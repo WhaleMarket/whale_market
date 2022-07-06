@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
 import { useHistory } from "react-router-dom";
-import JoinMember from "../components/join/joinMember/JoinMember";
-import JoinProfile from "../components/join/joinProfile/JoinProfile";
+import JoinMember from "../../components/join/joinMember/JoinMember";
+import JoinProfile from "../../components/join/joinProfile/JoinProfile";
 // import JoinProfile from "../components/join/JoinProfile";
 
 function Join(props){

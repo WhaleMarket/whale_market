@@ -1,7 +1,7 @@
-import Button from '../components/login/Button';
+import Button from '../../components/login/Button';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../assets/Logo.png';
+import Logo from '../../assets/Logo.png';
 
 const Wrapper = styled.main`
     width: 100vw;

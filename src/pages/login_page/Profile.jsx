@@ -1,4 +1,4 @@
-import ProfileSection from '../components/profile/ProfileSection';
+import ProfileSection from '../../components/profile/ProfileSection';
 
 function Profile() {
     return (
