@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import EmailLogin from './pages/EmailLogin';
 import Join from './pages/Join';
+import Profile from './pages/Profile';
+
 
 const Globalstyle = createGlobalStyle`
     ${reset}
@@ -22,6 +24,7 @@ function App() {
                     <Route path="/login" component={Login}/>
                     <Route path='/emaillogin' component={EmailLogin} />
                     <Route path='/join' component={Join} />
+                    <Route path="/profile" component={Profile}/>
                 </Switch>
             </BrowserRouter>
         </>
