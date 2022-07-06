@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import LogoSrc from '../assets/Logo.png';
+import LogoSrc from '../../assets/Logo.png';
 
 const Logo = styled.img`
     display: block;
