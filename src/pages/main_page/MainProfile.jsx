@@ -1,4 +1,4 @@
-import ChatProfileHeader from "../../components/main/Chatprofileheader"
+import ChatProfileHeader from "../../components/main/chat/Chatprofileheader"
 
 function MainProfile(){
     return(
