@@ -1,1 +1,8 @@
-# whale_Market
+### WhaleMarket
+
+## Project Description
+    `**🐳칭찬은 고래도 춤추게 한다.**`
+    - 👥서로의 칭찬을 공유할 수 있는 소셜 네트워크 서비스입니다.
+    - 🌍칭찬이 각박한 세상에서 서로를 돌아볼 수 있는 시간을 가지자는 취지의 프로젝트입니다.
+
+## How to Drive
