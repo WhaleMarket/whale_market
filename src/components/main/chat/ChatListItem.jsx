@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import partnerProfileImage from '../../../assets/basic-profile-img.png';
 
 const Wrapper = styled.div`
     width: 90vw;
@@ -56,7 +57,7 @@ function ChatListItem(props) {
     return (
         <Wrapper onClick={onClick}>
                 <div>
-                    <ChatRoomImg src={`../../..${room.partnerProfileImage}`} alt="" />
+                    <ChatRoomImg src={partnerProfileImage} alt="" />
                 </div>
 
                 <div>
