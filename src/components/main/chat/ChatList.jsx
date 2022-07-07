@@ -1,5 +1,5 @@
-import ChatListItem from "./ChatListItem";
-import styled from "styled-components";
+import ChatListItem from './ChatListItem';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
     display: flex;
