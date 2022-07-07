@@ -7,8 +7,9 @@ import Home from './pages/login_page/Home';
 import EmailLogin from './pages/login_page/EmailLogin';
 import Join from './pages/login_page/Join';
 import Profile from './pages/login_page/Profile';
-import Main from './routes/Main'
-
+import Main from './routes/Main';
+import Chatting from './pages/main_page/chat/Chatting';
+import ChattingView from './pages/main_page/chat/ChattingView';
 
 const Globalstyle = createGlobalStyle`
     ${reset}
@@ -27,6 +28,8 @@ function App() {
                     <Route path='/join' component={Join} />
                     <Route path="/profile" component={Profile}/>
                     <Route path="/main" component={Main}/>
+                    <Route path="/chatting" component={Chatting} />
+                    <Route path="/chatting/:chatId" component={ChattingView} />
                 </Switch>
             </BrowserRouter>
         </>
