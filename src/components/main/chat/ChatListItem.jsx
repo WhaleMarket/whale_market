@@ -53,11 +53,11 @@ const ChatDate = styled.p`
 
 function ChatListItem(props) {
     const { room, onClick } = props;
-
+    
     return (
         <Wrapper onClick={onClick}>
                 <div>
-                    <ChatRoomImg src={partnerProfileImage} alt="" />
+                    <ChatRoomImg src={partnerProfileImage} alt='' />
                 </div>
 
                 <div>
