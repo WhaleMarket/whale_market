@@ -27,12 +27,24 @@ const Search = styled.button`
     }
 `
 
-function ChatProfileHeader() {
+const ChatPartner = styled.p`
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    width: 100vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+function ChatProfileHeader(props) {
     const history = useHistory();
 
     return(
         <Head>
             <Search className='back' onClick={() => history.goBack()} />
+            <ChatPartner>{props.partner}</ChatPartner>
             <Search className='menu' />
         </Head>
     );
