@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import search_icon from '../../assets/icon-search.png'
+import { Link } from 'react-router-dom'
 
 const Head = styled.header`
     display: flex;
@@ -32,7 +33,9 @@ function Header(){
     return(
         <Head>
             <Title>감귤마켓 피드</Title>
-            <Search></Search>
+            <Link to = '/search'>
+                <Search />
+            </Link>
         </Head>
     )
 }
