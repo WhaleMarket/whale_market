@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import Button from '../../components/login/Button';
+import { useRef, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from "../../context/AuthProvider";
+import axios from '../../api/axios';
 import styled from 'styled-components';
+import Button from '../../components/login/Button';
+
+const LOGIN_URL = '/user/login';
 
 const Wrapper = styled.div`
     display: flex;
@@ -9,21 +13,21 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-top: 30px;
-
-    h2 {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 30px;
-        margin-bottom: 40px;
-    }
 `;
 
-const StyledForm = styled.form`
+const Title = styled.h2`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 40px;
+`;
+
+const Form = styled.form`
     width: 322px;
 `;
 
-const StyledLabel = styled.label`
+const Label = styled.label`
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -31,7 +35,7 @@ const StyledLabel = styled.label`
     color: #767676;
 `;
 
-const StyledInput = styled.input`
+const Input = styled.input`
     outline: none;
     display: block;
     border : none;
@@ -48,6 +52,15 @@ const StyledInput = styled.input`
     }
 `;
 
+// const ErrorMessage = styled.strong`
+//     display: inline-block;
+//     color: #EB5757;
+//     font-weight: 500;
+//     font-size: 12px;
+//     line-height: 1;
+//     margin-top: 6px;
+// `;
+
 const StyledLink = styled(Link)`
     position: relative;
     flex-direction: row;
@@ -59,73 +72,110 @@ const StyledLink = styled(Link)`
     margin-top: 20px;
 `;
 
+const EmailLogin = (props) => {
+    const { setAuth } = useContext(AuthContext);
+    const userRef = useRef();
+    const errRef = useRef();
 
-function EmailLogin(props) {
-    const [emailInput, setEmailInput] = useState("");
-    const [passwordInput, setPasswordInput] = useState("");
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
 
     
-    const handleEmailInput = (event) => {
-        setEmailInput(event.target.value);
-    };
-    
-    const handlePasswordInput = (event) => {
-        setPasswordInput(event.target.value);
-    };
-    
-    const handleSubmit = (event) => {
-        alert('?');
-        event.preventDefault();
-    };
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
 
-    // 로그인 버튼 활성상태 변경: 이메일인풋에 @, 비밀번호 5자이상 입력시 활성화
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({ user, pwd }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            console.log(JSON.stringify(response));
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+            setAuth({ user, pwd, roles, accessToken });
+            setUser('');
+            setPwd('');
+            setSuccess(true);
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('서버가 응답하지 않습니다.');
+            } else if (err.response?.status === 400) {
+                setErrMsg('사용자 이름 또는 비밀번호가 존재하지 않습니다.');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('로그인 실패');
+            }
+            errRef.current.focus();
+        }
+    }
+
+    // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const isPassedLogin = () => {
-        return emailInput.includes('@') && passwordInput.length > 4 ? setIsDisabled(false) : setIsDisabled(true);
+        return user.includes('@') && pwd.length > 4 ? setIsDisabled(false) : setIsDisabled(true);
     };
-
-    // TODO: 유효성 검사
-    // 버튼 클릭 시 이메일주소 및 비밀번호에 대한 유효성 검사 진행하는 기능
-    // 비밀번호가 일치하지 않는 경우 경고 문구보이는 기능 
-    
 
     return (
         <Wrapper>
-            <h2>로그인</h2>
-            <StyledForm onSubmit={handleSubmit}>
-                <div>
-                    <StyledLabel htmlFor="email">이메일
-                        <StyledInput 
-                            id="email" 
-                            type="email" 
-                            onChange={handleEmailInput}
-                            onKeyUp={isPassedLogin}
-                            // className={emailInput}
-                        />
-                    </StyledLabel>
-                </div>
+            <Title>로그인</Title>
+            {success ? (
+                <Link to='/main' />
+            ) : (
+            <>
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 
-                <div>
-                    <StyledLabel htmlFor="password">비밀번호
-                        <StyledInput 
-                            id="password" 
-                            type="password" 
-                            onChange={handlePasswordInput}
-                            onKeyUp={isPassedLogin}
-                            // className={passwordInput}
-                        />
-                    </StyledLabel>
-                </div>
+                <Form onSubmit={handleSubmit}>
+                    <div>
+                            <Label htmlFor="email">이메일
+                                <Input
+                                    type="email"
+                                    id="email"
+                                    ref={userRef}
+                                    autoComplete="off"
+                                    onChange={(e) => setUser(e.target.value)}
+                                    required
+                                    onKeyUp={isPassedLogin}
+                                />
+                            </Label>
+                    </div>
+                    <div>
+                            <Label htmlFor="password">비밀번호
+                                <Input
+                                    type="password"
+                                    id="password"
+                                    onChange={(e) => setPwd(e.target.value)}
+                                    value={pwd}
+                                    required
+                                    onKeyUp={isPassedLogin}
+                                />
+                            </Label>
+                    </div>
 
-                <Button 
-                    type="submit" 
-                    text="로그인"
-                    disabled={isDisabled ? true : false}
-                    style={{ backgroundColor: isDisabled ? '#B2EBF2' : '#00BCD4', border: '0px', fontWeight: '500', fontSize: '14px', color: 'white'}}
-                />
-            </StyledForm>
-            <StyledLink to='/join'>이메일로 회원가입</StyledLink>
-            
+                    <Button 
+                        type="submit" 
+                        text="로그인"
+                        disabled={isDisabled ? true : false}
+                        style={{ backgroundColor: isDisabled ? '#B2EBF2' : '#00BCD4', border: '0px', fontWeight: '500', fontSize: '14px', color: 'white'}}
+                    />
+                </Form>
+                    <StyledLink to='/join'>이메일로 회원가입</StyledLink>
+            </>
+            )}
         </Wrapper>
     );
 }
