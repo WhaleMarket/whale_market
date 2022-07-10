@@ -1,6 +1,7 @@
 import Navbar from "../components/main/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Chatting from "../pages/main_page/Chatting";
+import Chatting from "../pages/main_page/chat/Chatting";
+import ChattingView from "../pages/main_page/chat/ChattingView";
 import MainProfile from "../pages/main_page/mainProfile/UserProfile";
 import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
@@ -14,7 +15,8 @@ function Test() {
       {location.pathname !== "/posting" && <Navbar />}
       <Switch>
         <Route path="/home" exact component={Home} />
-        <Route path="/chatting" component={Chatting} />
+        <Route path="/chatting" exact component={Chatting}/>
+        <Route path="/chatting/:chatId" component={ChattingView}/>
         <Route path="/mainprofile" component={MainProfile} />
         <Route path="/posting" component={Posting} />
         <Route path="/search" component={HomeSearch}/>
@@ -24,13 +26,13 @@ function Test() {
 }
 
 function Main() {
-  return (
-    <>
-      <BrowserRouter basename="/main">
-        <Test />
-      </BrowserRouter>
-    </>
-  );
+    return (
+        <>
+        <BrowserRouter basename="/main">
+            <Test />
+        </BrowserRouter>
+        </>
+    );
 }
 
 export default Main;
