@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import back from '../../../assets/icon-arrow-left.png'
 import save from '../../../assets/Ms--Disabled-button.png'
@@ -37,9 +38,10 @@ const SaveBtn = styled.button`
 `
 
 function ProfileEditHeader(){   
+    const history = useHistory();
     return(
         <Head>
-            <BackBtn/>
+            <BackBtn  onClick={() => history.goBack()}/>
             <SaveBtn/>
         </Head>
     )
