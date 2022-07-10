@@ -11,7 +11,7 @@ const UserProfileContainer = styled.div`
     position: relative;
     width: 24.375rem;
     padding: 1.875rem 3.438rem 1.625rem;
-    margin: 0 auto;
+    margin: 3rem auto 0 auto;
 `
 
 const ProfileImg = styled.img`
