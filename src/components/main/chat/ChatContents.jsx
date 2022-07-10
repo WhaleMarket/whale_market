@@ -10,7 +10,6 @@ const Contents = styled.p`
 `;
 
 function ChatContents(props) {
-    console.log(props)
     return (
         <Contents>{props.content}</Contents>
     );
