@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import basicProfileImg from '../../../assets/basic-profile-img.png';
+import FollowButton from './FollowButton';
 
 const UserProfileContainer = styled.div`
     display: flex;
@@ -27,7 +28,7 @@ const UserId = styled.span`
     font-size: 0.750rem;
 `
 
-const UserInfoMsg = styled.span`
+const UserIntro = styled.span`
     margin: 1rem 0 1.5rem;
     color: #767676;
     font-size: 0.750rem;
@@ -61,23 +62,25 @@ const Followings = styled(Link)`
     text-decoration-line: none;
 `
 
-function UserProfileCard() {
+function UserProfileCard(props) {
+    const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
 
     return ( 
         <>    
         <UserProfileContainer>
             <ProfileImg src={basicProfileImg} alt="프로필 이미지"/>
-            <UserName>김웨일</UserName>
-            <UserId>@weniv_Whale</UserId>
-            <UserInfoMsg>안녕하세요, 김웨일입니다.</UserInfoMsg>
-            <Followers>
-                <FollowCount>2950</FollowCount>
+            <UserName>{username}</UserName>
+            <UserId>{userid}</UserId>
+            <UserIntro>{userintroduction}</UserIntro>
+            <Followers to={followers}>
+                <FollowCount>{followerCount}</FollowCount>
                 <FollowTxt>followers</FollowTxt>
             </Followers>
             <Followings>
-                <FollowCount>128</FollowCount>
+                <FollowCount>{followingCount}</FollowCount>
                 <FollowTxt>followings</FollowTxt>
             </Followings>
+            <FollowButton/>
         </UserProfileContainer>
         </>    
     )
