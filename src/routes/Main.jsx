@@ -5,6 +5,7 @@ import MainProfile from "../pages/main_page/MainProfile";
 import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
 import { useLocation } from "react-router-dom";
+import HomeSearch from "../pages/main_page/HomeSearch";
 
 function Test() {
   const location = useLocation();
@@ -16,6 +17,7 @@ function Test() {
         <Route path="/chatting" component={Chatting} />
         <Route path="/profile" component={MainProfile} />
         <Route path="/posting" component={Posting} />
+        <Route path="/search" component={HomeSearch}/>
       </Switch>
     </>
   );

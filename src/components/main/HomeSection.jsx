@@ -1,5 +1,6 @@
 import whale from "../../assets/Logo.png"
 import styled from "styled-components"
+import {Link} from 'react-router-dom'
 
 const Section = styled.section`
     display: flex;
@@ -39,7 +40,9 @@ function HomeSection(){
         <Section>
             <Logo src={whale} alt="whale"/>
             <Title>유저를 검색해 팔로우 해보세요!</Title>
-            <Search type="button">검색하기</Search>
+            <Link to = '/search'>
+                <Search type="button">검색하기</Search>
+            </Link>
         </Section>
     )
 }
