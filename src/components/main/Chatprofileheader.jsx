@@ -10,9 +10,9 @@ const Head = styled.header`
     position: fixed;
     width: calc(100% - 28px);
     padding: 13px 12px 13px 16px;
+    margin-bottom: 1.875rem;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
-    position: relative;
 `
 
 const Search = styled.button`
