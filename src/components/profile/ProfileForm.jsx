@@ -2,19 +2,17 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import profile_icon from '../../assets/basic-profile-img.png';
 import upload_icon from '../../assets/upload-file.png';
-import StartButton from './StartButton';
 
 const Form = styled.form`
     display: flex;
     flex-direction: column;
     margin: 1.875rem 2.125rem;
-
 `
 
 const Fieldset = styled.fieldset`
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.875rem;
+    margin-top: 1.875rem;
 `
 
 const Legend = styled.legend`
@@ -130,7 +128,6 @@ function ProfileForm() {
         <FormLabel for="introduction">소개</FormLabel>
         <FormInput type="text" id="introduction" placeholder="자신과 판매할 상품에 대해 소개해 주세요!"/>
         </Fieldset>
-        <StartButton/>
         </Form>
     );
 };

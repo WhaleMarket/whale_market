@@ -11,6 +11,7 @@ const Head = styled.header`
     padding: 13px 12px 13px 16px;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
+    position: relative;
 `
 
 const Search = styled.button`

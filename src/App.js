@@ -8,6 +8,8 @@ import EmailLogin from './pages/login_page/EmailLogin';
 import Join from './pages/login_page/Join';
 import Profile from './pages/login_page/Profile';
 import Main from './routes/Main'
+import MainProfile from './pages/main_page/mainProfile/UserProfile';
+import ProfileModification from './pages/main_page/mainProfile/ProfileEdit';
 
 
 const Globalstyle = createGlobalStyle`
@@ -27,6 +29,8 @@ function App() {
                     <Route path='/join' component={Join} />
                     <Route path="/profile" component={Profile}/>
                     <Route path="/main" component={Main}/>
+                    <Route path="/mainprofile" component={MainProfile}/>
+                    <Route path="/profileedit" component={ProfileModification}/>
                 </Switch>
             </BrowserRouter>
         </>

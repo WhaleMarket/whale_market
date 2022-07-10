@@ -39,51 +39,17 @@ const Logo = styled.img`
   margin: 0 auto;
 `;
 
-const Navbar = ({ location }) => {
-  return (
-    <Bottomnav>
-      <List className="home" current={location.pathname === "/home"}>
-        <Link to="/home">
-          <Logo
-            className="Home"
-            src={location.pathname === "/home" ? home_icon_fill : home_icon}
-            alt="home icon"
-          />
-          홈
-        </Link>
-      </List>
-      <List className="chatting" current={location.pathname === "/chatting"}>
-        <Link to="/chatting">
-          <Logo
-            className="Home"
-            src={
-              location.pathname === "/chatting"
-                ? chatting_icon_fill
-                : chatting_icon
-            }
-            alt="home icon"
-          />
-          채팅
-        </Link>
-      </List>
-      <List className="posting" current={location.pathname === "/posting"}>
-        <Link to="/posting">
-          <Logo className="Home" src={posting_icon} alt="home icon" />
-          게시물 작성
-        </Link>
-      </List>
-      <List className="profile" current={location.pathname === "/profile"}>
-        <Link to="/profile">
-          <Logo
-            className="Home"
-            src={location.pathname === "/profile" ? user_icon_fill : user_icon}
-            alt="home icon"
-          />
-          프로필
-        </Link>
-      </List>
-    </Bottomnav>
-  );
-};
+const Navbar = ({location})=>{
+    console.dir(document.querySelector('Home'))
+    return(
+        <Bottomnav>
+            <List className='home' current={location.pathname === '/home'}><Link to='/home'><Logo className="Home" src={location.pathname === '/home' ? home_icon_fill : home_icon} alt="home icon"/>홈</Link></List>
+            <List className='chatting' current={location.pathname === '/chatting'}><Link to='/chatting'><Logo className="Home" src={location.pathname === '/chatting' ? chatting_icon_fill : chatting_icon} alt="home icon"/>채팅</Link></List>
+            <List className='posting' current={location.pathname === '/posting'}><Link to='/posting'><Logo className="Home" src={posting_icon} alt="home icon"/>게시물 작성</Link></List>
+            <List className='profile' current={location.pathname === '/mainprofile'}><Link to='/mainprofile'><Logo className="Home" src={location.pathname === '/mainprofile' ? user_icon_fill : user_icon} alt="home icon"/>프로필</Link></List>
+        </Bottomnav>
+    )
+}
+
 
 export default withRouter(Navbar);
