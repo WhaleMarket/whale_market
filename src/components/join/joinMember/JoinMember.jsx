@@ -4,6 +4,7 @@ import { API_URL } from "../../../constants/defaultUrl";
 import axios from "axios";
 import styled from "styled-components";
 import Button from "../../login/Button";
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
     display: flex;
@@ -99,30 +100,32 @@ const JoinMember = ({ setNextPage, setUserInfo }) => {
         return data;
     };
 
+    
     const onSubmit = async ({ email, password }) => {
         if (isValid) {
-        try {
+            try {
             const response = await getEmailValid();
-
+            
             if (response.message === "사용 가능한 이메일 입니다.") {
                 setNextPage(false);
                 setUserInfo({ email, password });
             }
-                if (response.message === "이미 가입된 이메일 주소 입니다.") {
+            if (response.message === "이미 가입된 이메일 주소 입니다.") {
                 setEmailErrorMessage(response.message);
             }
         } catch (e) {
             console.error(e);
         }
-        }
-    };
+    }
+};
 
     // TODO: 유효성 검사
         // 이메일 주소의 형식이 유효하지 않거나, 이미 가입된 이메일일 경우, 또는 비밀번호가 6자 미만일 경우에는 각 입력창 하단에 경구 문구가 나타납니다.
         // 이메일 주소 또는 비밀번호를 입력하고 입력창에서 포커스를 잃으면 바로 유효성 검사가 진행되는 기능 
         // 유효성검사를 통과하지 못한 경우 경고 문구가 각 입력창 하단에 표시되는 기능
-    return (
-        <Wrapper>
+
+        return (
+            <Wrapper>
             <h2>이메일로 회원가입</h2>
             <StyledForm onSubmit={handleSubmit(onSubmit)}>
                 <div>
@@ -180,6 +183,7 @@ const JoinMember = ({ setNextPage, setUserInfo }) => {
                     disabled={!isValid}
                     style={{ backgroundColor: isValid ? '#00BCD4' : '#B2EBF2', border: '0px', fontWeight: '500', fontSize: '14px', color: 'white', marginTop: '30px' }}
                 />
+                <Link to='/profile'>다음(프로필 페이지 이동 test)</Link>
 
             </StyledForm>
         </Wrapper>

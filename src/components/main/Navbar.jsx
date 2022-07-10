@@ -1,43 +1,43 @@
-import {Link, withRouter} from 'react-router-dom'
-import styled from 'styled-components'
-import home_icon_fill from '../../assets/icon-home-fill.png'
-import home_icon from '../../assets/icon-home.png'
-import chatting_icon_fill from '../../assets/icon-message-circle-fill.png'
-import chatting_icon from '../../assets/icon-message-circle.png'
-import posting_icon from '../../assets/icon-edit.png'
-import user_icon_fill from '../../assets/icon-user-fill.png'
-import user_icon from '../../assets/icon-user.png'
+import { Link, withRouter } from "react-router-dom";
+import styled from "styled-components";
+import home_icon_fill from "../../assets/icon-home-fill.png";
+import home_icon from "../../assets/icon-home.png";
+import chatting_icon_fill from "../../assets/icon-message-circle-fill.png";
+import chatting_icon from "../../assets/icon-message-circle.png";
+import posting_icon from "../../assets/icon-edit.png";
+import user_icon_fill from "../../assets/icon-user-fill.png";
+import user_icon from "../../assets/icon-user.png";
 
 const Bottomnav = styled.ul`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 0 6px;
-    border-top: 0.5px solid #DBDBDB;
-    background-color: white;
-    box-sizing: border-box;
-    `
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0 6px;
+  border-top: 0.5px solid #dbdbdb;
+  background-color: white;
+  box-sizing: border-box;
+`;
 
 const List = styled.li`
-    width: 64px;
-    padding-bottom:6px;
-    color: ${(props)=>(props.current ? '#00BCD4' : 'black')};
-    font-size: 10px;
-    text-align: center;
-    & a{
-        text-decoration: none;
-        color: inherit;
-    }
-`
+  width: 64px;
+  padding-bottom: 6px;
+  color: ${(props) => (props.current ? "#00BCD4" : "black")};
+  font-size: 10px;
+  text-align: center;
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+`;
 
 const Logo = styled.img`
-    display: block;
-    padding: 12px 0 4px 0;
-    margin: 0 auto;
-`
+  display: block;
+  padding: 12px 0 4px 0;
+  margin: 0 auto;
+`;
 
 const Navbar = ({location})=>{
     console.dir(document.querySelector('Home'))
@@ -50,5 +50,6 @@ const Navbar = ({location})=>{
         </Bottomnav>
     )
 }
+
 
 export default withRouter(Navbar);

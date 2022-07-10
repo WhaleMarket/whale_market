@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import Button from '../../components/login/Button';
+import { useRef, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from "../../context/AuthProvider";
+import axios from 'axios';
+import { API_URL } from '../../constants/defaultUrl';
 import styled from 'styled-components';
+import Button from '../../components/login/Button';
 
 const Wrapper = styled.div`
     display: flex;
@@ -9,21 +12,21 @@ const Wrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-top: 30px;
-
-    h2 {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 30px;
-        margin-bottom: 40px;
-    }
 `;
 
-const StyledForm = styled.form`
+const Title = styled.h2`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 40px;
+`;
+
+const Form = styled.form`
     width: 322px;
 `;
 
-const StyledLabel = styled.label`
+const Label = styled.label`
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -31,7 +34,7 @@ const StyledLabel = styled.label`
     color: #767676;
 `;
 
-const StyledInput = styled.input`
+const Input = styled.input`
     outline: none;
     display: block;
     border : none;
@@ -40,12 +43,21 @@ const StyledInput = styled.input`
     height: 32px;
     padding: 0;
 
-    :first-child {
-        margin-bottom: 16px;
+    &:first-child {
+        margin-bottom: 6px;
     }
     &:focus {
         border-bottom: 1px solid #00BCD4;
     }
+`;
+
+const ErrorMessage = styled.strong`
+    display: inline-block;
+    color: #EB5757;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1;
+    margin-bottom: 16px;
 `;
 
 const StyledLink = styled(Link)`
@@ -60,73 +72,136 @@ const StyledLink = styled(Link)`
 `;
 
 
-function EmailLogin(props) {
-    const [emailInput, setEmailInput] = useState("");
-    const [passwordInput, setPasswordInput] = useState("");
+const EmailLogin = (props) => {
+    const { setAuth } = useContext(AuthContext);
+    const emailRef = useRef();
+    const errorRef = useRef();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(false);
+    const [notMatchError, setNotMatchError] = useState('');
 
     
-    const handleEmailInput = (event) => {
-        setEmailInput(event.target.value);
-    };
-    
-    const handlePasswordInput = (event) => {
-        setPasswordInput(event.target.value);
-    };
-    
-    const handleSubmit = (event) => {
-        alert('?');
+    useEffect(() => {
+        emailRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrorMessage('');
+    }, [email, password])
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-    };
 
-    // 로그인 버튼 활성상태 변경: 이메일인풋에 @, 비밀번호 5자이상 입력시 활성화
+        try {
+            const reqData = {
+                user: { email: email, password: password},
+            };
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+
+            const response = await axios.post(
+                `${API_URL}/user/login`,
+                reqData,
+                config
+            );
+            
+            // 로그인 데이터 확인용 콘솔로그
+            // console.log(JSON.stringify(response?.data));
+            // console.log(JSON.stringify(response));
+
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+            setAuth({ email, password, roles, accessToken });
+            setEmail('');
+            setPassword('');
+            setSuccess(true);
+
+            if (response?.data?.status === 422) {
+                setSuccess(false);
+                setNotMatchError(response.data.message);
+            }
+
+        } catch (error) {
+            if (!error?.response) {
+                setErrorMessage('서버가 응답하지 않습니다.');
+            } else if (error.response?.status === 400) {
+                setErrorMessage('이메일 또는 비밀번호가 일치하지 않습니다.');
+            } else if (error.response?.status === 401) {
+                setErrorMessage('Unauthorized');
+            } else {
+                setErrorMessage('로그인 실패');
+            }
+            errorRef.current.focus();
+        }
+    }
+
+    // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
-    const isPassedLogin = () => {
-        return emailInput.includes('@') && passwordInput.length > 4 ? setIsDisabled(false) : setIsDisabled(true);
-    };
+    const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
-    // TODO: 유효성 검사
-    // 버튼 클릭 시 이메일주소 및 비밀번호에 대한 유효성 검사 진행하는 기능
-    // 비밀번호가 일치하지 않는 경우 경고 문구보이는 기능 
-    
+    const isPassedLogin = () => {
+        return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
+    };
 
     return (
-        <Wrapper>
-            <h2>로그인</h2>
-            <StyledForm onSubmit={handleSubmit}>
-                <div>
-                    <StyledLabel htmlFor="email">이메일
-                        <StyledInput 
-                            id="email" 
-                            type="email" 
-                            onChange={handleEmailInput}
-                            onKeyUp={isPassedLogin}
-                            // className={emailInput}
-                        />
-                    </StyledLabel>
-                </div>
+        <>
+            {success ? (
+                window.location.href = '/main/home'
+            ) : (
+                <Wrapper>
+                    <Title>로그인</Title>
+                    <p ref={errorRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</p>
 
-                <div>
-                    <StyledLabel htmlFor="password">비밀번호
-                        <StyledInput 
-                            id="password" 
-                            type="password" 
-                            onChange={handlePasswordInput}
-                            onKeyUp={isPassedLogin}
-                            // className={passwordInput}
-                        />
-                    </StyledLabel>
-                </div>
+                    <Form onSubmit={handleSubmit}>
+                        <div>
+                                <Label htmlFor='email'>이메일
+                                    <Input
+                                        type='email'
+                                        id='email'
+                                        ref={emailRef}
+                                        autoComplete='off'
+                                        onChange={(event) => setEmail(event.target.value)}
+                                        required
+                                        onKeyUp={isPassedLogin}
+                                    />
+                                    {(email.length > 5) 
+                                    && !emailRegex.test(email) 
+                                    && <ErrorMessage>*올바르지 않은 이메일 형식입니다.</ErrorMessage>
+                                    }
+                                </Label>
+                        </div>
+                        <div>
+                                <Label htmlFor='password'>비밀번호
+                                    <Input
+                                        type='password'
+                                        id='password'
+                                        onChange={(event) => setPassword(event.target.value)}
+                                        value={password}
+                                        required
+                                        onKeyUp={isPassedLogin}
+                                    />
+                                    {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
+                                </Label>
+                        </div>
 
-                <Button 
-                    type="submit" 
-                    text="로그인"
-                    disabled={isDisabled ? true : false}
-                    style={{ backgroundColor: isDisabled ? '#B2EBF2' : '#00BCD4', border: '0px', fontWeight: '500', fontSize: '14px', color: 'white'}}
-                />
-            </StyledForm>
-            <StyledLink to='/join'>이메일로 회원가입</StyledLink>
-            
-        </Wrapper>
+                        <Button 
+                            type='submit' 
+                            text='로그인'
+                            disabled={isDisabled ? true : false}
+                            style={{ backgroundColor: isDisabled ? '#B2EBF2' : '#00BCD4', border: '0px', fontWeight: '500', fontSize: '14px', color: 'white'}}
+                        />
+                    </Form>
+                    <StyledLink to='/join'>이메일로 회원가입</StyledLink>
+                </Wrapper>
+            )}
+        </>
     );
 }
 
