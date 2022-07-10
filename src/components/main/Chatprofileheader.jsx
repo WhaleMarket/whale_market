@@ -13,7 +13,7 @@ const Head = styled.header`
     margin-bottom: 1.875rem;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
-`
+`;
 
 const Search = styled.button`
     width: 24px;
@@ -24,16 +24,29 @@ const Search = styled.button`
     &:hover{
         cursor: pointer;
     }
-`
+`;
 
-function ChatProfileHeader(){   
+const ChatPartner = styled.p`
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    width: 100vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+
+function ChatProfileHeader(props){   
     const history = useHistory();
+
     return(
         <Head>
-            <Search className='back' onClick={() => history.goBack()}></Search>
-            <Search className='menu'></Search>
+            <Search className='back' onClick={() => history.goBack()} />
+            <Search className='menu' />
+            <ChatPartner>{props.partner}</ChatPartner>
         </Head>
-    )
+    );
 }
 
-export default ChatProfileHeader
+export default ChatProfileHeader;
