@@ -15,7 +15,7 @@ function Test() {
       <Switch>
         <Route path="/home" exact component={Home} />
         <Route path="/chatting" component={Chatting} />
-        <Route path="/profile" component={MainProfile} />
+        <Route path="/mainprofile" component={MainProfile} />
         <Route path="/posting" component={Posting} />
         <Route path="/search" component={HomeSearch}/>
       </Switch>
