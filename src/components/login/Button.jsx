@@ -8,9 +8,9 @@ const StyledButton = styled.button`
 box-sizing: border-box;
     width: 100%;
     border: 1px solid ${(props) => (
-        props.account == 'kakao' && '#F2C94C') 
-        || (props.account == 'google' && '#767676;') 
-        || (props.account == 'facebook' && '#2D9CDB;')
+        props.account === 'kakao' && '#F2C94C') 
+        || (props.account === 'google' && '#767676;') 
+        || (props.account === 'facebook' && '#2D9CDB;')
     };
     border-radius: 44px;
     background-color: white;
@@ -24,9 +24,9 @@ box-sizing: border-box;
     position: relative;
 
     background-image: url(${(props) => (
-        props.account == 'kakao' && `${LogoKakao}`) 
-        || (props.account == 'google' && `${LogoGoogle}`) 
-        || (props.account == 'facebook' && `${LogoFacebook}`)
+        props.account === 'kakao' && `${LogoKakao}`) 
+        || (props.account === 'google' && `${LogoGoogle}`) 
+        || (props.account === 'facebook' && `${LogoFacebook}`)
     });
     background-repeat: no-repeat;
     background-size: 24px 24px;
