@@ -40,7 +40,7 @@ function Splash(){
         return ()=>{
             clearTimeout(timeOut);
         };
-    });
+    },[]);
 
     return(
         <SplashBody>
