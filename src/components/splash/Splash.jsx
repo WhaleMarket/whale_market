@@ -9,7 +9,7 @@ const Logo = styled.img`
     margin: 40vh auto;
 `;
 
-const BodyColor = styled.body`
+const SplashBody = styled.body`
     width: 100vw;
     height: 100vh;
     padding: 0;
@@ -43,9 +43,9 @@ function Splash(){
     });
 
     return(
-        <BodyColor>
+        <SplashBody>
             <Logo src={LogoSrc} />
-        </BodyColor>
+        </SplashBody>
     )
 }
 
