@@ -14,9 +14,9 @@ const StartBtn = styled.button`
      }
     `;
 
-function StartButton() {
+function StartButton({disabled}) {
     return(
-        <StartBtn type="submit">
+        <StartBtn type="submit" disabled={disabled}>
             웨일마켓 시작하기
         </StartBtn>
     );
