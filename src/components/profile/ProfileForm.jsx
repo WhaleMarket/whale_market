@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
@@ -135,7 +136,9 @@ function ProfileForm() {
         <FormInput type="text" id="introduction" placeholder="자신과 판매할 상품에 대해 소개해 주세요!"/>
         </Fieldset>
         </Form>
+        <Link to='/main/home'>
         <StartButton disabled={isDisabled}/>
+        </Link>
         </>
     );
 };
