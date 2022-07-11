@@ -112,7 +112,7 @@ const EmailLogin = (props) => {
                 config
             );
             
-            // 로그인 데이터 확인용 콘솔로그
+            // 로그인 데이터 확인
             // console.log(JSON.stringify(response?.data));
             // console.log(JSON.stringify(response));
 
@@ -143,13 +143,14 @@ const EmailLogin = (props) => {
     }
 
     // 버튼 활성상태 관리
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [buttonOn, setButtonOn] = useState(false);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
     const isPassedLogin = () => {
-        return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
+        return emailRegex.test(email) && password.length > 5 ? setButtonOn(true) : setButtonOn(false);
     };
 
+    console.log(buttonOn)
     return (
         <>
             {success ? (
@@ -190,14 +191,14 @@ const EmailLogin = (props) => {
                                     {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
                                 </Label>
                         </div>
-
                         <Button 
                             type='submit' 
                             text='로그인'
-                            disabled={isDisabled ? true : false}
-                            style={{ backgroundColor: isDisabled ? '#B2EBF2' : '#00BCD4', border: '0px', fontWeight: '500', fontSize: '14px', color: 'white'}}
+                            disabled={buttonOn ? false : true}
+                            style={{ backgroundColor: buttonOn ? '#00BCD4' : '#B2EBF2' , border: '0px', fontWeight: '500', fontSize: '14px', color: 'white'}}
                         />
                     </Form>
+
                     <StyledLink to='/join'>이메일로 회원가입</StyledLink>
                 </Wrapper>
             )}
