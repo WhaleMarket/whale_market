@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
 import upload_icon from '../../assets/upload-file.png';
 
@@ -85,6 +86,8 @@ function ProfileForm() {
     const [nameInputError, setNameInputError] = useState(false);
     const [idInput, setIdInPut] = useState('');
     const [idInputError, setIdInputError] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+
 
     // 프로필 사진 선택시 적용되는 기능 추가
 
@@ -96,15 +99,18 @@ function ProfileForm() {
     }
 
     const handleIdInput = (event) => {
-        const idRegex = /^[-._a-z0-9]+$/;
+        const idRegex = /^[._a-zA-Z0-9]+$/;
         if ((!event.target.value || !(idRegex.test(event.target.value)))) setIdInputError(true);
         else setIdInputError(false);
         setIdInPut(event.target.value);
     }
 
-    // 이름, 아이디 올바르게 입력하면 버튼 활성화 기능 추가
+    useEffect (() => {
+        setIsDisabled(!(nameInput && idInput && !nameInputError && !idInputError))
+    })
 
     return (
+        <>
         <Form>
         <Fieldset>
         <Legend>프로필 사진 변경</Legend>
@@ -129,6 +135,8 @@ function ProfileForm() {
         <FormInput type="text" id="introduction" placeholder="자신과 판매할 상품에 대해 소개해 주세요!"/>
         </Fieldset>
         </Form>
+        <StartButton disabled={isDisabled}/>
+        </>
     );
 };
 
