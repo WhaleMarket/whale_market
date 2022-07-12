@@ -1,4 +1,4 @@
-import ProfileEditSection from '../../../components/main/mainProfile/ProfileEdtiSection';
+import ProfileEditSection from '../../../components/main/mainProfile/ProfileEditSection';
 
 function ProfileModification() {
     return (
