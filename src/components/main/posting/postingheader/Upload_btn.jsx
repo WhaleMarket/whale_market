@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { UploadContext } from "../../../../pages/main_page/Posting";
+import UploadContext from "../../../../context/UploadProvider";
 
 const Upload = styled.button`
   width: 90px;
