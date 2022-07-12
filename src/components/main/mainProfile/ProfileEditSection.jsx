@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProfileForm from '../../profile/ProfileForm'
+import ProfileForm from '../../profile/ProfileForm';
 
 const ProfileEditContainer = styled.section`
     display: flex;
