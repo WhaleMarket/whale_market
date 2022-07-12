@@ -9,12 +9,14 @@ const StartBtn = styled.button`
     color: #fff;
     font-size: 0.875em;
     cursor: pointer;
-     :disabled {
+    :disabled {
         background: #B2EBF2;
-     }
+    }
     `;
 
 function StartButton({disabled}) {
+    if (window.location.pathname === '/profileedit') return null;
+    
     return(
         <StartBtn type="submit" disabled={disabled}>
             웨일마켓 시작하기
