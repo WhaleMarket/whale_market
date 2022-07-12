@@ -6,7 +6,7 @@ import LogoSrc from '../../assets/Logo.png';
 const Logo = styled.img`
     display: block;
     width: 200px;
-    margin: 40vh auto;
+    margin: 25vh auto;
 `;
 
 const SplashBody = styled.body`
