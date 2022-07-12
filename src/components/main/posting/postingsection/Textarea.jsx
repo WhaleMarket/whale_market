@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
 import styled from "styled-components";
-import { UploadContext } from "../../../../pages/main_page/Posting";
+import UploadContext from "../../../../context/UploadProvider";
 
 const TextArea = styled.textarea`
   margin: 10px 0 0 13px;
