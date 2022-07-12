@@ -100,10 +100,6 @@ export function JoinForm({ setNextPage }) {
         }
     };
 
-    // 무한 렌더링 발생!!!
-    // if (password.length > 5) {
-    //     setIsValidPassword(true);
-    // }
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
