@@ -1,9 +1,9 @@
 import ProfileSection from '../../components/profile/index';
 
-function Profile() {
+function Profile({ userInfo }) {
     return (
         <>
-        <ProfileSection/>
+        <ProfileSection userInfo={userInfo} />
         </>
     );
 }

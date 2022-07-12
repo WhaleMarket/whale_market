@@ -14,9 +14,7 @@ const StartBtn = styled.button`
     }
     `;
 
-function StartButton({disabled}) {
-    if (window.location.pathname === '/profileedit') return null;
-    
+function StartButton({ userInfo }) {
     return(
         <StartBtn type="submit" disabled={disabled}>
             웨일마켓 시작하기
