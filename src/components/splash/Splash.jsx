@@ -15,7 +15,7 @@ const SplashBody = styled.body`
     padding: 0;
     margin: 0;
     overflow: hidden;
-    animation: change-background 3s ease;
+    animation: change-background 3.1s ease;
     
     @keyframes change-background {
     0% {
