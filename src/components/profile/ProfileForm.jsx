@@ -126,15 +126,15 @@ function ProfileForm() {
 
         <Fieldset>
         <Legend>개인정보 변경</Legend>
-        <FormLabel for="name" style={{marginTop:'0'}}>사용자 이름</FormLabel>
+        <FormLabel htmlfor="name" style={{marginTop:'0'}}>사용자 이름</FormLabel>
         <FormInput type="text" id="name" placeholder="2~10자 이내여야 합니다." onChange={handleNameInput} value={nameInput}/>
         {nameInputError && <ErrorMessage>*2글자 이상 10글자 미만이어야 합니다.</ErrorMessage>}
 
-        <FormLabel for="id">계정 ID</FormLabel>
+        <FormLabel htmlfor="id">계정 ID</FormLabel>
         <FormInput type="text" id="id" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." onChange={handleIdInput} value={idInput}/>
         {idInputError && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>}
 
-        <FormLabel for="introduction">소개</FormLabel>
+        <FormLabel htmlfor="introduction">소개</FormLabel>
         <FormInput type="text" id="introduction" placeholder="자신과 판매할 상품에 대해 소개해 주세요!"/>
         </Fieldset>
         </Form>
