@@ -55,7 +55,7 @@ export function LoginForm(props) {
 
             if (response?.data?.status === 422) {
                 setSuccess(false);
-                setNotMatchError(response.data.message);
+                setNotMatchError('*' + response.data.message);
             }
 
         } catch (error) {
