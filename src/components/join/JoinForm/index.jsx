@@ -105,7 +105,6 @@ export function JoinForm({ setNextPage }) {
         return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
     };
     
-<<<<<<< HEAD
     const nextPage = () => {
         if(isValidEmail && isValidPassword) {
             setSuccess(true)
