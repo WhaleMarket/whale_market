@@ -8,12 +8,11 @@ const Head = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
+    position: relative;
     width: calc(100% - 28px);
     padding: 0.813rem 0.750rem 0.813rem 1rem;
     border-bottom: 0.031rem solid #BDBDBD;
     background-color: white;
-    position: relative;
 `
 
 const BackBtn = styled.button`
