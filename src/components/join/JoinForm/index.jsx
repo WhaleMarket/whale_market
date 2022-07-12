@@ -26,6 +26,9 @@ export function JoinForm({ setNextPage }) {
 
     useEffect(() => {
         setErrorMessage('');
+        if (password.length > 5) {
+            setIsValidPassword(true);
+        }
     }, [email, password]);
 
     const handleSubmit = async (event) => {
@@ -60,7 +63,6 @@ export function JoinForm({ setNextPage }) {
                 setNotMatchError('*' + response.data.message);
                 setNextPage(false);
             } 
-    
         } catch (error) {
             console.error(error);
             errorRef.current.focus();
@@ -96,13 +98,9 @@ export function JoinForm({ setNextPage }) {
         }
     };
 
-    if (password.length > 5) {
-        setIsValidPassword(true);
-    }
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    
     const isPassedJoin = () => {
         return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
     };
