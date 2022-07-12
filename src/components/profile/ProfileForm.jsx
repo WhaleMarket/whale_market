@@ -80,7 +80,7 @@ const ErrorMessage = styled.p`
     font-size: 0.750rem;
 `
 
-function ProfileForm() {
+function ProfileForm({ userInfo }) {
     const [nameInput, setNameInput] = useState('');
     const [nameInputError, setNameInputError] = useState(false);
     const [idInput, setIdInPut] = useState('');
@@ -106,28 +106,50 @@ function ProfileForm() {
 
     return (
         <Form>
-        <Fieldset>
-        <Legend>프로필 사진 변경</Legend>
-        <ProfileImgWrapper>
-        <ProfileImg src={profile_icon}/>
-        <ProfileImgLable htmlFor="profileImg"><Img src={upload_icon} alt="프로필 이미지 업로드"/></ProfileImgLable>
-        </ProfileImgWrapper>
-        <ProfileImgInput type="file" accept="image/*" id="profileImg"/>
-        </Fieldset>
+            <Fieldset>
+                <Legend>프로필 사진 변경</Legend>
+                <ProfileImgWrapper>
+                <ProfileImg src={profile_icon}/>
+                <ProfileImgLable htmlFor="profileImg"><Img src={upload_icon} alt="프로필 이미지 업로드"/></ProfileImgLable>
+                </ProfileImgWrapper>
+                <ProfileImgInput 
+                    type="file" 
+                    accept="image/*" 
+                    id="profileImg"
+                />
+            </Fieldset>
 
-        <Fieldset>
-        <Legend>개인정보 변경</Legend>
-        <FormLabel htmlfor="name" style={{marginTop:'0'}}>사용자 이름</FormLabel>
-        <FormInput type="text" id="name" placeholder="2~10자 이내여야 합니다." onChange={handleNameInput} value={nameInput}/>
-        {nameInputError && <ErrorMessage>*2글자 이상 10글자 미만이어야 합니다.</ErrorMessage>}
+            <Fieldset>
+                <Legend>개인정보 변경</Legend>
 
-        <FormLabel htmlfor="id">계정 ID</FormLabel>
-        <FormInput type="text" id="id" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." onChange={handleIdInput} value={idInput}/>
-        {idInputError && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>}
+                <FormLabel htmlfor="name" style={{marginTop:'0'}}>사용자 이름</FormLabel>
+                <FormInput 
+                    type="text" 
+                    id="name" 
+                    placeholder="2~10자 이내여야 합니다." 
+                    onChange={handleNameInput} 
+                    value={nameInput}
+                    required
+                />
+                {nameInputError && <ErrorMessage>*2글자 이상 10글자 미만이어야 합니다.</ErrorMessage>}
 
-        <FormLabel htmlfor="introduction">소개</FormLabel>
-        <FormInput type="text" id="introduction" placeholder="자신과 판매할 상품에 대해 소개해 주세요!"/>
-        </Fieldset>
+                <FormLabel htmlfor="id">계정 ID</FormLabel>
+                <FormInput 
+                    type="text" 
+                    id="id" 
+                    placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." 
+                    onChange={handleIdInput} 
+                    value={idInput}
+                />
+                {idInputError && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>}
+
+                <FormLabel htmlfor="introduction">소개</FormLabel>
+                <FormInput 
+                    type="text" 
+                    id="introduction" 
+                    placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+                />
+            </Fieldset>
         </Form>
     );
 };

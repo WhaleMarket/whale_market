@@ -6,7 +6,7 @@ import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
 import { Wrapper, Title, Form, Label, Input, ErrorMessage } from './index.style';
 
-export function JoinForm({ setNextPage }) {
+export function JoinForm({ setNextPage, setUserInfo }) {
     const { setAuth } = useContext(AuthContext);
     const emailRef = useRef();
     const errorRef = useRef();
@@ -29,6 +29,10 @@ export function JoinForm({ setNextPage }) {
 
         if (password.length > 5) {
             setIsValidPassword(true);
+        }
+
+        if(isValidEmail && isValidPassword) {
+            setSuccess(true)
         }
 
     }, [email, password]);
@@ -64,6 +68,7 @@ export function JoinForm({ setNextPage }) {
             } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
                 setNotMatchError('*' + response.data.message);
                 setNextPage(false);
+                setUserInfo({ email, password });
             } 
         } catch (error) {
             console.error(error);
@@ -106,18 +111,9 @@ export function JoinForm({ setNextPage }) {
     const isPassedJoin = () => {
         return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
     };
-    
-    const nextPage = () => {
-        if(isValidEmail && isValidPassword) {
-            setSuccess(true)
-        }
-    }
 
     return (
         <>
-            {success ? (
-                window.location.href = '/profile'
-            ) : (
             <Wrapper>
                 <Title>이메일로 회원가입</Title>
                 <p ref={errorRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</p>
@@ -159,7 +155,6 @@ export function JoinForm({ setNextPage }) {
                     />
                 </Form>
             </Wrapper>
-            )}
         </>
     );
 }

@@ -11,12 +11,12 @@ const Section = styled.section`
     padding: 1.875rem 2.125rem 19.625rem;
 `
 
-function ProfileSection() {
+function ProfileSection({ userInfo }) {
     return (
         <Section>
-        <ProfileTitle/>
-        <ProfileForm/>
-        <StartButton/>
+        <ProfileTitle />
+        <ProfileForm userInfo={userInfo} />
+        <StartButton userInfo={userInfo} />
         </Section>
     );
 }

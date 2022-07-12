@@ -14,7 +14,7 @@ const StartBtn = styled.button`
      }
     `;
 
-function StartButton() {
+function StartButton({ userInfo }) {
     return(
         <StartBtn type="submit">
             웨일마켓 시작하기
