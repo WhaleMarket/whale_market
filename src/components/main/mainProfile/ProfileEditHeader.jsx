@@ -1,7 +1,8 @@
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import back from '../../../assets/icon-arrow-left.png'
-import save from '../../../assets/Ms--Disabled-button.png'
+import save from '../../../assets/Ms-button.png'
+import disabledSave from '../../../assets/Ms--Disabled-button.png'
 
 const Head = styled.header`
     display: flex;
@@ -32,17 +33,22 @@ const SaveBtn = styled.button`
     background-color: inherit;
     background-image: url(${save});
     background-size: 5.625rem 2rem;
+    :disabled {
+        background-image: url(${disabledSave});
+    }
     &:hover{
         cursor: pointer;
     }
 `
 
-function ProfileEditHeader(){   
+function ProfileEditHeader({disabled}){
     const history = useHistory();
+    if (window.location.pathname === '/profile') return null;
+
     return(
         <Head>
             <BackBtn  onClick={() => history.goBack()}/>
-            <SaveBtn/>
+            <SaveBtn disabled={disabled}/>
         </Head>
     )
 }
