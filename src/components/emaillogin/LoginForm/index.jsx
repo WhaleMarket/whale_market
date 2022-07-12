@@ -29,7 +29,7 @@ export function LoginForm(props) {
 
         try {
             const reqData = {
-                user: { email: email, password: password},
+                user: { email: email, password: password },
             };
 
             const config = {
