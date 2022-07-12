@@ -26,6 +26,11 @@ export function JoinForm({ setNextPage }) {
 
     useEffect(() => {
         setErrorMessage('');
+
+        if (password.length > 5) {
+            setIsValidPassword(true);
+        }
+
     }, [email, password]);
 
     const handleSubmit = async (event) => {
@@ -95,9 +100,10 @@ export function JoinForm({ setNextPage }) {
         }
     };
 
-    if (password.length > 5) {
-        setIsValidPassword(true);
-    }
+    // 무한 렌더링 발생!!!
+    // if (password.length > 5) {
+    //     setIsValidPassword(true);
+    // }
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
