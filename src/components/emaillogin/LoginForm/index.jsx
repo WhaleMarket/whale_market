@@ -16,7 +16,6 @@ export function LoginForm(props) {
     const [success, setSuccess] = useState(false);
     const [notMatchError, setNotMatchError] = useState('');
 
-    
     useEffect(() => {
         emailRef.current.focus();
     }, [])
@@ -124,7 +123,7 @@ export function LoginForm(props) {
                         <Button 
                             type='submit' 
                             text='로그인'
-                            disabled={isDisabled ? true : false}
+                            disabled={isDisabled}
                         />
                     </Form>
 
