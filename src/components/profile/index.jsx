@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ProfileTitle from './ProfileTitle';
 import ProfileForm from './ProfileForm';
-import StartButton from './StartButton';
 
 const Section = styled.section`
     display: flex;
@@ -16,7 +15,6 @@ function ProfileSection() {
         <Section>
         <ProfileTitle/>
         <ProfileForm/>
-        <StartButton/>
         </Section>
     );
 }
