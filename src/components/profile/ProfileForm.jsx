@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
 import upload_icon from '../../assets/upload-file.png';
+import ProfileEditHeader from '../main/mainProfile/ProfileEditHeader';
 
 const Form = styled.form`
     display: flex;
@@ -112,6 +113,7 @@ function ProfileForm() {
 
     return (
         <>
+        <ProfileEditHeader disabled={isDisabled}/>
         <Form>
         <Fieldset>
         <Legend>프로필 사진 변경</Legend>
