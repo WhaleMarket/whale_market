@@ -60,7 +60,6 @@ export function JoinForm({ setNextPage }) {
                 setNotMatchError('*' + response.data.message);
                 setNextPage(false);
             } 
-    
         } catch (error) {
             console.error(error);
             errorRef.current.focus();
@@ -102,11 +101,11 @@ export function JoinForm({ setNextPage }) {
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    
     const isPassedJoin = () => {
         return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
     };
     
+<<<<<<< HEAD
     const nextPage = () => {
         if(isValidEmail && isValidPassword) {
             setSuccess(true)
