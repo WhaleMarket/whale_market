@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Button from '../../emaillogin/button/Button';
-import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from "../../../context/AuthProvider";
 import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
@@ -13,7 +12,6 @@ export function JoinForm({ setNextPage, setUserInfo }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [notMatchError, setNotMatchError] = useState('');
 
@@ -25,13 +23,12 @@ export function JoinForm({ setNextPage, setUserInfo }) {
     }, []);
 
     useEffect(() => {
-        setErrorMessage('');
         if (password.length > 5) {
             setIsValidPassword(true);
         }
 
-        if(isValidEmail && isValidPassword) {
-            setSuccess(true)
+        if (isValidEmail && isValidPassword) {
+            setSuccess(true);
         }
     }, [email, password]);
 
@@ -75,6 +72,9 @@ export function JoinForm({ setNextPage, setUserInfo }) {
     };
 
     const handleOnBlur = async (event) => {
+        event.preventDefault();
+        setNotMatchError('')
+
         try {
             const reqData = {
                 user: { 
@@ -93,6 +93,8 @@ export function JoinForm({ setNextPage, setUserInfo }) {
             );
             if (response?.data?.message === "이미 가입된 이메일 주소 입니다.") {
                 setNotMatchError('*' + response.data.message);
+            } else if (!emailRegex.test(email)) {
+                setNotMatchError('*올바르지 않은 이메일 형식입니다.');
             } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
                 setNotMatchError('*' + response.data.message);
                 setIsValidEmail(true);
@@ -114,7 +116,6 @@ export function JoinForm({ setNextPage, setUserInfo }) {
         <>
             <Wrapper>
                 <Title>이메일로 회원가입</Title>
-                <p ref={errorRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</p>
 
                 <Form onSubmit={handleSubmit}>
                     <div>
@@ -129,7 +130,7 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                                     onKeyUp={isPassedJoin}
                                     onBlur={handleOnBlur}
                                 />
-                                {!emailRegex.test(email) && <ErrorMessage>*올바르지 않은 이메일 형식입니다.</ErrorMessage> || notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
+                                {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
                             </Label>
                     </div>
                     <div>
@@ -138,9 +139,8 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                                     type='password'
                                     id='password'
                                     onChange={(event) => setPassword(event.target.value)}
-                                    require
-                                    value={password}
                                     required
+                                    value={password}
                                     onKeyUp={isPassedJoin}
                                 />
                                 {(password.length < 6) && <ErrorMessage>*비밀번호는 6자 이상이어야 합니다.</ErrorMessage>}
