@@ -8,6 +8,7 @@ const StyledButton = styled.button`
     border-radius: 44px;
     background-color: ${(props) => props.disabled ? '#B2EBF2' : '#00BCD4'};
     padding: 12px 86px;
+    cursor: ${(props) => props.disabled ? "default" : "pointer"};
 
     font-style: normal;
     font-weight: 500;
