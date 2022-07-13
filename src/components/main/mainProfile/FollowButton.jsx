@@ -24,6 +24,8 @@ const UnFollowBtn = styled.button`
 `
 
 function FollowButton() {
+    if (window.location.pathname === '/mainprofile') return null;
+
     return(
         <>
         <FollowBtn type="submit">
