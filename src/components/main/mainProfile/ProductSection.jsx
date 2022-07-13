@@ -15,7 +15,12 @@ const ProductTitle = styled.h1`
 const ProductList = styled.ul`
     display: flex;
     gap: 0.625rem;
-    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 `
 
 function ProductSection() {
