@@ -111,10 +111,13 @@ function ProfileForm({ userInfo }) {
         if (username.length > 1 && username.length < 11) {
             setIsValidUsername(true);
         }
+    }, [username, accountname]);
+
+    useEffect(() => {
         if (isValidAccountname && isValidUsername) {
             setSuccess(true);
         }
-    }, [username, accountname]);
+    }, [usernameRef, accountnameRef]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -196,8 +199,7 @@ function ProfileForm({ userInfo }) {
     return (
         <>
             {success ? (
-                <h1>성공했음! 여기는 대충 다음페이지임.</h1>
-                // window.location.href = '/main/home'
+                window.location.href = '/main/home'
             ) : (
                 <Form>
                     <Fieldset onSubmit={handleSubmit}>
@@ -244,7 +246,6 @@ function ProfileForm({ userInfo }) {
                             onBlur={handleOnBlur}
                         />
                         {(!accountnameRegex.test(accountname) && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>) || notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-                        {/* {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>} */}
 
                         <FormLabel htmlFor="intro">소개</FormLabel>
                         <FormInput 
