@@ -46,11 +46,11 @@ export function LoginForm(props) {
             
             // 로그인 데이터 확인
             // console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
+            console.log(JSON.stringify(response));
 
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ email, password, roles, accessToken });
+            const token = response?.data?.token;
+            setAuth({ email, password, token });
+
             setSuccess(true);
 
             if (response?.data?.status === 422) {
@@ -59,15 +59,7 @@ export function LoginForm(props) {
             }
 
         } catch (error) {
-            if (!error?.response) {
-                setErrorMessage('서버가 응답하지 않습니다.');
-            } else if (error.response?.status === 400) {
-                setErrorMessage('이메일 또는 비밀번호가 일치하지 않습니다.');
-            } else if (error.response?.status === 401) {
-                setErrorMessage('Unauthorized');
-            } else {
-                setErrorMessage('로그인 실패');
-            }
+            console.error(error);
             errorRef.current.focus();
         }
     }
