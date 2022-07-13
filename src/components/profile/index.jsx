@@ -15,7 +15,6 @@ function ProfileSection({ userInfo }) {
         <Section>
         <ProfileTitle />
         <ProfileForm userInfo={userInfo} />
-        <StartButton userInfo={userInfo} />
         </Section>
     );
 }
