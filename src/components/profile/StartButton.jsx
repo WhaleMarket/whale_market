@@ -11,9 +11,9 @@ const StartBtn = styled.button`
     cursor: ${(props) => props.disabled ? "default" : "pointer"};
     `;
 
-function StartButton(props) {
+function StartButton({disabled}) {
     return(
-        <StartBtn type="submit" disabled={props.disabled}>
+        <StartBtn type="submit" disabled={disabled}>
             웨일마켓 시작하기
         </StartBtn>
     );
