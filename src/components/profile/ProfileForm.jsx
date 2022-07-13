@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
 import upload_icon from '../../assets/upload-file.png';
 import ProfileEditHeader from '../main/mainProfile/ProfileEditHeader';
+import StartButton from './StartButton';
+import axios from 'axios';
+import { API_URL } from '../../constants/defaultUrl';
+import AuthContext from '../../context/AuthProvider';
 
 const Form = styled.form`
     display: flex;
@@ -16,6 +19,9 @@ const Fieldset = styled.fieldset`
     display: flex;
     flex-direction: column;
     margin-top: 1.875rem;
+    &:nth-child(2) {
+        margin-bottom: 1.875rem;
+    }
 `
 
 const Legend = styled.legend`
@@ -84,85 +90,174 @@ const ErrorMessage = styled.p`
 `
 
 function ProfileForm({ userInfo }) {
-    const [nameInput, setNameInput] = useState('');
-    const [nameInputError, setNameInputError] = useState(false);
-    const [idInput, setIdInPut] = useState('');
-    const [idInputError, setIdInputError] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(false);
+    const { setAuth } = useContext(AuthContext);
+    const usernameRef = useRef();
+    const accountnameRef = useRef();
+    const errorRef = useRef();
 
+    const [username, setUsername] = useState('');
+    const [accountname, setAccountname] = useState('');
+    const [success, setSuccess] = useState(false);
+    const [notMatchError, setNotMatchError] = useState('');
 
-    // 프로필 사진 선택시 적용되는 기능 추가
+    const [isValidUsername, setIsValidUsername] = useState(false);
+    const [isValidAccountname, setIsValidAccountname] = useState(false);
 
-    const handleNameInput = (event) => {
-        if ((event.target.value.length < 2 || event.target.value.length > 10))
-        setNameInputError(true);
-        else setNameInputError(false);
-        setNameInput(event.target.value);
-    }
+    useEffect(() => {
+        usernameRef.current.focus();
+    }, []);
 
-    const handleIdInput = (event) => {
-        const idRegex = /^[._a-zA-Z0-9]+$/;
-        if ((!event.target.value || !(idRegex.test(event.target.value)))) setIdInputError(true);
-        else setIdInputError(false);
-        setIdInPut(event.target.value);
-    }
+    useEffect(() => {
+        if (username.length > 1 && username.length < 11) {
+            setIsValidUsername(true);
+        }
+        if (isValidAccountname && isValidUsername) {
+            setSuccess(true);
+        }
+    }, [username, accountname]);
 
-    useEffect (() => {
-        setIsDisabled(!(nameInput && idInput && !nameInputError && !idInputError))
-    })
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
+        try {
+            const reqData = {
+                user: { accountname: accountname }
+            };
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.post(
+                `${API_URL}/user/accountnamevalid`,
+                reqData,
+                config
+            );
+            // 로그인 데이터 확인용 콘솔로그
+            console.log(JSON.stringify(response?.data));
+            // console.log(JSON.stringify(response));
+
+            setAuth({ accountname });
+
+            if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
+                setNotMatchError('*' + response.data.message);
+                setSuccess(false);
+            } else if (response?.data?.message === "사용 가능한 계정ID 입니다.") {
+                setNotMatchError('*' + response.data.message);
+                setIsValidAccountname(true);
+            }
+        } catch (error) {
+            console.error(error);
+            errorRef.current.focus();
+        }
+    };
+
+    const handleOnBlur = async (event) => {
+        event.preventDefault();
+
+        try {
+            const reqData = {
+                user: { accountname: accountname }
+            };
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.post(
+                `${API_URL}/user/accountnamevalid`,
+                reqData,
+                config
+            );
+
+            setAuth({ accountname });
+
+            if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
+                setNotMatchError('*' + response.data.message);
+                setSuccess(false);
+                setIsDisabled(true);
+            } else if (response?.data?.message === "사용 가능한 계정ID 입니다.") {
+                setNotMatchError('*' + response.data.message);
+                setIsValidAccountname(true);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    // 버튼 활성상태 관리
+    const [isDisabled, setIsDisabled] = useState(true);
+    const accountnameRegex = /^[-._a-z0-9]+$/;
+    const isPassedProfile = () => {
+        return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
+    };
+
+    console.log({userInfo})
     return (
         <>
-        <ProfileEditHeader disabled={isDisabled}/>
-        <Form>
-            <Fieldset>
-                <Legend>프로필 사진 변경</Legend>
-                <ProfileImgWrapper>
-                <ProfileImg src={profile_icon}/>
-                <ProfileImgLable htmlFor="profileImg"><Img src={upload_icon} alt="프로필 이미지 업로드"/></ProfileImgLable>
-                </ProfileImgWrapper>
-                <ProfileImgInput 
-                    type="file" 
-                    accept="image/*" 
-                    id="profileImg"
-                />
-            </Fieldset>
+            {success ? (
+                <h1>성공했음! 여기는 대충 다음페이지임.</h1>
+                // window.location.href = '/main/home'
+            ) : (
+                <Form>
+                    <Fieldset onSubmit={handleSubmit}>
+                        <Legend>프로필 사진 변경</Legend>
 
-            <Fieldset>
-                <Legend>개인정보 변경</Legend>
+                        <ProfileImgWrapper>
+                            <ProfileImg src={profile_icon}/>
+                            <ProfileImgLable htmlFor="profileImg">
+                                <Img src={upload_icon} alt="프로필 이미지 업로드"/>
+                            </ProfileImgLable>
+                        </ProfileImgWrapper>
+                        <ProfileImgInput 
+                            type="file" 
+                            accept="image/*" 
+                            id="profileImg"
+                        />
+                    </Fieldset>
 
-                <FormLabel htmlfor="name" style={{marginTop:'0'}}>사용자 이름</FormLabel>
-                <FormInput 
-                    type="text" 
-                    id="name" 
-                    placeholder="2~10자 이내여야 합니다." 
-                    onChange={handleNameInput} 
-                    value={nameInput}
-                    required
-                />
-                {nameInputError && <ErrorMessage>*2글자 이상 10글자 미만이어야 합니다.</ErrorMessage>}
 
-                <FormLabel htmlfor="id">계정 ID</FormLabel>
-                <FormInput 
-                    type="text" 
-                    id="id" 
-                    placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." 
-                    onChange={handleIdInput} 
-                    value={idInput}
-                />
-                {idInputError && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>}
+                    <Fieldset>
+                        <Legend>개인정보 변경</Legend>
 
-                <FormLabel htmlfor="introduction">소개</FormLabel>
-                <FormInput 
-                    type="text" 
-                    id="introduction" 
-                    placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
-                />
-            </Fieldset>
-        </Form>
-        <Link to='/main/home'>
-        <StartButton disabled={isDisabled}/>
-        </Link>
+                        <FormLabel htmlFor="username" style={{marginTop:'0'}}>사용자 이름</FormLabel>
+                        <FormInput 
+                            type="text" 
+                            id="username" 
+                            placeholder="2~10자 이내여야 합니다."  
+                            required
+                            ref={usernameRef}
+                            onChange={(event) => setUsername(event.target.value)}
+                            onKeyUp={isPassedProfile}
+                        />
+                        {!(username.length > 1 && username.length < 11) && <ErrorMessage>*2글자 이상 10글자 미만이어야 합니다.</ErrorMessage>}
+
+                        <FormLabel htmlFor="accountname">계정 ID</FormLabel>
+                        <FormInput 
+                            type="text" 
+                            id="accountname" 
+                            placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." 
+                            required
+                            ref={accountnameRef}
+                            onChange={(event) => setAccountname(event.target.value)}
+                            onKeyUp={isPassedProfile}
+                            onBlur={handleOnBlur}
+                        />
+                        {(!accountnameRegex.test(accountname) && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>) || notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
+                        {/* {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>} */}
+
+                        <FormLabel htmlFor="intro">소개</FormLabel>
+                        <FormInput 
+                            type="text" 
+                            id="intro" 
+                            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+                        />
+                    </Fieldset>
+                    <StartButton 
+                        disabled={isDisabled}
+                    />
+                </Form>
+            )}
         </>
     );
 };
