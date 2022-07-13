@@ -48,12 +48,16 @@ export function LoginForm(props) {
             // console.log(JSON.stringify(response?.data));
             console.log(JSON.stringify(response));
 
-            const token = response?.data?.token;
+            const token = response.data.user.token;
             setAuth({ email, password, token });
+
+            // 로컬스토리지 저장
+            localStorage.setItem('token', response.data.user.token);
+            console.log(response.data.user.token)
 
             setSuccess(true);
 
-            if (response?.data?.status === 422) {
+            if (response.data.status === 422) {
                 setSuccess(false);
                 setNotMatchError('*' + response.data.message);
             }
@@ -63,7 +67,7 @@ export function LoginForm(props) {
             errorRef.current.focus();
         }
     }
-
+    
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
