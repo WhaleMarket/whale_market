@@ -5,18 +5,15 @@ const StartBtn = styled.button`
     padding: 0.813rem 6.688rem 0.813rem 6.75em;
     border-style: none;
     border-radius: 2.750rem;
-    background-color: #00BCD4;
+    background-color: ${(props) => props.disabled ? '#B2EBF2' : '#00BCD4'};
     color: #fff;
     font-size: 0.875em;
-    cursor: pointer;
-    :disabled {
-        background: #B2EBF2;
-    }
-    `;
+    cursor: ${(props) => props.disabled ? "default" : "pointer"};
+`;
 
-function StartButton({ userInfo }) {
+function StartButton(props) {
     return(
-        <StartBtn type="submit" disabled={disabled}>
+        <StartBtn type="submit" disabled={props.disabled}>
             웨일마켓 시작하기
         </StartBtn>
     );
