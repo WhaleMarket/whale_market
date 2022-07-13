@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
-import menu from '../../assets/icon-more-vertical.png'
-import back from '../../assets/icon-arrow-left.png'
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import menu from '../../assets/icon-more-vertical.png';
+import back from '../../assets/icon-arrow-left.png';
 
 const Head = styled.header`
     display: flex;
@@ -9,15 +9,14 @@ const Head = styled.header`
     align-items: center;
     position: fixed;
     width: calc(100% - 28px);
-    padding: 13px 12px 13px 16px;
-    margin-bottom: 1.875rem;
+    padding: 0.813rem 0.750em 0.813rem 1rem;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
 `;
 
 const Search = styled.button`
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     border: none;
     background-color: inherit;
     background-image: ${(props)=>(props.className === 'back' ? `url(${back})` : `url(${menu})`)};
@@ -29,7 +28,7 @@ const Search = styled.button`
 const ChatPartner = styled.p`
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 1.125rem;
     text-align: center;
     width: 100vw;
     white-space: nowrap;
@@ -43,8 +42,8 @@ function ChatProfileHeader(props){
     return(
         <Head>
             <Search className='back' onClick={() => history.goBack()} />
-            <Search className='menu' />
             <ChatPartner>{props.partner}</ChatPartner>
+            <Search className='menu' />
         </Head>
     );
 }
