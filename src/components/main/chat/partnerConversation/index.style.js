@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     margin-bottom: 9px;
+    word-break: keep-all;
 `;
 
 export const Text = styled.p`
