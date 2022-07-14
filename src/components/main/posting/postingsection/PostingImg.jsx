@@ -13,6 +13,7 @@ function PostingImg({ src, alt }) {
   return (
     <>
       <PostImage src={src} alt={alt} />
+      <CancleBtn src={src} />
     </>
   );
 }
