@@ -44,6 +44,13 @@ export const Input = styled.input`
     &:focus {
         border-bottom: 1px solid #00BCD4;
     }
+    &::placeholder {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: #DBDBDB;
+    }
 `;
 
 export const ErrorMessage = styled.strong`
