@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import chatData from '../../../components/main/chat/chatData.json';
 import ChatProfileHeader from "../../../components/main/ChatProfileHeader";
-import ChatContents from '../../../components/main/chat/ChatContents';
+import ChatContents from '../../../components/main/chat/chatContents/index.jsx';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -20,7 +20,7 @@ function ChattingView(props) {
     return (
         <Wrapper>
             <ChatProfileHeader partner={chat.partner} />
-            <ChatContents content={chat.content}></ChatContents>
+            <ChatContents contents={chat.contents}></ChatContents>
         </Wrapper>
     );
 }
