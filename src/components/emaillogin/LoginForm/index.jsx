@@ -5,7 +5,7 @@ import { API_URL } from '../../../constants/defaultUrl';
 import Button from '../../emaillogin/button/Button';
 import { Wrapper, Title, Form, Label, Input, ErrorMessage, StyledLink } from './index.style';
 
-export function LoginForm(props) {
+export function LoginForm() {
     const { setAuth } = useContext(AuthContext);
     const emailRef = useRef();
     const errorRef = useRef();
@@ -26,6 +26,7 @@ export function LoginForm(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setPassword('');
 
         try {
             const reqData = {
@@ -46,20 +47,19 @@ export function LoginForm(props) {
             
             // 로그인 데이터 확인
             // console.log(JSON.stringify(response?.data));
-            console.log(JSON.stringify(response));
+            // console.log(JSON.stringify(response));
 
-            const token = response.data.user.token;
+            const token = response?.data?.user?.token;
             setAuth({ email, password, token });
 
             // 로컬스토리지 저장
-            localStorage.setItem('token', response.data.user.token);
-            console.log(response.data.user.token)
+            localStorage.setItem('token', response?.data?.user?.token);
 
             setSuccess(true);
 
-            if (response.data.status === 422) {
+            if (response?.data?.status === 422) {
                 setSuccess(false);
-                setNotMatchError('*' + response.data.message);
+                setNotMatchError('*' + response?.data?.message);
             }
 
         } catch (error) {
@@ -83,8 +83,6 @@ export function LoginForm(props) {
             ) : (
                 <Wrapper>
                     <Title>로그인</Title>
-                    <p ref={errorRef} className={errorMessage ? "errorMessage" : "offscreen"} aria-live="assertive">{errorMessage}</p>
-
                     <Form onSubmit={handleSubmit}>
                         <div>
                                 <Label htmlFor='email'>이메일
@@ -94,8 +92,9 @@ export function LoginForm(props) {
                                         ref={emailRef}
                                         autoComplete='off'
                                         onChange={(event) => setEmail(event.target.value)}
-                                        required
                                         onKeyUp={isPassedLogin}
+                                        placeholder='이메일 주소를 입력해 주세요.'
+                                        required
                                     />
                                     {(email.length > 5) 
                                     && !emailRegex.test(email) 
@@ -108,10 +107,11 @@ export function LoginForm(props) {
                                     <Input
                                         type='password'
                                         id='password'
-                                        onChange={(event) => setPassword(event.target.value)}
                                         value={password}
-                                        required
+                                        onChange={(event) => setPassword(event.target.value)}
                                         onKeyUp={isPassedLogin}
+                                        placeholder='비밀번호를 설정해 주세요.'
+                                        required
                                     />
                                     {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
                                 </Label>
