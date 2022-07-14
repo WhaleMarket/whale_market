@@ -91,7 +91,6 @@ function ProfileForm({ userInfo }) {
     const { setAuth } = useContext(AuthContext);
     const usernameRef = useRef();
     const accountnameRef = useRef();
-    const errorRef = useRef();
 
     const [username, setUsername] = useState('');
     const [accountname, setAccountname] = useState('');
@@ -117,42 +116,7 @@ function ProfileForm({ userInfo }) {
         }
     }, [usernameRef, accountnameRef]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            const reqData = {
-                user: { accountname: accountname }
-            };
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
-            const response = await axios.post(
-                `${API_URL}/user/accountnamevalid`,
-                reqData,
-                config
-            );
-            // 로그인 데이터 확인용 콘솔로그
-            console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
-
-            setAuth({ accountname });
-
-            if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
-                setNotMatchError('*' + response.data.message);
-                setSuccess(false);
-            } else if (response?.data?.message === "사용 가능한 계정ID 입니다.") {
-                setNotMatchError('*' + response.data.message);
-                setIsValidAccountname(true);
-            }
-        } catch (error) {
-            console.error(error);
-            errorRef.current.focus();
-        }
-    };
-
+    // accountname 검증 요청 및 에러처리
     const handleOnBlur = async (event) => {
         event.preventDefault();
 
@@ -171,11 +135,9 @@ function ProfileForm({ userInfo }) {
                 config
             );
 
-            setAuth({ accountname });
-
             if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
                 setNotMatchError('*' + response.data.message);
-                setSuccess(false);
+                // setSuccess(false);
                 setIsDisabled(true);
             } else if (response?.data?.message === "사용 가능한 계정ID 입니다.") {
                 setNotMatchError('*' + response.data.message);
@@ -186,21 +148,71 @@ function ProfileForm({ userInfo }) {
         }
     };
 
+    // 회원가입 정보 제출
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const image = {profile_icon};
+            const intro = '제발 돼라';
+            const reqData = {
+                user: { 
+                    // username: 'moonhee',
+                    // email: '220714@test.com',
+                    // password: '123123',
+                    // accountname: 'moontest2',
+                    // intro: '제발 돼라',
+                    // image: 'https://i.ibb.co/LJx5gZm/3.jpg'
+                    username: username,
+                    email: { userInfo }.email,
+                    password: { userInfo }.password,
+                    accountname: accountname,
+                    intro: intro,
+                    image: image
+                }
+            };
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+            const response = await axios.post(
+                `${API_URL}/user`,
+                reqData,
+                config
+            );
+            // 로그인 데이터 확인용 콘솔로그
+            console.log(JSON.stringify(response?.data));
+            // console.log(JSON.stringify(response));
+
+            setAuth({ accountname });
+            
+        } catch (error) {
+            if (error?.response?.data?.status === 422) {
+                alert('422 Unprocessable Entity(처리할 수 없는 개체): 요청을 잘 받았으나 문법 오류로 인하여 무언가를 응답할 수 없을때 사용되는 코드');
+                setSuccess(false);
+                setIsDisabled(true);
+            console.error(error);
+            }
+        }
+    };
+
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const accountnameRegex = /^[-._a-z0-9]+$/;
     const isPassedProfile = () => {
         return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
     };
-
+    
     console.log({userInfo})
+    
     return (
         <>
             {success ? (
-                window.location.href = '/main/home'
+                window.location.href = '/emaillogin'
             ) : (
-                <Form>
-                    <Fieldset onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
+                    <Fieldset>
                         <Legend>프로필 사진 변경</Legend>
 
                         <ProfileImgWrapper>
@@ -245,11 +257,13 @@ function ProfileForm({ userInfo }) {
                         />
                         {(!accountnameRegex.test(accountname) && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>) || notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
 
-                        <FormLabel htmlFor="intro">소개</FormLabel>
+                        <FormLabel htmlFor='intro'>소개</FormLabel>
                         <FormInput 
-                            type="text" 
-                            id="intro" 
-                            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+                            type='text' 
+                            id='intro' 
+                            placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
+                            name='intro'
+                            required
                         />
                     </Fieldset>
                     <StartButton 
