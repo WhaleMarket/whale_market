@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import styled from "styled-components";
 import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
@@ -22,6 +22,7 @@ const Upload = styled.button`
 
 function UploadButton() {
   const [uploadState] = useContext(UploadContext);
+<<<<<<< HEAD
   const [uploadPostingState] = useContext(UploadPostingContext);
 
   const onSubmit = async () => {
@@ -80,6 +81,21 @@ function UploadButton() {
           업로드
         </Upload>
       </Link>
+=======
+  const uploadButton = useRef();
+  if (uploadButton.current) {
+    if (uploadState) {
+      uploadButton.current.disabled = false;
+    } else {
+      uploadButton.current.disabled = true;
+    }
+  }
+  return (
+    <>
+      <Upload ref={uploadButton} state={uploadState}>
+        업로드
+      </Upload>
+>>>>>>> f764f05 (:sparkles: uploadState context API 관리 기능 수정)
     </>
   );
 }
