@@ -4,7 +4,7 @@ import ChatList from '../../../components/main/chat/chatList/index';
 import chatData from '../../../components/main/chat/chatData.json';
 import styled from 'styled-components';
 
-const Wrapper = styled.p`
+const Wrapper = styled.div`
     height: 100vh;
 `;
 
