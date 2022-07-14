@@ -64,6 +64,7 @@ function ImageUploadButton() {
     }
     const reader = new FileReader();
     reader.readAsDataURL(Blob);
+    event.target.value = "";
     return new Promise((resolve) => {
       reader.onload = () => {
         setUploadImgState((uploadImgState) => [
