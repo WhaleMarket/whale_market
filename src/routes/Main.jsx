@@ -14,14 +14,14 @@ function Test() {
         <>
             <Switch>
                 <Route path="/chatting/:chatId" component={ChattingView}/>
-                <div>
+                <>
                     {location.pathname !== "/posting" && <Navbar />}
                     <Route path="/home" exact component={Home} />
                     <Route path="/chatting" exact component={Chatting}/>
                     <Route path="/mainprofile" component={MainProfile} />
                     <Route path="/posting" component={Posting} />
                     <Route path="/search" component={HomeSearch}/>
-                </div>
+                </>
             </Switch>
         </>
     );
