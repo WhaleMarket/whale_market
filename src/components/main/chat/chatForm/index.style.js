@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import UpLoadFile from '../../../../assets/upload-file.png';
 
 export const Form = styled.form`
     position: fixed;
@@ -10,8 +11,15 @@ export const Form = styled.form`
     width: 100vw;
 `;
 
-export const ButtonUpLoad = styled.img`
+export const ButtonUpLoad = styled.button`
     width: 36px;
+    height: 36px;
+    background: no-repeat url(${UpLoadFile});
+    background-size: contain;
+    border:none; 
+    box-shadow:none; 
+    border-radius: 0; 
+    cursor: pointer;
     `;
 
 export const Input = styled.input`
@@ -33,6 +41,6 @@ export const SendButton = styled.button`
     box-shadow:none; 
     border-radius: 0; 
     font-size: 16px;
-    color: #C4C4C4;
-    cursor: pointer;
+    color: ${(props) => props.disabled ? '#C4C4C4' : '#00BCD4'};
+    cursor: ${(props) => props.disabled ? "default" : "pointer"};
 `;
