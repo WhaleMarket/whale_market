@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import profileImg from '../../../assets/basic-profile-img.png';
 import menubtn from '../../../assets/s-icon-more-vertical.png';
+import postImg from '../../../assets/postImg.png'
 
 const PostWrapper = styled.div`
     width: 24.375rem;
@@ -49,6 +50,21 @@ const PostInfoId = styled.p`
     font-size: 0.75rem;
     color: #767676;
 `  
+const PostContent = styled.div`
+    margin-left: 3.375rem;
+    padding-left: 0.75rem;
+`
+
+const PostTxt = styled.p`
+    margin-bottom: 1rem;
+`
+
+const PostImgWrapper = styled.div`
+`
+const PostImg = styled.img`
+    width: 19rem;
+    margin-bottom: 0.750rem;
+`
 
 function PostCard() {
     return(
@@ -61,6 +77,17 @@ function PostCard() {
                     <PostMenuBtn/>
                 </PostInfoUser>
             </PostInfo>
+            <PostContent>
+                <PostTxt>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quis.</PostTxt>
+                <PostImgWrapper>
+                    <PostImg src={postImg}/>
+                </PostImgWrapper>
+            {/* <PostIconContainer>
+                <LikeBtn>{heartCount}</LikeBtn>
+                <CommentBtn>{commentCount}</CommentBtn>
+            </PostIconContainer> */}
+            {/* <PostDate>{createdAt}</PostDate> */}
+            </PostContent>
         </PostWrapper>
     )
 }
