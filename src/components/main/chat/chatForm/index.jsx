@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Form, ButtonUpLoad, Input, SendButton } from './index.style';
+import { Form, UpLoadImg, HiddenUpLoadInput, Input, SendButton } from './index.style';
+import UpLoadFile from '../../../../assets/upload-file.png';
 
 function ChatForm() {
     const [textInput, setTextInput] = useState('');
@@ -24,7 +25,8 @@ function ChatForm() {
     return (
         <Form onSubmit={handleSubmit}>
             <label htmlFor="upLoad">
-                <ButtonUpLoad type='button' />
+                <UpLoadImg src={UpLoadFile} />
+                <HiddenUpLoadInput id='upLoad' type='file' accept='image/*' />
             </label>
             <label htmlFor="text">
                 <Input 
