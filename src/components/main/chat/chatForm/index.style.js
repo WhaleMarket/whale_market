@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import UpLoadFile from '../../../../assets/upload-file.png';
 
 export const Form = styled.form`
     position: fixed;
@@ -11,11 +10,13 @@ export const Form = styled.form`
     width: 100vw;
 `;
 
-export const ButtonUpLoad = styled.button`
+export const UpLoadImg = styled.img`
     width: 36px;
     height: 36px;
-    background: no-repeat url(${UpLoadFile});
-    background-size: contain;
+`;
+
+export const HiddenUpLoadInput = styled.input`
+    display: none;
     border:none; 
     box-shadow:none; 
     border-radius: 0; 
