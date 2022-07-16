@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PostIconContainer from './PostIconContainer';
 import profileImg from '../../../assets/basic-profile-img.png';
 import menubtn from '../../../assets/s-icon-more-vertical.png';
 import postImg from '../../../assets/postImg.png'
@@ -66,6 +67,11 @@ const PostImg = styled.img`
     margin-bottom: 0.750rem;
 `
 
+const PostDate = styled.p`
+    color: #767676;
+    font-size: 0.625em;
+`
+
 function PostCard() {
     return(
         <PostWrapper>
@@ -82,11 +88,8 @@ function PostCard() {
                 <PostImgWrapper>
                     <PostImg src={postImg}/>
                 </PostImgWrapper>
-            {/* <PostIconContainer>
-                <LikeBtn>{heartCount}</LikeBtn>
-                <CommentBtn>{commentCount}</CommentBtn>
-            </PostIconContainer> */}
-            {/* <PostDate>{createdAt}</PostDate> */}
+            <PostIconContainer/>
+            <PostDate>2022년 07월 15일</PostDate>
             </PostContent>
         </PostWrapper>
     )
