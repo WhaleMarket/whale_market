@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Form, UpLoadImg, HiddenUpLoadInput, Input, SendButton } from './index.style';
 import UpLoadFile from '../../../../assets/upload-file.png';
 
-function ChatForm() {
+function ChatForm({ sendMessage }) {
     const [textInput, setTextInput] = useState('');
     const [success, setSuccess] = useState(false);
     const textRef = useRef();
@@ -10,11 +10,14 @@ function ChatForm() {
     useEffect(() => {
         textRef.current.focus();
     });
-
+    
     const handleSubmit = (event) => {
         event.preventDefault();
+        setSuccess(true);
+        sendMessage(textInput);
         setTextInput('');
     };
+    
 
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
