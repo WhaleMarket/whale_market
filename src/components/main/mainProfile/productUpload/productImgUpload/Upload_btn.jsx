@@ -1,5 +1,6 @@
 import Img_logo from "../../../../../assets/image_logo.png";
 import styled from "styled-components";
+import { useRef } from "react";
 
 const Uploadbtn = styled.button`
   position: absolute;
@@ -13,12 +14,41 @@ const Uploadbtn = styled.button`
   background-repeat: no-repeat;
   bottom: 12px;
   right: 12px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-function UploadBtn() {
+const UploadInput = styled.input`
+  display: none;
+`;
+
+function UploadBtn({ setUrl }) {
+  const Upload_input = useRef();
+  const ImgUpload = (event) => {
+    const Blob = event.target.files[0];
+    if (Blob === undefined) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(Blob);
+    event.target.value = "";
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setUrl(reader.result);
+        resolve();
+      };
+    });
+  };
   return (
     <>
-      <Uploadbtn />
+      <UploadInput
+        ref={Upload_input}
+        type="file"
+        accept="image/*"
+        onChange={ImgUpload}
+      />
+      <Uploadbtn onClick={() => Upload_input.current.click()} />
     </>
   );
 }
