@@ -57,7 +57,7 @@ const MoreBtn = styled.button`
     }
 `
 
-function FeedProfile({profileImg, username, accountname}) {
+function ProfileSection({profileImg, username, accountname}) {
     return (
         <ProfileContainer>
             <ProfileDiv>
@@ -72,4 +72,4 @@ function FeedProfile({profileImg, username, accountname}) {
     );
 }
 
-export default FeedProfile;
+export default ProfileSection;
