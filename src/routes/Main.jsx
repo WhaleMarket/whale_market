@@ -7,6 +7,7 @@ import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
 import { useLocation } from "react-router-dom";
 import HomeSearch from "../pages/main_page/HomeSearch";
+import HomeFeed from "../pages/main_page/HomeFeed";
 
 function Test() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function Test() {
         <Route path="/mainprofile" component={MainProfile} />
         <Route path="/posting" component={Posting} />
         <Route path="/search" component={HomeSearch}/>
+        <Route path="/feed" component={HomeFeed}/>
       </Switch>
     </>
   );
