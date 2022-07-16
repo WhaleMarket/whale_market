@@ -13,7 +13,6 @@ const Head = styled.header`
     margin-bottom: 1.875rem;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
-    z-index: 1;
 `;
 
 const Search = styled.button`
