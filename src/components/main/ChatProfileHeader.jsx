@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import menu from '../../../assets/icon-more-vertical.png'
-import back from '../../../assets/icon-arrow-left.png'
+import menu from '../../assets/icon-more-vertical.png'
+import back from '../../assets/icon-arrow-left.png'
 
 const Head = styled.header`
     display: flex;
@@ -10,11 +10,10 @@ const Head = styled.header`
     position: fixed;
     width: calc(100% - 28px);
     padding: 13px 12px 13px 16px;
+    margin-bottom: 1.875rem;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
-    margin-bottom: 24px;
-    position: relative;
-`
+`;
 
 const Search = styled.button`
     width: 24px;
@@ -25,7 +24,7 @@ const Search = styled.button`
     &:hover{
         cursor: pointer;
     }
-`
+`;
 
 const ChatPartner = styled.p`
     font-style: normal;
@@ -38,14 +37,14 @@ const ChatPartner = styled.p`
     text-overflow: ellipsis;
 `;
 
-function ChatProfileHeader(props) {
+function ChatProfileHeader(props){   
     const history = useHistory();
 
     return(
         <Head>
             <Search className='back' onClick={() => history.goBack()} />
-            <ChatPartner>{props.partner}</ChatPartner>
             <Search className='menu' />
+            <ChatPartner>{props.partner}</ChatPartner>
         </Head>
     );
 }
