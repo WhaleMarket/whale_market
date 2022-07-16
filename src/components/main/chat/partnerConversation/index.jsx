@@ -4,7 +4,7 @@ import basicProfileImg from '../../../../assets/basic-profile-img.png';
 function PartnerConversation(props) {
     return (
         <Wrapper>
-            <PreviewProfile href="">
+            <PreviewProfile href=''>
                 <ProfileImg src={basicProfileImg} alt="프로필사진" />
             </PreviewProfile>
             <MessageBox>
