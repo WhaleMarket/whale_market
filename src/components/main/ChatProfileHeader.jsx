@@ -21,6 +21,7 @@ const Search = styled.button`
     border: none;
     background-color: inherit;
     background-image: ${(props)=>(props.className === 'back' ? `url(${back})` : `url(${menu})`)};
+    background-size: 1.375rem 1.375rem;
     &:hover{
         cursor: pointer;
     }
