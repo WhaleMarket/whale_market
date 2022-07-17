@@ -1,9 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import listIconOn from '../../../../assets/icon-post-list-on.png';
-import listIconOff from '../../../../assets/icon-post-list-off.png';
-import albumIconOn from '../../../../assets/icon-post-album-on.png';
-import albumIconOff from '../../../../assets/icon-post-album-off.png';
 import PostIconContainer from './PostIconContainer';
 import profileImg from '../../../../assets/basic-profile-img.png';
 import menubtn from '../../../../assets/s-icon-more-vertical.png';
@@ -12,35 +8,6 @@ import postImg from '../../../../assets/postImg.png'
 const PostWrapper = styled.div`
     width: 24.375rem;
     margin: 0  auto 3.750rem auto;
-`
-
-const ViewTypeNav = styled.nav`
-    display: flex;
-    justify-content: flex-end;
-    height: 2.750rem;
-    border-bottom: 0.5px solid #DBDBDB;
-`
-
-const ListIconBtn = styled.button`
-    padding: 0;
-    border-style: none;
-    background-color: inherit;
-`
-
-const ListIcon = styled.img`
-    width: 1.625rem;
-    height: 1.625rem;
-`
-
-const AlbumIconBtn = styled.button`
-    padding: 0;
-    border-style: none;
-    background-color: inherit;
-`
-
-const AlbumIcon = styled.img`
-    width: 1.625rem;
-    height: 1.625rem;
 `
 
 const PostInfo = styled.div`
@@ -109,20 +76,10 @@ const PostDate = styled.p`
 `
 
 function PostCard() {
-    const [viewType, setviewType] = useState(true);
 
     return(
+        <>
         <PostWrapper>
-            <ViewTypeNav>
-                <ListIconBtn onClick={() => {setviewType(true)}}>
-                        <ListIcon src={viewType ? listIconOn : listIconOff}/>
-                </ListIconBtn>
-                <AlbumIconBtn onClick={() => {setviewType(false)}}>
-                        <AlbumIcon src={viewType ? albumIconOff : albumIconOn}/>
-                </AlbumIconBtn>
-            </ViewTypeNav>
-            
-            {}
             <PostInfo>
                 <PostInfoImg src={profileImg}/>
                 <PostInfoUser>
@@ -140,6 +97,7 @@ function PostCard() {
             <PostDate>2022년 07월 15일</PostDate>
             </PostContent>
         </PostWrapper>
+        </>
     )
 }
 
