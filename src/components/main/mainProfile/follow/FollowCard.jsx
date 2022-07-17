@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import profileImg from '../../../../assets/basic-profile-img.png';
 
 const FollowWrapper = styled.div`
     display: flex;
     align-items: center;
     position: relative;
+`
+
+const FollowProfileWrapper = styled(Link)`
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 `
 
 const FollowProfileImg = styled.img`
@@ -21,6 +28,7 @@ const FollowInfo = styled.div`
 const FollowName = styled.strong`
     font-size: 0.875rem;
     font-weight: 500;
+    color: #000;
 `
 
 const FollowIntro = styled.p`
@@ -38,16 +46,21 @@ const FollowBtn = styled.button`
     background-color: #00BCD4;
     font-size: 0.75rem;
     color: #fff;
+    &:hover{
+        cursor: pointer;
+    }
 `
 
 function FollowCard() {
     return(
         <FollowWrapper>
-            <FollowProfileImg src={profileImg}/>
-            <FollowInfo>
-                <FollowName>박웨일</FollowName>
-                <FollowIntro>I love Whale Market!</FollowIntro>
-            </FollowInfo>
+            <FollowProfileWrapper to = 'mainprofile'>
+                <FollowProfileImg src={profileImg}/>
+                <FollowInfo>
+                    <FollowName>박웨일</FollowName>
+                    <FollowIntro>I love Whale Market!</FollowIntro>
+                </FollowInfo>
+            </FollowProfileWrapper>
             <FollowBtn>팔로우</FollowBtn>
         </FollowWrapper>
     )
