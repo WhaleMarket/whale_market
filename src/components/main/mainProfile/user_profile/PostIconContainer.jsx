@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import likeBtn from '../../../assets/icon-heart-fill.png';
-import likeBtnOutline from '../../../assets/icon-heart.png';
-import commentBtn from '../../../assets/icon-message-circle.png';
+import likeBtn from '../../../../assets/icon-heart-fill.png';
+import likeBtnOutline from '../../../../assets/icon-heart.png';
+import commentBtn from '../../../../assets/icon-message-circle.png';
 
 const PostIconWrapper = styled.div`
     display: flex;

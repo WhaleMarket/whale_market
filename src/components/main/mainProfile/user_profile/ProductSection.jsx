@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import ProductCard from './ProductCard';
 
 const ProductContainer = styled.section`
+    width: 24.375rem;
     padding: 1.250rem 1rem;
+    margin: 0 auto;
+    box-sizing: border-box;
 `
 
 const ProductTitle = styled.h1`
