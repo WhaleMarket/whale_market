@@ -21,6 +21,7 @@ const BackBtn = styled.button`
     border: none;
     background-color: inherit;
     background-image: url(${back});
+    background-size: 1.5rem 1.5rem;
     &:hover{
         cursor: pointer;
     }

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
 import upload_icon from '../../assets/upload-file.png';
-import ProfileEditHeader from '../main/mainProfile/ProfileEditHeader';
 import axios from 'axios';
 import { API_URL } from '../../constants/defaultUrl';
 import AuthContext from '../../context/AuthProvider';
