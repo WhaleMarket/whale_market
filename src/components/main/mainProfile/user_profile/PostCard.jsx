@@ -91,6 +91,8 @@ const PostContent = styled.div`
 
 const PostTxt = styled.p`
     margin-bottom: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
 `
 
 const PostImgWrapper = styled.div`
