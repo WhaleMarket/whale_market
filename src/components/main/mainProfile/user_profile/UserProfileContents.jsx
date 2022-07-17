@@ -73,7 +73,7 @@ function UserProfileCard(props) {
             <UserName>{username}</UserName>
             <UserId>{userid}</UserId>
             <UserIntro>{userintroduction}</UserIntro>
-            <Followers to={followers}>
+            <Followers to = '/followers'>
                 <FollowCount>{followerCount}</FollowCount>
                 <FollowTxt>followers</FollowTxt>
             </Followers>
