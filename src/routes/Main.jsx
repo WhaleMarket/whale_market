@@ -9,20 +9,22 @@ import { useLocation } from "react-router-dom";
 import HomeSearch from "../pages/main_page/HomeSearch";
 
 function Test() {
-  const location = useLocation();
-  return (
-    <>
-      {location.pathname !== "/posting" && <Navbar />}
-      <Switch>
-        <Route path="/home" exact component={Home} />
-        <Route path="/chatting" exact component={Chatting}/>
-        <Route path="/chatting/:chatId" component={ChattingView}/>
-        <Route path="/mainprofile" component={MainProfile} />
-        <Route path="/posting" component={Posting} />
-        <Route path="/search" component={HomeSearch}/>
-      </Switch>
-    </>
-  );
+    const location = useLocation();
+    return (
+        <>
+            <Switch>
+                <Route path="/chatting/:chatId" component={ChattingView}/>
+                <>
+                    {location.pathname !== "/posting" && <Navbar />}
+                    <Route path="/home" exact component={Home} />
+                    <Route path="/chatting" exact component={Chatting}/>
+                    <Route path="/mainprofile" component={MainProfile} />
+                    <Route path="/posting" component={Posting} />
+                    <Route path="/search" component={HomeSearch}/>
+                </>
+            </Switch>
+        </>
+    );
 }
 
 function Main() {
