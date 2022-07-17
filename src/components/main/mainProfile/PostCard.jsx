@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import listIconOn from '../../../assets/icon-post-list-on.png';
+import listIconOff from '../../../assets/icon-post-list-off.png';
+import albumIconOn from '../../../assets/icon-post-album-on.png';
+import albumIconOff from '../../../assets/icon-post-album-off.png';
 import PostIconContainer from './PostIconContainer';
 import profileImg from '../../../assets/basic-profile-img.png';
 import menubtn from '../../../assets/s-icon-more-vertical.png';
@@ -8,6 +12,35 @@ import postImg from '../../../assets/postImg.png'
 const PostWrapper = styled.div`
     width: 24.375rem;
     margin: 0  auto 3.750rem auto;
+`
+
+const ViewTypeNav = styled.nav`
+    display: flex;
+    justify-content: flex-end;
+    height: 2.750rem;
+    border-bottom: 0.5px solid #DBDBDB;
+`
+
+const ListIconBtn = styled.button`
+    padding: 0;
+    border-style: none;
+    background-color: inherit;
+`
+
+const ListIcon = styled.img`
+    width: 1.625rem;
+    height: 1.625rem;
+`
+
+const AlbumIconBtn = styled.button`
+    padding: 0;
+    border-style: none;
+    background-color: inherit;
+`
+
+const AlbumIcon = styled.img`
+    width: 1.625rem;
+    height: 1.625rem;
 `
 
 const PostInfo = styled.div`
@@ -68,13 +101,26 @@ const PostImg = styled.img`
 `
 
 const PostDate = styled.p`
+    margin-top: 1rem;
     color: #767676;
     font-size: 0.625em;
 `
 
 function PostCard() {
+    const [viewType, setviewType] = useState(true);
+
     return(
         <PostWrapper>
+            <ViewTypeNav>
+                <ListIconBtn onClick={() => {setviewType(true)}}>
+                        <ListIcon src={viewType ? listIconOn : listIconOff}/>
+                </ListIconBtn>
+                <AlbumIconBtn onClick={() => {setviewType(false)}}>
+                        <AlbumIcon src={viewType ? albumIconOff : albumIconOn}/>
+                </AlbumIconBtn>
+            </ViewTypeNav>
+            
+            {}
             <PostInfo>
                 <PostInfoImg src={profileImg}/>
                 <PostInfoUser>
@@ -84,7 +130,7 @@ function PostCard() {
                 </PostInfoUser>
             </PostInfo>
             <PostContent>
-                <PostTxt>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, quis.</PostTxt>
+                <PostTxt>반짝이는 방황하여도, 간에 속에서 없으면, 고동을 모래뿐일 풀이 있는 황금시대다. 소담스러운 가슴에 그것은 인생을 뜨고, 돋고, 찬미를 같으며, 것이다. 청춘의 어디 인생에 스며들어 우리 바이며, 이상의 얼음 것은 것이다.</PostTxt>
                 <PostImgWrapper>
                     <PostImg src={postImg}/>
                 </PostImgWrapper>
