@@ -2,11 +2,12 @@ import Navbar from "../components/main/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Chatting from "../pages/main_page/chat/Chatting";
 import ChattingView from "../pages/main_page/chat/ChattingView";
-import MainProfile from "../pages/main_page/mainProfile/UserProfile";
+import MainProfile from "../pages/main_page/mainProfile/MyProfile";
 import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
 import { useLocation } from "react-router-dom";
 import HomeSearch from "../pages/main_page/HomeSearch";
+import Followers from "../pages/main_page/mainProfile/Followers";
 
 function Test() {
     const location = useLocation();
@@ -21,6 +22,7 @@ function Test() {
                     <Route path="/mainprofile" component={MainProfile} />
                     <Route path="/posting" component={Posting} />
                     <Route path="/search" component={HomeSearch}/>
+                    <Route path="/followers" component={Followers}/>
                 </>
             </Switch>
         </>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
 import upload_icon from '../../assets/upload-file.png';
-import ProfileEditHeader from '../main/mainProfile/ProfileEditHeader';
 import axios from 'axios';
 import { API_URL } from '../../constants/defaultUrl';
 import AuthContext from '../../context/AuthProvider';
@@ -11,7 +11,7 @@ import AuthContext from '../../context/AuthProvider';
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-    margin: 1.875rem 2.125rem;
+    margin-top: 1.875rem;
 `
 
 const Fieldset = styled.fieldset`
@@ -92,6 +92,7 @@ function ProfileForm({ userInfo }) {
     const { setAuth } = useContext(AuthContext);
     const usernameRef = useRef();
     const accountnameRef = useRef();
+    const errorRef = useRef();
 
     const [username, setUsername] = useState('');
     const [accountname, setAccountname] = useState('');
@@ -210,10 +211,10 @@ function ProfileForm({ userInfo }) {
     return (
         <>
             {success ? (
-                window.location.href = '/emaillogin'
+                window.location.href = '/main/home'
             ) : (
-                <Form onSubmit={handleSubmit}>
-                    <Fieldset>
+                <Form>
+                    <Fieldset onSubmit={handleSubmit}>
                         <Legend>프로필 사진 변경</Legend>
 
                         <ProfileImgWrapper>
@@ -258,18 +259,18 @@ function ProfileForm({ userInfo }) {
                         />
                         {(!accountnameRegex.test(accountname) && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>) || notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
 
-                        <FormLabel htmlFor='intro'>소개</FormLabel>
+                        <FormLabel htmlFor="intro">소개</FormLabel>
                         <FormInput 
-                            type='text' 
-                            id='intro' 
-                            placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
-                            name='intro'
-                            required
+                            type="text" 
+                            id="intro" 
+                            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
                         />
                     </Fieldset>
+                    <Link to='/main/home'>
                     <StartButton 
                         disabled={isDisabled}
                     />
+                    </Link>
                 </Form>
             )}
         </>

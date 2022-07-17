@@ -8,6 +8,7 @@ const Section = styled.section`
     flex-direction: column;
     align-items: center;
     padding: 1.875rem 2.125rem 19.625rem;
+    box-sizing: border-box;
 `
 
 function ProfileSection({ userInfo }) {

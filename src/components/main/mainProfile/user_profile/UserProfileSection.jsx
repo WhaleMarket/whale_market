@@ -9,6 +9,7 @@ const ProfileContainer = styled.section`
     justify-content: center;
     flex-direction: column;
     border-bottom: 0.031rem solid #DBDBDB;
+    box-sizing: border-box;
 `
 
 function UserProfileSection() {
