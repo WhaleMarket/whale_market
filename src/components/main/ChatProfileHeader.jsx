@@ -12,6 +12,7 @@ const Head = styled.header`
     padding: 0.813rem 0.750em 0.813rem 1rem;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
+    z-index: 1;
 `;
 
 const Search = styled.button`

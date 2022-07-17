@@ -1,15 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import img from '../../../assets/product-img.png';
+import img from '../../../../assets/product-img.png';
 
 const ProductWrapper = styled.li`
     display: flex;
     flex-direction: column;
     list-style: none;
+    width: 24.375rem;
     cursor:pointer;
-    /* &:not(last-child) {
-        margin-right: 0.625rem;
-    } */
 `
 const ProductImg = styled.img`
     width: 8.75rem;

@@ -35,6 +35,7 @@ const List = styled.li`
 
 const Logo = styled.img`
   display: block;
+  width: 1.5rem;
   padding: 12px 0 4px 0;
   margin: 0 auto;
 `;

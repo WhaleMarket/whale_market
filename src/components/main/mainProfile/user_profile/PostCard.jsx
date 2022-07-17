@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import listIconOn from '../../../assets/icon-post-list-on.png';
-import listIconOff from '../../../assets/icon-post-list-off.png';
-import albumIconOn from '../../../assets/icon-post-album-on.png';
-import albumIconOff from '../../../assets/icon-post-album-off.png';
+import listIconOn from '../../../../assets/icon-post-list-on.png';
+import listIconOff from '../../../../assets/icon-post-list-off.png';
+import albumIconOn from '../../../../assets/icon-post-album-on.png';
+import albumIconOff from '../../../../assets/icon-post-album-off.png';
 import PostIconContainer from './PostIconContainer';
-import profileImg from '../../../assets/basic-profile-img.png';
-import menubtn from '../../../assets/s-icon-more-vertical.png';
-import postImg from '../../../assets/postImg.png'
+import profileImg from '../../../../assets/basic-profile-img.png';
+import menubtn from '../../../../assets/s-icon-more-vertical.png';
+import postImg from '../../../../assets/postImg.png'
 
 const PostWrapper = styled.div`
     width: 24.375rem;

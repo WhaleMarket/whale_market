@@ -1,8 +1,8 @@
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import back from '../../../assets/icon-arrow-left.png'
-import save from '../../../assets/Ms-button.png'
-import disabledSave from '../../../assets/Ms--Disabled-button.png'
+import back from '../../../../assets/icon-arrow-left.png'
+import save from '../../../../assets/Ms-button.png'
+import disabledSave from '../../../../assets/Ms--Disabled-button.png'
 
 const Head = styled.header`
     display: flex;
@@ -42,7 +42,7 @@ const SaveBtn = styled.button`
 
 function ProfileEditHeader({disabled}){
     const history = useHistory();
-    if (window.location.pathname === '/profile') return null;
+    // if (window.location.pathname === '/profile') return null;
 
     return(
         <Head>

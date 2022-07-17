@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import basicProfileImg from '../../../assets/basic-profile-img.png';
+import basicProfileImg from '../../../../assets/basic-profile-img.png';
 import FollowButton from './FollowButton';
 
 const UserProfileContainer = styled.div`
@@ -12,6 +12,7 @@ const UserProfileContainer = styled.div`
     width: 24.375rem;
     padding: 1.875rem 3.438rem 1.625rem;
     margin: 3rem auto 0 auto;
+    box-sizing: border-box;
 `
 
 const ProfileImg = styled.img`
