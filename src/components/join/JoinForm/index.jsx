@@ -3,7 +3,7 @@ import Button from '../../emaillogin/button/Button';
 import AuthContext from "../../../context/AuthProvider";
 import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
-import { Wrapper, Title, Form, Label, Input, ErrorMessage } from './index.style';
+import { Wrapper, Title, Form, Fieldset, Legend, Label, Input, ErrorMessage } from './index.style';
 
 export function JoinForm({ setNextPage, setUserInfo }) {
     const { setAuth } = useContext(AuthContext);
@@ -109,7 +109,8 @@ export function JoinForm({ setNextPage, setUserInfo }) {
             <Wrapper>
                 <Title>이메일로 회원가입</Title>
                 <Form onSubmit={handleNextButton}>
-                    <div>
+                    <Fieldset>
+                        <Legend>회원가입</Legend>
                         <Label htmlFor='email'>이메일</Label>
                         <Input
                             type='email'
@@ -123,8 +124,7 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                             placeholder='이메일 주소를 입력해 주세요.'
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-                    </div>
-                    <div>
+
                         <Label htmlFor='password'>비밀번호</Label>
                         <Input
                             type='password'
@@ -138,12 +138,13 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                             placeholder='비밀번호를 설정해 주세요.'
                         />
                         {passwordMessage && <ErrorMessage>{passwordMessage}</ErrorMessage>}
-                    </div>
-                    <Button 
-                        type='submit' 
-                        text='다음'
-                        disabled={isDisabled}
-                    />
+                        
+                        <Button 
+                            type='submit' 
+                            text='다음'
+                            disabled={isDisabled}
+                        />
+                    </Fieldset>
                 </Form>
             </Wrapper>
         </>
