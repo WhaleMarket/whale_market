@@ -73,8 +73,8 @@ const StyledLink = styled(Link)`
 function Login(){
     const history = useHistory();
     useEffect(() => {
-        if (window.localStorage.getItem('token')) {
-            history.push('main/home');
+        if (window.localStorage.getItem('token') !== 'undefined' && window.localStorage.getItem('token')) {
+            history.push('/main/home');
         }
     }, [history]);
     
