@@ -124,6 +124,7 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                             placeholder='이메일 주소를 입력해 주세요.'
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
+                        
                         <Label htmlFor='password'>비밀번호</Label>
                         <Input
                             type='password'
