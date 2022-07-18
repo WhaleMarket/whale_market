@@ -38,6 +38,7 @@ export function JoinForm({ setNextPage, setUserInfo }) {
 
     const handleNextButton = async (event) => {
         event.preventDefault();
+        console.log(email, isValidEmail, isValidPassword, success);
         try {
             if (success) {
                 // setAuth({ email, password });
@@ -123,7 +124,8 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                             placeholder='이메일 주소를 입력해 주세요.'
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-                        
+                    </div>
+                    <div>
                         <Label htmlFor='password'>비밀번호</Label>
                         <Input
                             type='password'
@@ -137,7 +139,6 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                             placeholder='비밀번호를 설정해 주세요.'
                         />
                         {passwordMessage && <ErrorMessage>{passwordMessage}</ErrorMessage>}
-                        
                         <Button 
                             type='submit' 
                             text='다음'
