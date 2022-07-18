@@ -7,7 +7,6 @@ function ChatContents(props) {
     useEffect(() => {
         document.body.style.width = '100%';
         document.body.style.height = '100%';
-        document.body.style.backgroundColor = '#F2F2F2';
     }, []);
     
     return (
