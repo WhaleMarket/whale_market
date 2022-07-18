@@ -156,6 +156,7 @@ function ProfileEditForm() {
         }
     };
 
+<<<<<<< HEAD
     function preview(loadImage) {
         const reader = new FileReader();
         reader.onload = () => (
@@ -176,6 +177,14 @@ function ProfileEditForm() {
             console.error(error);
         }
     };
+=======
+    const handleNameInput = (event) => {
+        if ((event.target.value.length < 2 || event.target.value.length > 10))
+        setNameInputError(true);
+        else setNameInputError(false);
+        setNameInput(event.target.value);
+    }
+>>>>>>> 1f40c09 (:sparkles: 이미지 업로드 API 추가)
 
     const handleOnBlur = async (event) => {
         event.preventDefault();
