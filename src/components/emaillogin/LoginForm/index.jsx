@@ -44,10 +44,6 @@ export function LoginForm() {
                 reqData,
                 config
             );
-            
-            // 로그인 데이터 확인
-            // console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
 
             const token = response?.data?.user?.token;
             setAuth({ email, password, token });
