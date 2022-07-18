@@ -37,6 +37,7 @@ export function JoinForm({ setNextPage }) {
 
     const handleNextButton = async (event) => {
         event.preventDefault();
+        console.log(email, isValidEmail, isValidPassword, success);
         try {
             if (success) {
                 setAuth({ email, password });
@@ -134,7 +135,6 @@ export function JoinForm({ setNextPage }) {
                             placeholder='비밀번호를 설정해 주세요.'
                         />
                         {passwordMessage && <ErrorMessage>{passwordMessage}</ErrorMessage>}
-                        
                         <Button 
                             type='submit' 
                             text='다음'
