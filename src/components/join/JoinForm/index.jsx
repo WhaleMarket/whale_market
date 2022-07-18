@@ -37,6 +37,7 @@ export function JoinForm({ setNextPage }) {
 
     const handleNextButton = async (event) => {
         event.preventDefault();
+        console.log(email, isValidEmail, isValidPassword, success);
         try {
             if (success) {
                 setInfoState((InfoState) => {
@@ -107,7 +108,7 @@ export function JoinForm({ setNextPage }) {
     const isPassedJoin = () => {
         return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
     };
-    
+
     return (
         <>
             <Wrapper>
@@ -129,11 +130,7 @@ export function JoinForm({ setNextPage }) {
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
 
-<<<<<<< HEAD
                         <Label htmlFor='password' id='labelPassword'>비밀번호</Label>
-=======
-                        <Label htmlFor='password'>비밀번호</Label>
->>>>>>> f709333 (💄 폼태그 레이아웃 수정으로 인한 값 수정)
                         <Input
                             type='password'
                             id='password'
