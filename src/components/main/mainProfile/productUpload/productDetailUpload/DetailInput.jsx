@@ -1,3 +1,5 @@
+import { useRef, useContext } from "react";
+import SaveProductContext from "../../../../../context/SaveProductProvider";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -5,7 +7,6 @@ const Input = styled.input`
   border-bottom: 1px solid #dbdbdb;
   display: block;
   padding: 10px 0 8px 0;
-  margin-bottom: 16px;
   width: ${(props) => props.width + "px"};
   &:focus {
     outline: none;
@@ -15,10 +16,35 @@ const Input = styled.input`
   }
 `;
 
-function DetailInput({ id, type, placeholder }) {
+function DetailInput({ id, type, placeholder, setValue, value, index }) {
+  const [saveStates ,setSaveStates] = useContext(SaveProductContext);
+  const input_ref = useRef();
+  const inputstate = () => {
+    if(input_ref){
+      setValue((value) => {value[index] = input_ref.current.value
+      return value
+      })
+    }
+    if(value[index] !== ""){
+      setSaveStates((saveStates) => {saveStates.required[parseInt(index)+1] = {
+        ...saveStates.required[parseInt(index)+1],
+        error: true
+        }
+        return saveStates
+      });
+    } else {
+      setSaveStates((saveStates) => {saveStates.required[parseInt(index)+1] = {
+        ...saveStates.required[parseInt(index)+1],
+        error: false
+        }
+        return saveStates
+      });
+    }
+  }
+  
   return (
     <>
-      <Input id={id} type={type} placeholder={placeholder} />
+      <Input ref={input_ref} onChange={inputstate} id={id} type={type} placeholder={placeholder}/>
     </>
   );
 }
