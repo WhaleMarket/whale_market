@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StartBtn = styled.button`
-    margin-top: 2.125rem;
     padding: 0.813rem 6.688rem 0.813rem 6.75em;
     border-style: none;
     border-radius: 2.750rem;
