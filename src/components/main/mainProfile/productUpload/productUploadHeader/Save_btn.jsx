@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
 
@@ -17,18 +17,37 @@ const Save = styled.button`
 `;
 
 function SaveButton() {
-  const [saveState] = useContext(SaveProductContext);
+  const [saveStates] = useContext(SaveProductContext);
+  const [save, setSave] = useState(false);
   const saveButton = useRef();
+
+  // useEffect(()=>{
+  //   const SavePossible = saveStates.required.reduce((count, value) => (value.savePossible === true ? count++ : count), 0)
+  //   if(SavePossible === 4){
+  //     return setSave(true)
+  //   } else {
+  //     return setSave(false)
+  //   }
+  // },[saveStates])
+
+  console.log(
+    saveStates.required.reduce(
+      (count, value) => (value.savePossible === true ? count++ : count),
+      0
+    )
+  );
+
   if (saveButton.current) {
-    if (saveState) {
+    if (save) {
       saveButton.current.disabled = false;
     } else {
       saveButton.current.disabled = true;
     }
   }
+
   return (
     <>
-      <Save ref={saveButton} state={saveState}>
+      <Save ref={saveButton} state={save}>
         저장
       </Save>
     </>
