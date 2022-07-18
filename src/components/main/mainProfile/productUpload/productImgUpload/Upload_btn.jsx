@@ -1,6 +1,7 @@
 import Img_logo from "../../../../../assets/image_logo.png";
 import styled from "styled-components";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import SaveProductContext from "../../../../../context/SaveProductProvider";
 
 const Uploadbtn = styled.button`
   position: absolute;
@@ -24,6 +25,7 @@ const UploadInput = styled.input`
 `;
 
 function UploadBtn({ setUrl }) {
+  const [saveStates, setSaveStates] = useContext(SaveProductContext);
   const Upload_input = useRef();
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
@@ -32,6 +34,12 @@ function UploadBtn({ setUrl }) {
     }
     const reader = new FileReader();
     reader.readAsDataURL(Blob);
+    setSaveStates((saveStates) => {saveStates.required[0] = {
+        ...saveStates.required[0],
+        savePossible: true
+      }
+      return saveStates
+    });
     event.target.value = "";
     return new Promise((resolve) => {
       reader.onload = () => {
