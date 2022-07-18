@@ -122,7 +122,11 @@ export function JoinForm({ setNextPage }) {
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
 
+<<<<<<< HEAD
                         <Label htmlFor='password' id='labelPassword'>비밀번호</Label>
+=======
+                        <Label htmlFor='password'>비밀번호</Label>
+>>>>>>> f709333 (💄 폼태그 레이아웃 수정으로 인한 값 수정)
                         <Input
                             type='password'
                             id='password'
