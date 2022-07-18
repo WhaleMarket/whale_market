@@ -37,6 +37,7 @@ export function JoinForm({ setNextPage }) {
 
     const handleNextButton = async (event) => {
         event.preventDefault();
+        console.log(email, isValidEmail, isValidPassword, success);
         try {
             if (success) {
                 setInfoState((InfoState) => {
@@ -140,7 +141,6 @@ export function JoinForm({ setNextPage }) {
                             placeholder='이메일 주소를 입력해 주세요.'
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-
 
                         <Label htmlFor='password' id='labelPassword'>비밀번호</Label>
                         <Input
