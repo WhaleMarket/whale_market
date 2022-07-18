@@ -37,6 +37,7 @@ export function JoinForm({ setNextPage }) {
 
     const handleNextButton = async (event) => {
         event.preventDefault();
+        console.log(email, isValidEmail, isValidPassword, success);
         try {
             if (success) {
                 setAuth({ email, password });
@@ -78,6 +79,18 @@ export function JoinForm({ setNextPage }) {
             if (error.response.data.message === "잘못된 이메일 형식입니다.") {
                 setNotMatchError('*' + error.response.data.message);
             }
+        }
+    };
+
+    const handleOnBlurForPassword = async (event) => {
+        event.preventDefault();
+        setPasswordMessage('');
+        try {
+            if (!(password.length > 5)) {
+                setPasswordMessage('*비밀번호는 6자 이상이어야 합니다.');
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
 
