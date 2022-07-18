@@ -114,7 +114,6 @@ function ProfileEditForm() {
         });
     };
 
-
     const handleNameInput = (event) => {
         if ((event.target.value.length < 2 || event.target.value.length > 10))
         setNameInputError(true);
