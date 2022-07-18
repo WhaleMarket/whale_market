@@ -15,7 +15,10 @@ import NotFound from './pages/NotFoundPage';
 
 const Globalstyle = createGlobalStyle`
     ${reset}
-`
+    html, body, #root {
+        height: 100%;
+    }
+`;
 
 function App() {
     return (
