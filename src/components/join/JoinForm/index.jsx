@@ -8,12 +8,14 @@ import { Wrapper, Title, Form, Label, Input, ErrorMessage } from './index.style'
 export function JoinForm({ setNextPage, setUserInfo }) {
     const { setAuth } = useContext(AuthContext);
     const emailRef = useRef();
+    const passwordRef = useRef();
     const errorRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [success, setSuccess] = useState(false);
     const [notMatchError, setNotMatchError] = useState('');
+    const [passwordMessage, setPasswordMessage] = useState('');
 
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [isValidPassword, setIsValidPassword] = useState(false);
@@ -26,55 +28,31 @@ export function JoinForm({ setNextPage, setUserInfo }) {
         if (password.length > 5) {
             setIsValidPassword(true);
         }
+    }, [email, password]);
 
+    useEffect(() => {
         if (isValidEmail && isValidPassword) {
             setSuccess(true);
         }
-    }, [email, password]);
+    }, [isValidEmail, isValidPassword]);
 
-    const handleSubmit = async (event) => {
+    const handleNextButton = async (event) => {
         event.preventDefault();
+        console.log(email, isValidEmail, isValidPassword, success);
         try {
-            const reqData = {
-                user: { 
-                    email: email
-                }
-            };
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
-            const response = await axios.post(
-                `${API_URL}/user/emailvalid`,
-                reqData,
-                config
-            );
-            // 로그인 데이터 확인용 콘솔로그
-            console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
-    
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ email, password, roles, accessToken });
-
-            if (response?.data?.message === "이미 가입된 이메일 주소 입니다.") {
-                setSuccess(false);
-            } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
-                setNotMatchError('*' + response.data.message);
+            if (success) {
+                // setAuth({ email, password });
                 setNextPage(false);
                 setUserInfo({ email, password });
-            } 
+            }
         } catch (error) {
             console.error(error);
-            errorRef.current.focus();
         }
     };
 
-    const handleOnBlur = async (event) => {
+    const handleOnBlurForEmail = async (event) => {
         event.preventDefault();
-        setNotMatchError('')
-
+        setNotMatchError('');
         try {
             const reqData = {
                 user: { 
@@ -93,8 +71,10 @@ export function JoinForm({ setNextPage, setUserInfo }) {
             );
             if (response?.data?.message === "이미 가입된 이메일 주소 입니다.") {
                 setNotMatchError('*' + response.data.message);
+            } else if (!email) {
+                setNotMatchError('*이메일을 입력해주세요.');
             } else if (!emailRegex.test(email)) {
-                setNotMatchError('*올바르지 않은 이메일 형식입니다.');
+                setNotMatchError('*잘못된 이메일 형식입니다.');
             } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
                 setNotMatchError('*' + response.data.message);
                 setIsValidEmail(true);
@@ -102,6 +82,18 @@ export function JoinForm({ setNextPage, setUserInfo }) {
         } catch (error) {
             console.error(error);
             errorRef.current.focus();
+        }
+    };
+
+    const handleOnBlurForPassword = async (event) => {
+        event.preventDefault();
+        setPasswordMessage('');
+        try {
+            if (!(password.length > 5)) {
+                setPasswordMessage('*비밀번호는 6자 이상이어야 합니다.');
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -116,35 +108,36 @@ export function JoinForm({ setNextPage, setUserInfo }) {
         <>
             <Wrapper>
                 <Title>이메일로 회원가입</Title>
-
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleNextButton}>
                     <div>
-                            <Label htmlFor='email'>이메일
-                                <Input
-                                    type='email'
-                                    id='email'
-                                    ref={emailRef}
-                                    autoComplete='off'
-                                    onChange={(event) => setEmail(event.target.value)}
-                                    required
-                                    onKeyUp={isPassedJoin}
-                                    onBlur={handleOnBlur}
-                                />
-                                {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-                            </Label>
+                        <Label htmlFor='email'>이메일</Label>
+                        <Input
+                            type='email'
+                            id='email'
+                            ref={emailRef}
+                            autoComplete='off'
+                            onChange={(event) => setEmail(event.target.value)}
+                            required
+                            onKeyUp={isPassedJoin}
+                            onBlur={handleOnBlurForEmail}
+                            placeholder='이메일 주소를 입력해 주세요.'
+                        />
+                        {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
                     </div>
                     <div>
-                            <Label htmlFor='password'>비밀번호
-                                <Input
-                                    type='password'
-                                    id='password'
-                                    onChange={(event) => setPassword(event.target.value)}
-                                    required
-                                    value={password}
-                                    onKeyUp={isPassedJoin}
-                                />
-                                {(password.length < 6) && <ErrorMessage>*비밀번호는 6자 이상이어야 합니다.</ErrorMessage>}
-                            </Label>
+                        <Label htmlFor='password'>비밀번호</Label>
+                        <Input
+                            type='password'
+                            id='password'
+                            ref={passwordRef}
+                            onChange={(event) => setPassword(event.target.value)}
+                            required
+                            value={password}
+                            onKeyUp={isPassedJoin}
+                            onBlur={handleOnBlurForPassword}
+                            placeholder='비밀번호를 설정해 주세요.'
+                        />
+                        {passwordMessage && <ErrorMessage>{passwordMessage}</ErrorMessage>}
                     </div>
                     <Button 
                         type='submit' 
