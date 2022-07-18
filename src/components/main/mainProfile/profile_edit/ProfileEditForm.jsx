@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ProfileEditHeader from './ProfileEditHeader';
 import profile_icon from '../../../../assets/basic-profile-img.png';
 import upload_icon from '../../../../assets/upload-file.png';
-
+import axios from 'axios';
+import { API_URL } from '../../../../constants/defaultUrl';
 
 const Form = styled.form`
     display: flex;
@@ -83,14 +84,28 @@ const ErrorMessage = styled.p`
 `
 
 function ProfileEditForm() {
+    const imgRef = useRef();
+    const [imgage, setImage] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [nameInputError, setNameInputError] = useState(false);
     const [idInput, setIdInPut] = useState('');
     const [idInputError, setIdInputError] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
 
+    const handleUploadIcon = (event) => {
+        event.preventDefault();
+        imgRef.current.click();
+    };
 
-    // 프로필 사진 선택시 적용되는 기능 추가
+    const handleImageUpload = async (event) => {
+        setImage(true)
+        const formData = new FormData();
+        formData.append('image', event.target.files[0]);
+        const response = await axios.post(
+            `${API_URL}/image/uploadfile`,
+                formData
+        )
+    };
 
     const handleNameInput = (event) => {
         if ((event.target.value.length < 2 || event.target.value.length > 10))
@@ -117,10 +132,10 @@ function ProfileEditForm() {
         <Fieldset>
         <Legend>프로필 사진 변경</Legend>
         <ProfileImgWrapper>
-        <ProfileImg src={profile_icon}/>
+        <ProfileImg src={profile_icon} onClick={handleUploadIcon}/>
         <ProfileImgLable htmlFor="profileImg"><Img src={upload_icon} alt="프로필 이미지 업로드"/></ProfileImgLable>
         </ProfileImgWrapper>
-        <ProfileImgInput type="file" accept="image/*" id="profileImg"/>
+        <ProfileImgInput ref={imgRef} type="file" onChange={handleImageUpload} accept="image/*" id="profileImg"/>
         </Fieldset>
 
         <Fieldset>
