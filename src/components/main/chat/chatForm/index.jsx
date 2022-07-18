@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Form, UpLoadImg, HiddenUpLoadInput, Input, SendButton } from './index.style';
+import { Fieldset, UpLoadImg, HiddenUpLoadInput, Input, SendButton } from './index.style';
 import UpLoadFile from '../../../../assets/upload-file.png';
 
 function ChatForm({ sendMessage }) {
     const [textInput, setTextInput] = useState('');
-    const [success, setSuccess] = useState(false);
+    const upLoadFileRef = useRef();
     const textRef = useRef();
 
     useEffect(() => {
@@ -13,11 +13,13 @@ function ChatForm({ sendMessage }) {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        setSuccess(true);
         sendMessage(textInput);
         setTextInput('');
     };
-    
+
+    const onClickUpLoadFile = () => {
+        upLoadFileRef.current.click();
+    };
 
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
@@ -26,23 +28,29 @@ function ChatForm({ sendMessage }) {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <label htmlFor="upLoad">
-                <UpLoadImg src={UpLoadFile} />
-                <HiddenUpLoadInput id='upLoad' type='file' accept='image/*' />
-            </label>
-            <label htmlFor="text">
-                <Input 
-                    id='text'
-                    type='text' 
-                    placeholder='메시지 입력하기...'
-                    ref={textRef}
-                    onChange={(event) => setTextInput(event.target.value)}
-                    onKeyUp={isPassedMessage}
-                />
-            </label>
-            <SendButton type='submit' disabled={isDisabled}>전송</SendButton>
-        </Form>
+        <form onSubmit={handleSubmit}>
+            <Fieldset>
+                <legend></legend>
+                <label htmlFor='upLoad'></label>
+                    <UpLoadImg src={UpLoadFile} onClick={onClickUpLoadFile}/>
+                    <HiddenUpLoadInput 
+                        id='upLoad' 
+                        type='file' 
+                        accept='image/*' 
+                        ref={upLoadFileRef}
+                    />
+                <label htmlFor='text'></label>
+                    <Input 
+                        id='text'
+                        type='text' 
+                        placeholder='메시지 입력하기...'
+                        ref={textRef}
+                        onChange={(event) => setTextInput(event.target.value)}
+                        onKeyUp={isPassedMessage}
+                    />
+                <SendButton type='submit' disabled={isDisabled}>전송</SendButton>
+            </Fieldset>
+        </form>
     );
 }
 
