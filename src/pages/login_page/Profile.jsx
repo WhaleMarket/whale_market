@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ProfileSection from '../../components/profile/index';
 
-function Profile({ userInfo }) {
+function Profile() {
     // 로그인 기록이 있으면 main/home으로 가는 기능
     const history = useHistory();
     useEffect(() => {
@@ -13,7 +13,7 @@ function Profile({ userInfo }) {
 
     return (
         <>
-            <ProfileSection userInfo={userInfo} />
+            <ProfileSection />
         </>
     );
 }
