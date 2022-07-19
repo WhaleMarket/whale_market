@@ -33,9 +33,8 @@ function MainRouter() {
           <Route path="/profileedit" component={ProfileModification} />
           <Route path="/profileedit" component={ProfileModification} />
           <Route path="/search" component={HomeSearch} />
-          <Route path="/home/search" component={HomeSearch}/>
-          <Route path="/followers" component={Followers} />
         </>
+
       </Switch>
     </>
   );
