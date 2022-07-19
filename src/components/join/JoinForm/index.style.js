@@ -34,6 +34,7 @@ export const Label = styled.label`
     font-size: 12px;
     line-height: 15px;
     color: #767676;
+    margin-top: ${(props) => props.id === 'labelPassword' ? '16px' : null};
 `;
 
 export const Input = styled.input`
@@ -49,10 +50,11 @@ export const Input = styled.input`
         border-bottom: 1px solid #00BCD4;
     }
     &::placeholder {
+        font-style: normal;
         font-weight: 400;
-        font-size: 16px;
-        line-height: 22px;
-        color: #C4C4C4
+        font-size: 14px;
+        line-height: 14px;
+        color: #DBDBDB
     }
 `;
 
@@ -62,5 +64,4 @@ export const ErrorMessage = styled.strong`
     font-weight: 500;
     font-size: 12px;
     line-height: 1;
-    margin-bottom: 16px;
 `;
