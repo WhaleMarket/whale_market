@@ -4,6 +4,11 @@ import chatData from '../../../components/main/chat/chatData.json';
 import ChatProfileHeader from "../../../components/main/ChatProfileHeader";
 import ChatContents from '../../../components/main/chat/chatContents/index.jsx';
 import ChatForm from '../../../components/main/chat/chatForm';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+    height: 100%;
+`;
 
 function ChattingView(props) {
     const { chatId } = useParams();
@@ -13,17 +18,16 @@ function ChattingView(props) {
     });
     
     const [myText, setMyText] = useState('');
-    const sendMessage = (x) => {
-        setMyText(x);
+    const sendMessage = (messageFromChatForm) => {
+        setMyText(messageFromChatForm);
     };
-    console.log(myText);
 
     return (
-        <div>
+        <Wrapper>
             <ChatProfileHeader partner={chat.partner} />
             <ChatContents contents={chat.contents} myText={myText}></ChatContents>
             <ChatForm sendMessage={sendMessage} />
-        </div>
+        </Wrapper>
     );
 }
 

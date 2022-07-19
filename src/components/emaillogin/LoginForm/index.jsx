@@ -57,10 +57,13 @@ export function LoginForm() {
 
             setSuccess(true);
 
-            if (response?.data?.status === 422) {
+            if (!emailRegex.test(email)) {
+                setSuccess(false);
+                setNotMatchError('*올바르지 않은 이메일 형식입니다.');
+            } else if (response?.data?.status === 422) {
                 setSuccess(false);
                 setNotMatchError('*' + response?.data?.message);
-            }
+            } 
 
         } catch (error) {
             console.error(error);
@@ -73,7 +76,7 @@ export function LoginForm() {
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
     const isPassedLogin = () => {
-        return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
+        return email.length > 0 && password.length > 0 ? setIsDisabled(false) : setIsDisabled(true);
     };
 
     return (
@@ -96,10 +99,6 @@ export function LoginForm() {
                                         placeholder='이메일 주소를 입력해 주세요.'
                                         required
                                     />
-                                    {(email.length > 5) 
-                                    && !emailRegex.test(email) 
-                                    && <ErrorMessage>*올바르지 않은 이메일 형식입니다.</ErrorMessage>
-                                    }
                                 </Label>
                         </div>
                         <div>
@@ -110,7 +109,7 @@ export function LoginForm() {
                                         value={password}
                                         onChange={(event) => setPassword(event.target.value)}
                                         onKeyUp={isPassedLogin}
-                                        placeholder='비밀번호를 설정해 주세요.'
+                                        placeholder='비밀번호를 입력해 주세요.'
                                         required
                                     />
                                     {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
