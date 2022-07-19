@@ -77,7 +77,6 @@ function MainRouter() {
       <Switch>
         <Route path="/chatting/:chatId" component={ChattingView} />
         <Route path="/posting" component={Posting} />
-
         <Route path="/mainprofile" component={MainProfile} />
         <Route path="/profileedit" component={ProfileModification} />
         <Route path="/followers" component={Followers} />
