@@ -1,25 +1,15 @@
 import { useContext } from "react";
-import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
 import DetailInput from "./DetailInput";
 import DetailLabel from "./DetailLabel";
 import ErrorMessage from "./ErrorMessage";
-
-const Legend = styled.legend`
-  position: absolute;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-`;
 
 function Detail() {
   const [saveStates] = useContext(SaveProductContext);
 
   return (
     <>
-      <Legend>Product</Legend>
+      <legend className='a11yhidden'>Product</legend>
       <DetailLabel id="name" title="상품명" />
       <DetailInput
         index="0"
