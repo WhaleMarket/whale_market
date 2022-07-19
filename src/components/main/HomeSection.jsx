@@ -40,7 +40,7 @@ function HomeSection(){
         <Section>
             <Logo src={whale} alt="whale"/>
             <Title>유저를 검색해 팔로우 해보세요!</Title>
-            <Link to = '/search'>
+            <Link to = '/home/search'>
                 <Search type="button">검색하기</Search>
             </Link>
         </Section>
