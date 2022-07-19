@@ -1,18 +1,15 @@
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import back from '../../../assets/icon-arrow-left.png'
-import save from '../../../assets/Ms--Disabled-button.png'
+import back from '../../../../assets/icon-arrow-left.png'
 
 const Head = styled.header`
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: fixed;
+    position: relative;
     width: calc(100% - 28px);
     padding: 0.813rem 0.750rem 0.813rem 1rem;
     border-bottom: 0.031rem solid #BDBDBD;
     background-color: white;
-    position: relative;
 `
 
 const BackBtn = styled.button`
@@ -21,30 +18,26 @@ const BackBtn = styled.button`
     border: none;
     background-color: inherit;
     background-image: url(${back});
-    &:hover{
-        cursor: pointer;
-    }
-`
-const SaveBtn = styled.button`
-    width: 5.625rem;
-    height: 2rem;
-    border: none;
-    background-color: inherit;
-    background-image: url(${save});
-    background-size: 5.625rem 2rem;
+    background-size: 1.375rem 1.375rem;
     &:hover{
         cursor: pointer;
     }
 `
 
-function ProfileEditHeader(){   
+const FollowTxt = styled.h1`
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+`
+
+function FollowHeader(){
     const history = useHistory();
+
     return(
         <Head>
             <BackBtn  onClick={() => history.goBack()}/>
-            <SaveBtn/>
+            <FollowTxt>Followers</FollowTxt>
         </Head>
     )
 }
 
-export default ProfileEditHeader;
+export default FollowHeader;

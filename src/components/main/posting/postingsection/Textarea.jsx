@@ -1,12 +1,22 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
+import UploadImageContext from "../../../../context/UploadImageListProvider";
 import UploadContext from "../../../../context/UploadProvider";
+import ImgWrapper from "./ImgArticle";
+
+const EnterWrapper = styled.div``;
 
 const TextArea = styled.textarea`
   margin: 10px 0 0 13px;
   border: none;
   font-size: 14px;
   resize: none;
+  height: ${(props) => props.height};
+  width: 1100px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
   &:focus {
     outline: none;
   }
@@ -14,26 +24,46 @@ const TextArea = styled.textarea`
 
 function PostingArea() {
   const [, setUploadState] = useContext(UploadContext);
+  const [UploadImgState] = useContext(UploadImageContext);
+  const [value, setValue] = useState(false);
   const content = useRef();
   function con() {
     if (content) {
-      if (content.current.value !== "") {
-        return setUploadState(true);
-      } else {
+      if (content.current.value === "") {
+        setValue(false);
+      }
+      if (content.current.value === "" && UploadImgState.length === 0) {
         return setUploadState(false);
+      } else {
+        setValue(true);
+        return setUploadState(true);
       }
     }
   }
+
+  const [textareaHeight, setTextareaHeight] = useState("20px");
+  const checkValue = (event) => {
+    setTextareaHeight(
+      (event.target.value.split("\n").length +
+        Math.floor(event.target.value.split("").length / 150)) *
+        20 +
+        "px"
+    );
+  };
+
   return (
-    <>
+    <EnterWrapper>
       <TextArea
         onChange={con}
         ref={content}
         placeholder="게시글 입력하기"
-        rows="30"
-        cols="500"
+        cols="150"
+        maxLength="2400"
+        height={textareaHeight}
+        onInput={checkValue}
       ></TextArea>
-    </>
+      <ImgWrapper text={value} />
+    </EnterWrapper>
   );
 }
 

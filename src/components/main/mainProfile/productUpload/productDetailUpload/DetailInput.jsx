@@ -1,3 +1,5 @@
+import { useRef, useContext } from "react";
+import SaveProductContext from "../../../../../context/SaveProductProvider";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -5,7 +7,6 @@ const Input = styled.input`
   border-bottom: 1px solid #dbdbdb;
   display: block;
   padding: 10px 0 8px 0;
-  margin-bottom: 16px;
   width: ${(props) => props.width + "px"};
   &:focus {
     outline: none;
@@ -15,10 +16,47 @@ const Input = styled.input`
   }
 `;
 
-function DetailInput({ id, type, placeholder }) {
+function DetailInput({ id, type, placeholder, index }) {
+  const [saveStates, setSaveStates] = useContext(SaveProductContext);
+  const input_ref = useRef();
+  const inputstate = () => {
+    if (input_ref) {
+      setSaveStates((saveStates) => {
+        saveStates.required[parseInt(index) + 1] = {
+          ...saveStates.required[parseInt(index) + 1],
+          value: input_ref.current.value,
+        };
+        return { required: saveStates.required };
+      });
+    }
+    if (saveStates.required[parseInt(index) + 1].value !== "") {
+      setSaveStates((saveStates) => {
+        saveStates.required[parseInt(index) + 1] = {
+          ...saveStates.required[parseInt(index) + 1],
+          savePossible: true,
+        };
+        return { required: saveStates.required };
+      });
+    } else {
+      setSaveStates((saveStates) => {
+        saveStates.required[parseInt(index) + 1] = {
+          ...saveStates.required[parseInt(index) + 1],
+          savePossible: false,
+        };
+        return { required: saveStates.required };
+      });
+    }
+  };
+
   return (
     <>
-      <Input id={id} type={type} placeholder={placeholder} />
+      <Input
+        ref={input_ref}
+        onInput={inputstate}
+        id={id}
+        type={type}
+        placeholder={placeholder}
+      />
     </>
   );
 }

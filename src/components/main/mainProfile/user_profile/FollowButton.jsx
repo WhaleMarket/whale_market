@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const FollowBtn = styled.button`
@@ -24,14 +24,22 @@ const UnFollowBtn = styled.button`
 `
 
 function FollowButton() {
+    const [isFollowed, setisFollowed] = useState(0);
+    const handleFollowBtn = () => {
+        setisFollowed(true);
+    };
+
+    const handleUnFollowBtn = () => {
+        setisFollowed(false);
+    };
+
     return(
         <>
-        <FollowBtn type="submit">
-            팔로우
-        </FollowBtn>
-        <UnFollowBtn type="submit">
-            언팔로우
-        </UnFollowBtn>
+        {isFollowed ? (
+            <FollowBtn type="submit" onClick={handleUnFollowBtn}>팔로우</FollowBtn>
+        ) : (
+            <UnFollowBtn type="submit" onClick={handleFollowBtn}>언팔로우</UnFollowBtn>
+        )}
         </>
     )
 }

@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import ImageUpload from "../../../../assets/upload-file.png";
+import UploadImageContext from "../../../../context/UploadImageListProvider";
 
 const ImgUploadBtn = styled.img`
   position: fixed;
@@ -15,13 +16,25 @@ const UploadInput = styled.input`
 `;
 
 function ImageUploadButton() {
-  const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadImgState, setUploadImgState] = useContext(UploadImageContext);
   const Upload_Input = useRef();
-  const ImgUpload = async (event) => {
-    setUploadLoading(true);
-    const formData = new FormData();
-    formData.append("Image", event.target.files[0]);
-    console.log(formData);
+  const ImgUpload = (event) => {
+    const Blob = event.target.files[0];
+    if (Blob === undefined) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(Blob);
+    event.target.value = "";
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setUploadImgState((uploadImgState) => [
+          ...uploadImgState,
+          reader.result,
+        ]);
+        resolve();
+      };
+    });
   };
   return (
     <>
@@ -34,7 +47,11 @@ function ImageUploadButton() {
       <ImgUploadBtn
         src={ImageUpload}
         alt="Image Upload Button"
-        onClick={() => Upload_Input.current.click()}
+        onClick={() =>
+          uploadImgState.length === 3
+            ? alert("이미지는 3개까지만 업로드할 수 있습니다.")
+            : Upload_Input.current.click()
+        }
       />
     </>
   );

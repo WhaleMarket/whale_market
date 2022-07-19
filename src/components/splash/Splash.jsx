@@ -5,17 +5,17 @@ import LogoSrc from '../../assets/Logo.png';
 
 const Logo = styled.img`
     display: block;
-    width: 13rem;
-    margin: 40vh auto;
+    width: 200px;
+    margin: 25vh auto;
 `;
 
-const BodyColor = styled.body`
+const SplashBody = styled.div`
     width: 100vw;
     height: 100vh;
     padding: 0;
     margin: 0;
     overflow: hidden;
-    animation: change-background 3s ease;
+    animation: change-background 3.1s ease;
     
     @keyframes change-background {
     0% {
@@ -40,12 +40,12 @@ function Splash(){
         return ()=>{
             clearTimeout(timeOut);
         };
-    });
+    },[]);
 
     return(
-        <BodyColor>
+        <SplashBody>
             <Logo src={LogoSrc} />
-        </BodyColor>
+        </SplashBody>
     )
 }
 

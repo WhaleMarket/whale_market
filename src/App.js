@@ -8,8 +8,9 @@ import EmailLogin from './pages/login_page/EmailLogin';
 import Join from './pages/login_page/Join';
 import Profile from './pages/login_page/Profile';
 import Main from './routes/Main'
-import MainProfile from './pages/main_page/mainProfile/UserProfile';
+import MainProfile from './pages/main_page/mainProfile/MyProfile';
 import ProfileModification from './pages/main_page/mainProfile/ProfileEdit';
+import NotFound from './pages/NotFoundPage';
 
 
 const Globalstyle = createGlobalStyle`
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/main" component={Main}/>
                     <Route path="/mainprofile" component={MainProfile}/>
                     <Route path="/profileedit" component={ProfileModification}/>
+                    <Route path="*" component={NotFound}/>
                 </Switch>
             </BrowserRouter>
         </>

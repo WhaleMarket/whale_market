@@ -5,7 +5,7 @@ import PostingArea from "./Textarea";
 const PostingWrapper = styled.section`
   padding: 70px 16px;
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: flex-start;
 `;
 
