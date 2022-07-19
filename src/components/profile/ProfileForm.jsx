@@ -251,7 +251,7 @@ function ProfileForm() {
     const isPassedProfile = () => {
         return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
     };
-
+    
     return (
         <>
             {success ? (
