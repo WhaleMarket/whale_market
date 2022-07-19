@@ -41,7 +41,6 @@ const Logo = styled.img`
 `;
 
 const Navbar = ({location})=>{
-    console.dir(document.querySelector('Home'))
     return(
         <Bottomnav>
             <List className='home' current={location.pathname === '/home'}><Link to='/home'><Logo className="Home" src={location.pathname === '/home' ? home_icon_fill : home_icon} alt="home icon"/>홈</Link></List>
