@@ -5,7 +5,6 @@ import Profile from './Profile';
 
 const Join = (props) => {
     const [nextPage, setNextPage] = useState(true);
-    const [userInfo, setUserInfo] = useState({ email: '', password: '' });
     const history = useHistory();
 
     // 로컬스토리지에 토큰이 있으면 회원가입 페이지는 메인/홈으로 스킵하는 기능
@@ -18,9 +17,9 @@ const Join = (props) => {
     return (
         <>
             {nextPage ? (
-                <JoinForm setNextPage={setNextPage} setUserInfo={setUserInfo} />
+                <JoinForm setNextPage={setNextPage} />
                 ) : (
-                <Profile userInfo={userInfo} />
+                <Profile />
             )}
         </>
     );

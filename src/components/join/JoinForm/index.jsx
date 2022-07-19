@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
 import { Wrapper, Title, Form, Fieldset, Legend, Label, Input, ErrorMessage } from './index.style';
 
-export function JoinForm({ setNextPage, setUserInfo }) {
+export function JoinForm({ setNextPage }) {
     const { setAuth } = useContext(AuthContext);
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -38,12 +38,10 @@ export function JoinForm({ setNextPage, setUserInfo }) {
 
     const handleNextButton = async (event) => {
         event.preventDefault();
-        console.log(email, isValidEmail, isValidPassword, success);
         try {
             if (success) {
-                // setAuth({ email, password });
+                setAuth({ email, password });
                 setNextPage(false);
-                setUserInfo({ email, password });
             }
         } catch (error) {
             console.error(error);
@@ -124,7 +122,8 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                             placeholder='이메일 주소를 입력해 주세요.'
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-                        <Label htmlFor='password'>비밀번호</Label>
+
+                        <Label htmlFor='password' id='labelPassword'>비밀번호</Label>
                         <Input
                             type='password'
                             id='password'

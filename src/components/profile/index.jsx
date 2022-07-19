@@ -11,11 +11,11 @@ const Section = styled.section`
     box-sizing: border-box;
 `
 
-function ProfileSection({ userInfo }) {
+function ProfileSection() {
     return (
         <Section>
-        <ProfileTitle />
-        <ProfileForm userInfo={userInfo} />
+            <ProfileTitle />
+            <ProfileForm />
         </Section>
     );
 }
