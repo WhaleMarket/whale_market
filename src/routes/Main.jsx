@@ -40,12 +40,18 @@ function MainRouter() {
 =======
           <Route path="/mainprofile" component={MainProfile} />
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Route path="/profileedit" component={ProfileModification} />
 >>>>>>> d0db107 (:truck: 프로필 수정 페이지 Route 추가)
 =======
 >>>>>>> ad5509f (:truck: myprofile 루트 추가 및 mainprofile 루트 변경)
           <Route path="/search" component={HomeSearch} />
+=======
+          <Route path="/home/search" component={HomeSearch}/>
+          <Route path="/followers" component={Followers} />
+>>>>>>> dcfb428 (:truck: HomeSearch 페이지 경로 수정)
         </>
+
       </Switch>
     </>
   );
