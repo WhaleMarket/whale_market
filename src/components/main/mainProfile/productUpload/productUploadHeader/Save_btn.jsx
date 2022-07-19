@@ -17,25 +17,20 @@ const Save = styled.button`
 `;
 
 function SaveButton() {
-  const [saveStates] = useContext(SaveProductContext);
+  const [saveStates, setSaveStates] = useContext(SaveProductContext);
   const [save, setSave] = useState(false);
   const saveButton = useRef();
 
-  // useEffect(()=>{
-  //   const SavePossible = saveStates.required.reduce((count, value) => (value.savePossible === true ? count++ : count), 0)
-  //   if(SavePossible === 4){
-  //     return setSave(true)
-  //   } else {
-  //     return setSave(false)
-  //   }
-  // },[saveStates])
-
-  console.log(
-    saveStates.required.reduce(
-      (count, value) => (value.savePossible === true ? count++ : count),
-      0
-    )
-  );
+  useEffect(() => {
+    let SavePossible = saveStates.required.reduce((count, value) => {
+      return value.savePossible === true ? (count += 1) : count;
+    }, 0);
+    if (SavePossible === 4) {
+      return setSave(true);
+    } else {
+      return setSave(false);
+    }
+  }, [saveStates]);
 
   if (saveButton.current) {
     if (save) {
@@ -45,9 +40,39 @@ function SaveButton() {
     }
   }
 
+  const errorState = () => {
+    const nameState =
+      saveStates.required[1].value.split("").length < 2 ||
+      saveStates.required[1].value.split("").length > 15;
+
+    const priceState = isNaN(parseInt(saveStates.required[2].value));
+
+    const pattern =
+      /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    const urlState = pattern.test(saveStates.required[3].value);
+
+    if (nameState) {
+      setSaveStates((saveStates) => {
+        saveStates.required[1] = {
+          ...saveStates.required[1],
+          error: true,
+        };
+        return { required: saveStates.required };
+      });
+    } else {
+      setSaveStates((saveStates) => {
+        saveStates.required[1] = {
+          ...saveStates.required[1],
+          error: false,
+        };
+        return { required: saveStates.required };
+      });
+    }
+  };
+
   return (
     <>
-      <Save ref={saveButton} state={save}>
+      <Save ref={saveButton} state={save} onClick={errorState}>
         저장
       </Save>
     </>
