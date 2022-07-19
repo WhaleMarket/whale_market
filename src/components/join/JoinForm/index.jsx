@@ -37,7 +37,6 @@ export function JoinForm({ setNextPage }) {
 
     const handleNextButton = async (event) => {
         event.preventDefault();
-        console.log(email, isValidEmail, isValidPassword, success);
         try {
             if (success) {
                 setAuth({ email, password });
