@@ -36,10 +36,10 @@ function PostingArea() {
             }
             return { required: uploadPostingState.required }
         });
-      if (uploadPostingState.required[0].value === "") {
+      if (content.current.value === "") {
         setValue(false);
       }
-      if (uploadPostingState.required[0].value === "" && uploadPostingState.required[1].prevUrl.length === 0) {
+      if (content.current.value === "" && uploadPostingState.required[1].prevUrl.length === 0) {
         return setUploadState(false);
       } else {
         setValue(true);
