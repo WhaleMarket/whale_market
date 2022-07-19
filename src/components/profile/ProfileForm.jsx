@@ -78,7 +78,11 @@ const FormInput = styled.input`
         border-bottom: 1px solid #00BCD4;
     }
     &::placeholder {
-        color: #DBDBDB;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: #DBDBDB
     }
 `
 
@@ -88,16 +92,17 @@ const ErrorMessage = styled.p`
     font-size: 0.750rem;
 `
 
-function ProfileForm({ userInfo }) {
-    const { setAuth } = useContext(AuthContext);
+function ProfileForm() {
+    const { auth, setAuth } = useContext(AuthContext);
     const usernameRef = useRef();
     const accountnameRef = useRef();
-    const errorRef = useRef();
 
     const [username, setUsername] = useState('');
     const [accountname, setAccountname] = useState('');
     const [success, setSuccess] = useState(false);
-    const [notMatchError, setNotMatchError] = useState('');
+
+    const [errMsgForUsername, setErrMsgForUsername] = useState('');
+    const [errMsgForAccountname, setErrMsgForAccountname] = useState('');
 
     const [isValidUsername, setIsValidUsername] = useState(false);
     const [isValidAccountname, setIsValidAccountname] = useState(false);
@@ -118,9 +123,24 @@ function ProfileForm({ userInfo }) {
         }
     }, [usernameRef, accountnameRef]);
 
+    // username 검증
+    const handleOnBlurUsername = async (event) => {
+        event.preventDefault();
+        setErrMsgForUsername('');
+        try {
+            if (!(username.length > 1 && username.length < 11)) {
+                setErrMsgForUsername('*2글자 이상 10글자 미만이어야 합니다.');
+                setIsDisabled(true);
+            } 
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     // accountname 검증 요청 및 에러처리
     const handleOnBlur = async (event) => {
         event.preventDefault();
+        setErrMsgForAccountname('');
 
         try {
             const reqData = {
@@ -138,11 +158,14 @@ function ProfileForm({ userInfo }) {
             );
 
             if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
-                setNotMatchError('*' + response.data.message);
-                // setSuccess(false);
+                setErrMsgForAccountname('*' + response.data.message);
                 setIsDisabled(true);
+            } else if (!accountname) {
+                setErrMsgForAccountname('*계정ID를 입력해주세요.');
+            } else if (!accountnameRegex.test(accountname)) {
+                setErrMsgForAccountname('*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.');
             } else if (response?.data?.message === "사용 가능한 계정ID 입니다.") {
-                setNotMatchError('*' + response.data.message);
+                setErrMsgForAccountname('*' + response.data.message);
                 setIsValidAccountname(true);
             }
         } catch (error) {
@@ -156,18 +179,12 @@ function ProfileForm({ userInfo }) {
 
         try {
             const image = {profile_icon};
-            const intro = '제발 돼라';
+            const intro = '';
             const reqData = {
                 user: { 
-                    // username: 'moonhee',
-                    // email: '220714@test.com',
-                    // password: '123123',
-                    // accountname: 'moontest2',
-                    // intro: '제발 돼라',
-                    // image: 'https://i.ibb.co/LJx5gZm/3.jpg'
                     username: username,
-                    email: { userInfo }.email,
-                    password: { userInfo }.password,
+                    email: auth.email,
+                    password: auth.password,
                     accountname: accountname,
                     intro: intro,
                     image: image
@@ -187,7 +204,6 @@ function ProfileForm({ userInfo }) {
             console.log(JSON.stringify(response?.data));
             // console.log(JSON.stringify(response));
 
-            setAuth({ accountname });
             
         } catch (error) {
             if (error?.response?.data?.status === 422) {
@@ -205,11 +221,11 @@ function ProfileForm({ userInfo }) {
     const isPassedProfile = () => {
         return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
     };
-    
+
     return (
         <>
             {success ? (
-                window.location.href = '/main/home'
+                window.location.href = '/emaillogin'
             ) : (
                 <Form>
                     <Fieldset onSubmit={handleSubmit}>
@@ -241,8 +257,9 @@ function ProfileForm({ userInfo }) {
                             ref={usernameRef}
                             onChange={(event) => setUsername(event.target.value)}
                             onKeyUp={isPassedProfile}
+                            onBlur={handleOnBlurUsername}
                         />
-                        {!(username.length > 1 && username.length < 11) && <ErrorMessage>*2글자 이상 10글자 미만이어야 합니다.</ErrorMessage>}
+                        {errMsgForUsername && <ErrorMessage>{errMsgForUsername}</ErrorMessage>}
 
                         <FormLabel htmlFor="accountname">계정 ID</FormLabel>
                         <FormInput 
@@ -255,8 +272,8 @@ function ProfileForm({ userInfo }) {
                             onKeyUp={isPassedProfile}
                             onBlur={handleOnBlur}
                         />
-                        {(!accountnameRegex.test(accountname) && <ErrorMessage>*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</ErrorMessage>) || notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-
+                        {errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>}
+                        
                         <FormLabel htmlFor="intro">소개</FormLabel>
                         <FormInput 
                             type="text" 
@@ -264,11 +281,9 @@ function ProfileForm({ userInfo }) {
                             placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
                         />
                     </Fieldset>
-                    <Link to='/main/home'>
                     <StartButton 
                         disabled={isDisabled}
                     />
-                    </Link>
                 </Form>
             )}
         </>
