@@ -45,11 +45,12 @@ function SaveButton() {
       saveStates.required[1].value.split("").length < 2 ||
       saveStates.required[1].value.split("").length > 15;
 
-    const priceState = isNaN(parseInt(saveStates.required[2].value));
+    const numberpattern = /^[0-9]*$/
+    const priceState = !numberpattern.test(saveStates.required[2].value);
 
-    const pattern =
+    const urlpattern =
       /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    const urlState = pattern.test(saveStates.required[3].value);
+    const urlState = !urlpattern.test(saveStates.required[3].value);
 
     if (nameState) {
       setSaveStates((saveStates) => {
@@ -67,6 +68,40 @@ function SaveButton() {
         };
         return { required: saveStates.required };
       });
+      if(priceState){
+        setSaveStates((saveStates) => {
+          saveStates.required[2] = {
+            ...saveStates.required[2],
+            error: true,
+          };
+          return { required: saveStates.required };
+        });
+      } else {
+        setSaveStates((saveStates) => {
+          saveStates.required[2] = {
+            ...saveStates.required[2],
+            error: false,
+          };
+          return { required: saveStates.required };
+        });
+        if(urlState){
+          setSaveStates((saveStates) => {
+            saveStates.required[3] = {
+              ...saveStates.required[3],
+              error: true,
+            };
+            return { required: saveStates.required };
+          });
+        } else {
+          setSaveStates((saveStates) => {
+            saveStates.required[3] = {
+              ...saveStates.required[3],
+              error: false,
+            };
+            return { required: saveStates.required };
+          });
+        }
+      }
     }
   };
 
