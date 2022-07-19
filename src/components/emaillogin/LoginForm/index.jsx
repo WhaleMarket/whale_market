@@ -87,8 +87,9 @@ export function LoginForm() {
                 <Wrapper>
                     <Title>로그인</Title>
                     <Form onSubmit={handleSubmit}>
-                        <div>
-                                <Label htmlFor='email'>이메일
+                        <fieldset>
+                            <legend className='a11yhidden'>로그인</legend>
+                                <Label htmlFor='email'>이메일</Label>
                                     <Input
                                         type='email'
                                         id='email'
@@ -99,10 +100,8 @@ export function LoginForm() {
                                         placeholder='이메일 주소를 입력해 주세요.'
                                         required
                                     />
-                                </Label>
-                        </div>
-                        <div>
-                                <Label htmlFor='password'>비밀번호
+                                
+                                <Label htmlFor='password' id='labelPassword'>비밀번호</Label>
                                     <Input
                                         type='password'
                                         id='password'
@@ -113,8 +112,7 @@ export function LoginForm() {
                                         required
                                     />
                                     {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-                                </Label>
-                        </div>
+                            </fieldset>
                         <Button 
                             type='submit' 
                             text='로그인'

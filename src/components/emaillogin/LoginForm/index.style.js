@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
@@ -22,11 +22,13 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
+    display: block;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
     color: #767676;
+    margin-top: ${(props) => props.id === 'labelPassword' ? '16px' : null};
 `;
 
 export const Input = styled.input`
@@ -37,10 +39,7 @@ export const Input = styled.input`
     width: 100%;
     height: 32px;
     padding: 0;
-
-    &:first-child {
-        margin-bottom: 6px;
-    }
+    margin-bottom: 6px;
     &:focus {
         border-bottom: 1px solid #00BCD4;
     }
@@ -59,7 +58,6 @@ export const ErrorMessage = styled.strong`
     font-weight: 500;
     font-size: 12px;
     line-height: 1;
-    margin-bottom: 16px;
 `;
 
 export const StyledLink = styled(Link)`
