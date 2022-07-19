@@ -20,7 +20,15 @@ export const Form = styled.form`
     width: 322px;
 `;
 
+export const Fieldset = styled.fieldset`
+`;
+
+export const Legend = styled.legend`
+    display: none;
+`;
+
 export const Label = styled.label`
+    display: block;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -36,12 +44,15 @@ export const Input = styled.input`
     width: 100%;
     height: 32px;
     padding: 0;
-
-    &:first-child {
-        margin-bottom: 6px;
-    }
+    margin-bottom: 6px;
     &:focus {
         border-bottom: 1px solid #00BCD4;
+    }
+    &::placeholder {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        color: #C4C4C4
     }
 `;
 

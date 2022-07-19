@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useContext, useRef } from "react";
 import ImageUpload from "../../../../assets/upload-file.png";
-import UploadImageContext from "../../../../context/UploadImageListProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
 
 const ImgUploadBtn = styled.img`
   position: fixed;
@@ -16,22 +16,33 @@ const UploadInput = styled.input`
 `;
 
 function ImageUploadButton() {
-  const [uploadImgState, setUploadImgState] = useContext(UploadImageContext);
+  const [uploadPostingState, setUploadPostingState] =
+    useContext(UploadPostingContext);
   const Upload_Input = useRef();
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
     if (Blob === undefined) {
       return;
     }
+    setUploadPostingState((uploadPostingState) => {
+      uploadPostingState.required[1] = {
+        ...uploadPostingState.required[1],
+        file: [...uploadPostingState.required[1].file, Blob],
+      };
+      return { required: uploadPostingState.required };
+    });
     const reader = new FileReader();
     reader.readAsDataURL(Blob);
     event.target.value = "";
     return new Promise((resolve) => {
       reader.onload = () => {
-        setUploadImgState((uploadImgState) => [
-          ...uploadImgState,
-          reader.result,
-        ]);
+        setUploadPostingState((uploadPostingState) => {
+          uploadPostingState.required[1] = {
+            ...uploadPostingState.required[1],
+            prevUrl: [...uploadPostingState.required[1].prevUrl, reader.result],
+          };
+          return { required: uploadPostingState.required };
+        });
         resolve();
       };
     });
@@ -48,7 +59,7 @@ function ImageUploadButton() {
         src={ImageUpload}
         alt="Image Upload Button"
         onClick={() =>
-          uploadImgState.length === 3
+          uploadPostingState.required[1].prevUrl.length === 3
             ? alert("이미지는 3개까지만 업로드할 수 있습니다.")
             : Upload_Input.current.click()
         }
