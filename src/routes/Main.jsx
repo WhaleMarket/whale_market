@@ -22,9 +22,10 @@ function MainRouter() {
           <Route path="/home" exact component={Home} />
           <Route path="/chatting" component={Chatting} />
           <Route path="/mainprofile" component={MainProfile} />
-          <Route path="/search" component={HomeSearch} />
+          <Route path="/home/search" component={HomeSearch}/>
           <Route path="/followers" component={Followers} />
         </>
+
       </Switch>
     </>
   );
