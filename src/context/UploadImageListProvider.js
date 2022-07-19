@@ -1,14 +1,26 @@
 import { createContext, useState } from "react";
 
-const UploadImageContext = createContext();
+const UploadPostingContext = createContext();
 
-export const UploadImageProvider = ({ children }) => {
-  const uploadImageState = useState([]);
+export const UploadPostingProvider = ({ children }) => {
+  const uploadPostingState = useState({
+    required: [
+        {
+            label: "textarea",
+            value: ""
+        }, 
+        {
+            label: "image",
+            file: [],
+            prevUrl: []
+        }
+    ]
+  });
   return (
-    <UploadImageContext.Provider value={uploadImageState}>
+    <UploadPostingContext.Provider value={uploadPostingState}>
       {children}
-    </UploadImageContext.Provider>
+    </UploadPostingContext.Provider>
   );
 };
 
-export default UploadImageContext;
+export default UploadPostingContext;
