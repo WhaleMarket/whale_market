@@ -12,10 +12,13 @@ import NotFound from './pages/NotFoundPage';
 
 const Globalstyle = createGlobalStyle`
     ${reset}
+<<<<<<< HEAD
     
     html, body, #root {
         height: 100%;
     }
+=======
+>>>>>>> 5a115e7 (💄 글로벌 스타일 a11yhidden 클래스 추가)
 
     .a11yhidden {
         position: absolute;
