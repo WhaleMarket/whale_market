@@ -101,7 +101,7 @@ function ProfileEditForm() {
         setImage(true)
         const formData = new FormData();
         formData.append('image', event.target.files[0]);
-        const response = await axios.post(
+        await axios.post(
             `${API_URL}/image/uploadfile`,
                 formData
         )
