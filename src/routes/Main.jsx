@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Chatting from "../pages/main_page/chat/Chatting";
 import ChattingView from "../pages/main_page/chat/ChattingView";
 import MainProfile from "../pages/main_page/mainProfile/MyProfile";
+import ProfileModification from "../pages/main_page/mainProfile/ProfileEdit";
 import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
 import { useLocation } from "react-router-dom";
@@ -22,6 +23,7 @@ function Test() {
           <Route path="/home" exact component={Home} />
           <Route path="/chatting" component={Chatting} />
           <Route path="/mainprofile" component={MainProfile} />
+          <Route path="/profileedit" component={ProfileModification} />
           <Route path="/search" component={HomeSearch} />
           <Route path="/followers" component={Followers} />
         </>
