@@ -25,7 +25,7 @@ const UploadInput = styled.input`
 `;
 
 function UploadBtn({ setUrl }) {
-  const [saveStates, setSaveStates] = useContext(SaveProductContext);
+  const [, setSaveStates] = useContext(SaveProductContext);
   const Upload_input = useRef();
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
@@ -39,7 +39,7 @@ function UploadBtn({ setUrl }) {
         ...saveStates.required[0],
         savePossible: true,
       };
-      return saveStates;
+      return { required: saveStates.required };
     });
     event.target.value = "";
     return new Promise((resolve) => {
