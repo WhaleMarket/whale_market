@@ -206,8 +206,6 @@ function ProfileForm({ userInfo }) {
         return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
     };
     
-    console.log({userInfo})
-    
     return (
         <>
             {success ? (

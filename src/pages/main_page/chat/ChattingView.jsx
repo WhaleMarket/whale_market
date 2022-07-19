@@ -16,7 +16,6 @@ function ChattingView(props) {
     const sendMessage = (x) => {
         setMyText(x);
     };
-    console.log(myText);
 
     return (
         <div>
