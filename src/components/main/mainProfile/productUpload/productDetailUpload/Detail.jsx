@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
 import DetailInput from "./DetailInput";
@@ -16,15 +16,12 @@ const Legend = styled.legend`
 
 function Detail() {
   const [saveStates] = useContext(SaveProductContext);
-  const [value, setValue] = useState(["", "", ""]);
 
   return (
     <>
       <Legend>Product</Legend>
       <DetailLabel id="name" title="상품명" />
       <DetailInput
-        setValue={setValue}
-        value={value}
         index="0"
         id="name"
         type="text"
@@ -35,8 +32,6 @@ function Detail() {
       )}
       <DetailLabel id="price" title="가격" />
       <DetailInput
-        setValue={setValue}
-        value={value}
         index="1"
         id="price"
         type="text"
@@ -47,8 +42,6 @@ function Detail() {
       )}
       <DetailLabel id="link" title="판매 링크" />
       <DetailInput
-        setValue={setValue}
-        value={value}
         index="2"
         id="link"
         type="url"

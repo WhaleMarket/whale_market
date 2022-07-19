@@ -16,31 +16,34 @@ const Input = styled.input`
   }
 `;
 
-function DetailInput({ id, type, placeholder, setValue, value, index }) {
+function DetailInput({ id, type, placeholder, index }) {
   const [saveStates, setSaveStates] = useContext(SaveProductContext);
   const input_ref = useRef();
   const inputstate = () => {
     if (input_ref) {
-      setValue((value) => {
-        value[index] = input_ref.current.value;
-        return value;
-      });
-    }
-    if (value[index] !== "") {
       setSaveStates((saveStates) => {
         saveStates.required[parseInt(index) + 1] = {
           ...saveStates.required[parseInt(index) + 1],
-          error: true,
+          value: input_ref.current.value,
         };
-        return saveStates;
+        return { required: saveStates.required };
+      });
+    }
+    if (saveStates.required[parseInt(index) + 1].value !== "") {
+      setSaveStates((saveStates) => {
+        saveStates.required[parseInt(index) + 1] = {
+          ...saveStates.required[parseInt(index) + 1],
+          savePossible: true,
+        };
+        return { required: saveStates.required };
       });
     } else {
       setSaveStates((saveStates) => {
         saveStates.required[parseInt(index) + 1] = {
           ...saveStates.required[parseInt(index) + 1],
-          error: false,
+          savePossible: false,
         };
-        return saveStates;
+        return { required: saveStates.required };
       });
     }
   };
@@ -49,7 +52,7 @@ function DetailInput({ id, type, placeholder, setValue, value, index }) {
     <>
       <Input
         ref={input_ref}
-        onChange={inputstate}
+        onInput={inputstate}
         id={id}
         type={type}
         placeholder={placeholder}
