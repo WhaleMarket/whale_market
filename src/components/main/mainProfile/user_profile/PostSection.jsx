@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import listIconOn from '../../../../assets/icon-post-list-on.png';
 import listIconOff from '../../../../assets/icon-post-list-off.png';
 import albumIconOn from '../../../../assets/icon-post-album-on.png';
 import albumIconOff from '../../../../assets/icon-post-album-off.png';
 import PostCard from './PostCard';
+import postImg from '../../../../assets/postImg.png';
 
 const ViewTypeNav = styled.nav`
     display: flex;
@@ -40,8 +42,27 @@ const AlbumIcon = styled.img`
 const PostContainer = styled.section`
     display: flex;
     flex-direction: column;
-    padding: 1rem;
     box-sizing: border-box;
+`
+
+const AlbumContainer = styled.section`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 8px;
+    width: 24.375rem;
+    margin: 16px auto;
+`
+
+const AlbumCard = styled.div`
+    text-align: center;
+    cursor: pointer;
+`
+
+const AlbumImg = styled.img`
+    width: 114px;
+    height: 114px;
+    object-fit: cover;
 `
 
 function PostSection() {
@@ -57,9 +78,19 @@ function PostSection() {
                 <AlbumIcon src={viewType ? albumIconOff : albumIconOn}/>
             </AlbumIconBtn>
         </ViewTypeNav>
-        <PostContainer>
-            <PostCard/>
-        </PostContainer>
+        {viewType ? (
+            <PostContainer>
+                <PostCard/>
+            </PostContainer>
+        ) : (
+            <AlbumContainer>
+                <AlbumCard>
+                    <Link to = '/'>
+                        <AlbumImg src={postImg}/>
+                    </Link>
+                </AlbumCard>
+            </AlbumContainer>
+        )}
         </>
     )
 }
