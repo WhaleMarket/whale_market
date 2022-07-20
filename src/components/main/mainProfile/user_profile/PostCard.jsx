@@ -113,8 +113,8 @@ function PostCard() {
     const Res = async () => {
         const headerData = {
             headers: {
-              "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
-              "Content-type": "application/json",
+                "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
+                "Content-type": "application/json",
             },
         };
         
