@@ -33,6 +33,7 @@ const ProfileImgWrapper = styled.div`
 
 const ProfileImg = styled.img`
     width: 6.875rem;
+    border-radius: 50%;
 `
 
 const ProfileImgLable = styled.label`
@@ -85,7 +86,7 @@ const ErrorMessage = styled.p`
 
 function ProfileEditForm() {
     const imgRef = useRef();
-    const [imgage, setImage] = useState('');
+    const [image, setImage] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [nameInputError, setNameInputError] = useState(false);
     const [idInput, setIdInPut] = useState('');
@@ -97,15 +98,22 @@ function ProfileEditForm() {
         imgRef.current.click();
     };
 
-    const handleImageUpload = async (event) => {
-        setImage(true)
-        const formData = new FormData();
-        formData.append('image', event.target.files[0]);
-        await axios.post(
-            `${API_URL}/image/uploadfile`,
-                formData
-        )
+    const handleImageUpload = (event) => {
+        const Blob = event.target.files[0];
+        if (Blob === undefined) {
+            return;
+        }
+        const reader = new FileReader();
+        reader.readAsDataURL(Blob);
+        event.target.value = "";
+        return new Promise((resolve) => {
+            reader.onload = () => {
+            setImage(reader.result);
+            resolve();
+        };
+        });
     };
+
 
     const handleNameInput = (event) => {
         if ((event.target.value.length < 2 || event.target.value.length > 10))
@@ -132,8 +140,8 @@ function ProfileEditForm() {
         <Fieldset>
         <Legend>프로필 사진 변경</Legend>
         <ProfileImgWrapper>
-        <ProfileImg src={profile_icon} onClick={handleUploadIcon}/>
-        <ProfileImgLable htmlFor="profileImg"><Img src={upload_icon} alt="프로필 이미지 업로드"/></ProfileImgLable>
+        <ProfileImg src={image ? image : profile_icon}/>
+        <ProfileImgLable htmlFor="profileImg"><Img src={upload_icon} onClick={handleUploadIcon} alt="프로필 이미지 업로드"/></ProfileImgLable>
         </ProfileImgWrapper>
         <ProfileImgInput ref={imgRef} type="file" onChange={handleImageUpload} accept="image/*" id="profileImg"/>
         </Fieldset>
