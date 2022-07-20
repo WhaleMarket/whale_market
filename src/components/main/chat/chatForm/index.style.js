@@ -9,6 +9,7 @@ export const Fieldset = styled.fieldset`
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    padding: 0 13px;
 `;
 
 export const UpLoadImg = styled.img`
