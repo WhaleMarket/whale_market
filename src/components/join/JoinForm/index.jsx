@@ -9,7 +9,6 @@ export function JoinForm({ setNextPage }) {
     const { setAuth } = useContext(AuthContext);
     const emailRef = useRef();
     const passwordRef = useRef();
-    const errorRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -71,15 +70,14 @@ export function JoinForm({ setNextPage }) {
                 setNotMatchError('*' + response.data.message);
             } else if (!email) {
                 setNotMatchError('*이메일을 입력해주세요.');
-            } else if (!emailRegex.test(email)) {
-                setNotMatchError('*잘못된 이메일 형식입니다.');
             } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
                 setNotMatchError('*' + response.data.message);
                 setIsValidEmail(true);
-            }
+            } 
         } catch (error) {
-            console.error(error);
-            errorRef.current.focus();
+            if (error.response.data.message === "잘못된 이메일 형식입니다.") {
+                setNotMatchError('*' + error.response.data.message);
+            }
         }
     };
 
