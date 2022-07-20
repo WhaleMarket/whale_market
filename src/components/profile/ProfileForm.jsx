@@ -225,7 +225,7 @@ function ProfileForm() {
                     email: auth.email,
                     password: auth.password,
                     accountname: accountname,
-                    intro: '',
+                    intro: intro,
                     image: image
                 }
             };
@@ -245,59 +245,17 @@ function ProfileForm() {
         }
     };
 
+    // 소개
+    function handleChangeIntro(event) {
+        setIntro(event.target.value);
+    };
+
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const accountnameRegex = /^[-._a-z0-9]+$/;
     const isPassedProfile = () => {
         return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
     };
-
-    // 프로필 이미지 관리
-
-    const [image, setImage] = useState('');
-    const previewImage = useRef();
-
-    // 이미지 filename 응답 받기
-    function handleImageChange (event) {
-        const loadImage = event.target.files;
-        const formData = new FormData();
-        formData.append('', loadImage[0]);
-        onLoadImage(formData, loadImage);
-    }
-
-    async function onLoadImage (formData, loadImage) {
-        try {
-            const config = {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Access-Control-Allow-Origin": "*",
-                },
-            };
-            const response = await axios.post(
-                `${API_URL}/image/uploadfile`,
-                formData,
-                config
-            );
-
-            if (response?.data?.filename) {
-                setImage(`${API_URL}/` + response?.data?.filename);
-                preview(loadImage);
-            } else {
-                alert('.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.');
-            }
-        } catch (error) {
-            console.error(error);
-            alert('잘못된 접근입니다.');
-        }
-    };
-
-    function preview(loadImage) {
-        const reader = new FileReader();
-        reader.onload = () => (
-            previewImage.current.style.backgroundImage = `url(${reader.result})`
-        );
-        reader.readAsDataURL(loadImage[0]);
-    }
 
     return (
         <>
