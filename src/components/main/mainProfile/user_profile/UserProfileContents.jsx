@@ -81,15 +81,17 @@ const MessageButton = styled(Link)`
     background-repeat: no-repeat;
 `
 
-const ShareButton = styled(Link)`
+const ShareButton = styled.button`
     width: 34px;
     height: 34px;
     border: 1px solid #DBDBDB;
     border-radius: 30px;
+    background-color: inherit;
     background-image: url(${shareIcon});
     background-position: center center;
     background-size: 20px 20px;
     background-repeat: no-repeat;
+    cursor: pointer;
 `
 
 function UserProfileCard(props) {
@@ -111,9 +113,9 @@ function UserProfileCard(props) {
                 <FollowTxt>followings</FollowTxt>
             </Followings>
             <IconWrapper>
-            <MessageButton to = '/'/>
+            <MessageButton to = '/Chatting'/>
             <FollowButton/>
-            <ShareButton to = '/'/>
+            <ShareButton/>
             </IconWrapper>
         </UserProfileContainer>
         </>    
