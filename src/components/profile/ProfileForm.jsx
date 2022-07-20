@@ -156,6 +156,9 @@ function ProfileForm() {
                 reqData,
                 config
             );
+            // 로그인 데이터 확인
+            // console.log(JSON.stringify(response?.data));
+            console.log(JSON.stringify(response));
 
             if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
                 setErrMsgForAccountname('*' + response.data.message);
@@ -178,15 +181,13 @@ function ProfileForm() {
         event.preventDefault();
 
         try {
-            const image = {profile_icon};
-            const intro = '';
             const reqData = {
                 user: { 
                     username: username,
                     email: auth.email,
                     password: auth.password,
                     accountname: accountname,
-                    intro: intro,
+                    intro: '',
                     image: image
                 }
             };
@@ -222,6 +223,53 @@ function ProfileForm() {
         return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
     };
 
+    // 프로필 이미지 관리
+
+    const [image, setImage] = useState('');
+    const previewImage = useRef();
+
+    // 이미지 filename 응답 받기
+    function handleImageChange (event) {
+        const loadImage = event.target.files;
+        const formData = new FormData();
+        formData.append('', loadImage[0]);
+        onLoadImage(formData, loadImage);
+    }
+
+    async function onLoadImage (formData, loadImage) {
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Access-Control-Allow-Origin": "*",
+                },
+            };
+            const response = await axios.post(
+                `${API_URL}/image/uploadfile`,
+                formData,
+                config
+            );
+
+            if (response?.data?.filename) {
+                setImage(`${API_URL}/` + response?.data?.filename);
+                preview(loadImage);
+            } else {
+                alert('.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('잘못된 접근입니다.');
+        }
+    };
+
+    function preview(loadImage) {
+        const reader = new FileReader();
+        reader.onload = () => (
+            previewImage.current.style.backgroundImage = `url(${reader.result})`
+        );
+        reader.readAsDataURL(loadImage[0]);
+    }
+
     return (
         <>
             {success ? (
@@ -231,8 +279,12 @@ function ProfileForm() {
                     <Fieldset onSubmit={handleSubmit}>
                         <Legend>프로필 사진 변경</Legend>
 
-                        <ProfileImgWrapper>
-                            <ProfileImg src={profile_icon}/>
+                        <ProfileImgWrapper ref={previewImage}>
+                            <ProfileImg 
+                                // src={prevImage ? prevImage : profile_icon}
+                                src={profile_icon}
+                                alt='프로필 이미지 업로드 버튼'
+                            />
                             <ProfileImgLable htmlFor="profileImg">
                                 <Img src={upload_icon} alt="프로필 이미지 업로드"/>
                             </ProfileImgLable>
@@ -241,6 +293,8 @@ function ProfileForm() {
                             type="file" 
                             accept="image/*" 
                             id="profileImg"
+                            // onChange={(event) => insertImage(event)}
+                            onChange={handleImageChange}
                         />
                     </Fieldset>
 
