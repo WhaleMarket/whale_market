@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import basicProfileImg from '../../../../assets/basic-profile-img.png';
+import messageIcon from '../../../../assets/icon-message-circle.png';
 import FollowButton from './FollowButton';
 
 const UserProfileContainer = styled.div`
@@ -63,6 +64,22 @@ const Followings = styled(Link)`
     text-decoration-line: none;
 `
 
+const IconWrapper = styled.div`
+    display: flex;
+    gap: 10px;
+`
+
+const MessageButton = styled(Link)`
+    width: 34px;
+    height: 34px;
+    border: 1px solid #DBDBDB;
+    border-radius: 30px;
+    background-image: url(${messageIcon});
+    background-position: center center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+`
+
 function UserProfileCard(props) {
     const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
 
@@ -81,7 +98,10 @@ function UserProfileCard(props) {
                 <FollowCount>{followingCount}</FollowCount>
                 <FollowTxt>followings</FollowTxt>
             </Followings>
+            <IconWrapper>
+            <MessageButton to = '/'/>
             <FollowButton/>
+            </IconWrapper>
         </UserProfileContainer>
         </>    
     )
