@@ -17,6 +17,7 @@ const ListIconBtn = styled.button`
     padding: 0;
     border-style: none;
     background-color: inherit;
+    cursor: pointer;
 `
 
 const ListIcon = styled.img`
@@ -28,6 +29,7 @@ const AlbumIconBtn = styled.button`
     padding: 0;
     border-style: none;
     background-color: inherit;
+    cursor: pointer;
 `
 
 const AlbumIcon = styled.img`
@@ -39,7 +41,6 @@ const PostContainer = styled.section`
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    border-top: 0.5px solid #DBDBDB;
     box-sizing: border-box;
 `
 
