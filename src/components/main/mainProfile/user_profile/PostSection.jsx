@@ -42,6 +42,7 @@ const AlbumIcon = styled.img`
 const PostContainer = styled.section`
     display: flex;
     flex-direction: column;
+    padding: 1rem;
     box-sizing: border-box;
 `
 
