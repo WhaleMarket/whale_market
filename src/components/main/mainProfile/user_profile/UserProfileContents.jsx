@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import basicProfileImg from '../../../../assets/basic-profile-img.png';
 import messageIcon from '../../../../assets/icon-message-circle.png';
+import shareIcon from '../../../../assets/icon-share.png';
 import FollowButton from './FollowButton';
 
 const UserProfileContainer = styled.div`
@@ -80,6 +81,17 @@ const MessageButton = styled(Link)`
     background-repeat: no-repeat;
 `
 
+const ShareButton = styled(Link)`
+    width: 34px;
+    height: 34px;
+    border: 1px solid #DBDBDB;
+    border-radius: 30px;
+    background-image: url(${shareIcon});
+    background-position: center center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+`
+
 function UserProfileCard(props) {
     const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
 
@@ -101,6 +113,7 @@ function UserProfileCard(props) {
             <IconWrapper>
             <MessageButton to = '/'/>
             <FollowButton/>
+            <ShareButton to = '/'/>
             </IconWrapper>
         </UserProfileContainer>
         </>    
