@@ -22,7 +22,7 @@ const PostInfoImg = styled.img`
 `
 
 const PostInfoUser = styled.div`
-    margin: 0 0 1rem 0.750rem;
+    margin-left: 0.750rem;
     padding-top: 0.25rem;
 `
 
