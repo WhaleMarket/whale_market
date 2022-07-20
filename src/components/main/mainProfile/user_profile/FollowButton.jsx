@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const FollowBtn = styled.button`
-    padding: 0.5rem 2.5rem;
+    padding: 8px 40px 8px 41px;
     border-style: none;
     border-radius: 1.875rem;
     background-color: #00BCD4;
     color: #fff;
-    font-size: 0.875em;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
 `
 
 const UnFollowBtn = styled.button`
-    padding: 0.5rem 2.125rem;
+    padding: 7px 33px;
     border: 0.063rem solid #DBDBDB;
     border-radius: 1.875rem;
     background-color: #fff;
     color: #767676;
-    font-size: 0.875em;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
 `
