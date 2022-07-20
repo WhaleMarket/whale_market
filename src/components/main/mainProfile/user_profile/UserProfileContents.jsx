@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import basicProfileImg from '../../../../assets/basic-profile-img.png';
@@ -94,8 +94,26 @@ const ShareButton = styled.button`
     cursor: pointer;
 `
 
+const TextArea = styled.textarea`
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+`
+
 function UserProfileCard(props) {
     const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
+    const urlRef = useRef();
+    const copyUrl = () => {
+        urlRef.current.focus();
+        urlRef.current.select();
+        navigator.clipboard.writeText(urlRef.current.value).then(() => {
+        alert("URL이 복사되었습니다.");
+        });
+        console.log(urlRef.current.value);
+    }
 
     return ( 
         <>    
@@ -115,7 +133,10 @@ function UserProfileCard(props) {
             <IconWrapper>
             <MessageButton to = '/Chatting'/>
             <FollowButton/>
-            <ShareButton/>
+            <ShareButton onClick={copyUrl}/>
+            <form>
+                <TextArea ref={urlRef} value={window.location.href}/>
+            </form>
             </IconWrapper>
         </UserProfileContainer>
         </>    
