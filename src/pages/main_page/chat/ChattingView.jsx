@@ -22,11 +22,16 @@ function ChattingView(props) {
         setMyText(messageFromChatForm);
     };
 
+    const [pop, setPop] = useState(false);
+    const popMessage = () => {
+        setPop(true);
+    }
+
     return (
         <Wrapper>
             <ChatProfileHeader partner={chat.partner} />
-            <ChatContents contents={chat.contents} myText={myText}></ChatContents>
-            <ChatForm sendMessage={sendMessage} />
+            <ChatContents contents={chat.contents} myText={myText} pop={pop}></ChatContents>
+            <ChatForm sendMessage={sendMessage} popMessage={popMessage}/>
         </Wrapper>
     );
 }
