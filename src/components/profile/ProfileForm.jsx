@@ -245,11 +245,6 @@ function ProfileForm() {
         }
     };
 
-    // 소개
-    function handleChangeIntro(event) {
-        setIntro(event.target.value);
-    };
-
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const accountnameRegex = /^[-._a-z0-9]+$/;
