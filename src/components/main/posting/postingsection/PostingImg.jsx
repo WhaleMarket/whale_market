@@ -13,7 +13,7 @@ function PostingImg({ src, alt }) {
   return (
     <>
       <PostImage src={src} alt={alt} />
-      <CancleBtn src={src} />
+      <CancleBtn src={src} index={alt.substr(0, 1)} />
     </>
   );
 }

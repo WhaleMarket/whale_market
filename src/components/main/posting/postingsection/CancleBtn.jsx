@@ -13,16 +13,15 @@ const Btn = styled.button`
   width: 20px;
 `;
 
-function CancleBtn({ src }) {
-  const [uploadPostingState, setUploadPostingState] =
-    useContext(UploadPostingContext);
+function CancleBtn({ src, index }) {
+  const [, setUploadPostingState] = useContext(UploadPostingContext);
   const deleteImg = () => {
     setUploadPostingState((uploadPostingState) => {
       uploadPostingState.required[1] = {
         ...uploadPostingState.required[1],
-        // file: uploadPostingState.required[1].file.filter((img) => {
-        //   return img !== src;
-        // }),
+        file: uploadPostingState.required[1].file.filter((file) => {
+          return file !== uploadPostingState.required[1].file[index];
+        }),
         prevUrl: uploadPostingState.required[1].prevUrl.filter((img) => {
           return img !== src;
         }),
