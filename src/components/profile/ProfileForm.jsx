@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
@@ -218,10 +217,16 @@ function ProfileForm() {
         }
     };
 
+    // 소개
+    function handleChangeIntro(event) {
+        setIntro(event.target.value);
+    };
+
     // 회원가입 정보 제출
     const handleSubmit = async (event) => {
         alert('🎉 웨일마켓에 오신 것을 환영합니다. 로그인 화면으로 이동합니다.');
         event.preventDefault();
+        window.location.href = '/emaillogin';
         try {
             const reqData = {
                 user: { 
@@ -238,24 +243,14 @@ function ProfileForm() {
                     "Content-Type": "application/json",
                 },
             };
-            const response = await axios.post(
+            await axios.post(
                 `${API_URL}/user`,
                 reqData,
                 config
             );
         } catch (error) {
-            if (error?.response?.data?.status === 422) {
-                alert('422 Unprocessable Entity(처리할 수 없는 개체): 요청을 잘 받았으나 문법 오류로 인하여 무언가를 응답할 수 없을때 사용되는 코드');
-                setSuccess(false);
-                setIsDisabled(true);
             console.error(error);
-            }
         }
-    };
-
-    // 소개
-    function handleChangeIntro(event) {
-        setIntro(event.target.value);
     };
 
     // 버튼 활성상태 관리
@@ -275,11 +270,6 @@ function ProfileForm() {
                         <Legend>프로필 사진 변경</Legend>
 
                         <ProfileImgWrapper ref={previewImage}>
-                            {/* <ProfileImg 
-                                src={prevImage ? prevImage : profile_icon}
-                                src={profile_icon}
-                                alt='프로필 이미지 업로드 버튼'
-                            /> */}
                             <ProfileImgLable htmlFor="profileImg">
                                 <Img src={upload_icon} alt="프로필 이미지 업로드"/>
                             </ProfileImgLable>
@@ -288,7 +278,6 @@ function ProfileForm() {
                             type="file" 
                             accept="image/*" 
                             id="profileImg"
-                            // onChange={(event) => insertImage(event)}
                             onChange={handleImageChange}
                         />
                     </Fieldset>
