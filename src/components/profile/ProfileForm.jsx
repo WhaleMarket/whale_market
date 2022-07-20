@@ -18,14 +18,6 @@ const Fieldset = styled.fieldset`
     flex-direction: column;
 `
 
-const Legend = styled.legend`
-    overflow: hidden;
-    position: block;
-    font-size: 0;
-    line-height: 0;
-    text-indent: -9999px;
-`
-
 const ProfileImgWrapper = styled.div`
     width: 110px;
     height: 110px;
@@ -140,7 +132,6 @@ function ProfileForm() {
             const config = {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Access-Control-Allow-Origin": "*",
                 },
             };
             const response = await axios.post(
@@ -201,14 +192,14 @@ function ProfileForm() {
                 reqData,
                 config
             );
-            if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
+            if (response?.data?.message === '이미 가입된 계정ID 입니다.') {
                 setErrMsgForAccountname('*' + response.data.message);
                 setIsDisabled(true);
             } else if (!accountname) {
                 setErrMsgForAccountname('*계정ID를 입력해주세요.');
             } else if (!accountnameRegex.test(accountname)) {
                 setErrMsgForAccountname('*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.');
-            } else if (response?.data?.message === "사용 가능한 계정ID 입니다.") {
+            } else if (response?.data?.message === '사용 가능한 계정ID 입니다.') {
                 setErrMsgForAccountname('*' + response.data.message);
                 setIsValidAccountname(true);
             }
@@ -248,6 +239,7 @@ function ProfileForm() {
                 reqData,
                 config
             );
+            setAuth({ username, accountname, intro, image });
         } catch (error) {
             console.error(error);
         }
@@ -267,30 +259,30 @@ function ProfileForm() {
             ) : (
                 <Form onSubmit={handleSubmit}>
                     <Fieldset>
-                        <Legend>프로필 사진 변경</Legend>
+                        <legend className='a11yhidden'>프로필 사진 변경</legend>
 
                         <ProfileImgWrapper ref={previewImage}>
-                            <ProfileImgLable htmlFor="profileImg">
-                                <Img src={upload_icon} alt="프로필 이미지 업로드"/>
+                            <ProfileImgLable htmlFor='profileImg'>
+                                <Img src={upload_icon} alt='프로필 이미지 업로드'/>
                             </ProfileImgLable>
                         </ProfileImgWrapper>
                         <ProfileImgInput 
-                            type="file" 
-                            accept="image/*" 
-                            id="profileImg"
+                            type='file' 
+                            accept='image/*' 
+                            id='profileImg'
                             onChange={handleImageChange}
                         />
                     </Fieldset>
 
 
                     <Fieldset>
-                        <Legend>개인정보 변경</Legend>
+                        <legend className='a11yhidden'>개인정보 변경</legend>
 
-                        <FormLabel htmlFor="username" style={{marginTop:'0'}}>사용자 이름</FormLabel>
+                        <FormLabel htmlFor='username' style={{marginTop:'0'}}>사용자 이름</FormLabel>
                         <FormInput 
-                            type="text" 
-                            id="username" 
-                            placeholder="2~10자 이내여야 합니다."  
+                            type='text' 
+                            id='username' 
+                            placeholder='2~10자 이내여야 합니다.'  
                             required
                             ref={usernameRef}
                             onChange={(event) => setUsername(event.target.value)}
@@ -299,11 +291,11 @@ function ProfileForm() {
                         />
                         {errMsgForUsername && <ErrorMessage>{errMsgForUsername}</ErrorMessage>}
 
-                        <FormLabel htmlFor="accountname">계정 ID</FormLabel>
+                        <FormLabel htmlFor='accountname'>계정 ID</FormLabel>
                         <FormInput 
-                            type="text" 
-                            id="accountname" 
-                            placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." 
+                            type='text' 
+                            id='accountname' 
+                            placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.' 
                             required
                             ref={accountnameRef}
                             onChange={(event) => setAccountname(event.target.value)}
@@ -312,11 +304,11 @@ function ProfileForm() {
                         />
                         {errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>}
                         
-                        <FormLabel htmlFor="intro">소개</FormLabel>
+                        <FormLabel htmlFor='intro'>소개</FormLabel>
                         <FormInput 
-                            type="text" 
-                            id="intro" 
-                            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+                            type='text' 
+                            id='intro' 
+                            placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
                             onChange={handleChangeIntro}
                         />
                     </Fieldset>
