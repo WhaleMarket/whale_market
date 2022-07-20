@@ -17,10 +17,6 @@ const Form = styled.form`
 const Fieldset = styled.fieldset`
     display: flex;
     flex-direction: column;
-    margin-top: 1.875rem;
-    &:nth-child(2) {
-        margin-bottom: 1.875rem;
-    }
 `
 
 const Legend = styled.legend`
@@ -32,12 +28,16 @@ const Legend = styled.legend`
 `
 
 const ProfileImgWrapper = styled.div`
-    position:relative; 
-    margin:0 auto;
-`
-
-const ProfileImg = styled.img`
-    width: 6.875rem;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+    background-image: url(${profile_icon});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative; 
+    border-radius: 9999px;
+    margin-bottom: 30px;
 `
 
 const ProfileImgLable = styled.label`
@@ -99,6 +99,7 @@ function ProfileForm() {
 
     const [username, setUsername] = useState('');
     const [accountname, setAccountname] = useState('');
+    const [intro, setIntro] = useState('');
     const [success, setSuccess] = useState(false);
 
     const [errMsgForUsername, setErrMsgForUsername] = useState('');
@@ -122,6 +123,51 @@ function ProfileForm() {
             setSuccess(true);
         }
     }, [usernameRef, accountnameRef]);
+
+    // 프로필 이미지
+    const [image, setImage] = useState('https://mandarin.api.weniv.co.kr/1658318303337.png');
+    const previewImage = useRef();
+
+    // 이미지 filename 응답 받기
+    function handleImageChange (event) {
+        const loadImage = event.target.files;
+        const formData = new FormData();
+        formData.append('image', loadImage[0]);
+        onLoadImage(formData, loadImage);
+    }
+
+    async function onLoadImage (formData, loadImage) {
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Access-Control-Allow-Origin": "*",
+                },
+            };
+            const response = await axios.post(
+                `${API_URL}/image/uploadfile`,
+                formData,
+                config
+            );
+            if (response?.data?.filename) {
+                setImage(`${API_URL}/` + response?.data?.filename);
+                preview(loadImage);
+            } else {
+                alert('.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('잘못된 접근입니다.');
+        }
+    };
+
+    function preview(loadImage) {
+        const reader = new FileReader();
+        reader.onload = () => (
+            previewImage.current.style.backgroundImage = `url(${reader.result})`
+        );
+        reader.readAsDataURL(loadImage[0]);
+    };
 
     // username 검증
     const handleOnBlurUsername = async (event) => {
@@ -156,10 +202,6 @@ function ProfileForm() {
                 reqData,
                 config
             );
-            // 로그인 데이터 확인
-            // console.log(JSON.stringify(response?.data));
-            console.log(JSON.stringify(response));
-
             if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
                 setErrMsgForAccountname('*' + response.data.message);
                 setIsDisabled(true);
@@ -178,8 +220,8 @@ function ProfileForm() {
 
     // 회원가입 정보 제출
     const handleSubmit = async (event) => {
+        alert('🎉 웨일마켓에 오신 것을 환영합니다. 로그인 화면으로 이동합니다.');
         event.preventDefault();
-
         try {
             const reqData = {
                 user: { 
@@ -187,7 +229,7 @@ function ProfileForm() {
                     email: auth.email,
                     password: auth.password,
                     accountname: accountname,
-                    intro: '',
+                    intro: intro,
                     image: image
                 }
             };
@@ -201,11 +243,6 @@ function ProfileForm() {
                 reqData,
                 config
             );
-            // 로그인 데이터 확인용 콘솔로그
-            console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
-
-            
         } catch (error) {
             if (error?.response?.data?.status === 422) {
                 alert('422 Unprocessable Entity(처리할 수 없는 개체): 요청을 잘 받았으나 문법 오류로 인하여 무언가를 응답할 수 없을때 사용되는 코드');
@@ -216,6 +253,11 @@ function ProfileForm() {
         }
     };
 
+    // 소개
+    function handleChangeIntro(event) {
+        setIntro(event.target.value);
+    };
+
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const accountnameRegex = /^[-._a-z0-9]+$/;
@@ -223,68 +265,21 @@ function ProfileForm() {
         return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
     };
 
-    // 프로필 이미지 관리
-
-    const [image, setImage] = useState('');
-    const previewImage = useRef();
-
-    // 이미지 filename 응답 받기
-    function handleImageChange (event) {
-        const loadImage = event.target.files;
-        const formData = new FormData();
-        formData.append('', loadImage[0]);
-        onLoadImage(formData, loadImage);
-    }
-
-    async function onLoadImage (formData, loadImage) {
-        try {
-            const config = {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Access-Control-Allow-Origin": "*",
-                },
-            };
-            const response = await axios.post(
-                `${API_URL}/image/uploadfile`,
-                formData,
-                config
-            );
-
-            if (response?.data?.filename) {
-                setImage(`${API_URL}/` + response?.data?.filename);
-                preview(loadImage);
-            } else {
-                alert('.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.');
-            }
-        } catch (error) {
-            console.error(error);
-            alert('잘못된 접근입니다.');
-        }
-    };
-
-    function preview(loadImage) {
-        const reader = new FileReader();
-        reader.onload = () => (
-            previewImage.current.style.backgroundImage = `url(${reader.result})`
-        );
-        reader.readAsDataURL(loadImage[0]);
-    }
-
     return (
         <>
             {success ? (
                 window.location.href = '/emaillogin'
             ) : (
-                <Form>
-                    <Fieldset onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit}>
+                    <Fieldset>
                         <Legend>프로필 사진 변경</Legend>
 
                         <ProfileImgWrapper ref={previewImage}>
-                            <ProfileImg 
-                                // src={prevImage ? prevImage : profile_icon}
+                            {/* <ProfileImg 
+                                src={prevImage ? prevImage : profile_icon}
                                 src={profile_icon}
                                 alt='프로필 이미지 업로드 버튼'
-                            />
+                            /> */}
                             <ProfileImgLable htmlFor="profileImg">
                                 <Img src={upload_icon} alt="프로필 이미지 업로드"/>
                             </ProfileImgLable>
@@ -333,6 +328,7 @@ function ProfileForm() {
                             type="text" 
                             id="intro" 
                             placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+                            onChange={handleChangeIntro}
                         />
                     </Fieldset>
                     <StartButton 
