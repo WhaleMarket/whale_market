@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useContext, useRef } from "react";
+import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
 import ImageUpload from "../../../../assets/upload-file.png";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 
@@ -21,8 +22,12 @@ function ImageUploadButton() {
   const Upload_Input = useRef();
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
-    if (Blob === undefined) {
-      return;
+    if (
+      Blob === undefined ||
+      !IMG_EXTENSION.includes(Blob.name.split(".")[1])
+    ) {
+      event.target.value = "";
+      return alert("올바른 형식의 파일을 넣어주세요.");
     }
     setUploadPostingState((uploadPostingState) => {
       uploadPostingState.required[1] = {
