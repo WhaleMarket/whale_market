@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import { useContext, useRef } from "react";
+<<<<<<< HEAD
 import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
 import ImageUpload from "../../../../assets/upload-file.png";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
+=======
+import ImageUpload from "../../../../assets/upload-file.png";
+import UploadImageContext from "../../../../context/UploadImageListProvider";
+>>>>>>> b795e89 (:sparkles: 이미지 업로드 및 업로드 갯수 제한 기능 구현)
 
 const ImgUploadBtn = styled.img`
   position: fixed;
@@ -17,6 +22,7 @@ const UploadInput = styled.input`
 `;
 
 function ImageUploadButton() {
+<<<<<<< HEAD
   const [uploadPostingState, setUploadPostingState] =
     useContext(UploadPostingContext);
   const Upload_Input = useRef();
@@ -48,6 +54,23 @@ function ImageUploadButton() {
           };
           return { required: uploadPostingState.required };
         });
+=======
+  const [uploadImgState, setUploadImgState] = useContext(UploadImageContext);
+  const Upload_Input = useRef();
+  const ImgUpload = (event) => {
+    const Blob = event.target.files[0];
+    if (Blob === undefined) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(Blob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setUploadImgState((uploadImgState) => [
+          ...uploadImgState,
+          reader.result,
+        ]);
+>>>>>>> b795e89 (:sparkles: 이미지 업로드 및 업로드 갯수 제한 기능 구현)
         resolve();
       };
     });
@@ -64,7 +87,11 @@ function ImageUploadButton() {
         src={ImageUpload}
         alt="Image Upload Button"
         onClick={() =>
+<<<<<<< HEAD
           uploadPostingState.required[1].prevUrl.length === 3
+=======
+          uploadImgState.length === 3
+>>>>>>> b795e89 (:sparkles: 이미지 업로드 및 업로드 갯수 제한 기능 구현)
             ? alert("이미지는 3개까지만 업로드할 수 있습니다.")
             : Upload_Input.current.click()
         }
