@@ -173,7 +173,7 @@ function UserProfileCard(props) {
                     <ProductUploadButton to ='/productupload'>상품 등록</ProductUploadButton>
                     </>
             )}
-                </IconWrapper>
+            </IconWrapper>
         </UserProfileContainer>
         </>    
     )
