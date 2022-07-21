@@ -79,7 +79,9 @@ function SaveButton() {
         headerData
       );
 
-      console.log(response);
+      if (response) {
+        alert("🐳 성공적으로 업로드 되었습니다! 🐳");
+      }
     } catch (e) {
       console.error(e);
     }
@@ -93,7 +95,13 @@ function SaveButton() {
   return (
     <>
       <Link to="/mainprofile" onClick={complete}>
-        <Save onClick={onSubmit} type="submit" ref={saveButton} state={save}>
+        <Save
+          onClick={onSubmit}
+          type="submit"
+          ref={saveButton}
+          state={save}
+          disabled
+        >
           저장
         </Save>
       </Link>
