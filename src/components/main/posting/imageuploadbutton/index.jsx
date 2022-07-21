@@ -75,6 +75,7 @@ function ImageUploadButton() {
             ...uploadPostingState.required[1],
             file: [...uploadPostingState.required[1].file, Blob]
         }
+        return {required : uploadPostingState.required}
     });
     const reader = new FileReader();
     reader.readAsDataURL(Blob);
@@ -91,8 +92,9 @@ function ImageUploadButton() {
         setUploadPostingState((uploadPostingState) => {
             uploadPostingState.required[1] = {
                 ...uploadPostingState.required[1],
-                prevUrl: [...uploadPostingState.required[1].prevUrl, Blob]
+                prevUrl: [...uploadPostingState.required[1].prevUrl, reader.result]
             }
+            return {required : uploadPostingState.required}
         });
 >>>>>>> c426f97 (♻️ useContext 리팩토링)
         resolve();

@@ -77,11 +77,15 @@ function PostingArea() {
             }
             return { required: uploadPostingState.required }
         });
-      if (uploadPostingState.required[0].value === "") {
+      if (content.current.value === "") {
         setValue(false);
       }
+<<<<<<< HEAD
       if (uploadPostingState.required[0].value === "" && uploadPostingState.required[1].prevUrl.length === 0) {
 >>>>>>> c426f97 (♻️ useContext 리팩토링)
+=======
+      if (content.current.value === "" && uploadPostingState.required[1].prevUrl.length === 0) {
+>>>>>>> e76d107 (:recycle: 취소 버튼 Context변경사항 적용)
         return setUploadState(false);
       } else {
         setValue(true);

@@ -13,6 +13,7 @@ const Btn = styled.button`
   width: 20px;
 `;
 
+<<<<<<< HEAD
 function CancleBtn({ src, index }) {
   const [, setUploadPostingState] = useContext(UploadPostingContext);
   const deleteImg = () => {
@@ -33,6 +34,32 @@ function CancleBtn({ src, index }) {
   return (
     <>
       <Btn onClick={deleteImg} />
+=======
+function CancleBtn({ src }) {
+  const [uploadPostingState, setUploadPostingState] = useContext(UploadPostingContext);
+  const deleteImg = () => {
+    setUploadPostingState(
+      (uploadPostingState) => {
+        uploadPostingState.required[1] = {
+          ...uploadPostingState.required[1],
+          // file: uploadPostingState.required[1].file.filter((img) => {
+          //   return img !== src;
+          // }),
+          prevUrl: uploadPostingState.required[1].prevUrl.filter((img) => {
+            return img !== src;
+          })
+        }
+        return {required : uploadPostingState.required}
+      }
+    )
+  }
+  
+  return (
+    <>
+      <Btn
+        onClick={deleteImg}
+      />
+>>>>>>> e76d107 (:recycle: 취소 버튼 Context변경사항 적용)
     </>
   );
 }
