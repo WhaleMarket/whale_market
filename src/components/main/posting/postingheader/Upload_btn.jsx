@@ -70,7 +70,9 @@ function UploadButton() {
         headerData
       );
 
-      console.log(response);
+      if (response) {
+        alert("🐳 성공적으로 업로드 되었습니다! 🐳");
+      }
     } catch (e) {
       console.error(e);
     }
@@ -85,7 +87,12 @@ function UploadButton() {
   return (
     <>
       <Link to="/mainprofile" onClick={complete}>
-        <Upload onClick={onSubmit} ref={uploadButton} state={uploadState}>
+        <Upload
+          onClick={onSubmit}
+          ref={uploadButton}
+          state={uploadState}
+          disabled
+        >
           업로드
         </Upload>
       </Link>
