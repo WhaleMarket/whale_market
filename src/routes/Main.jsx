@@ -7,7 +7,6 @@ import MainProfile from "../pages/main_page/mainProfile/MyProfile";
 import ProfileModification from "../pages/main_page/mainProfile/ProfileEdit";
 import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
-import { useLocation } from "react-router-dom";
 import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
