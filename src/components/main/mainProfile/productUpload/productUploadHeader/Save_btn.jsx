@@ -94,7 +94,7 @@ function SaveButton() {
   };
   return (
     <>
-      <Link to="/mainprofile" onClick={complete}>
+      <Link to="/myprofile" onClick={complete}>
         <Save
           onClick={onSubmit}
           type="submit"
