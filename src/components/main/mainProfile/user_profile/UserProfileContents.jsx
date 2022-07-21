@@ -132,6 +132,7 @@ const ProductUploadButton = styled(Link)`
 function UserProfileCard(props) {
     const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
     const {pathname} = window.location
+
     const urlRef = useRef();
     const copyUrl = () => {
         urlRef.current.focus();
