@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PostIconContainer from './PostIconContainer';
 import profileImg from '../../../../assets/basic-profile-img.png';
-import menubtn from '../../../../assets/s-icon-more-vertical.png';
-import postImg from '../../../../assets/postImg.png'
+import postImg from '../../../../assets/postImg.png';
+import ModalBtn from '../../../modal/ModalBtn';
+import Modal from '../../../modal/Modal';
+import AlertModal from '../../../modal/AlertModal';
 
 const PostWrapper = styled.div`
     width: 24.375rem;
@@ -29,21 +31,6 @@ const PostInfoUser = styled.div`
 const PostInfoName = styled.strong`
     font-size: 0.875rem;
     font-weight: 500;
-`
-
-const PostMenuBtn = styled.button`
-    position: absolute;
-    top: 1.5rem;
-    right: 0;
-    width: 1.125rem;
-    height: 1.125rem;
-    border: none;
-    background-color: inherit;
-    background-image: url(${menubtn});
-    background-size:  1.125rem  1.125rem;
-    &:hover{
-        cursor: pointer;
-    }
 `
 
 const PostInfoId = styled.p` 
@@ -76,27 +63,61 @@ const PostDate = styled.p`
 `
 
 function PostCard() {
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [alertModal, setAlertModal] = useState(false);
+
+    const modalItemList = [
+        {
+            content: "삭제",
+            onClick: () => {
+                setAlertModal(true);
+            },
+            
+        },
+        {
+            content: "수정",
+            onClick: () => {},
+        }
+    ];
+
+    const deleteBtn = {
+        content: "삭제",
+        onClick: () => {},
+    };
 
     return(
         <>
-        <PostWrapper>
-            <PostInfo>
-                <PostInfoImg src={profileImg}/>
-                <PostInfoUser>
-                    <PostInfoName>김웨일</PostInfoName>
-                    <PostInfoId>@sosoheehee_whale</PostInfoId>
-                    <PostMenuBtn/>
-                </PostInfoUser>
-            </PostInfo>
-            <PostContent>
-                <PostTxt>반짝이는 방황하여도, 간에 속에서 없으면, 고동을 모래뿐일 풀이 있는 황금시대다. 소담스러운 가슴에 그것은 인생을 뜨고, 돋고, 찬미를 같으며, 것이다. 청춘의 어디 인생에 스며들어 우리 바이며, 이상의 얼음 것은 것이다.</PostTxt>
-                <PostImgWrapper>
-                    <PostImg src={postImg}/>
-                </PostImgWrapper>
-            <PostIconContainer/>
-            <PostDate>2022년 07월 15일</PostDate>
-            </PostContent>
-        </PostWrapper>
+            <PostWrapper>
+                <PostInfo>
+                    <PostInfoImg src={profileImg}/>
+                    <PostInfoUser>
+                        <PostInfoName>김웨일</PostInfoName>
+                        <PostInfoId>@sosoheehee_whale</PostInfoId>
+                        <ModalBtn className='small' onClick={()=>setIsOpenModal(!isOpenModal)}/>
+                    </PostInfoUser>
+                </PostInfo>
+                <PostContent>
+                    <PostTxt>반짝이는 방황하여도, 간에 속에서 없으면, 고동을 모래뿐일 풀이 있는 황금시대다. 소담스러운 가슴에 그것은 인생을 뜨고, 돋고, 찬미를 같으며, 것이다. 청춘의 어디 인생에 스며들어 우리 바이며, 이상의 얼음 것은 것이다.</PostTxt>
+                    <PostImgWrapper>
+                        <PostImg src={postImg}/>
+                    </PostImgWrapper>
+                <PostIconContainer/>
+                <PostDate>2022년 07월 15일</PostDate>
+                </PostContent>
+            </PostWrapper>
+            
+            <Modal 
+                isOpenModal={isOpenModal} 
+                setIsOpenModal={setIsOpenModal} 
+                modalItemList={modalItemList} 
+            />
+            <AlertModal
+                alertModal={alertModal}
+                setAlertModal={setAlertModal}
+                setIsOpenModal={setIsOpenModal}
+                content={"게시글을 삭제할까요?"}
+                deleteBtn={deleteBtn}
+            />
         </>
     )
 }

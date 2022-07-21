@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import img from '../../../../assets/product-img.png';
+import Modal from '../../../modal/Modal';
+import AlertModal from '../../../modal/AlertModal';
 
 const ProductWrapper = styled.li`
     display: flex;
     flex-direction: column;
     list-style: none;
-    width: 24.375rem;
+    /* width: 24.375rem; */ 
     cursor:pointer;
 `
 const ProductImg = styled.img`
@@ -28,12 +30,53 @@ const ProductPrice = styled.p`
 `
 
 function ProductCard({productPrice}) {
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [alertModal, setAlertModal] = useState(false);
+
+    const modalItemList = [
+        {
+            content: "삭제",
+            onClick: () => {
+                setAlertModal(true);
+            },
+            
+        },
+        {
+            content: "수정",
+            onClick: () => {},
+        },
+        {
+            content: "웹사이트에서 상품보기",
+            onClick: () => {},
+        }
+    ];
+
+    const deleteBtn = {
+        content: "삭제",
+        onClick: () => {},
+    };
+    
     return(
-        <ProductWrapper>
-            <ProductImg src={img}/>
-            <ProductName>고래밥</ProductName>
-            <ProductPrice>{productPrice}원</ProductPrice>
-        </ProductWrapper>
+        <>
+            <ProductWrapper onClick={()=>setIsOpenModal(!isOpenModal)}>
+                <ProductImg src={img}/>
+                <ProductName>고래밥</ProductName>
+                <ProductPrice>{productPrice}원</ProductPrice>
+            </ProductWrapper>
+
+            <Modal 
+                isOpenModal={isOpenModal} 
+                setIsOpenModal={setIsOpenModal} 
+                modalItemList={modalItemList} 
+            />
+            <AlertModal
+                alertModal={alertModal}
+                setAlertModal={setAlertModal}
+                setIsOpenModal={setIsOpenModal}
+                content={"상품을 삭제할까요?"}
+                deleteBtn={deleteBtn}
+            />
+        </>
     )
 }
 
