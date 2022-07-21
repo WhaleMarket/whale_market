@@ -14,6 +14,9 @@ const Btn = styled.button`
 `;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 99b55aa (:recycle: context변경 후 취소 버튼 활성화)
 function CancleBtn({ src, index }) {
   const [, setUploadPostingState] = useContext(UploadPostingContext);
   const deleteImg = () => {
