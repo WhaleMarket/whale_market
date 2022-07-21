@@ -22,7 +22,11 @@ function Test() {
       <Switch>
         <Route path="/chatting/:chatId" component={ChattingView} />
         <Route path="/posting" component={Posting} />
+<<<<<<< HEAD
         <Route path="/mainprofile" component={MainProfile} />
+=======
+        <Route path="/myprofile" component={MainProfile} />
+>>>>>>> ad5509f (:truck: myprofile 루트 추가 및 mainprofile 루트 변경)
         <Route path="/profileedit" component={ProfileModification} />
         <Route path="/followers" component={Followers} />
         <Route path="/productupload" component={ProductUpload} />
@@ -35,8 +39,11 @@ function Test() {
           <Route path="/myprofile" component={MainProfile} />
 =======
           <Route path="/mainprofile" component={MainProfile} />
+<<<<<<< HEAD
           <Route path="/profileedit" component={ProfileModification} />
 >>>>>>> d0db107 (:truck: 프로필 수정 페이지 Route 추가)
+=======
+>>>>>>> ad5509f (:truck: myprofile 루트 추가 및 mainprofile 루트 변경)
           <Route path="/search" component={HomeSearch} />
         </>
       </Switch>
