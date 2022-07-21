@@ -1,6 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
+import axios from "axios";
+import { API_URL } from "../../../../../constants/defaultUrl";
 
 const Save = styled.button`
   width: 90px;
@@ -17,15 +20,18 @@ const Save = styled.button`
 `;
 
 function SaveButton() {
-  const [saveStates, setSaveStates] = useContext(SaveProductContext);
+  const [saveStates] = useContext(SaveProductContext);
   const [save, setSave] = useState(false);
   const saveButton = useRef();
 
   useEffect(() => {
+    let Error = saveStates.required.reduce((count, value) => {
+      return value.error === false ? (count += 1) : count;
+    }, 0);
     let SavePossible = saveStates.required.reduce((count, value) => {
       return value.savePossible === true ? (count += 1) : count;
     }, 0);
-    if (SavePossible === 4) {
+    if (Error === 4 && SavePossible === 4) {
       return setSave(true);
     } else {
       return setSave(false);
@@ -40,76 +46,57 @@ function SaveButton() {
     }
   }
 
-  const errorState = () => {
-    const nameState =
-      saveStates.required[1].value.split("").length < 2 ||
-      saveStates.required[1].value.split("").length > 15;
+  const onSubmit = async () => {
+    try {
+      const imgBodyData = new FormData();
 
-    const numberpattern = /^[0-9]*$/
-    const priceState = !numberpattern.test(saveStates.required[2].value);
+      imgBodyData.append("image", saveStates.required[0].file);
 
-    const urlpattern =
-      /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    const urlState = !urlpattern.test(saveStates.required[3].value);
+      const imgResponse = await axios.post(
+        `${API_URL}/image/uploadfile`,
+        imgBodyData
+      );
 
-    if (nameState) {
-      setSaveStates((saveStates) => {
-        saveStates.required[1] = {
-          ...saveStates.required[1],
-          error: true,
-        };
-        return { required: saveStates.required };
-      });
-    } else {
-      setSaveStates((saveStates) => {
-        saveStates.required[1] = {
-          ...saveStates.required[1],
-          error: false,
-        };
-        return { required: saveStates.required };
-      });
-      if(priceState){
-        setSaveStates((saveStates) => {
-          saveStates.required[2] = {
-            ...saveStates.required[2],
-            error: true,
-          };
-          return { required: saveStates.required };
-        });
-      } else {
-        setSaveStates((saveStates) => {
-          saveStates.required[2] = {
-            ...saveStates.required[2],
-            error: false,
-          };
-          return { required: saveStates.required };
-        });
-        if(urlState){
-          setSaveStates((saveStates) => {
-            saveStates.required[3] = {
-              ...saveStates.required[3],
-              error: true,
-            };
-            return { required: saveStates.required };
-          });
-        } else {
-          setSaveStates((saveStates) => {
-            saveStates.required[3] = {
-              ...saveStates.required[3],
-              error: false,
-            };
-            return { required: saveStates.required };
-          });
-        }
-      }
+      const headerData = {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      };
+
+      const postBodyData = {
+        product: {
+          itemName: saveStates.required[1].value,
+          price: parseInt(saveStates.required[2].value),
+          link: saveStates.required[3].value,
+          itemImage: `${API_URL}/${imgResponse.data.filename}`,
+        },
+      };
+
+      const response = await axios.post(
+        `${API_URL}/product`,
+        postBodyData,
+        headerData
+      );
+
+      console.log(response);
+    } catch (e) {
+      console.error(e);
     }
   };
 
+  const complete = () => {
+    if (!save) {
+      return false;
+    }
+  };
   return (
     <>
-      <Save ref={saveButton} state={save} onClick={errorState}>
-        저장
-      </Save>
+      <Link to="/mainprofile" onClick={complete}>
+        <Save onClick={onSubmit} type="submit" ref={saveButton} state={save}>
+          저장
+        </Save>
+      </Link>
     </>
   );
 }

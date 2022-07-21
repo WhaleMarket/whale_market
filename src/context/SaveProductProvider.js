@@ -9,6 +9,7 @@ export const SaveProductProvider = ({ children }) => {
         label: "img",
         error: false,
         savePossible: false,
+        file: "",
       },
       {
         label: "name",
