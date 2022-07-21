@@ -37,6 +37,7 @@ function UploadBtn({ setUrl }) {
     setSaveStates((saveStates) => {
       saveStates.required[0] = {
         ...saveStates.required[0],
+        file: Blob,
         savePossible: true,
       };
       return { required: saveStates.required };
