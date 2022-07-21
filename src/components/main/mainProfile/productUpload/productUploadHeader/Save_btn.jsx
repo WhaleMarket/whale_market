@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
@@ -22,7 +22,6 @@ const Save = styled.button`
 function SaveButton() {
   const [saveStates] = useContext(SaveProductContext);
   const [save, setSave] = useState(false);
-  const saveButton = useRef();
 
   useEffect(() => {
     let Error = saveStates.required.reduce((count, value) => {
@@ -37,14 +36,6 @@ function SaveButton() {
       return setSave(false);
     }
   }, [saveStates]);
-
-  if (saveButton.current) {
-    if (save) {
-      saveButton.current.disabled = false;
-    } else {
-      saveButton.current.disabled = true;
-    }
-  }
 
   const onSubmit = async () => {
     try {
@@ -79,6 +70,7 @@ function SaveButton() {
         headerData
       );
 
+      console.log(response);
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
       }
@@ -92,16 +84,11 @@ function SaveButton() {
       return false;
     }
   };
+
   return (
     <>
       <Link to="/myprofile" onClick={complete}>
-        <Save
-          onClick={onSubmit}
-          type="submit"
-          ref={saveButton}
-          state={save}
-          disabled
-        >
+        <Save onClick={onSubmit} type="submit" state={save} disabled={!save}>
           저장
         </Save>
       </Link>
