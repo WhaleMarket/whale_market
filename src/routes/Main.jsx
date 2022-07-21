@@ -13,7 +13,6 @@ import Followers from "../pages/main_page/mainProfile/Followers";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
 
 function MainRouter() {
-  const location = useLocation();
   return (
     <>
       <Switch>
@@ -34,7 +33,6 @@ function MainRouter() {
           <Route path="/profileedit" component={ProfileModification} />
           <Route path="/search" component={HomeSearch} />
         </>
-
       </Switch>
     </>
   );
