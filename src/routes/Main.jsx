@@ -12,7 +12,7 @@ import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
 
-function Test() {
+function MainRouter() {
   const location = useLocation();
   return (
     <>
@@ -31,6 +31,7 @@ function Test() {
           <Route path="/myprofile" component={MainProfile} />
           <Route path="/search" component={HomeSearch} />
         </>
+
       </Switch>
     </>
   );
@@ -40,7 +41,7 @@ function Main() {
   return (
     <>
       <BrowserRouter basename="/main">
-        <Test />
+        <MainRouter />
       </BrowserRouter>
     </>
   );

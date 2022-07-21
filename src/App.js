@@ -12,7 +12,20 @@ import NotFound from './pages/NotFoundPage';
 
 const Globalstyle = createGlobalStyle`
     ${reset}
-`
+    
+    html, body, #root {
+        height: 100%;
+    }
+
+    .a11yhidden {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+    }
+`;
 
 function App() {
     return (
