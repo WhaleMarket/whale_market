@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
@@ -22,17 +22,6 @@ const Upload = styled.button`
 
 function UploadButton() {
   const [uploadState] = useContext(UploadContext);
-
-  const uploadButton = useRef();
-
-  if (uploadButton.current) {
-    if (uploadState) {
-      uploadButton.current.disabled = false;
-    } else {
-      uploadButton.current.disabled = true;
-    }
-  }
-
   const [uploadPostingState] = useContext(UploadPostingContext);
 
   const onSubmit = async () => {
@@ -86,13 +75,8 @@ function UploadButton() {
 
   return (
     <>
-      <Link to="/mainprofile" onClick={complete}>
-        <Upload
-          onClick={onSubmit}
-          ref={uploadButton}
-          state={uploadState}
-          disabled
-        >
+      <Link to="/myprofile" onClick={complete}>
+        <Upload onClick={onSubmit} state={uploadState} disabled={!uploadState}>
           업로드
         </Upload>
       </Link>
