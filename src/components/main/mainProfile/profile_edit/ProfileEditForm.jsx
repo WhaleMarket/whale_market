@@ -5,8 +5,7 @@ import profile_icon from '../../../../assets/basic-profile-img.png';
 import upload_icon from '../../../../assets/upload-file.png';
 import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
-import AuthContext from '../../../../context/AuthProvider';
- 
+import AuthContext from '../../../../context/AuthProvider'
 const Form = styled.form`
     display: flex;
     flex-direction: column;
