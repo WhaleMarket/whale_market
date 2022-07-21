@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { useContext, useRef } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1d2b67c (:adhesive_bandage: 이미지 파일 유효성 검사 추가)
 import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
 import ImageUpload from "../../../../assets/upload-file.png";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
