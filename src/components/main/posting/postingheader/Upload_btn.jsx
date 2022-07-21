@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
@@ -22,6 +22,7 @@ const Upload = styled.button`
 
 function UploadButton() {
   const [uploadState] = useContext(UploadContext);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   const [uploadPostingState] = useContext(UploadPostingContext);
@@ -96,6 +97,8 @@ function UploadButton() {
     }
   }
 
+=======
+>>>>>>> e4190da (:sparkles: ref로 관리하던 button disabled props로 상태관리)
   const [uploadPostingState] = useContext(UploadPostingContext);
 
   const onSubmit = async () => {
@@ -150,6 +153,7 @@ function UploadButton() {
   return (
     <>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Upload ref={uploadButton} state={uploadState}>
         업로드
       </Upload>
@@ -162,6 +166,10 @@ function UploadButton() {
           state={uploadState}
           disabled
         >
+=======
+      <Link to="/myprofile" onClick={complete}>
+        <Upload onClick={onSubmit} state={uploadState} disabled={!uploadState}>
+>>>>>>> e4190da (:sparkles: ref로 관리하던 button disabled props로 상태관리)
           업로드
         </Upload>
       </Link>
