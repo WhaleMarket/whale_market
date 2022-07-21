@@ -1,6 +1,10 @@
 import { useContext, useRef } from "react";
 import styled from "styled-components";
 import UploadContext from "../../../../context/UploadProvider";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
+import { Link } from "react-router-dom";
 
 const Upload = styled.button`
   width: 90px;
@@ -18,7 +22,9 @@ const Upload = styled.button`
 
 function UploadButton() {
   const [uploadState] = useContext(UploadContext);
+
   const uploadButton = useRef();
+
   if (uploadButton.current) {
     if (uploadState) {
       uploadButton.current.disabled = false;
@@ -26,11 +32,63 @@ function UploadButton() {
       uploadButton.current.disabled = true;
     }
   }
+
+  const [uploadPostingState] = useContext(UploadPostingContext);
+
+  const onSubmit = async () => {
+    try {
+      const imgBodyData = new FormData();
+
+      uploadPostingState.required[1].file.map((value) => {
+        return imgBodyData.append("image", value);
+      });
+
+      const imgResponse = await axios.post(
+        `${API_URL}/image/uploadfiles`,
+        imgBodyData
+      );
+
+      const headerData = {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      };
+
+      const postBodyData = {
+        post: {
+          content: uploadPostingState.required[0].value,
+          image: imgResponse.data
+            .map((img) => `https://mandarin.api.weniv.co.kr/${img.filename}`)
+            .join(","),
+        },
+      };
+
+      const response = await axios.post(
+        `${API_URL}/post`,
+        postBodyData,
+        headerData
+      );
+
+      console.log(response);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const complete = (event) => {
+    if (!uploadState) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <>
-      <Upload ref={uploadButton} state={uploadState}>
-        업로드
-      </Upload>
+      <Link to="/mainprofile" onClick={complete}>
+        <Upload onClick={onSubmit} ref={uploadButton} state={uploadState}>
+          업로드
+        </Upload>
+      </Link>
     </>
   );
 }
