@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import ProfileEditHeader from './ProfileEditHeader';
 import profile_icon from '../../../../assets/basic-profile-img.png';
@@ -156,6 +156,13 @@ function ProfileEditForm() {
         }
     };
 
+    function preview(loadImage) {
+        const reader = new FileReader();
+        reader.onload = () => (
+            previewImage.current.style.backgroundImage = `url(${reader.result})`
+        );
+        reader.readAsDataURL(loadImage[0]);
+    };
 
     function preview(loadImage) {
         const reader = new FileReader();
