@@ -1,14 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
-=======
-import UploadImageContext from "../../../../context/UploadImageListProvider";
->>>>>>> 2033ac4 (:sparkles: textarea높이 자동 조절 구현)
-=======
-import UploadPostingContext from "../../../../context/UploadImageListProvider";
->>>>>>> c426f97 (♻️ useContext 리팩토링)
 import UploadContext from "../../../../context/UploadProvider";
 import ImgWrapper from "./ImgArticle";
 
@@ -32,18 +24,12 @@ const TextArea = styled.textarea`
 
 function PostingArea() {
   const [, setUploadState] = useContext(UploadContext);
-<<<<<<< HEAD
-<<<<<<< HEAD
   const [uploadPostingState, setUploadPostingState] =
     useContext(UploadPostingContext);
-=======
-  const [UploadImgState] = useContext(UploadImageContext);
->>>>>>> 2033ac4 (:sparkles: textarea높이 자동 조절 구현)
   const [value, setValue] = useState(false);
   const content = useRef();
   function con() {
     if (content) {
-<<<<<<< HEAD
       setUploadPostingState((uploadPostingState) => {
         uploadPostingState.required[0] = {
           ...uploadPostingState.required[0],
@@ -58,34 +44,6 @@ function PostingArea() {
         content.current.value === "" &&
         uploadPostingState.required[1].prevUrl.length === 0
       ) {
-=======
-      if (content.current.value === "") {
-        setValue(false);
-      }
-      if (content.current.value === "" && UploadImgState.length === 0) {
->>>>>>> 2033ac4 (:sparkles: textarea높이 자동 조절 구현)
-=======
-  const [uploadPostingState, setUploadPostingState] = useContext(UploadPostingContext);
-  const [value, setValue] = useState(false);
-  const content = useRef();
-  function con() {
-    if (content) { 
-        setUploadPostingState((uploadPostingState) => {
-            uploadPostingState.required[0] = {
-                ...uploadPostingState.required[0],
-                value: content.current.value
-            }
-            return { required: uploadPostingState.required }
-        });
-      if (content.current.value === "") {
-        setValue(false);
-      }
-<<<<<<< HEAD
-      if (uploadPostingState.required[0].value === "" && uploadPostingState.required[1].prevUrl.length === 0) {
->>>>>>> c426f97 (♻️ useContext 리팩토링)
-=======
-      if (content.current.value === "" && uploadPostingState.required[1].prevUrl.length === 0) {
->>>>>>> e76d107 (:recycle: 취소 버튼 Context변경사항 적용)
         return setUploadState(false);
       } else {
         setValue(true);

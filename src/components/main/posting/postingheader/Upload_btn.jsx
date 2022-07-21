@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import styled from "styled-components";
 import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
@@ -22,9 +22,6 @@ const Upload = styled.button`
 
 function UploadButton() {
   const [uploadState] = useContext(UploadContext);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   const [uploadPostingState] = useContext(UploadPostingContext);
 
   const onSubmit = async () => {
@@ -83,97 +80,6 @@ function UploadButton() {
           업로드
         </Upload>
       </Link>
-=======
-=======
-
->>>>>>> 7319955 (:sparkles: 서버로 post내용 보내기 구현)
-  const uploadButton = useRef();
-
-  if (uploadButton.current) {
-    if (uploadState) {
-      uploadButton.current.disabled = false;
-    } else {
-      uploadButton.current.disabled = true;
-    }
-  }
-
-=======
->>>>>>> e4190da (:sparkles: ref로 관리하던 button disabled props로 상태관리)
-  const [uploadPostingState] = useContext(UploadPostingContext);
-
-  const onSubmit = async () => {
-    try {
-      const imgBodyData = new FormData();
-
-      uploadPostingState.required[1].file.map((value) => {
-        return imgBodyData.append("image", value);
-      });
-
-      const imgResponse = await axios.post(
-        `${API_URL}/image/uploadfiles`,
-        imgBodyData
-      );
-
-      const headerData = {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          "Content-type": "application/json",
-        },
-      };
-
-      const postBodyData = {
-        post: {
-          content: uploadPostingState.required[0].value,
-          image: imgResponse.data
-            .map((img) => `https://mandarin.api.weniv.co.kr/${img.filename}`)
-            .join(","),
-        },
-      };
-
-      const response = await axios.post(
-        `${API_URL}/post`,
-        postBodyData,
-        headerData
-      );
-
-      if (response) {
-        alert("🐳 성공적으로 업로드 되었습니다! 🐳");
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const complete = (event) => {
-    if (!uploadState) {
-      event.preventDefault();
-    }
-  };
-
-  return (
-    <>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <Upload ref={uploadButton} state={uploadState}>
-        업로드
-      </Upload>
->>>>>>> f764f05 (:sparkles: uploadState context API 관리 기능 수정)
-=======
-      <Link to="/mainprofile" onClick={complete}>
-        <Upload
-          onClick={onSubmit}
-          ref={uploadButton}
-          state={uploadState}
-          disabled
-        >
-=======
-      <Link to="/myprofile" onClick={complete}>
-        <Upload onClick={onSubmit} state={uploadState} disabled={!uploadState}>
->>>>>>> e4190da (:sparkles: ref로 관리하던 button disabled props로 상태관리)
-          업로드
-        </Upload>
-      </Link>
->>>>>>> 7319955 (:sparkles: 서버로 post내용 보내기 구현)
     </>
   );
 }
