@@ -1,19 +1,12 @@
-<<<<<<< HEAD
 import React, { useState, useEffect, useRef, useContext } from 'react';
-=======
-import React, { useState, useEffect, useRef } from 'react';
->>>>>>> 6ada73b (:sparkles: 이미지 업로드 API 추가)
 import styled from 'styled-components';
 import ProfileEditHeader from './ProfileEditHeader';
 import profile_icon from '../../../../assets/basic-profile-img.png';
 import upload_icon from '../../../../assets/upload-file.png';
 import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
-<<<<<<< HEAD
 import AuthContext from '../../../../context/AuthProvider';
-=======
->>>>>>> 6ada73b (:sparkles: 이미지 업로드 API 추가)
-
+ 
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -96,7 +89,6 @@ const ErrorMessage = styled.p`
 `
 
 function ProfileEditForm() {
-<<<<<<< HEAD
     const usernameRef = useRef();
     const accountnameRef = useRef();
     const imgRef = useRef();
@@ -113,30 +105,6 @@ function ProfileEditForm() {
 
     const [isValidUsername, setIsValidUsername] = useState(false);
     const [isValidAccountname, setIsValidAccountname] = useState(false);
-=======
-    const imgRef = useRef();
-    const [imgage, setImage] = useState('');
-    const [nameInput, setNameInput] = useState('');
-    const [nameInputError, setNameInputError] = useState(false);
-    const [idInput, setIdInPut] = useState('');
-    const [idInputError, setIdInputError] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(false);
-
-    const handleUploadIcon = (event) => {
-        event.preventDefault();
-        imgRef.current.click();
-    };
-
-    const handleImageUpload = async (event) => {
-        setImage(true)
-        const formData = new FormData();
-        formData.append('image', event.target.files[0]);
-        await axios.post(
-            `${API_URL}/image/uploadfile`,
-                formData
-        )
-    };
->>>>>>> 6ada73b (:sparkles: 이미지 업로드 API 추가)
 
     useEffect(() => {
         usernameRef.current.focus();
@@ -194,7 +162,6 @@ function ProfileEditForm() {
         reader.readAsDataURL(loadImage[0]);
     };
 
-<<<<<<< HEAD
     const handleOnBlurUsername = async (event) => {
         event.preventDefault();
         setErrMsgForUsername('');
@@ -207,20 +174,6 @@ function ProfileEditForm() {
             console.error(error);
         }
     };
-=======
-    return (
-        <>
-        <ProfileEditHeader disabled={isDisabled}/>
-        <Form>
-        <Fieldset>
-        <Legend>프로필 사진 변경</Legend>
-        <ProfileImgWrapper>
-        <ProfileImg src={profile_icon} onClick={handleUploadIcon}/>
-        <ProfileImgLable htmlFor="profileImg"><Img src={upload_icon} alt="프로필 이미지 업로드"/></ProfileImgLable>
-        </ProfileImgWrapper>
-        <ProfileImgInput ref={imgRef} type="file" onChange={handleImageUpload} accept="image/*" id="profileImg"/>
-        </Fieldset>
->>>>>>> 6ada73b (:sparkles: 이미지 업로드 API 추가)
 
     const handleOnBlur = async (event) => {
         event.preventDefault();
