@@ -1,6 +1,9 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
+import axios from "axios";
+import { API_URL } from "../../../../../constants/defaultUrl";
 
 const Save = styled.button`
   width: 90px;
@@ -17,99 +20,78 @@ const Save = styled.button`
 `;
 
 function SaveButton() {
-  const [saveStates, setSaveStates] = useContext(SaveProductContext);
+  const [saveStates] = useContext(SaveProductContext);
   const [save, setSave] = useState(false);
-  const saveButton = useRef();
 
   useEffect(() => {
+    let Error = saveStates.required.reduce((count, value) => {
+      return value.error === false ? (count += 1) : count;
+    }, 0);
     let SavePossible = saveStates.required.reduce((count, value) => {
       return value.savePossible === true ? (count += 1) : count;
     }, 0);
-    if (SavePossible === 4) {
+    if (Error === 4 && SavePossible === 4) {
       return setSave(true);
     } else {
       return setSave(false);
     }
   }, [saveStates]);
 
-  if (saveButton.current) {
-    if (save) {
-      saveButton.current.disabled = false;
-    } else {
-      saveButton.current.disabled = true;
-    }
-  }
+  const onSubmit = async () => {
+    try {
+      const imgBodyData = new FormData();
 
-  const errorState = () => {
-    const nameState =
-      saveStates.required[1].value.split("").length < 2 ||
-      saveStates.required[1].value.split("").length > 15;
+      imgBodyData.append("image", saveStates.required[0].file);
 
-    const numberpattern = /^[0-9]*$/
-    const priceState = !numberpattern.test(saveStates.required[2].value);
+      const imgResponse = await axios.post(
+        `${API_URL}/image/uploadfile`,
+        imgBodyData
+      );
 
-    const urlpattern =
-      /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    const urlState = !urlpattern.test(saveStates.required[3].value);
+      const headerData = {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      };
 
-    if (nameState) {
-      setSaveStates((saveStates) => {
-        saveStates.required[1] = {
-          ...saveStates.required[1],
-          error: true,
-        };
-        return { required: saveStates.required };
-      });
-    } else {
-      setSaveStates((saveStates) => {
-        saveStates.required[1] = {
-          ...saveStates.required[1],
-          error: false,
-        };
-        return { required: saveStates.required };
-      });
-      if(priceState){
-        setSaveStates((saveStates) => {
-          saveStates.required[2] = {
-            ...saveStates.required[2],
-            error: true,
-          };
-          return { required: saveStates.required };
-        });
-      } else {
-        setSaveStates((saveStates) => {
-          saveStates.required[2] = {
-            ...saveStates.required[2],
-            error: false,
-          };
-          return { required: saveStates.required };
-        });
-        if(urlState){
-          setSaveStates((saveStates) => {
-            saveStates.required[3] = {
-              ...saveStates.required[3],
-              error: true,
-            };
-            return { required: saveStates.required };
-          });
-        } else {
-          setSaveStates((saveStates) => {
-            saveStates.required[3] = {
-              ...saveStates.required[3],
-              error: false,
-            };
-            return { required: saveStates.required };
-          });
-        }
+      const postBodyData = {
+        product: {
+          itemName: saveStates.required[1].value,
+          price: parseInt(saveStates.required[2].value),
+          link: saveStates.required[3].value,
+          itemImage: `${API_URL}/${imgResponse.data.filename}`,
+        },
+      };
+
+      const response = await axios.post(
+        `${API_URL}/product`,
+        postBodyData,
+        headerData
+      );
+
+      console.log(response);
+      if (response) {
+        alert("🐳 성공적으로 업로드 되었습니다! 🐳");
       }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const complete = () => {
+    if (!save) {
+      return false;
     }
   };
 
   return (
     <>
-      <Save ref={saveButton} state={save} onClick={errorState}>
-        저장
-      </Save>
+      <Link to="/myprofile" onClick={complete}>
+        <Save onClick={onSubmit} type="submit" state={save} disabled={!save}>
+          저장
+        </Save>
+      </Link>
     </>
   );
 }

@@ -2,6 +2,7 @@ import Img_logo from "../../../../../assets/image_logo.png";
 import styled from "styled-components";
 import { useContext, useRef } from "react";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
+import { IMG_EXTENSION } from "../../../../../constants/defaultUrl";
 
 const Uploadbtn = styled.button`
   position: absolute;
@@ -29,14 +30,19 @@ function UploadBtn({ setUrl }) {
   const Upload_input = useRef();
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
-    if (Blob === undefined) {
-      return;
+    if (
+      Blob === undefined ||
+      !IMG_EXTENSION.includes(Blob.name.split(".")[1])
+    ) {
+      event.target.value = "";
+      return alert("올바른 형식의 파일을 넣어주세요.");
     }
     const reader = new FileReader();
     reader.readAsDataURL(Blob);
     setSaveStates((saveStates) => {
       saveStates.required[0] = {
         ...saveStates.required[0],
+        file: Blob,
         savePossible: true,
       };
       return { required: saveStates.required };

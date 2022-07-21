@@ -16,9 +16,10 @@ const Input = styled.input`
   }
 `;
 
-function DetailInput({ id, type, placeholder, index }) {
-  const [saveStates, setSaveStates] = useContext(SaveProductContext);
+function DetailInput({ id, type, placeholder, index, errorName }) {
+  const [, setSaveStates] = useContext(SaveProductContext);
   const input_ref = useRef();
+
   const inputstate = () => {
     if (input_ref) {
       setSaveStates((saveStates) => {
@@ -29,7 +30,7 @@ function DetailInput({ id, type, placeholder, index }) {
         return { required: saveStates.required };
       });
     }
-    if (saveStates.required[parseInt(index) + 1].value !== "") {
+    if (input_ref.current.value !== "") {
       setSaveStates((saveStates) => {
         saveStates.required[parseInt(index) + 1] = {
           ...saveStates.required[parseInt(index) + 1],
@@ -37,6 +38,12 @@ function DetailInput({ id, type, placeholder, index }) {
         };
         return { required: saveStates.required };
       });
+      if (id === "price") {
+        const KRmoney = parseInt(
+          input_ref.current.value.replaceAll(",", "")
+        ).toLocaleString("ko-KR");
+        input_ref.current.value = KRmoney;
+      }
     } else {
       setSaveStates((saveStates) => {
         saveStates.required[parseInt(index) + 1] = {
@@ -48,14 +55,35 @@ function DetailInput({ id, type, placeholder, index }) {
     }
   };
 
+  const errorState = () => {
+    if (errorName) {
+      setSaveStates((saveStates) => {
+        saveStates.required[parseInt(index) + 1] = {
+          ...saveStates.required[parseInt(index) + 1],
+          error: true,
+        };
+        return { required: saveStates.required };
+      });
+    } else {
+      setSaveStates((saveStates) => {
+        saveStates.required[parseInt(index) + 1] = {
+          ...saveStates.required[parseInt(index) + 1],
+          error: false,
+        };
+        return { required: saveStates.required };
+      });
+    }
+  };
+
   return (
     <>
       <Input
         ref={input_ref}
-        onInput={inputstate}
+        onChange={inputstate}
         id={id}
         type={type}
         placeholder={placeholder}
+        onBlur={errorState}
       />
     </>
   );

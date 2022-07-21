@@ -6,12 +6,25 @@ import ErrorMessage from "./ErrorMessage";
 
 function Detail() {
   const [saveStates] = useContext(SaveProductContext);
+  const nameState =
+    saveStates.required[1].value.split("").length < 2 ||
+    saveStates.required[1].value.split("").length > 15;
+
+  const numberpattern = /^[0-9]*$/;
+  const priceState = !numberpattern.test(
+    saveStates.required[2].value.replaceAll(",", "")
+  );
+
+  const urlpattern =
+    /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  const urlState = !urlpattern.test(saveStates.required[3].value);
 
   return (
     <>
       <legend className='a11yhidden'>Product</legend>
       <DetailLabel id="name" title="상품명" />
       <DetailInput
+        errorName={nameState}
         index="0"
         id="name"
         type="text"
@@ -22,6 +35,7 @@ function Detail() {
       )}
       <DetailLabel id="price" title="가격" />
       <DetailInput
+        errorName={priceState}
         index="1"
         id="price"
         type="text"
@@ -32,6 +46,7 @@ function Detail() {
       )}
       <DetailLabel id="link" title="판매 링크" />
       <DetailInput
+        errorName={urlState}
         index="2"
         id="link"
         type="url"
