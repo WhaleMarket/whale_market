@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
