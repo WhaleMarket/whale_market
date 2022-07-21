@@ -5,7 +5,7 @@ import DetailLabel from "./DetailLabel";
 import ErrorMessage from "./ErrorMessage";
 
 function Detail() {
-  const [saveStates, setSaveStates] = useContext(SaveProductContext);
+  const [saveStates] = useContext(SaveProductContext);
   const nameState =
     saveStates.required[1].value.split("").length < 2 ||
     saveStates.required[1].value.split("").length > 15;
