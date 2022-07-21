@@ -51,6 +51,7 @@ const AlbumContainer = styled.section`
     grid-auto-rows: 1fr;
     gap: 8px;
     width: 24.375rem;
+    padding-bottom: 70px;
     margin: 16px auto;
 `
 
