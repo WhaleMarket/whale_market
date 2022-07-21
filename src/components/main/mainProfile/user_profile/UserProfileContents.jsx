@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import basicProfileImg from '../../../../assets/basic-profile-img.png';
+import messageIcon from '../../../../assets/icon-message-circle.png';
+import shareIcon from '../../../../assets/icon-share.png';
 import FollowButton from './FollowButton';
 
 const UserProfileContainer = styled.div`
@@ -63,8 +65,83 @@ const Followings = styled(Link)`
     text-decoration-line: none;
 `
 
+const IconWrapper = styled.div`
+    display: flex;
+    gap: 10px;
+`
+
+const MessageButton = styled(Link)`
+    width: 34px;
+    height: 34px;
+    border: 1px solid #DBDBDB;
+    border-radius: 30px;
+    background-image: url(${messageIcon});
+    background-position: center center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+`
+
+const ShareButton = styled.button`
+    width: 34px;
+    height: 34px;
+    border: 1px solid #DBDBDB;
+    border-radius: 30px;
+    background-color: inherit;
+    background-image: url(${shareIcon});
+    background-position: center center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+`
+
+const TextArea = styled.textarea`
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+`
+
+const ProfileEditButton = styled(Link)`
+    padding: 8px 26px;
+    border: 1px solid #DBDBDB;
+    border-radius: 1.875rem;
+    background-color: #fff;
+    color: #767676;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 18px;
+    cursor: pointer;
+`
+
+const ProductUploadButton = styled(Link)`
+    padding: 8px 23px;
+    border: 1px solid #DBDBDB;
+    border-radius: 1.875rem;
+    background-color: #fff;
+    color: #767676;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 18px;
+    cursor: pointer;
+`
+
 function UserProfileCard(props) {
     const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
+    const {pathname} = window.location
+
+    const urlRef = useRef();
+    const copyUrl = () => {
+        urlRef.current.focus();
+        urlRef.current.select();
+        navigator.clipboard.writeText(urlRef.current.value).then(() => {
+        alert("URL이 복사되었습니다.");
+        });
+        console.log(urlRef.current.value);
+    }
 
     return ( 
         <>    
@@ -81,7 +158,24 @@ function UserProfileCard(props) {
                 <FollowCount>{followingCount}</FollowCount>
                 <FollowTxt>followings</FollowTxt>
             </Followings>
-            <FollowButton/>
+            <IconWrapper>
+            {pathname ==='/main/mainprofile' ? (
+                <>
+                    <MessageButton to = '/Chatting'/>
+                    <FollowButton/>
+                    <ShareButton onClick={copyUrl}/>
+                    <form>
+                        <TextArea ref={urlRef} value={window.location.href}/>
+                    </form>
+                </>
+            ) : (
+                <>
+                    <ProfileEditButton to = '/profileedit'>프로필 수정</ProfileEditButton>
+                    <ProductUploadButton to ='/productupload'>상품 등록</ProductUploadButton>
+                    </>
+
+            )}
+                </IconWrapper>
         </UserProfileContainer>
         </>    
     )
