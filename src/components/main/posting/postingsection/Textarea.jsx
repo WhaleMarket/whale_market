@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
-import UploadImageContext from "../../../../context/UploadImageListProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import UploadContext from "../../../../context/UploadProvider";
 import ImgWrapper from "./ImgArticle";
 
@@ -24,15 +24,26 @@ const TextArea = styled.textarea`
 
 function PostingArea() {
   const [, setUploadState] = useContext(UploadContext);
-  const [UploadImgState] = useContext(UploadImageContext);
+  const [uploadPostingState, setUploadPostingState] =
+    useContext(UploadPostingContext);
   const [value, setValue] = useState(false);
   const content = useRef();
   function con() {
     if (content) {
+      setUploadPostingState((uploadPostingState) => {
+        uploadPostingState.required[0] = {
+          ...uploadPostingState.required[0],
+          value: content.current.value,
+        };
+        return { required: uploadPostingState.required };
+      });
       if (content.current.value === "") {
         setValue(false);
       }
-      if (content.current.value === "" && UploadImgState.length === 0) {
+      if (
+        content.current.value === "" &&
+        uploadPostingState.required[1].prevUrl.length === 0
+      ) {
         return setUploadState(false);
       } else {
         setValue(true);

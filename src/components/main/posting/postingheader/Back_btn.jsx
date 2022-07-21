@@ -18,7 +18,7 @@ function BackButton() {
   const history = useHistory();
   return (
     <>
-      <Back onClick={() => history.goBack()}></Back>
+      <Back type="button" onClick={() => history.goBack()}></Back>
     </>
   );
 }

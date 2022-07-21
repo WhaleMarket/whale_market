@@ -1,7 +1,7 @@
 import Cancle from "../../../../assets/cancle_Btn_icon.png";
 import styled from "styled-components";
 import { useContext } from "react";
-import UploadImageContext from "../../../../context/UploadImageListProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
 
 const Btn = styled.button`
   background-image: url(${Cancle});
@@ -13,19 +13,26 @@ const Btn = styled.button`
   width: 20px;
 `;
 
-function CancleBtn({ src }) {
-  const [UploadImgState, setUploadImgState] = useContext(UploadImageContext);
+function CancleBtn({ src, index }) {
+  const [, setUploadPostingState] = useContext(UploadPostingContext);
+  const deleteImg = () => {
+    setUploadPostingState((uploadPostingState) => {
+      uploadPostingState.required[1] = {
+        ...uploadPostingState.required[1],
+        file: uploadPostingState.required[1].file.filter((file) => {
+          return file !== uploadPostingState.required[1].file[index];
+        }),
+        prevUrl: uploadPostingState.required[1].prevUrl.filter((img) => {
+          return img !== src;
+        }),
+      };
+      return { required: uploadPostingState.required };
+    });
+  };
+
   return (
     <>
-      <Btn
-        onClick={() =>
-          setUploadImgState(
-            UploadImgState.filter(function (img) {
-              return img !== src;
-            })
-          )
-        }
-      />
+      <Btn onClick={deleteImg} />
     </>
   );
 }

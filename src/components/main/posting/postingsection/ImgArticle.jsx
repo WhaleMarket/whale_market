@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import PostingImg from "./PostingImg";
-import UploadImageContext from "../../../../context/UploadImageListProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import UploadContext from "../../../../context/UploadProvider";
 import { useContext, useEffect } from "react";
 
@@ -11,20 +11,20 @@ const Wrapper = styled.article`
 `;
 
 function ImgWrapper({ text }) {
-  const [uploadImgState] = useContext(UploadImageContext);
+  const [uploadPostingState] = useContext(UploadPostingContext);
   const [, setUploadState] = useContext(UploadContext);
   useEffect(() => {
-    if (uploadImgState.length === 0 && !text) {
+    if (uploadPostingState.required[1].prevUrl.length === 0 && !text) {
       setUploadState(false);
     } else {
       setUploadState(true);
     }
-  }, [uploadImgState, setUploadState, text]);
+  }, [uploadPostingState, setUploadState, text]);
   return (
     <>
       <Wrapper>
-        {uploadImgState.length !== 0
-          ? uploadImgState.map((index, key) => (
+        {uploadPostingState.required[1].prevUrl.length !== 0
+          ? uploadPostingState.required[1].prevUrl.map((index, key) => (
               <PostingImg key={key} src={index} alt={`${key} Image`} />
             ))
           : ""}
