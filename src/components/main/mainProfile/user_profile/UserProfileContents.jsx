@@ -103,8 +103,36 @@ const TextArea = styled.textarea`
     opacity: 0;
 `
 
+const ProfileEditButton = styled(Link)`
+    padding: 8px 26px;
+    border: 1px solid #DBDBDB;
+    border-radius: 1.875rem;
+    background-color: #fff;
+    color: #767676;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 18px;
+    cursor: pointer;
+`
+
+const ProductUploadButton = styled(Link)`
+    padding: 8px 23px;
+    border: 1px solid #DBDBDB;
+    border-radius: 1.875rem;
+    background-color: #fff;
+    color: #767676;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    line-height: 18px;
+    cursor: pointer;
+`
+
 function UserProfileCard(props) {
     const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
+    const {pathname} = window.location
+
     const urlRef = useRef();
     const copyUrl = () => {
         urlRef.current.focus();
@@ -131,13 +159,26 @@ function UserProfileCard(props) {
                 <FollowTxt>followings</FollowTxt>
             </Followings>
             <IconWrapper>
-            <MessageButton to = '/Chatting'/>
-            <FollowButton/>
-            <ShareButton onClick={copyUrl}/>
-            <form>
-                <TextArea ref={urlRef} value={window.location.href}/>
-            </form>
-            </IconWrapper>
+            {pathname ==='/main/mainprofile' ? (
+                // <IconWrapper>
+                <>
+                    <MessageButton to = '/Chatting'/>
+                    <FollowButton/>
+                    <ShareButton onClick={copyUrl}/>
+                    <form>
+                        <TextArea ref={urlRef} value={window.location.href}/>
+                    </form>
+                </>
+                // </IconWrapper>
+            ) : (
+                // <IconWrapper>
+                <>
+                    <ProfileEditButton to = '/profileedit'>프로필 수정</ProfileEditButton>
+                    <ProductUploadButton to ='/productupload'>상품 등록</ProductUploadButton>
+                    </>
+                // </IconWrapper>
+            )}
+                </IconWrapper>
         </UserProfileContainer>
         </>    
     )
