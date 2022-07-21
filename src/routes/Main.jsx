@@ -36,7 +36,6 @@ function MainRouter() {
           <Route path="/home/search" component={HomeSearch}/>
           <Route path="/followers" component={Followers} />
         </>
-
       </Switch>
     </>
   );
