@@ -160,7 +160,6 @@ function UserProfileCard(props) {
             </Followings>
             <IconWrapper>
             {pathname ==='/main/mainprofile' ? (
-                // <IconWrapper>
                 <>
                     <MessageButton to = '/Chatting'/>
                     <FollowButton/>
@@ -169,14 +168,12 @@ function UserProfileCard(props) {
                         <TextArea ref={urlRef} value={window.location.href}/>
                     </form>
                 </>
-                // </IconWrapper>
             ) : (
-                // <IconWrapper>
                 <>
                     <ProfileEditButton to = '/profileedit'>프로필 수정</ProfileEditButton>
                     <ProductUploadButton to ='/productupload'>상품 등록</ProductUploadButton>
                     </>
-                // </IconWrapper>
+
             )}
                 </IconWrapper>
         </UserProfileContainer>
