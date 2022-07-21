@@ -1,6 +1,10 @@
 import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
+<<<<<<< HEAD
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
+=======
+import UploadImageContext from "../../../../context/UploadImageListProvider";
+>>>>>>> 2033ac4 (:sparkles: textarea높이 자동 조절 구현)
 import UploadContext from "../../../../context/UploadProvider";
 import ImgWrapper from "./ImgArticle";
 
@@ -24,12 +28,17 @@ const TextArea = styled.textarea`
 
 function PostingArea() {
   const [, setUploadState] = useContext(UploadContext);
+<<<<<<< HEAD
   const [uploadPostingState, setUploadPostingState] =
     useContext(UploadPostingContext);
+=======
+  const [UploadImgState] = useContext(UploadImageContext);
+>>>>>>> 2033ac4 (:sparkles: textarea높이 자동 조절 구현)
   const [value, setValue] = useState(false);
   const content = useRef();
   function con() {
     if (content) {
+<<<<<<< HEAD
       setUploadPostingState((uploadPostingState) => {
         uploadPostingState.required[0] = {
           ...uploadPostingState.required[0],
@@ -44,6 +53,12 @@ function PostingArea() {
         content.current.value === "" &&
         uploadPostingState.required[1].prevUrl.length === 0
       ) {
+=======
+      if (content.current.value === "") {
+        setValue(false);
+      }
+      if (content.current.value === "" && UploadImgState.length === 0) {
+>>>>>>> 2033ac4 (:sparkles: textarea높이 자동 조절 구현)
         return setUploadState(false);
       } else {
         setValue(true);
