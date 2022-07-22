@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import back from '../../assets/icon-arrow-left.png';
@@ -44,7 +44,7 @@ const ChatPartner = styled.p`
 function ChatProfileHeader(props){   
     const history = useHistory();
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [alertModal, setAlertModal] = useState(false);
+    const [alertModal, setAlertModal] = useState(false); 
 
     const modalItemList = [
         {
@@ -64,27 +64,61 @@ function ChatProfileHeader(props){
         onClick: () => {},
     };
 
+    const quitModal = [
+        {
+            content: "채팅방 나가기",
+            onClick: () => {
+                setAlertModal(true);
+            },
+        }
+    ];
 
-    return(
+    const quitBtn = {
+        content: "나가기",
+        onClick: () => {},
+    };
+
+
+    return (
         <Head>
             <Search onClick={() => history.goBack()} />
             <ChatPartner>{props.partner}</ChatPartner>
 
             <ModalBtn 
-                onClick={()=>setIsOpenModal(!isOpenModal)}
+                onClick= {()=>{setIsOpenModal(!isOpenModal)}}
                 /> 
-            <Modal 
-                isOpenModal={isOpenModal} 
-                setIsOpenModal={setIsOpenModal} 
-                modalItemList={modalItemList} 
+
+            { props.partner ? 
+            <>
+                <Modal 
+                    isOpenModal={isOpenModal} 
+                    setIsOpenModal={setIsOpenModal} 
+                    modalItemList={quitModal} 
                 />
-            <AlertModal
-                alertModal={alertModal}
-                setAlertModal={setAlertModal}
-                setIsOpenModal={setIsOpenModal}
-                content={"로그아웃하시겠어요?"}
-                deleteBtn={deleteBtn}
-            />
+                <AlertModal
+                    alertModal={alertModal}
+                    setAlertModal={setAlertModal}
+                    setIsOpenModal={setIsOpenModal}
+                    content={"채팅방을 나가시겠어요?"}
+                    deleteBtn={quitBtn}
+                />
+            </>
+            : 
+            <>
+                <Modal 
+                    isOpenModal={isOpenModal} 
+                    setIsOpenModal={setIsOpenModal} 
+                    modalItemList={modalItemList} 
+                />
+                <AlertModal
+                    alertModal={alertModal}
+                    setAlertModal={setAlertModal}
+                    setIsOpenModal={setIsOpenModal}
+                    content={"로그아웃하시겠어요?"}
+                    deleteBtn={deleteBtn}
+                />
+            </>
+            }
         </Head>
     );
 }
