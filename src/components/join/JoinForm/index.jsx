@@ -5,11 +5,10 @@ import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
 import { Wrapper, Title, Form, Fieldset, Legend, Label, Input, ErrorMessage } from './index.style';
 
-export function JoinForm({ setNextPage, setUserInfo }) {
+export function JoinForm({ setNextPage }) {
     const { setAuth } = useContext(AuthContext);
     const emailRef = useRef();
     const passwordRef = useRef();
-    const errorRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -40,9 +39,8 @@ export function JoinForm({ setNextPage, setUserInfo }) {
         event.preventDefault();
         try {
             if (success) {
-                // setAuth({ email, password });
+                setAuth({ email, password });
                 setNextPage(false);
-                setUserInfo({ email, password });
             }
         } catch (error) {
             console.error(error);
@@ -72,15 +70,14 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                 setNotMatchError('*' + response.data.message);
             } else if (!email) {
                 setNotMatchError('*이메일을 입력해주세요.');
-            } else if (!emailRegex.test(email)) {
-                setNotMatchError('*잘못된 이메일 형식입니다.');
             } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
                 setNotMatchError('*' + response.data.message);
                 setIsValidEmail(true);
-            }
+            } 
         } catch (error) {
-            console.error(error);
-            errorRef.current.focus();
+            if (error.response.data.message === "잘못된 이메일 형식입니다.") {
+                setNotMatchError('*' + error.response.data.message);
+            }
         }
     };
 
@@ -124,7 +121,7 @@ export function JoinForm({ setNextPage, setUserInfo }) {
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
 
-                        <Label htmlFor='password'>비밀번호</Label>
+                        <Label htmlFor='password' id='labelPassword'>비밀번호</Label>
                         <Input
                             type='password'
                             id='password'
