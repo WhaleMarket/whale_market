@@ -10,7 +10,6 @@ const ModalBg =styled.section`
     right: 0;
     z-index: 100;
     background-color: rgba(0, 0, 0, 0.2);
-    /* isOpenModal true면 보이게  */
     visibility: ${(props) => (props.isOpenModal === false ? "hidden" : "visible")};
     opacity: ${(props) => (props.isOpenModal === false ? "0" : "1")};
 `
@@ -54,14 +53,10 @@ const ModalItem = styled.button`
     }
 `
 
-// 상대방 게시글, 댓글 신고 모달 
-// 내 게시글, 댓글 삭제 모달
-// 채팅룸 모달 - 채팅방 나가기
 
 function Modal({isOpenModal, setIsOpenModal, modalItemList}) {
     return (
         <ModalPortal>
-            {/* 모달창 백그라운드 누르면 모달창 닫힘 */}
             <ModalBg isOpenModal={isOpenModal} onClick={() => setIsOpenModal(false)}>
                 <ModalUl isOpenModal={isOpenModal} onClick={(event)=>{event.stopPropagation()}}>
                     {modalItemList.map((item,index)=>{
