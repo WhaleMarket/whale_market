@@ -43,7 +43,7 @@ const Logo = styled.img`
 const Navbar = ({location})=>{
     return(
         <Bottomnav>
-            <List className='home' current={location.pathname === '/home'}><Link to='/home'><Logo className="Home" src={location.pathname === '/home' ? home_icon_fill : home_icon} alt="home icon"/>홈</Link></List>
+            <List className='home' current={location.pathname.substr(0, 5) === '/home'}><Link to='/home'><Logo className="Home" src={location.pathname.substr(0, 5) === '/home' ? home_icon_fill : home_icon} alt="home icon"/>홈</Link></List>
             <List className='chatting' current={location.pathname === '/chatting'}><Link to='/chatting'><Logo className="Home" src={location.pathname === '/chatting' ? chatting_icon_fill : chatting_icon} alt="home icon"/>채팅</Link></List>
             <List className='posting' current={location.pathname === '/posting'}><Link to='/posting'><Logo className="Home" src={posting_icon} alt="home icon"/>게시물 작성</Link></List>
             <List className='profile' current={location.pathname === '/myprofile'}><Link to='/myprofile'><Logo className="Home" src={location.pathname === '/myprofile' ? user_icon_fill : user_icon} alt="home icon"/>프로필</Link></List>
