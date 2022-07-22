@@ -30,12 +30,16 @@ function UploadBtn({ setUrl }) {
   const Upload_input = useRef();
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
+    console.log(Blob.size);
     if (
       Blob === undefined ||
       !IMG_EXTENSION.includes(Blob.name.split(".")[1])
     ) {
       event.target.value = "";
       return alert("올바른 형식의 파일을 넣어주세요.");
+    } else if (Blob.size > 1024 * 1024) {
+      event.target.value = "";
+      return alert("파일의 용량이 1MB를 초과했습니다.");
     }
     const reader = new FileReader();
     reader.readAsDataURL(Blob);

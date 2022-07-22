@@ -11,9 +11,9 @@ function Detail() {
     saveStates.required[1].value.split("").length > 15;
 
   const numberpattern = /^[0-9]*$/;
-  const priceState = !numberpattern.test(
-    saveStates.required[2].value.replaceAll(",", "")
-  );
+  const priceState =
+    !numberpattern.test(saveStates.required[2].value.replaceAll(",", "")) ||
+    parseInt(saveStates.required[2].value) === 0;
 
   const urlpattern =
     /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -21,7 +21,7 @@ function Detail() {
 
   return (
     <>
-      <legend className='a11yhidden'>Product</legend>
+      <legend className="a11yhidden">Product</legend>
       <DetailLabel id="name" title="상품명" />
       <DetailInput
         errorName={nameState}
@@ -39,10 +39,10 @@ function Detail() {
         index="1"
         id="price"
         type="text"
-        placeholder="숫자만 입력 가능합니다."
+        placeholder="0보다 큰 숫자만 입력 가능합니다."
       />
       {saveStates.required[2].error && (
-        <ErrorMessage message="숫자만 입력해주세요." />
+        <ErrorMessage message="0보다 큰 숫자만 입력해주세요." />
       )}
       <DetailLabel id="link" title="판매 링크" />
       <DetailInput
