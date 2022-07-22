@@ -71,23 +71,25 @@ function SaveButton() {
       );
 
       console.log(response);
+
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
       }
-    } catch (e) {
-      console.error(e);
+    } catch (event) {
+      console.error(event);
+      alert("error");
     }
   };
 
-  const complete = () => {
+  const onComplete = (e) => {
     if (!save) {
-      return false;
+      e.preventDefault();
     }
   };
 
   return (
     <>
-      <Link to="/myprofile" onClick={complete}>
+      <Link to="/myprofile" onClick={onComplete}>
         <Save onClick={onSubmit} type="submit" state={save} disabled={!save}>
           저장
         </Save>
