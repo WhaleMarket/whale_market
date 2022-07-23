@@ -16,6 +16,7 @@ const Form = styled.form`
 const Fieldset = styled.fieldset`
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
 `
 
 const ProfileImgWrapper = styled.div`
@@ -28,7 +29,6 @@ const ProfileImgWrapper = styled.div`
     background-size: cover;
     position: relative; 
     border-radius: 9999px;
-    margin-bottom: 30px;
 `
 
 const ProfileImgLable = styled.label`
