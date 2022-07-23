@@ -9,68 +9,10 @@ import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
 import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
-
-import axios from "axios";
-import { useState, useEffect, useContext } from 'react';
-import AuthContext from "../context/AuthProvider";
-import { API_URL } from '../constants/defaultUrl';
+import useAccountInfo from "../hook/useAccountInfo";
 
 function MainRouter() {
-  const { setAuth, token, setMyImage, setMyUsername, setMyAccountname, setMyIntro, setMyFollowerCount, setMyFollowingCount } = useContext(AuthContext);
-  const [tokenIsValid, setTokenIsValid] = useState();
-
-
-  useEffect(() => {
-    // 나의 accountname 받아오기
-    async function getAccountname() {
-      try {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-type": "application/json",
-            },
-        };
-        const response = await axios.get(
-            `${API_URL}/user/myinfo`,
-            config
-        );
-        setMyImage(response.data.user.image);
-        setMyUsername(response.data.user.username);
-        setMyAccountname(response.data.user.accountname);
-        setMyIntro(response.data.user.intro);
-        setMyFollowerCount(response.data.user.followerCount);
-        setMyFollowingCount(response.data.user.followingCount);
-        // TODO: 사용자가 팔로잉하는 유저의 포스트를 받아오는 기능 자리
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    token && getTokenIsValid();
-    tokenIsValid && getAccountname();
-  }, [token, setMyAccountname, setMyImage, tokenIsValid]);
-
-  // 토큰 검증
-  async function getTokenIsValid() {
-      try {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-type": "application/json",
-            },
-        };
-        const response = await axios.get(
-            `${API_URL}/user/checktoken`,
-            config
-        );
-        setTokenIsValid(response?.data?.isValid);
-      } catch (error) {
-        console.error(error);
-      }
-  }
-
-  // TODO: 내가 팔로잉하는 사용자의 게시글 목록 불러오기
-
-
+  useAccountInfo();
   return (
     <>
       <Switch>

@@ -20,14 +20,14 @@ const FollowButton = styled.button`
 `;
 
 function UserFollowButton({ text, user, setUser }) {
-    const { token } = useContext(AuthContext);
+    const [InfoState] = useContext(AuthContext);
 
     const handleClick = () => {
         // 언팔로우
         if (user.isfollow) {
             const config = {
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${InfoState.MyInformations[0].token}`,
                     "Content-type": "application/json",
                 },
             };
@@ -51,7 +51,7 @@ function UserFollowButton({ text, user, setUser }) {
             const reqData = [];
             const config = {
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${InfoState.MyInformations[0].token}`,
                     "Content-type": "application/json",
                 },
             };
