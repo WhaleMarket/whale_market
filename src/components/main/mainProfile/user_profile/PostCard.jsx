@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PostIconContainer from './PostIconContainer';
 import profileImg from '../../../../assets/basic-profile-img.png';
 import menubtn from '../../../../assets/s-icon-more-vertical.png';
 import postImg from '../../../../assets/postImg.png'
+import { useContext } from 'react';
+import AuthContext from '../../../../context/AuthProvider';
 
 const PostWrapper = styled.div`
     width: 24.375rem;
@@ -16,9 +18,15 @@ const PostInfo = styled.div`
     padding: 1rem 1rem;
 `
 
-const PostInfoImg = styled.img`
+const UserImgDiv = styled.div`
     width: 2.625rem;
     height: 2.625rem;
+    background-image: url(${profileImg});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative; 
+    border-radius: 50%;
 `
 
 const PostInfoUser = styled.div`
@@ -76,15 +84,27 @@ const PostDate = styled.p`
 `
 
 function PostCard() {
+    // 희: 내 프로필 이미지, 이름, 계정, 소개 연결
+    const { myImage, myUsername, myAccountname } = useContext(AuthContext);
+    const img = myImage;
+    const name = myUsername;
+    const account = myAccountname;
+
+    // 희: 이미지를 div의 background-image로 연결
+    const imgRef = useRef();
+    useEffect(() => {
+        imgRef.current.style.backgroundImage = `url(${img})`;
+    }, [img]);
 
     return(
         <>
         <PostWrapper>
             <PostInfo>
-                <PostInfoImg src={profileImg}/>
+                {/* <PostInfoImg src={img}/> */}
+                <UserImgDiv ref={imgRef} />
                 <PostInfoUser>
-                    <PostInfoName>김웨일</PostInfoName>
-                    <PostInfoId>@sosoheehee_whale</PostInfoId>
+                    <PostInfoName>{name}</PostInfoName>
+                    <PostInfoId>{`@${account}`}</PostInfoId>
                     <PostMenuBtn/>
                 </PostInfoUser>
             </PostInfo>
