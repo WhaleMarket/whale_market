@@ -17,7 +17,6 @@ const PostWrapper = styled.div`
 
 const PostInfo = styled.div`
     display: flex;
-    justify-content: space-between;
     position: relative;
     padding: 16px 30px;
 `
