@@ -6,14 +6,17 @@ import menubtn from '../../../../assets/s-icon-more-vertical.png';
 import postImg from '../../../../assets/postImg.png'
 
 const PostWrapper = styled.div`
-    width: 24.375rem;
-    margin: 0  auto 3.750rem auto;
+    width: 80vw;
+    margin-bottom: 34px;
+    padding: 0 60px;
+    box-sizing: border-box;
 `
 
 const PostInfo = styled.div`
     display: flex;
+    justify-content: space-between;
     position: relative;
-    padding: 1rem 1rem;
+    padding: 16px 30px;
 `
 
 const PostInfoImg = styled.img`
@@ -22,8 +25,10 @@ const PostInfoImg = styled.img`
 `
 
 const PostInfoUser = styled.div`
+    display: inline-block;
     margin-left: 0.750rem;
     padding-top: 0.25rem;
+    vertical-align: top;
 `
 
 const PostInfoName = styled.strong`
@@ -32,9 +37,6 @@ const PostInfoName = styled.strong`
 `
 
 const PostMenuBtn = styled.button`
-    position: absolute;
-    top: 1.5rem;
-    right: 0;
     width: 1.125rem;
     height: 1.125rem;
     border: none;
@@ -52,7 +54,7 @@ const PostInfoId = styled.p`
     color: #767676;
 `  
 const PostContent = styled.div`
-    margin-left: 3.375rem;
+    margin: 0 40px 0 54px;
     padding-left: 0.75rem;
 `
 
@@ -63,6 +65,7 @@ const PostTxt = styled.p`
 `
 
 const PostImgWrapper = styled.div`
+    text-align: center;
 `
 const PostImg = styled.img`
     width: 19rem;
@@ -81,12 +84,14 @@ function PostCard() {
         <>
         <PostWrapper>
             <PostInfo>
-                <PostInfoImg src={profileImg}/>
-                <PostInfoUser>
-                    <PostInfoName>김웨일</PostInfoName>
-                    <PostInfoId>@sosoheehee_whale</PostInfoId>
-                    <PostMenuBtn/>
-                </PostInfoUser>
+                <div>
+                    <PostInfoImg src={profileImg}/>
+                    <PostInfoUser>
+                        <PostInfoName>김웨일</PostInfoName>
+                        <PostInfoId>@sosoheehee_whale</PostInfoId>
+                    </PostInfoUser>
+                </div>
+                <PostMenuBtn/>
             </PostInfo>
             <PostContent>
                 <PostTxt>반짝이는 방황하여도, 간에 속에서 없으면, 고동을 모래뿐일 풀이 있는 황금시대다. 소담스러운 가슴에 그것은 인생을 뜨고, 돋고, 찬미를 같으며, 것이다. 청춘의 어디 인생에 스며들어 우리 바이며, 이상의 얼음 것은 것이다.</PostTxt>
