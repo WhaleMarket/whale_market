@@ -11,6 +11,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
 `
+
 const StyledLink = styled(Link)`
     width: 50px;
     height: 50px;
@@ -48,7 +49,7 @@ const FollowIntro = styled.p`
     color: #767676;
 `
 
-function User({accountname, username, image, intro, isfollow}) {
+function User({ accountname, username, image, intro, isfollow }) {
     const { myAccountname } = useContext(AuthContext);
     const [user, setUser] = useState({
         accountname: accountname,
@@ -57,6 +58,9 @@ function User({accountname, username, image, intro, isfollow}) {
         intro: intro,
         isfollow: isfollow,
     });
+
+    // user = 나를 팔로우 하는 사용자의 accountname 등 정보
+    console.log(user);
 
     const userImgRef = useRef();
     useEffect(() => {
@@ -75,7 +79,7 @@ function User({accountname, username, image, intro, isfollow}) {
                 </FollowInfo>
 
                 <UserFollowButton 
-                    text={user.isfollow ? '팔로잉' : '팔로우'}
+                    text={user.isfollow ? '취소' : '팔로우'}
                     user={user}
                     setUser={setUser}
                 />
