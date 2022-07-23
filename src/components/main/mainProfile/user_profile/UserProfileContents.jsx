@@ -1,10 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import basicProfileImg from '../../../../assets/basic-profile-img.png';
 import messageIcon from '../../../../assets/icon-message-circle.png';
 import shareIcon from '../../../../assets/icon-share.png';
 import FollowButton from './FollowButton';
+
+import { useContext } from 'react';
+import AuthContext from '../../../../context/AuthProvider';
 
 const UserProfileContainer = styled.div`
     display: flex;
@@ -16,9 +19,16 @@ const UserProfileContainer = styled.div`
     margin: 3rem auto 0 auto;
     box-sizing: border-box;
 `
-
-const ProfileImg = styled.img`
-    width: 6.875rem;
+const ImgDiv = styled.div`
+    width: 110px;
+    height: 110px;
+    margin: 0 auto;
+    background-image: url(${basicProfileImg});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative; 
+    border-radius: 50%;
 `
 
 const UserName = styled.h1`
@@ -132,29 +142,45 @@ const ProductUploadButton = styled(Link)`
 function UserProfileCard(props) {
     const {username, userid, userintroduction, followers, followerCount, followingCount} = props;
     const {pathname} = window.location
-
+    
     const urlRef = useRef();
     const copyUrl = () => {
         urlRef.current.focus();
         urlRef.current.select();
         navigator.clipboard.writeText(urlRef.current.value).then(() => {
-        alert("URL이 복사되었습니다.");
+            alert("URL이 복사되었습니다.");
         });
     }
+    
+    // 희: 내 프로필 이미지, 이름, 계정, 소개 연결
+    const { myImage, myUsername, myAccountname, myIntro, myFollowerCount, myFollowingCount } = useContext(AuthContext);
+    const img = myImage;
+    const name = myUsername;
+    const account = myAccountname;
+    const introduce = myIntro;
+    const follower = myFollowerCount;
+    const following = myFollowingCount;
+    
+    // 희: 이미지를 div의 background-image로 연결
+    const imgRef = useRef();
+    useEffect(() => {
+        imgRef.current.style.backgroundImage = `url(${img})`;
+    }, [img]);
 
+    
     return ( 
         <>    
         <UserProfileContainer>
-            <ProfileImg src={basicProfileImg} alt="프로필 이미지"/>
-            <UserName>{username}</UserName>
-            <UserId>{userid}</UserId>
-            <UserIntro>{userintroduction}</UserIntro>
+            <ImgDiv ref={imgRef} />
+            <UserName>{name}</UserName>
+            <UserId>{`@${account}`}</UserId>
+            <UserIntro>{introduce}</UserIntro>
             <Followers to = '/followers'>
-                <FollowCount>{followerCount}</FollowCount>
+                <FollowCount>{follower}</FollowCount>
                 <FollowTxt>followers</FollowTxt>
             </Followers>
             <Followings>
-                <FollowCount>{followingCount}</FollowCount>
+                <FollowCount>{following}</FollowCount>
                 <FollowTxt>followings</FollowTxt>
             </Followings>
             <IconWrapper>
