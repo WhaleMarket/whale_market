@@ -6,8 +6,6 @@ import Modal from '../../../modal/Modal';
 import AlertModal from '../../../modal/AlertModal';
 import styled from 'styled-components';
 import PostIconContainer from './PostIconContainer';
-import profileImg from '../../../../assets/basic-profile-img.png';
-import postImg from '../../../../assets/postImg.png'
 import AuthContext from '../../../../context/AuthProvider';
 
 const PostWrapper = styled.div`
@@ -94,13 +92,11 @@ function PostCard() {
         onClick: () => {},
     };
 
-    // 희: 내 프로필 이미지, 이름, 계정, 소개 연결
     const { myImage, myUsername, myAccountname } = useContext(AuthContext);
     const img = myImage;
     const name = myUsername;
     const account = myAccountname;
 
-    // 희: 이미지를 div의 background-image로 연결
     const imgRef = useRef();
     useEffect(() => {
         imgRef.current.style.backgroundImage = `url(${img})`;
@@ -110,7 +106,6 @@ function PostCard() {
         <>
         <PostWrapper>
             <PostInfo>
-                {/* <PostInfoImg src={img}/> */}
                 <UserImgDiv ref={imgRef} />
                 <PostInfoUser>
                     <PostInfoName>{name}</PostInfoName>

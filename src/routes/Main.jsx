@@ -9,7 +9,6 @@ import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
 import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
-import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
 
 import axios from "axios";
 import { useState, useEffect, useContext } from 'react';
