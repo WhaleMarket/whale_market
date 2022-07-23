@@ -1,5 +1,7 @@
-import Button from '../../components/login/Button';
+import React, { useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import Button from '../../components/login/Button';
 import styled from 'styled-components';
 import Logo from '../../assets/Logo.png';
 
@@ -69,6 +71,14 @@ const StyledLink = styled(Link)`
 `;
 
 function Login(){
+    const history = useHistory();
+    useEffect(() => {
+        if (window.localStorage.getItem('token') !== 'undefined' && window.localStorage.getItem('token')) {
+            history.push('/main/home');
+        }
+    }, [history]);
+    
+    
     return(
         <Wrapper>
         <LogoImage src={Logo} alt='로고' />

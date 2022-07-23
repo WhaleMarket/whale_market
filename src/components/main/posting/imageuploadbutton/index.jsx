@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useContext, useRef } from "react";
+import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
 import ImageUpload from "../../../../assets/upload-file.png";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
 
 const ImgUploadBtn = styled.img`
   position: fixed;
@@ -15,13 +17,43 @@ const UploadInput = styled.input`
 `;
 
 function ImageUploadButton() {
-  const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadPostingState, setUploadPostingState] =
+    useContext(UploadPostingContext);
   const Upload_Input = useRef();
-  const ImgUpload = async (event) => {
-    setUploadLoading(true);
-    const formData = new FormData();
-    formData.append("Image", event.target.files[0]);
-    console.log(formData);
+  const ImgUpload = (event) => {
+    const Blob = event.target.files[0];
+    if (
+      Blob === undefined ||
+      !IMG_EXTENSION.includes(Blob.name.split(".")[1])
+    ) {
+      event.target.value = "";
+      return alert("올바른 형식의 파일을 넣어주세요.");
+    } else if (Blob.size > 1024 * 1024* 10) {
+      event.target.value = "";
+      return alert("파일의 용량이 10MB를 초과했습니다.");
+    }
+    setUploadPostingState((uploadPostingState) => {
+      uploadPostingState.required[1] = {
+        ...uploadPostingState.required[1],
+        file: [...uploadPostingState.required[1].file, Blob],
+      };
+      return { required: uploadPostingState.required };
+    });
+    const reader = new FileReader();
+    reader.readAsDataURL(Blob);
+    event.target.value = "";
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setUploadPostingState((uploadPostingState) => {
+          uploadPostingState.required[1] = {
+            ...uploadPostingState.required[1],
+            prevUrl: [...uploadPostingState.required[1].prevUrl, reader.result],
+          };
+          return { required: uploadPostingState.required };
+        });
+        resolve();
+      };
+    });
   };
   return (
     <>
@@ -34,7 +66,11 @@ function ImageUploadButton() {
       <ImgUploadBtn
         src={ImageUpload}
         alt="Image Upload Button"
-        onClick={() => Upload_Input.current.click()}
+        onClick={() =>
+          uploadPostingState.required[1].prevUrl.length === 3
+            ? alert("이미지는 3개까지만 업로드할 수 있습니다.")
+            : Upload_Input.current.click()
+        }
       />
     </>
   );

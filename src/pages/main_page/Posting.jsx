@@ -1,20 +1,19 @@
-import { useState } from "react";
-import { createContext } from "react";
-import ImageUploadButton from "../../components/main/posting/imageuploadbutton";
 import PostingHeader from "../../components/main/posting/postingheader";
 import PostingSection from "../../components/main/posting/postingsection";
-
-export const UploadContext = createContext();
+import ImageUploadButton from "../../components/main/posting/imageuploadbutton";
+import { UploadPostingProvider } from "../../context/UploadImageListProvider";
+import { UploadProvider } from "../../context/UploadProvider";
 
 function Posting() {
-  const uploadState = useState(false);
   return (
     <>
-      <UploadContext.Provider value={uploadState}>
-        <PostingHeader />
-        <PostingSection />
-        <ImageUploadButton />
-      </UploadContext.Provider>
+      <UploadProvider>
+        <UploadPostingProvider>
+          <PostingHeader />
+          <PostingSection />
+          <ImageUploadButton />
+        </UploadPostingProvider>
+      </UploadProvider>
     </>
   );
 }

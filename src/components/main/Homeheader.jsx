@@ -14,11 +14,12 @@ const Head = styled.header`
 `
 
 const Search = styled.button`
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     border: none;
     background-color: inherit;
     background-image: url(${search_icon});
+    background-size: 1.5rem 1.5rem;
     &:hover{
         cursor: pointer;
     }
@@ -33,7 +34,7 @@ function Header(){
     return(
         <Head>
             <Title>감귤마켓 피드</Title>
-            <Link to = '/search'>
+            <Link to = '/home/search'>
                 <Search />
             </Link>
         </Head>

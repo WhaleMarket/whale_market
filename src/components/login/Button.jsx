@@ -5,7 +5,7 @@ import LogoGoogle from '../../assets/google-logo.png';
 import LogoFacebook from '../../assets/facebook-logo.png';
 
 const StyledButton = styled.button`
-box-sizing: border-box;
+    box-sizing: border-box;
     width: 100%;
     border: 1px solid ${(props) => (
         props.account === 'kakao' && '#F2C94C') 
@@ -22,12 +22,9 @@ box-sizing: border-box;
     line-height: 18px;
     color: #767676;
     position: relative;
+    cursor: pointer;
 
-    background-image: url(${(props) => (
-        props.account === 'kakao' && `${LogoKakao}`) 
-        || (props.account === 'google' && `${LogoGoogle}`) 
-        || (props.account === 'facebook' && `${LogoFacebook}`)
-    });
+    background-image: url(${(props) => (props.account === 'kakao' && `${LogoKakao}`) || (props.account === 'google' && `${LogoGoogle}`) || (props.account === 'facebook' && `${LogoFacebook}`)});
     background-repeat: no-repeat;
     background-size: 24px 24px;
     background-position: 14px 10px;
@@ -46,7 +43,7 @@ box-sizing: border-box;
 
 function Button(props) {
     return (
-        <StyledButton account={props.account} disabled={props.disabled} style={props.style}>{props.text}</StyledButton>
+        <StyledButton account={props.account}>{props.text}</StyledButton>
     );
 }
 

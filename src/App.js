@@ -8,13 +8,24 @@ import EmailLogin from './pages/login_page/EmailLogin';
 import Join from './pages/login_page/Join';
 import Profile from './pages/login_page/Profile';
 import Main from './routes/Main'
-import MainProfile from './pages/main_page/mainProfile/UserProfile';
-import ProfileModification from './pages/main_page/mainProfile/ProfileEdit';
-
+import NotFound from './pages/NotFoundPage';
 
 const Globalstyle = createGlobalStyle`
     ${reset}
-`
+    
+    html, body, #root {
+        height: 100%;
+    }
+
+    .a11yhidden {
+        position: absolute;
+        clip: rect(0 0 0 0);
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+    }
+`;
 
 function App() {
     return (
@@ -29,8 +40,7 @@ function App() {
                     <Route path='/join' component={Join} />
                     <Route path="/profile" component={Profile}/>
                     <Route path="/main" component={Main}/>
-                    <Route path="/mainprofile" component={MainProfile}/>
-                    <Route path="/profileedit" component={ProfileModification}/>
+                    <Route path="*" component={NotFound}/>
                 </Switch>
             </BrowserRouter>
         </>

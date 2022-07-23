@@ -1,0 +1,40 @@
+import React from 'react';
+import styled from 'styled-components';
+import ProductCard from './ProductCard';
+
+const ProductContainer = styled.section`
+    width: 24.375rem;
+    padding: 1.250rem 1rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+`
+
+const ProductTitle = styled.h1`
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+`
+
+const ProductList = styled.ul`
+    display: flex;
+    gap: 0.625rem;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`
+
+function ProductSection() {
+    return(
+        <ProductContainer>
+            <ProductTitle>판매 중인 상품</ProductTitle>
+            <ProductList>
+                <ProductCard/>
+            </ProductList>
+        </ProductContainer>
+    )
+}
+
+export default ProductSection;

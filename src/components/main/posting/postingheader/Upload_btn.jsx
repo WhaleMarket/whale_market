@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { UploadContext } from "../../../../pages/main_page/Posting";
+import UploadContext from "../../../../context/UploadProvider";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
+import { Link } from "react-router-dom";
 
 const Upload = styled.button`
   width: 90px;
@@ -11,15 +15,71 @@ const Upload = styled.button`
   color: white;
   font-size: 14px;
   &:hover {
-    cursor: pointer;
+    cursor: ${(props) => (props.state ? "pointer" : "auto")};
+    outline: ${(props) => (props.state ? "1px solid #03a9f4" : "none")};
   }
 `;
 
 function UploadButton() {
   const [uploadState] = useContext(UploadContext);
+  const [uploadPostingState] = useContext(UploadPostingContext);
+
+  const onSubmit = async () => {
+    try {
+      const imgBodyData = new FormData();
+
+      uploadPostingState.required[1].file.map((value) => {
+        return imgBodyData.append("image", value);
+      });
+
+      const imgResponse = await axios.post(
+        `${API_URL}/image/uploadfiles`,
+        imgBodyData
+      );
+
+      const headerData = {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          "Content-type": "application/json",
+        },
+      };
+
+      const postBodyData = {
+        post: {
+          content: uploadPostingState.required[0].value,
+          image: imgResponse.data
+            .map((img) => `${API_URL}/${img.filename}`)
+            .join(","),
+        },
+      };
+
+      const response = await axios.post(
+        `${API_URL}/post`,
+        postBodyData,
+        headerData
+      );
+
+      if (response) {
+        alert("🐳 성공적으로 업로드 되었습니다! 🐳");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const complete = (event) => {
+    if (!uploadState) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <>
-      <Upload state={uploadState}>업로드</Upload>
+      <Link to="/myprofile" onClick={complete}>
+        <Upload onClick={onSubmit} state={uploadState} disabled={!uploadState}>
+          업로드
+        </Upload>
+      </Link>
     </>
   );
 }

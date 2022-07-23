@@ -9,6 +9,7 @@ const BackBtn = styled.button`
     border: none;
     background-color: inherit;
     background-image: url(${BackBtnIcon});
+    background-size: 1.375rem 1.375rem;
     &:hover{
         cursor: pointer;
     }
