@@ -99,7 +99,7 @@ export function JoinForm({ setNextPage }) {
     const isPassedJoin = () => {
         return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
     };
-
+    
     return (
         <>
             <Wrapper>
