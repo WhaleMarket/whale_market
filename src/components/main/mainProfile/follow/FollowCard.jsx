@@ -17,7 +17,7 @@ const FollowWrapper = styled.div`
 
 function FollowCard() {
     // 희: 팔로워 리스트 불러오기
-    const { token, myAccountname } = useContext(AuthContext);
+    const [InfoState, setInfoState] = useContext(AuthContext);
     const [followerList, setFollowerList] = useState([]);
     const [show, setShow] = useState(false);
 
@@ -26,12 +26,12 @@ function FollowCard() {
             try {
                 const config = {
                     headers: {
-                        "Authorization" : `Bearer ${token}`,
+                        "Authorization" : `Bearer ${InfoState.MyInformations[0].token}`,
                         "Content-type" : "application/json"
                     },
                 };
                 const response = await axios.get(
-                    `${API_URL}/profile/${myAccountname}/follower`,
+                    `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/follower`,
                     config
                 );
                 // console.log(JSON.stringify(response.data));
@@ -42,8 +42,8 @@ function FollowCard() {
                 setShow(false);
             }
         }
-        token && getFollowerList();
-    }, [token, myAccountname]);
+        InfoState.MyInformations[0].token && getFollowerList();
+    }, [InfoState.MyInformations[0].token, InfoState.MyInformations[0].myAccountname]);
     return(
         <FollowWrapper>
             {show && (

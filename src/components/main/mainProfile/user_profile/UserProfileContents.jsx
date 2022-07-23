@@ -153,13 +153,13 @@ function UserProfileCard(props) {
     }
     
     // 희: 내 프로필 이미지, 이름, 계정, 소개 연결
-    const { myImage, myUsername, myAccountname, myIntro, myFollowerCount, myFollowingCount } = useContext(AuthContext);
-    const img = myImage;
-    const name = myUsername;
-    const account = myAccountname;
-    const introduce = myIntro;
-    const follower = myFollowerCount;
-    const following = myFollowingCount;
+    const [InfoState] = useContext(AuthContext);
+    const img = InfoState.MyInformations[0].myImage;
+    const name = InfoState.MyInformations[0].myUsername;
+    const account = InfoState.MyInformations[0].myAccountname;
+    const introduce = InfoState.MyInformations[0].myIntro;
+    const follower = InfoState.MyInformations[0].myFollowerCount;
+    const following = InfoState.MyInformations[0].myFollowingCount;
     
     // 희: 이미지를 div의 background-image로 연결
     const imgRef = useRef();

@@ -6,7 +6,7 @@ import { API_URL } from '../../../constants/defaultUrl';
 import { Wrapper, Title, Form, Fieldset, Legend, Label, Input, ErrorMessage } from './index.style';
 
 export function JoinForm({ setNextPage }) {
-    const { setAuth } = useContext(AuthContext);
+    const [, setInfoState] = useContext(AuthContext);
     const emailRef = useRef();
     const passwordRef = useRef();
 
@@ -39,7 +39,15 @@ export function JoinForm({ setNextPage }) {
         event.preventDefault();
         try {
             if (success) {
-                setAuth({ email, password });
+                setInfoState((InfoState) => {
+                    InfoState.MyInformations[1] = {
+                        ...InfoState.MyInformations[1],
+                        email: email,
+                        password: password
+                    };
+                    return { MyInformations: InfoState.MyInformations }
+                });
+                // setAuth({ email, password });
                 setNextPage(false);
             }
         } catch (error) {

@@ -7,6 +7,8 @@ import AlertModal from '../../../modal/AlertModal';
 import styled from 'styled-components';
 import PostIconContainer from './PostIconContainer';
 import AuthContext from '../../../../context/AuthProvider';
+import axios from 'axios';
+import { API_URL } from '../../../../constants/defaultUrl';
 
 const PostWrapper = styled.div`
     width: 24.375rem;
@@ -92,15 +94,31 @@ function PostCard() {
         onClick: () => {},
     };
 
-    const { myImage, myUsername, myAccountname } = useContext(AuthContext);
-    const img = myImage;
-    const name = myUsername;
-    const account = myAccountname;
+    const [InfoState] = useContext(AuthContext);
+    const img = InfoState.MyInformations[0].myImage;
+    const name = InfoState.MyInformations[0].myUsername;
+    const account = InfoState.MyInformations[0].myAccountname;
 
     const imgRef = useRef();
     useEffect(() => {
         imgRef.current.style.backgroundImage = `url(${img})`;
     }, [img]);
+
+    const Res = async () => {
+        const headerData = {
+            headers: {
+              "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
+              "Content-type": "application/json",
+            },
+        };
+        
+        const postRes = await axios.get(
+            `${API_URL}/post/:accountname/userpost`,
+            headerData
+        )
+        
+        console.log(postRes)
+    }
     
     return(
         <>

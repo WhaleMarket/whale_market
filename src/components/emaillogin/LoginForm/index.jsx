@@ -6,7 +6,7 @@ import Button from '../../emaillogin/button/Button';
 import { Wrapper, Title, Form, Label, Input, ErrorMessage, StyledLink } from './index.style';
 
 export function LoginForm() {
-    const { setAuth } = useContext(AuthContext);
+    const [, setInfoState] = useContext(AuthContext);
     const emailRef = useRef();
     const errorRef = useRef();
 
@@ -46,7 +46,16 @@ export function LoginForm() {
             );
 
             const token = response?.data?.user?.token;
-            setAuth({ email, password, token });
+            setInfoState((InfoState) => {
+                InfoState.MyInformations[1] = {
+                    ...InfoState.MyInformations[1],
+                    email: email,
+                    password: password,
+                    token: token
+                };
+                return { MyInformations: InfoState.MyInformations }
+            });
+            // setAuth({ email, password, token });
 
             // 로컬스토리지 저장
             localStorage.setItem('token', response?.data?.user?.token);

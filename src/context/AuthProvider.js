@@ -1,41 +1,30 @@
 import { createContext, useState } from "react";
 
-const AuthContext = createContext({});
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({});
-    const [token, setToken] = useState(localStorage.getItem('token'));
-    const [myImage, setMyImage] = useState('');
-    const [myUsername, setMyUsername] = useState('');
-    const [myAccountname, setMyAccountname] = useState(
-        localStorage.getItem('accountname')
-        );
-    const [myIntro, setMyIntro] = useState('');
-    const [myFollowerCount, setMyFollowerCount] = useState('');
-    const [myFollowingCount, setMyFollowingCount] = useState('');
-    const [myFollowerList, setMyFollowerList] = useState([]);
+    const InfoState = useState({
+        MyInformations: [
+            {
+                token: localStorage.getItem('token'),
+                myImage: "",
+                myUsername: "",
+                myAccountname: localStorage.getItem('accountname'),
+                myIntro: "",
+                myFollowerCount: "",
+                myFollowingCount: "",
+                myFollowerList: []
+            },
+            {
+                email: "",
+                password: "",
+                token: "",
+            },
+        ]
+    })
         
     return (
-        <AuthContext.Provider value={{ 
-            auth, 
-            setAuth,
-            token,
-            setToken,
-            myImage,
-            setMyImage,
-            myUsername,
-            setMyUsername,
-            myAccountname,
-            setMyAccountname,
-            myIntro,
-            setMyIntro,
-            myFollowerCount,
-            setMyFollowerCount,
-            myFollowingCount,
-            setMyFollowingCount,
-            myFollowerList,
-            setMyFollowerList
-        }}>
+        <AuthContext.Provider value={InfoState}>
             {children}
         </AuthContext.Provider>
     )

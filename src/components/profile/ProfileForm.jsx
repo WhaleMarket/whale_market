@@ -84,7 +84,7 @@ const ErrorMessage = styled.p`
 `
 
 function ProfileForm() {
-    const { auth, setAuth } = useContext(AuthContext);
+    const [InfoState] = useContext(AuthContext);
     const usernameRef = useRef();
     const accountnameRef = useRef();
 
@@ -222,8 +222,8 @@ function ProfileForm() {
             const reqData = {
                 user: { 
                     username: username,
-                    email: auth.email,
-                    password: auth.password,
+                    email: InfoState.MyInformations[1].email,
+                    password: InfoState.MyInformations[1].password,
                     accountname: accountname,
                     intro: intro,
                     image: image
@@ -239,7 +239,6 @@ function ProfileForm() {
                 reqData,
                 config
             );
-            setAuth({ username, accountname, intro, image });
         } catch (error) {
             console.error(error);
         }

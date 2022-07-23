@@ -59,14 +59,11 @@ function Modal({isOpenModal, setIsOpenModal, modalItemList}) {
         <ModalPortal>
             <ModalBg isOpenModal={isOpenModal} onClick={() => setIsOpenModal(false)}>
                 <ModalUl isOpenModal={isOpenModal} onClick={(event)=>{event.stopPropagation()}}>
-                    {modalItemList.map((item,index)=>{
+                    {modalItemList.map((item, key)=>{
                         // 모달창 아이템 리스트
                         return(
-                            <li>
-                                <ModalItem
-                                    key={index}
-                                    onClick={item.onClick}
-                                    >
+                            <li key={key}>
+                                <ModalItem onClick={item.onClick}>
                                     {item.content}
                                 </ModalItem>
                             </li>
