@@ -9,14 +9,17 @@ import PostIconContainer from './PostIconContainer';
 import AuthContext from '../../../../context/AuthProvider';
 
 const PostWrapper = styled.div`
-    width: 24.375rem;
-    margin: 0  auto 3.750rem auto;
+    width: 80vw;
+    margin-bottom: 34px;
+    padding: 0 60px;
+    box-sizing: border-box;
 `
 
 const PostInfo = styled.div`
     display: flex;
+    justify-content: space-between;
     position: relative;
-    padding: 1rem 1rem;
+    padding: 16px 30px;
 `
 
 const UserImgDiv = styled.div`
@@ -31,8 +34,10 @@ const UserImgDiv = styled.div`
 `
 
 const PostInfoUser = styled.div`
+    display: inline-block;
     margin-left: 0.750rem;
     padding-top: 0.25rem;
+    vertical-align: top;
 `
 
 const PostInfoName = styled.strong`
@@ -46,7 +51,7 @@ const PostInfoId = styled.p`
     color: #767676;
 `  
 const PostContent = styled.div`
-    margin-left: 3.375rem;
+    margin: 0 40px 0 54px;
     padding-left: 0.75rem;
 `
 
@@ -57,6 +62,7 @@ const PostTxt = styled.p`
 `
 
 const PostImgWrapper = styled.div`
+    text-align: center;
 `
 const PostImg = styled.img`
     width: 19rem;
