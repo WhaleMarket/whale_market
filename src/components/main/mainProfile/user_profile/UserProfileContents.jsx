@@ -140,7 +140,6 @@ function UserProfileCard(props) {
         navigator.clipboard.writeText(urlRef.current.value).then(() => {
         alert("URL이 복사되었습니다.");
         });
-        console.log(urlRef.current.value);
     }
 
     return ( 

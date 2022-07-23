@@ -48,7 +48,7 @@ function UploadButton() {
         post: {
           content: uploadPostingState.required[0].value,
           image: imgResponse.data
-            .map((img) => `https://mandarin.api.weniv.co.kr/${img.filename}`)
+            .map((img) => `${API_URL}/${img.filename}`)
             .join(","),
         },
       };
@@ -62,8 +62,8 @@ function UploadButton() {
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   };
 

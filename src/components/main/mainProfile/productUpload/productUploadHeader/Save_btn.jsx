@@ -70,8 +70,6 @@ function SaveButton() {
         headerData
       );
 
-      console.log(response);
-
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
       }
