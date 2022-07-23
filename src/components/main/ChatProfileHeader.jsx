@@ -49,7 +49,9 @@ function ChatProfileHeader(props){
     const modalItemList = [
         {
             content: "설정 및 개인정보",
-            onClick: () => {},
+            onClick: () => {
+                history.push('/profileedit');
+            },
         },
         {
             content: "로그아웃",
