@@ -20,6 +20,12 @@ export const AuthProvider = ({ children }) => {
                 password: "",
                 token: "",
             },
+            {
+                itemName: [],
+				price: [],
+				link: [],
+				itemImage: [],
+            }
         ]
     })
         

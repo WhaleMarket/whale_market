@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import img from '../../../../assets/product-img.png';
 import Modal from '../../../modal/Modal';
 import AlertModal from '../../../modal/AlertModal';
+import AuthContext from '../../../../context/AuthProvider';
+import axios from 'axios';
+import { API_URL } from '../../../../constants/defaultUrl';
 
 const ProductWrapper = styled.li`
     display: flex;
@@ -56,6 +59,40 @@ function ProductCard({productPrice}) {
         onClick: () => {},
     };
     
+    const[InfoState, setInfoState] = useContext(AuthContext);
+
+    console.log(InfoState.MyInformations[2]);
+
+    // async function getProductName() {
+    //     try{
+    //         const config = {
+    //             headers: {
+    //                 Authorization : `Bearer ${InfoState.MyInformations[0].token}`,
+    //                 "Content-type" : "application/json"
+    //             },
+    //         };
+    //         const response = await axios.get(
+    //             `${API_URL}/product/${InfoState.MyInformations[0].myAccountname}`,
+    //             config
+    //         );
+    //         setInfoState((InfoState) => {
+    //             response.data.product.map((value) => {
+    //                 InfoState.MyInformations[2] = {
+    //                     ...InfoState.MyInformations[2],
+    //                     itemName: [...InfoState.MyInformations[2].itemName, value.itemName],
+    //                     price: [...InfoState.MyInformations[2].price, value.price],
+    //                     link: [...InfoState.MyInformations[2].link, value.link],
+    //                     itemImage: [...InfoState.MyInformations[2].itemImage, value.itemImage],
+    //                 };
+    //                 return {MyInformations: InfoState.MyInformations }
+    //             })
+    //         });
+    //         console.log(InfoState.MyInformations[2]);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+
     return(
         <>
             <ProductWrapper onClick={()=>setIsOpenModal(!isOpenModal)}>
