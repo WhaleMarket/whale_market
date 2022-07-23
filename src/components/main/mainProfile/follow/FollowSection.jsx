@@ -2,9 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import FollowCard from './FollowCard';
 const FollowerContainer = styled.section`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
     width: 24.375rem;
     padding: 1.5rem 1rem;
     margin: 0 auto;

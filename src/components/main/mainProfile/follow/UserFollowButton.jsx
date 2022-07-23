@@ -8,12 +8,12 @@ const FollowButton = styled.button`
     width: 56px;
     height: 28px;
     border-radius: 1.625rem;
-    border-style: none;
-    background-color: #00BCD4;
     font-size: 12px;
     vertical-align: baseline;
     padding: 0;
-    color: #fff;
+    border: solid 1px grey;
+    background-color: white;
+    color: black;
     &:hover {
         cursor: pointer;
     }
@@ -21,13 +21,13 @@ const FollowButton = styled.button`
 
 function UserFollowButton({ text, user, setUser }) {
     const { token } = useContext(AuthContext);
-    const authToken = 'Bearer' + token;
-    
-    function handleClick() {
+
+    const handleClick = () => {
+        // 언팔로우
         if (user.isfollow) {
             const config = {
                 headers: {
-                    Authorization: authToken,
+                    "Authorization": `Bearer ${token}`,
                     "Content-type": "application/json",
                 },
             };
@@ -39,28 +39,33 @@ function UserFollowButton({ text, user, setUser }) {
                 setUser({
                     ...user,
                     isfollow: response.data.profile.isfollow,
-                    followers: response.data.profile.followerCount,
+                    followerCount: response.data.profile.followerCount,
                 });
             })
             .catch((error) => {
                 console.error(error);
             })
+
+        // 팔로우
         } else {
+            const reqData = [];
             const config = {
                 headers: {
-                    Authorization: authToken,
+                    "Authorization": `Bearer ${token}`,
                     "Content-type": "application/json",
                 },
             };
-            axios.delete(
+            axios.post(
                 `${API_URL}/profile/${user.accountname}/follow`,
+                reqData,
                 config
             )
             .then((response) => {
+                // 나를 팔로우한 사용자의 정보에 isfollow와 followerCount 추가
                 setUser({
                     ...user,
                     isfollow: response.data.profile.isfollow,
-                    followers: response.data.profile.followerCount,
+                    followerCount: response.data.profile.followerCount,
                 });
             })
             .catch((error) => {

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import PostIconContainer from './PostIconContainer';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import profileImg from '../../../../assets/basic-profile-img.png';
 import postImg from '../../../../assets/postImg.png';
 import ModalBtn from '../../../modal/ModalBtn';
 import Modal from '../../../modal/Modal';
 import AlertModal from '../../../modal/AlertModal';
+import styled from 'styled-components';
+import PostIconContainer from './PostIconContainer';
+import profileImg from '../../../../assets/basic-profile-img.png';
+import postImg from '../../../../assets/postImg.png'
+import AuthContext from '../../../../context/AuthProvider';
 
 const PostWrapper = styled.div`
     width: 24.375rem;
@@ -18,9 +21,15 @@ const PostInfo = styled.div`
     padding: 1rem 1rem;
 `
 
-const PostInfoImg = styled.img`
+const UserImgDiv = styled.div`
     width: 2.625rem;
     height: 2.625rem;
+    background-image: url(${profileImg});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative; 
+    border-radius: 50%;
 `
 
 const PostInfoUser = styled.div`
@@ -85,39 +94,52 @@ function PostCard() {
         onClick: () => {},
     };
 
+    // 희: 내 프로필 이미지, 이름, 계정, 소개 연결
+    const { myImage, myUsername, myAccountname } = useContext(AuthContext);
+    const img = myImage;
+    const name = myUsername;
+    const account = myAccountname;
+
+    // 희: 이미지를 div의 background-image로 연결
+    const imgRef = useRef();
+    useEffect(() => {
+        imgRef.current.style.backgroundImage = `url(${img})`;
+    }, [img]);
+    
     return(
         <>
-            <PostWrapper>
-                <PostInfo>
-                    <PostInfoImg src={profileImg}/>
-                    <PostInfoUser>
-                        <PostInfoName>김웨일</PostInfoName>
-                        <PostInfoId>@sosoheehee_whale</PostInfoId>
-                        <ModalBtn className='small' onClick={()=>setIsOpenModal(!isOpenModal)}/>
-                    </PostInfoUser>
-                </PostInfo>
-                <PostContent>
-                    <PostTxt>반짝이는 방황하여도, 간에 속에서 없으면, 고동을 모래뿐일 풀이 있는 황금시대다. 소담스러운 가슴에 그것은 인생을 뜨고, 돋고, 찬미를 같으며, 것이다. 청춘의 어디 인생에 스며들어 우리 바이며, 이상의 얼음 것은 것이다.</PostTxt>
-                    <PostImgWrapper>
-                        <PostImg src={postImg}/>
-                    </PostImgWrapper>
-                <PostIconContainer/>
-                <PostDate>2022년 07월 15일</PostDate>
-                </PostContent>
-            </PostWrapper>
-            
-            <Modal 
+        <PostWrapper>
+            <PostInfo>
+                {/* <PostInfoImg src={img}/> */}
+                <UserImgDiv ref={imgRef} />
+                <PostInfoUser>
+                    <PostInfoName>{name}</PostInfoName>
+                    <PostInfoId>{`@${account}`}</PostInfoId>
+                    <ModalBtn className='small' onClick={()=>setIsOpenModal(!isOpenModal)}/>
+                </PostInfoUser>
+            </PostInfo>
+            <PostContent>
+                <PostTxt>반짝이는 방황하여도, 간에 속에서 없으면, 고동을 모래뿐일 풀이 있는 황금시대다. 소담스러운 가슴에 그것은 인생을 뜨고, 돋고, 찬미를 같으며, 것이다. 청춘의 어디 인생에 스며들어 우리 바이며, 이상의 얼음 것은 것이다.</PostTxt>
+                <PostImgWrapper>
+                    <PostImg src={postImg}/>
+                </PostImgWrapper>
+            <PostIconContainer/>
+            <PostDate>2022년 07월 15일</PostDate>
+            </PostContent>
+        </PostWrapper>
+
+        <Modal 
                 isOpenModal={isOpenModal} 
                 setIsOpenModal={setIsOpenModal} 
                 modalItemList={modalItemList} 
-            />
-            <AlertModal
+        />
+        <AlertModal
                 alertModal={alertModal}
                 setAlertModal={setAlertModal}
                 setIsOpenModal={setIsOpenModal}
                 content={"게시글을 삭제할까요?"}
                 deleteBtn={deleteBtn}
-            />
+        />
         </>
     )
 }
