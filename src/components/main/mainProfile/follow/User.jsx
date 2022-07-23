@@ -50,7 +50,7 @@ const FollowIntro = styled.p`
 `
 
 function User({ accountname, username, image, intro, isfollow }) {
-    const { myAccountname } = useContext(AuthContext);
+    const [InfoState] = useContext(AuthContext);
     const [user, setUser] = useState({
         accountname: accountname,
         username: username,
@@ -70,7 +70,7 @@ function User({ accountname, username, image, intro, isfollow }) {
     return (
         <>
             <Wrapper>
-                <StyledLink to={"/" + accountname}>
+                <StyledLink to={"/" + InfoState.MyInformations[0].myAccountname}>
                     <UserImgDiv ref={userImgRef} />
                 </StyledLink>
                 <FollowInfo>
