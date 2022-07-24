@@ -4,7 +4,6 @@ import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
-import { Link } from "react-router-dom";
 
 const Upload = styled.button`
   width: 90px;

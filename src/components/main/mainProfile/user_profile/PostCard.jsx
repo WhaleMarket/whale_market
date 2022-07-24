@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import postImg from "../../../../assets/postImg.png";
+import React, { useState, useContext } from "react";
 import ModalBtn from "../../../modal/ModalBtn";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
