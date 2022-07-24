@@ -223,9 +223,9 @@ function ProfileEditForm() {
         setIntro(event.target.value);
     };
 
-    // 회원가입 정보 제출
+    // 프로필 정보 제출
     const handleSubmit = async (event) => {
-        alert('프로필이 수정되었습니다.');
+        alert('🐳 프로필이 수정되었습니다. 🐳');
         event.preventDefault();
         window.location.href = '/main/myprofile';
         try {
