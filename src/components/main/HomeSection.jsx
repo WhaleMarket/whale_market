@@ -1,6 +1,11 @@
 import whale from "../../assets/Logo.png"
 import styled from "styled-components"
 import {Link} from 'react-router-dom'
+import Feed from '../main/homeFeed/FeedContent';
+import { useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/AuthProvider';
+import { API_URL } from '../../constants/defaultUrl';
+import axios from "axios";
 
 const Section = styled.section`
     display: flex;
@@ -36,7 +41,34 @@ const Search = styled.button`
 `
 
 function HomeSection(){
+    const [InfoState]  = useContext(AuthContext);
+    const [posts, setPosts] = useState([])
+
+    useEffect(()=>{
+        async function getFeed(){
+            try{
+                const config = {
+                    headers : {
+                        "Authorization" : `Bearer ${InfoState.MyInformations[0].token}`,
+                        "Content-type" : "application/json",
+                    },
+                };
+                const response = await axios.get(
+                    `${API_URL}/post/feed`,
+                    config,
+                );
+                setPosts(response.data.posts);
+            } catch (error){
+                console.error(error);
+            }
+            
+        }
+        InfoState.MyInformations[0].token && getFeed();
+    },[InfoState.MyInformations[0].token])
+
     return(
+        parseInt(InfoState.MyInformations[0].myFollowingCount) > 0 ? <Feed posts={posts}/> 
+        :
         <Section>
             <Logo src={whale} alt="whale"/>
             <Title>유저를 검색해 팔로우 해보세요!</Title>
@@ -47,4 +79,4 @@ function HomeSection(){
     )
 }
 
-export default HomeSection
+export default HomeSection;
