@@ -101,25 +101,13 @@ export function JoinForm({ setNextPage }) {
         }
     };
 
-    const handleOnBlurForPassword = async (event) => {
-        event.preventDefault();
-        setPasswordMessage('');
-        try {
-            if (!(password.length > 5)) {
-                setPasswordMessage('*비밀번호는 6자 이상이어야 합니다.');
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     const isPassedJoin = () => {
         return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
     };
-
+    
     return (
         <>
             <Wrapper>
@@ -154,6 +142,7 @@ export function JoinForm({ setNextPage }) {
                             placeholder='비밀번호를 설정해 주세요.'
                         />
                         {passwordMessage && <ErrorMessage>{passwordMessage}</ErrorMessage>}
+                        
                         <Button 
                             type='submit' 
                             text='다음'
