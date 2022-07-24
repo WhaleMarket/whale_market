@@ -53,20 +53,16 @@ function ProfileSection({username, accountname, src}) {
 
     const modalItemList = [
         {
-            content: "삭제",
+            content: "신고",
             onClick: () => {
                 setAlertModal(true);
             },
 
         },
-        {
-            content: "수정",
-            onClick: () => {},
-        }
     ];
 
     const deleteBtn = {
-        content: "삭제",
+        content: "신고",
         onClick: () => {},
     };
 
@@ -92,7 +88,7 @@ function ProfileSection({username, accountname, src}) {
             alertModal={alertModal}
             setAlertModal={setAlertModal}
             setIsOpenModal={setIsOpenModal}
-            content={"게시글을 삭제할까요?"}
+            content={"게시글을 신고하시겠어요?"}
             deleteBtn={deleteBtn}
             />
         </>

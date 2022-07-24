@@ -12,19 +12,19 @@ const Head = styled.header`
     align-items: center;
     position: fixed;
     width: calc(100% - 28px);
-    padding: 0.813rem 0.750em 0.813rem 1rem;
+    padding: 13px 12px 13px 16px;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
     z-index: 1;
 `;
 
 const Search = styled.button`
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 24px;
+    height: 24px;
     border: none;
     background-color: inherit;
     background-image: url(${back});
-    background-size: 1.375rem 1.375rem;
+    background-size: 22px 22px;
     &:hover{
         cursor: pointer;
     }
@@ -33,7 +33,7 @@ const Search = styled.button`
 const ChatPartner = styled.p`
     font-style: normal;
     font-weight: 700;
-    font-size: 1.125rem;
+    font-size: 18px;
     text-align: center;
     width: 100vw;
     white-space: nowrap;
@@ -63,7 +63,10 @@ function ChatProfileHeader(props){
 
     const deleteBtn = {
         content: "로그아웃",
-        onClick: () => {},
+        onClick: () => {
+                localStorage.clear();
+                document.location.href = "/";
+        },
     };
 
     const quitModal = [

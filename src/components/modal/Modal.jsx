@@ -21,7 +21,7 @@ const ModalUl = styled.ul`
     transition: all 0.5s;
     transform: translateY( ${(props) => (props.isOpenModal === false ? "100%" : "0")} );
     width: 100%;
-    padding: 36px 0 16px;
+    padding: 36px 0 10px;
     border-radius: 10px 10px 0 0;
     background-color: #FFFFFF;
 
@@ -40,7 +40,7 @@ const ModalUl = styled.ul`
 
 const ModalItem = styled.button`
     width: 100%;
-    padding: 16px 26px;
+    padding: 14px 26px;
     border: none;
     background-color: inherit;
     font-size: 14px;
