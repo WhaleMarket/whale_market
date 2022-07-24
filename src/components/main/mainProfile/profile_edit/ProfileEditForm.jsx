@@ -5,8 +5,6 @@ import profile_icon from '../../../../assets/basic-profile-img.png';
 import upload_icon from '../../../../assets/upload-file.png';
 import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
-import AuthContext from '../../../../context/AuthProvider'
-import AuthContext from '../../../../context/AuthProvider';
 
 
 const Form = styled.form`
@@ -184,12 +182,6 @@ function ProfileEditForm() {
             console.error(error);
         }
     };
-    const handleNameInput = (event) => {
-        if ((event.target.value.length < 2 || event.target.value.length > 10))
-        setNameInputError(true);
-        else setNameInputError(false);
-        setNameInput(event.target.value);
-    }
 
     const handleOnBlur = async (event) => {
         event.preventDefault();
@@ -233,9 +225,9 @@ function ProfileEditForm() {
 
     // 회원가입 정보 제출
     const handleSubmit = async (event) => {
-        // alert('프로필이 수정되었습니다.');
+        alert('프로필이 수정되었습니다.');
         event.preventDefault();
-        // window.location.href = '/main/myprofile';
+        window.location.href = '/main/myprofile';
         try {
             const token = window.localStorage.getItem('token');
             const reqData = {
