@@ -84,7 +84,7 @@ const ErrorMessage = styled.p`
 `
 
 function ProfileForm() {
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth, setAuth, setMyAccountname } = useContext(AuthContext);
     const usernameRef = useRef();
     const accountnameRef = useRef();
 
@@ -239,7 +239,7 @@ function ProfileForm() {
                 reqData,
                 config
             );
-            setAuth({ username, accountname, intro, image });
+            setMyAccountname(accountname);
         } catch (error) {
             console.error(error);
         }

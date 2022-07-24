@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../components/main/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Chatting from "../pages/main_page/chat/Chatting";
@@ -10,6 +11,9 @@ import Posting from "../pages/main_page/Posting";
 import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
+import axios from "axios";
+import AuthContext from "../context/AuthProvider";
+import { API_URL } from "../constants/defaultUrl";
 
 import axios from "axios";
 import { useState, useEffect, useContext } from 'react';
