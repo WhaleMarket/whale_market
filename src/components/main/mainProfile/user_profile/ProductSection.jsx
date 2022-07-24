@@ -46,10 +46,11 @@ function ProductSection() {
     }
     return result;
   };
+
   return (
     <ProductContainer>
       <ProductTitle>판매 중인 상품</ProductTitle>
-      <ProductList>{rendering()} </ProductList>
+      <ProductList>{rendering()}</ProductList>
     </ProductContainer>
   );
 }

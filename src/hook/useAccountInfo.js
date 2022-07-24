@@ -52,13 +52,53 @@ export default function useAccountInfo(){
                 return { MyInformations: InfoState.MyInformations }
             });
 
-            // 팔로잉 정보
+
+        //Posting Upload
+        const Postingconfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const Postingresponse = await axios.get(
+          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
+          Postingconfig
+        );
+        Postingresponse.data.post.map((value) => {
+          return setInfoState((InfoState) => {
+            InfoState.MyInformations[3] = {
+              ...InfoState.MyInformations[3],
+              id: [...InfoState.MyInformations[3].id, value.id],
+              content: [...InfoState.MyInformations[3].content, value.content],
+              image: [...InfoState.MyInformations[3].image, value.image],
+              createdAt: [
+                ...InfoState.MyInformations[3].createdAt,
+                value.createdAt,
+              ],
+              updatedAt: [
+                ...InfoState.MyInformations[3].updatedAt,
+                value.updatedAt,
+              ],
+              hearted: [...InfoState.MyInformations[3].hearted, value.hearted],
+              heartCount: [
+                ...InfoState.MyInformations[3].heartCount,
+                value.heartCount,
+              ],
+              commentCount: [
+                ...InfoState.MyInformations[3].commentCount,
+                value.commentCount,
+              ],
+            }
+              return { MyInformations: InfoState.MyInformations }
+          });
+        })
+          // 팔로잉 정보
             const FollowingConfig = {
                 headers : {
                     "Authorization" : `Bearer ${InfoState.MyInformations[0].token}`,
                     "Content-type" : "application/json",
                 },
-            };
+              };
             const FollowingResponse = await axios.get(
                 `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/following`,
                 FollowingConfig,

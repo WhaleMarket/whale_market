@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
             itemImage: [],
         },
         {
+            id: [],
             content: [],
             image: [],
             createdAt: [],

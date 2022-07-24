@@ -64,7 +64,7 @@ function HomeSection(){
             
         }
         InfoState.MyInformations[0].token && getFeed();
-    },[InfoState.MyInformations[0].token])
+    },[InfoState.MyInformations])
 
     return(
         parseInt(InfoState.MyInformations[0].myFollowingCount) > 0 ? <Feed posts={posts}/> 

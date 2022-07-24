@@ -13,8 +13,7 @@ const PostWrapper = styled.div`
 
 const PostInfo = styled.div`
   display: flex;
-  padding: 1rem 1rem;
-  padding-left: 0;
+  padding: 1rem 0;
 `;
 
 const UserImgDiv = styled.div`
@@ -30,6 +29,7 @@ const UserImgDiv = styled.div`
 const PostInfoUser = styled.div`
   margin-left: 0.75rem;
   padding-top: 0.25rem;
+  margin-right: 175px;
 `;
 
 const PostInfoName = styled.strong`
@@ -108,12 +108,24 @@ function PostCard() {
               <PostInfoName>
                 {InfoState.MyInformations[0].myUsername}
               </PostInfoName>
-              <PostInfoId>{`@${InfoState.MyInformations[0].myAccountname}`}</PostInfoId>
+              <PostInfoId>
+                {`@${InfoState.MyInformations[0].myAccountname}`}</PostInfoId>
+            </PostInfoUser>
               <ModalBtn
-                className="small"
                 onClick={() => setIsOpenModal(!isOpenModal)}
               />
-            </PostInfoUser>
+              <Modal
+                isOpenModal={isOpenModal}
+                setIsOpenModal={setIsOpenModal}
+                modalItemList={modalItemList}
+              />
+              <AlertModal
+                alertModal={alertModal}
+                setAlertModal={setAlertModal}
+                setIsOpenModal={setIsOpenModal}
+                content={"게시글을 삭제할까요?"}
+                deleteBtn={deleteBtn}
+              />
           </PostInfo>
           <PostTxt>{InfoState.MyInformations[3].content[i]}</PostTxt>
           <PostImgWrapper>
@@ -123,7 +135,12 @@ function PostCard() {
                 return <PostImg key={key} src={value} />;
               })}
           </PostImgWrapper>
-          <PostIconContainer />
+          <PostIconContainer
+            id={InfoState.MyInformations[3].id[i]}
+            like={InfoState.MyInformations[3].heartCount[i]}
+            liked={InfoState.MyInformations[3].hearted[i]}
+            comment={InfoState.MyInformations[3].commentCount[i]}
+          />
           <PostDate>{InfoState.MyInformations[3].createdAt[i]}</PostDate>
         </PostContent>
       );
@@ -137,18 +154,7 @@ function PostCard() {
         <PostContentList>{rendering()}</PostContentList>
       </PostWrapper>
 
-      <Modal
-        isOpenModal={isOpenModal}
-        setIsOpenModal={setIsOpenModal}
-        modalItemList={modalItemList}
-      />
-      <AlertModal
-        alertModal={alertModal}
-        setAlertModal={setAlertModal}
-        setIsOpenModal={setIsOpenModal}
-        content={"게시글을 삭제할까요?"}
-        deleteBtn={deleteBtn}
-      />
+      
     </>
   );
 }
