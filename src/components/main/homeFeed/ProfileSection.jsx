@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import defaultImg from '../../../assets/basic-profile-img.png';
-import moreBtn from '../../../assets/icon-more-vertical.png';
+import ModalBtn from '../../modal/ModalBtn';
+import Modal from '../../modal/Modal';
+import AlertModal from '../../modal/AlertModal';
 
 const ProfileContainer = styled.section`
     display: flex;
@@ -20,8 +22,8 @@ const ProfileImg = styled.img`
     margin-right: 12px;
     border: 0.5px solid #DBDBDB;
     border-radius: 50%;
-    /* background: url(${defaultImg}) ; // 수정 */
-    /* background-size: 42px 42px; // 수정 */
+    background: url(${defaultImg}) ;
+    background-size: 42px 42px;
 `
 
 const UserInfoWrapper = styled.div`
@@ -45,30 +47,55 @@ const UserId = styled.span`
     line-height: 14px;
 `
 
-const MoreBtn = styled.button`
-    margin-top: 4px;
-    width: 18px;
-    height: 21px; // 이미지 파일 변경후 18px로 변경 필요
-    border: none;
-    background-color: inherit;
-    background-image: url(${moreBtn});
-    &:hover{
-        cursor: pointer;
-    }
-`
+function ProfileSection({username, accountname, src}) {
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [alertModal, setAlertModal] = useState(false);
 
-function ProfileSection({profileImg, username, accountname}) {
+    const modalItemList = [
+        {
+            content: "삭제",
+            onClick: () => {
+                setAlertModal(true);
+            },
+
+        },
+        {
+            content: "수정",
+            onClick: () => {},
+        }
+    ];
+
+    const deleteBtn = {
+        content: "삭제",
+        onClick: () => {},
+    };
+
     return (
-        <ProfileContainer>
-            <ProfileDiv>
-            <ProfileImg src={profileImg || defaultImg} alt="프로필 이미지"/>
-                <UserInfoWrapper>
-                    <UserName>{username}</UserName>
-                    <UserId>{accountname}</UserId>
-                </UserInfoWrapper>
-            </ProfileDiv>
-            <MoreBtn />
-        </ProfileContainer>
+        <>
+            <ProfileContainer>
+                <ProfileDiv>
+                <ProfileImg src={src || defaultImg} alt="프로필 이미지"/>
+                    <UserInfoWrapper>
+                        <UserName>{username}</UserName>
+                        <UserId>{accountname}</UserId>
+                    </UserInfoWrapper>
+                </ProfileDiv>
+                <ModalBtn className='small' onClick={()=>setIsOpenModal(!isOpenModal)}/>
+            </ProfileContainer>
+
+            <Modal 
+            isOpenModal={isOpenModal} 
+            setIsOpenModal={setIsOpenModal} 
+            modalItemList={modalItemList} 
+            />
+            <AlertModal
+            alertModal={alertModal}
+            setAlertModal={setAlertModal}
+            setIsOpenModal={setIsOpenModal}
+            content={"게시글을 삭제할까요?"}
+            deleteBtn={deleteBtn}
+            />
+        </>
     );
 }
 

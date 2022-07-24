@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ProfileSection from './ProfileSection';
-// import axios from 'axios';
-// import { API_URL } from '../../../constants/defaultUrl';
 import IconGroup from './IconGroup';
-
-import dummy from '../../../data.json';
+import AuthContext from '../../../context/AuthProvider';
 
 const LayOut =styled.div`
     padding: 53px 0 56px;
+    /* position: fixed; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 const FeedWrapper = styled.div`
     display: inline-block;
-    width: calc(100% - 32px);
+    /* width: calc(100% - 32px); */
+    min-width: 358px;
     margin: 20px 16px 0;
+    display: flex;
+    flex-direction: column;
 `
 
 const ContentWrapper = styled.div`
@@ -30,9 +34,8 @@ const ContentText = styled.p`
 
 const ContentImg = styled.img`
     overflow: hidden; //
-    min-width: 304px;
+    max-width: 303px;
     min-height: 228px;
-    border: 1px solid ; //지울 것 
     border-radius: 10px;
     object-fit: cover;
 `
@@ -45,23 +48,27 @@ const CreatedDate = styled.p`
     line-height: 12px;
 `
 
-function FeedContent () {
+function FeedContent ({ posts }) {
+    const [InfoState] = useContext(AuthContext);
     return (
         <LayOut>
-            {dummy.post.map( item => {
+            {InfoState.MyInformations[4].response[0] && posts.map((item, id)=> {
                 return (
-                    <FeedWrapper key={item.id}>
+                    <FeedWrapper key={id}>
                         <ProfileSection 
-                            profileImg={item.author.profileImg}
+                            src={InfoState.MyInformations[4].response[InfoState.MyInformations[4].response.map((index)=>{
+                                return index["0"].accountname;
+                            }).indexOf(item.author.accountname)]["0"].image}
                             username={item.author.username}
                             accountname={item.author.accountname}/>
                         <ContentWrapper>
                             <ContentText>{item.content}</ContentText>
-                            <ContentImg 
-                            src={item.image}
-                            alt="게시글 이미지"
-                            />
-                            {/* image없으면 띄우지 말것  */}
+                            {item.image && 
+                                <ContentImg 
+                                    src={item.image}
+                                    alt="게시글 이미지"
+                                />
+                            }
                             <IconGroup 
                                 heartCount={item.heartCount}
                                 comment={item.commentCount}
@@ -70,7 +77,7 @@ function FeedContent () {
                             <CreatedDate>{item.updatedAt}</CreatedDate>
                         </ContentWrapper>
                     </FeedWrapper>
-                )
+                );
             })}
         </LayOut>
     );
