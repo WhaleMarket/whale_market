@@ -27,7 +27,6 @@ function MainRouter() {
           <Route path="/chatting" component={Chatting} />
           <Route path="/myprofile" component={MainProfile} />
           <Route path="/search" component={HomeSearch} />
-          <Route path="/feed" component={Feed} />
         </>
       </Switch>
     </>
