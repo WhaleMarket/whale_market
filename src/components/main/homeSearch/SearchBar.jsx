@@ -29,12 +29,21 @@ const SearchInput = styled.input`
     text-indent: 1rem;
 `
 
-function SearchBar() {
+function SearchBar({ value, handleKeyword }) {
     return (
         <SearchHeader>
             <GoBackBtn />
             <SearchForm>
-                <SearchInput type='text' placeholder='계정 검색' name='searchInput' id='searchInput' />
+                <label className='a11yhidden' htmlFor='searchInput'>계정 검색</label>
+                <SearchInput 
+                    type='text' 
+                    placeholder='계정 검색' 
+                    name='searchInput' 
+                    id='searchInput' 
+                    value={value}
+                    onChange={handleKeyword}
+                    autoFocus
+                />
             </SearchForm>
         </SearchHeader>
     );
