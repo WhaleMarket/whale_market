@@ -12,7 +12,7 @@ const ViewTypeNav = styled.nav`
     display: flex;
     justify-content: flex-end;
     height: 2.750rem;
-    margin-right: 20px;
+    padding-right: 20px;
     border-top: 0.5px solid #DBDBDB;
 `
 
