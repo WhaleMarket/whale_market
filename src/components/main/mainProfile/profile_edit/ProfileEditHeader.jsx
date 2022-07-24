@@ -8,7 +8,9 @@ const Head = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: calc(100% - 28px);
     padding: 0.813rem 0.750rem 0.813rem 1rem;
     border-bottom: 0.031rem solid #BDBDBD;
@@ -43,11 +45,10 @@ const SaveBtn = styled.button`
 
 function ProfileEditHeader({disabled}){
     const history = useHistory();
-    // if (window.location.pathname === '/profile') return null;
 
     return(
         <Head>
-            <BackBtn  onClick={() => history.goBack()}/>
+            <BackBtn onClick={() => history.goBack()}/>
             <SaveBtn disabled={disabled}/>
         </Head>
     )
