@@ -10,17 +10,14 @@ import Posting from "../pages/main_page/Posting";
 import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
 import useAccountInfo from "../hook/useAccountInfo";
-import usePrductInfo from "../hook/useProductInfo";
 
 function MainRouter() {
   useAccountInfo();
-  usePrductInfo();
   return (
     <>
       <Switch>
         <Route path="/chatting/:chatId" component={ChattingView} />
         <Route path="/posting" component={Posting} />
-        <Route path="/mainprofile" component={MainProfile} />
         <Route path="/profileedit" component={ProfileModification} />
         <Route path="/followers" component={Followers} />
         <Route path="/productupload" component={ProductUpload} />

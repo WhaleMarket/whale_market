@@ -61,25 +61,18 @@ function UploadButton() {
 
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
+        window.location.href = "./myprofile";
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const complete = (event) => {
-    if (!uploadState) {
-      event.preventDefault();
-    }
-  };
-
   return (
     <>
-      <Link to="/myprofile" onClick={complete}>
-        <Upload onClick={onSubmit} state={uploadState} disabled={!uploadState}>
-          업로드
-        </Upload>
-      </Link>
+      <Upload onClick={onSubmit} state={uploadState} disabled={!uploadState}>
+        업로드
+      </Upload>
     </>
   );
 }
