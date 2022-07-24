@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import ModalIcon from '../../assets/icon-more-vertical.png';
 
 const ModalButton = styled.button`
-    position: ${(props)=>(props.className === 'small' ?  'absolute' : null )};
-    top: ${(props)=>(props.className === 'small' ?  '1.5rem' : null )};
+    margin-top:${(props)=>(props.className === 'small' ?  '4px' : null )};
     right: ${(props)=>(props.className === 'small' ?  '0' : null )};
-    width : ${(props)=>(props.className === 'small' ?  '1.125rem' : '1.5rem' )};
-    height : ${(props)=>(props.className === 'small' ?  '1.125rem' : '1.5rem' )};
+    width : ${(props)=>(props.className === 'small' ?  '18px' : '24px' )};
+    height : ${(props)=>(props.className === 'small' ?  '18px' : '24px' )};
     border: none;
     background-color: inherit;
     background-image: url(${ModalIcon});
-    background-size : ${(props)=>(props.className === 'small' ?  '1.125rem 1.125rem' : '1.375rem 1.375rem' )};
+    background-size : ${(props)=>(props.className === 'small' ?  '18px 18px' : '22px 22px' )};
     &:hover{
         cursor: pointer;
     }
