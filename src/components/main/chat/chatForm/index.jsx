@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Fieldset, UpLoadImg, HiddenUpLoadInput, Input, SendButton } from './index.style';
 import UpLoadFile from '../../../../assets/upload-file.png';
 
-function ChatForm({ sendMessage }) {
+function ChatForm({ sendMessage, popMessage }) {
     const [textInput, setTextInput] = useState('');
     const upLoadFileRef = useRef();
     const textRef = useRef();
@@ -15,6 +15,8 @@ function ChatForm({ sendMessage }) {
         event.preventDefault();
         sendMessage(textInput);
         setTextInput('');
+        popMessage();
+        textRef.current.value = '';
     };
 
     const onClickUpLoadFile = () => {

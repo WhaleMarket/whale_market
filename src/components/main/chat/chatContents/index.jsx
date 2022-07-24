@@ -14,7 +14,7 @@ function ChatContents(props) {
             <PartnerConversation contents={props.contents[0]} />
             <PartnerConversation contents={props.contents[1]} />
             <PartnerConversation contents={props.contents[2]} />
-            <MyConversation myText={props.myText} />
+            <MyConversation myText={props.myText} pop={props.pop} />
         </Contents>
     );
 }
