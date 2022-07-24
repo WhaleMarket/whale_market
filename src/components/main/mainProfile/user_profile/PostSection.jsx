@@ -12,6 +12,7 @@ const ViewTypeNav = styled.nav`
     display: flex;
     justify-content: flex-end;
     height: 2.750rem;
+    padding-right: 20px;
     border-top: 0.5px solid #DBDBDB;
 `
 
@@ -42,6 +43,8 @@ const AlbumIcon = styled.img`
 const PostContainer = styled.section`
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
     box-sizing: border-box;
 `
 
@@ -51,6 +54,7 @@ const AlbumContainer = styled.section`
     grid-auto-rows: 1fr;
     gap: 8px;
     width: 24.375rem;
+    padding-bottom: 70px;
     margin: 16px auto;
 `
 
