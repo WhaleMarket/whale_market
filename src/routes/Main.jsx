@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../components/main/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Chatting from "../pages/main_page/chat/Chatting";
