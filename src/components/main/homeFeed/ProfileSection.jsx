@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import defaultImg from '../../../assets/basic-profile-img.png';
 import ModalBtn from '../../modal/ModalBtn';
