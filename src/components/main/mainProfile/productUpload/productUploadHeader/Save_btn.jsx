@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
 import axios from "axios";
@@ -58,7 +57,7 @@ function SaveButton() {
       const postBodyData = {
         product: {
           itemName: saveStates.required[1].value,
-          price: parseInt(saveStates.required[2].value),
+          price: parseInt(saveStates.required[2].value.replace(",", "")),
           link: saveStates.required[3].value,
           itemImage: `${API_URL}/${imgResponse.data.filename}`,
         },
@@ -72,6 +71,7 @@ function SaveButton() {
 
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
+        window.location.href = "./myprofile";
       }
     } catch (event) {
       console.error(event);
@@ -79,19 +79,11 @@ function SaveButton() {
     }
   };
 
-  const onComplete = (e) => {
-    if (!save) {
-      e.preventDefault();
-    }
-  };
-
   return (
     <>
-      <Link to="/myprofile" onClick={onComplete}>
-        <Save onClick={onSubmit} type="submit" state={save} disabled={!save}>
-          저장
-        </Save>
-      </Link>
+      <Save onClick={onSubmit} type="submit" state={save} disabled={!save}>
+        저장
+      </Save>
     </>
   );
 }
