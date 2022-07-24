@@ -63,7 +63,10 @@ function ChatProfileHeader(props){
 
     const deleteBtn = {
         content: "로그아웃",
-        onClick: () => {},
+        onClick: () => {
+                localStorage.clear();
+                document.location.href = "/";
+        },
     };
 
     const quitModal = [
