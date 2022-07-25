@@ -1,23 +1,23 @@
-import React, { useState, useContext } from 'react';
-import ModalBtn from '../../../modal/ModalBtn';
-import Modal from '../../../modal/Modal';
-import AlertModal from '../../../modal/AlertModal';
-import styled from 'styled-components';
-import PostIconContainer from './PostIconContainer';
-import AuthContext from '../../../../context/AuthProvider';
-import axios from 'axios';
-import { API_URL } from '../../../../constants/defaultUrl';
+import React, { useState, useContext } from "react";
+import ModalBtn from "../../../modal/ModalBtn";
+import Modal from "../../../modal/Modal";
+import AlertModal from "../../../modal/AlertModal";
+import styled from "styled-components";
+import PostIconContainer from "./PostIconContainer";
+import AuthContext from "../../../../context/AuthProvider";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
 
 const PostWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 60vw;
-    margin-bottom: 34px;
-    padding: 0 4%;
-    box-sizing: border-box;
-    @media screen and (max-width: 500px) {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  margin-bottom: 34px;
+  padding: 0 4%;
+  box-sizing: border-box;
+  @media screen and (max-width: 500px) {
     width: 100%;
-  } 
+  }
 `;
 
 const PostInfo = styled.div`
@@ -62,7 +62,7 @@ const PostContentList = styled.ul`
 
 const PostContent = styled.li`
   padding: 0 8% 30px;
-  border: solid #DBDBDB 1px;
+  border: solid #dbdbdb 1px;
   border-radius: 10px;
   margin-bottom: 20px;
 `;
@@ -73,7 +73,7 @@ const PostTxt = styled.p`
   line-height: 18px;
   @media screen and (max-width: 855px) {
     margin-bottom: 16px;
-  } 
+  }
 `;
 
 const PostImgWrapper = styled.div`
@@ -82,8 +82,8 @@ const PostImgWrapper = styled.div`
   text-align: center;
   @media screen and (max-width: 855px) {
     margin-bottom: 12px;
-  } 
-  `;
+  }
+`;
 
 const PostImg = styled.img`
   overflow: hidden;
@@ -109,7 +109,7 @@ function PostCard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [InfoState] = useContext(AuthContext);
-  const [targetPost, setTargetPost] = useState('');
+  const [targetPost, setTargetPost] = useState("");
 
   const modalItemList = [
     {
@@ -132,22 +132,19 @@ function PostCard() {
           "Content-type": "application/json",
         },
       };
-      await axios.delete(
-        `${API_URL}/post/`+id,
-        deleteConfig
-      );
+      await axios.delete(`${API_URL}/post/` + id, deleteConfig);
       alert("🐳 게시글이 삭제되었습니다. 🐳");
       window.location.href = "/main/myprofile";
     } catch (error) {
       console.error(error);
       alert("error");
     }
-  }
+  };
 
   const rendering = () => {
     const result = [];
 
-    for (let i = 0; i < InfoState.MyInformations[3].content.length; i++){
+    for (let i = 0; i < InfoState.MyInformations[3].content.length; i++) {
       const createAt = InfoState.MyInformations[3].createdAt[i];
       const timeGap = parseInt(Date.now() - new Date(createAt));
       const hoursGap = Math.floor(timeGap / 3600000);
@@ -157,30 +154,33 @@ function PostCard() {
       result.push(
         <PostContent key={i}>
           <PostInfo>
-            <UserImgDiv src={InfoState.MyInformations[0].myImage} />
-            <PostInfoUser>
-              <PostInfoName>
-                {InfoState.MyInformations[0].myUsername}
-              </PostInfoName>
-              <PostInfoId>
-                {`@${InfoState.MyInformations[0].myAccountname}`}
-              </PostInfoId>
-            </PostInfoUser>
-                  <ModalBtn 
-                    className="small"
-                    onClick={() => {
-                      setIsOpenModal(!isOpenModal)
-                      setTargetPost(InfoState.MyInformations[3].id[i])
-                    }}
-                  />
+            <div>
+              <UserImgDiv src={InfoState.MyInformations[0].myImage} />
+              <PostInfoUser>
+                <PostInfoName>
+                  {InfoState.MyInformations[0].myUsername}
+                </PostInfoName>
+                <PostInfoId>
+                  {`@${InfoState.MyInformations[0].myAccountname}`}
+                </PostInfoId>
+              </PostInfoUser>
+            </div>
+            <ModalBtn
+              className="small"
+              onClick={() => {
+                setIsOpenModal(!isOpenModal);
+                setTargetPost(InfoState.MyInformations[3].id[i]);
+              }}
+            />
           </PostInfo>
           <PostTxt>{InfoState.MyInformations[3].content[i]}</PostTxt>
           <PostImgWrapper>
-            {InfoState.MyInformations[3].image[i]
-              ?.split(",")
-              .map((value, key) => {
-                return <PostImg key={key} src={value} />;
-              })}
+            {InfoState.MyInformations[3].image[i] !== "" &&
+              InfoState.MyInformations[3].image[i]
+                .split(",")
+                .map((value, key) => {
+                  return <PostImg key={key} src={value} />;
+                })}
           </PostImgWrapper>
           <PostIconContainer
             id={InfoState.MyInformations[3].id[i]}
@@ -189,9 +189,17 @@ function PostCard() {
             comment={InfoState.MyInformations[3].commentCount[i]}
           />
 
-          <PostDate>{hoursGap < 24 ? (minsGap < 60 ? (secsGap < 60 ? `방금 전` : `${minsGap}분 전`) : `${hoursGap}시간 전`) : `${createAt.substr(0,10).split("-")[0]}년 ${createAt.substr(0,10).split("-")[1]}월 ${createAt.substr(0,10).split("-")[2]}일`}</PostDate>
-
-          
+          <PostDate>
+            {hoursGap < 24
+              ? minsGap < 60
+                ? secsGap < 60
+                  ? `방금 전`
+                  : `${minsGap}분 전`
+                : `${hoursGap}시간 전`
+              : `${createAt.substr(0, 10).split("-")[0]}년 ${
+                  createAt.substr(0, 10).split("-")[1]
+                }월 ${createAt.substr(0, 10).split("-")[2]}일`}
+          </PostDate>
         </PostContent>
       );
     }
@@ -211,12 +219,12 @@ function PostCard() {
           alertModal={alertModal}
           setAlertModal={setAlertModal}
           setIsOpenModal={setIsOpenModal}
-          content={'게시글을 삭제할까요?'}
+          content={"게시글을 삭제할까요?"}
           deleteBtn={{
             content: "삭제",
             onClick: () => {
-              removePost(targetPost)
-            }
+              removePost(targetPost);
+            },
           }}
         />
       </PostWrapper>

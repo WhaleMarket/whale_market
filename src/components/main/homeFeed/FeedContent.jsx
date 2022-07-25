@@ -6,7 +6,7 @@ import AuthContext from "../../../context/AuthProvider";
 
 const LayOut = styled.ul`
   width: 50vw;
-  padding: 53px 0 68px ;
+  padding: 53px 0 68px;
   margin: 0 auto;
   /* position: fixed; */
   display: flex;
@@ -16,11 +16,11 @@ const LayOut = styled.ul`
   @media screen and (max-width: 500px) {
     width: 100%;
     padding: 53px 4% 68px;
-  } 
+  }
 `;
 
 const FeedWrapper = styled.li`
-  border: solid #DBDBDB 1px;
+  border: solid #dbdbdb 1px;
   border-radius: 10px;
   display: inline-block;
   /* width: calc(100% - 32px); */
@@ -43,7 +43,7 @@ const ContentText = styled.p`
   line-height: 17.53px;
   @media screen and (max-width: 855px) {
     margin-bottom: 16px;
-  } 
+  }
 `;
 
 const ImgWrapper = styled.div`
@@ -84,7 +84,7 @@ function FeedContent() {
         InfoState.MyInformations[5].accountname[i]
       );
 
-      const createAt = InfoState.MyInformations[3].createdAt[i];
+      const createAt = InfoState.MyInformations[5].createdAt[i];
       const timeGap = parseInt(Date.now() - new Date(createAt));
       const hoursGap = Math.floor(timeGap / 3600000);
       const minsGap = Math.floor(timeGap / 60000);
@@ -110,6 +110,8 @@ function FeedContent() {
                   })}
             </ImgWrapper>
             <IconGroup
+              src={InfoState.MyInformations[4].image[index]}
+              index={i}
               id={InfoState.MyInformations[5].id[i]}
               like={InfoState.MyInformations[5].heartCount[i]}
               comment={InfoState.MyInformations[5].commentCount[i]}
@@ -122,9 +124,9 @@ function FeedContent() {
                     ? `방금 전`
                     : `${minsGap}분 전`
                   : `${hoursGap}시간 전`
-                : `${createAt.substr(0, 10).split("-")[0]}년 ${
-                    createAt.substr(0, 10).split("-")[1]
-                  }월 ${createAt.substr(0, 10).split("-")[2]}일`}
+                : `${createAt?.substr(0, 10).split("-")[0]}년 ${
+                    createAt?.substr(0, 10).split("-")[1]
+                  }월 ${createAt?.substr(0, 10).split("-")[2]}일`}
             </CreatedDate>
           </ContentWrapper>
         </FeedWrapper>
