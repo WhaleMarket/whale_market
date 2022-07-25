@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
@@ -52,6 +52,7 @@ function ProductCard({ src, name, price }) {
     content: "삭제",
     onClick: () => {},
   };
+
 
   return (
     <>
