@@ -8,7 +8,7 @@ import AlertModal from "../../modal/AlertModal";
 const ProfileContainer = styled.section`
   display: flex;
   justify-content: space-between;
-  height: 42px;
+  padding: 16px 0;
 `;
 
 const ProfileDiv = styled.div`

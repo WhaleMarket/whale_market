@@ -13,11 +13,16 @@ const UserProfileContainer = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
-  width: 24.375rem;
-  padding: 1.875rem 3.438rem 1.625rem;
-  margin: 3rem auto 0 auto;
+  width: 60vw;
+  padding: 30px 55px 26px;
+  margin: 48px auto 0 auto;
   box-sizing: border-box;
+  @media screen and (max-width: 1100px) {
+    width: 100vw;
+    margin-top: 48px;
+  }
 `;
+
 const ImgDiv = styled.div`
   width: 110px;
   height: 110px;
@@ -48,10 +53,13 @@ const UserIntro = styled.span`
 
 const Followers = styled(Link)`
   position: absolute;
-  left: 3.5rem;
-  top: 4.063rem;
+  left: 150px;
+  top: 65px;
   text-align: center;
   text-decoration: none;
+  @media screen and (max-width: 855px) {
+      left: 56px;
+  }
 `;
 
 const FollowCount = styled.span`
@@ -68,10 +76,13 @@ const FollowTxt = styled.span`
 
 const Followings = styled(Link)`
   position: absolute;
-  right: 3.5rem;
-  top: 4.063rem;
+  right: 150px;
+  top: 65px;
   text-align: center;
   text-decoration-line: none;
+    @media screen and (max-width: 855px) {
+      right: 56px;
+  }
 `;
 
 const IconWrapper = styled.div`

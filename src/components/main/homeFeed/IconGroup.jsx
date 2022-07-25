@@ -14,7 +14,10 @@ const IconWrapper = styled.div`
   font-size: 12px;
   line-height: 12px;
   align-items: center;
-  margin: 12px 0 16px;
+  margin: 24px 0 24px;
+  @media screen and (max-width: 855px) {
+    margin-top: 12px 0 16px 0;
+  }
 `;
 
 const Heart = styled.button`

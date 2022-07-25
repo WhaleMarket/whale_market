@@ -5,10 +5,13 @@ import AuthContext from "../../../../context/AuthProvider";
 import { useContext } from "react";
 
 const ProductContainer = styled.section`
-  width: 24.375rem;
-  padding: 1.25rem 1rem;
+  width: 60vw;
+  padding: 20px 4%;
   margin: 0 auto;
   box-sizing: border-box;
+  @media screen and (max-width: 855px) {
+    width: 100vw;
+    }
 `;
 
 const ProductTitle = styled.h1`
@@ -19,12 +22,17 @@ const ProductTitle = styled.h1`
 
 const ProductList = styled.ul`
   display: flex;
-  gap: 0.625rem;
+  padding: 10px 0;
+  gap: 10px;
+  overflow-x: auto;
   overflow-y: hidden;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #b2ebf288;
+    border-radius: 5px;
   }
 `;
 
