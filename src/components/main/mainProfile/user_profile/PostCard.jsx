@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import ModalBtn from "../../../modal/ModalBtn";
-import Modal from "../../../modal/Modal";
-import AlertModal from "../../../modal/AlertModal";
-import styled from "styled-components";
-import PostIconContainer from "./PostIconContainer";
-import AuthContext from "../../../../context/AuthProvider";
+import React, { useState, useContext } from 'react';
+import ModalBtn from '../../../modal/ModalBtn';
+import Modal from '../../../modal/Modal';
+import AlertModal from '../../../modal/AlertModal';
+import styled from 'styled-components';
+import PostIconContainer from './PostIconContainer';
+import AuthContext from '../../../../context/AuthProvider';
 import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
 
@@ -39,8 +39,8 @@ const UserImgDiv = styled.div`
 
 const PostInfoUser = styled.div`
   display: inline-block;
-  margin-left: 0.75rem;
-  padding-top: 0.25rem;
+  margin-left: 12px;
+  padding-top: 4px;
   vertical-align: top;
 `;
 
@@ -108,7 +108,8 @@ const PostDate = styled.p`
 function PostCard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-  const [InfoState, setInfoState] = useContext(AuthContext);
+  const [InfoState] = useContext(AuthContext);
+  const [targetPost, setTargetPost] = useState('');
 
   const modalItemList = [
     {
@@ -123,76 +124,39 @@ function PostCard() {
     },
   ];
 
-
+  const removePost = async (id) => {
+    try {
+      const deleteConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.delete(
+        `${API_URL}/post/`+id,
+        deleteConfig
+      );
+      alert("🐳 게시글이 삭제되었습니다. 🐳");
+      window.location.href = "/main/myprofile";
+    } catch (error) {
+      console.error(error);
+      alert("error");
+    }
+  }
 
   const rendering = () => {
     const result = [];
 
-    for (let i = 0; i < InfoState.MyInformations[3].content.length; i++) {
-      const deleteBtn = {
-        content: "삭제",
-        onClick: async () => {
-            try{
-              const deleteConfig = {
-                headers: {
-                  "Authorization": `Bearer ${InfoState.MyInformations[0].token}`,
-                  "Content-type": "application/json",
-                },
-              };
-              await axios.delete(
-                `${API_URL}/post/${InfoState.MyInformations[3].id[i]}`,
-                deleteConfig
-              );
-
-                setInfoState((InfoState) => {
-                  InfoState.MyInformations[3] = {
-                    ...InfoState.MyInformations[3],
-                    id: InfoState.MyInforMations[3].id.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].id[i];
-                    }),
-                    content: InfoState.MyInforMations[3].content.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].content[i];
-                    }),
-                    image: InfoState.MyInforMations[3].image.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].image[i];
-                    }),
-                    createdAt: InfoState.MyInforMations[3].createdAt.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].createdAt[i];
-                    }),
-                    updatedAt: InfoState.MyInforMations[3].updatedAt.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].updatedAt[i];
-                    }),
-                    hearted: InfoState.MyInforMations[3].hearted.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].hearted[i];
-                    }),
-                    heartCount: InfoState.MyInforMations[3].heartCount.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].heartCount[i];
-                    }),
-                    commentCount: InfoState.MyInforMations[3].commentCount.filter((value) => {
-                      return value !== InfoState.MyInforMations[3].commentCount[i];
-                    }),
-                  };
-                  return { MyInformations: InfoState.MyInformations };
-                });  
-            alert('🐳 게시글이 삭제되었습니다. 🐳');
-            window.location.href = '/main/myprofile';
-            } catch(error) {
-              console.error(error)
-              alert('error');
-            }
-          }
-        };
-
+    for (let i = 0; i < InfoState.MyInformations[3].content.length; i++){
       const createAt = InfoState.MyInformations[3].createdAt[i];
       const timeGap = parseInt(Date.now() - new Date(createAt));
-      const hoursGap = Math.floor(timeGap /3600000);
+      const hoursGap = Math.floor(timeGap / 3600000);
       const minsGap = Math.floor(timeGap / 60000);
       const secsGap = Math.floor(timeGap / 1000);
 
       result.push(
         <PostContent key={i}>
           <PostInfo>
-            <div>
             <UserImgDiv src={InfoState.MyInformations[0].myImage} />
             <PostInfoUser>
               <PostInfoName>
@@ -202,11 +166,13 @@ function PostCard() {
                 {`@${InfoState.MyInformations[0].myAccountname}`}
               </PostInfoId>
             </PostInfoUser>
-            </div>
-            <ModalBtn
-              className="small"
-              onClick={() => setIsOpenModal(!isOpenModal)}
-            />
+                  <ModalBtn 
+                    className="small"
+                    onClick={() => {
+                      setIsOpenModal(!isOpenModal)
+                      setTargetPost(InfoState.MyInformations[3].id[i])
+                    }}
+                  />
           </PostInfo>
           <PostTxt>{InfoState.MyInformations[3].content[i]}</PostTxt>
           <PostImgWrapper>
@@ -222,20 +188,10 @@ function PostCard() {
             liked={InfoState.MyInformations[3].hearted[i]}
             comment={InfoState.MyInformations[3].commentCount[i]}
           />
+
           <PostDate>{hoursGap < 24 ? (minsGap < 60 ? (secsGap < 60 ? `방금 전` : `${minsGap}분 전`) : `${hoursGap}시간 전`) : `${createAt.substr(0,10).split("-")[0]}년 ${createAt.substr(0,10).split("-")[1]}월 ${createAt.substr(0,10).split("-")[2]}일`}</PostDate>
 
-          <Modal
-          isOpenModal={isOpenModal}
-          setIsOpenModal={setIsOpenModal}
-          modalItemList={modalItemList}
-        />
-        <AlertModal
-          alertModal={alertModal}
-          setAlertModal={setAlertModal}
-          setIsOpenModal={setIsOpenModal}
-          content={"게시글을 삭제할까요?"}
-          deleteBtn={deleteBtn}
-        />
+          
         </PostContent>
       );
     }
@@ -246,6 +202,23 @@ function PostCard() {
     <>
       <PostWrapper>
         <PostContentList>{rendering()}</PostContentList>
+        <Modal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          modalItemList={modalItemList}
+        />
+        <AlertModal
+          alertModal={alertModal}
+          setAlertModal={setAlertModal}
+          setIsOpenModal={setIsOpenModal}
+          content={'게시글을 삭제할까요?'}
+          deleteBtn={{
+            content: "삭제",
+            onClick: () => {
+              removePost(targetPost)
+            }
+          }}
+        />
       </PostWrapper>
     </>
   );
