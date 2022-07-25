@@ -190,6 +190,76 @@ export default function useAccountInfo() {
             return { MyInformations: InfoState.MyInformations };
           });
         });
+
+        //내 팔로워 정보
+        const followerConfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const followerResponse = await axios.get(
+          `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/follower`,
+          followerConfig
+        );
+
+        followerResponse.data.map((value) => {
+          return setInfoState((InfoState) => {
+            InfoState.MyInformations[6] = {
+              ...InfoState.MyInformations[6],
+              accountname: [
+                ...InfoState.MyInformations[6].accountname,
+                value.accountname,
+              ],
+              username: [
+                ...InfoState.MyInformations[6].username,
+                value.username,
+              ],
+              image: [...InfoState.MyInformations[6].image, value.image],
+              intro: [...InfoState.MyInformations[6].intro, value.intro],
+              isfollow: [
+                ...InfoState.MyInformations[6].isfollow,
+                value.isfollow,
+              ],
+            };
+            return { MyInformations: InfoState.MyInformations };
+          });
+        });
+
+        //내 팔로잉 정보
+        const followingConfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const followingResponse = await axios.get(
+          `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/following`,
+          followingConfig
+        );
+
+        followingResponse.data.map((value) => {
+          return setInfoState((InfoState) => {
+            InfoState.MyInformations[7] = {
+              ...InfoState.MyInformations[7],
+              accountname: [
+                ...InfoState.MyInformations[7].accountname,
+                value.accountname,
+              ],
+              username: [
+                ...InfoState.MyInformations[7].username,
+                value.username,
+              ],
+              image: [...InfoState.MyInformations[7].image, value.image],
+              intro: [...InfoState.MyInformations[7].intro, value.intro],
+              isfollow: [
+                ...InfoState.MyInformations[7].isfollow,
+                value.isfollow,
+              ],
+            };
+            return { MyInformations: InfoState.MyInformations };
+          });
+        });
       } catch (error) {
         console.error(error);
       }

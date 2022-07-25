@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const InfoState = useState({
     MyInformations: [
       {
+        index: 0,
         label: "login",
         token: localStorage.getItem("token"),
         myImage: "",
@@ -17,11 +18,13 @@ export const AuthProvider = ({ children }) => {
         myFollowerList: [],
       },
       {
+        index: 1,
         email: "",
         password: "",
         token: "",
       },
       {
+        index: 2,
         label: "product",
         itemName: [],
         price: [],
@@ -29,6 +32,7 @@ export const AuthProvider = ({ children }) => {
         itemImage: [],
       },
       {
+        index: 3,
         label: "posting",
         id: [],
         content: [],
@@ -40,11 +44,13 @@ export const AuthProvider = ({ children }) => {
         commentCount: [],
       },
       {
+        index: 4,
         label: "following Information",
         accountname: [],
         image: [],
       },
       {
+        index: 5,
         label: "feed Information",
         id: [],
         username: [],
@@ -56,6 +62,24 @@ export const AuthProvider = ({ children }) => {
         hearted: [],
         updatedAt: [],
         createdAt: [],
+      },
+      {
+        index: 6,
+        label: "follower",
+        accountname: [],
+        username: [],
+        image: [],
+        intro: [],
+        isfollow: [],
+      },
+      {
+        index: 7,
+        label: "following",
+        accountname: [],
+        username: [],
+        image: [],
+        intro: [],
+        isfollow: [],
       },
     ],
   });
