@@ -112,18 +112,9 @@ function PostCard() {
                 {`@${InfoState.MyInformations[0].myAccountname}`}
               </PostInfoId>
             </PostInfoUser>
-            <ModalBtn onClick={() => setIsOpenModal(!isOpenModal)} />
-            <Modal
-              isOpenModal={isOpenModal}
-              setIsOpenModal={setIsOpenModal}
-              modalItemList={modalItemList}
-            />
-            <AlertModal
-              alertModal={alertModal}
-              setAlertModal={setAlertModal}
-              setIsOpenModal={setIsOpenModal}
-              content={"게시글을 삭제할까요?"}
-              deleteBtn={deleteBtn}
+            <ModalBtn
+              className="small"
+              onClick={() => setIsOpenModal(!isOpenModal)}
             />
           </PostInfo>
           <PostTxt>{InfoState.MyInformations[3].content[i]}</PostTxt>
@@ -151,6 +142,18 @@ function PostCard() {
     <>
       <PostWrapper>
         <PostContentList>{rendering()}</PostContentList>
+        <Modal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          modalItemList={modalItemList}
+        />
+        <AlertModal
+          alertModal={alertModal}
+          setAlertModal={setAlertModal}
+          setIsOpenModal={setIsOpenModal}
+          content={"게시글을 삭제할까요?"}
+          deleteBtn={deleteBtn}
+        />
       </PostWrapper>
     </>
   );

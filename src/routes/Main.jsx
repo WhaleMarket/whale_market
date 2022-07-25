@@ -10,6 +10,7 @@ import Posting from "../pages/main_page/Posting";
 import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
 import useAccountInfo from "../hook/useAccountInfo";
+import Followings from "../pages/main_page/mainProfile/Following";
 
 function MainRouter() {
   useAccountInfo();
@@ -20,6 +21,7 @@ function MainRouter() {
         <Route path="/posting" component={Posting} />
         <Route path="/profileedit" component={ProfileModification} />
         <Route path="/followers" component={Followers} />
+        <Route path="/followings" component={Followings} />
         <Route path="/productupload" component={ProductUpload} />
         <>
           <Navbar />
