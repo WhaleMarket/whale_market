@@ -8,33 +8,45 @@ const SearchHeader = styled.header`
     align-items: center;
     position: fixed;
     width: 100%;
-    padding: 0.5rem 1rem;
+    padding: 8px 16px;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: white;
     box-sizing: border-box;
-`
+`;
 
 const SearchForm = styled.form`
     width: 100%;
-    margin-left: 0.75rem;
-`
+    margin-left: 12px;
+`;
 
 const SearchInput = styled.input`
     width: 100%;
-    height: 2rem;
+    height: 32px;
     border: none;
-    border-radius: 2rem;
+    border-radius: 32px;
     background-color: #F2F2F2;
     box-sizing: border-box;
-    text-indent: 1rem;
-`
+    text-indent: 16px;
+    &:focus {
+        outline: #00BCD4 2px solid;
+    }
+`;
 
-function SearchBar() {
+function SearchBar({ value, handleKeyword }) {
     return (
         <SearchHeader>
             <GoBackBtn />
             <SearchForm>
-                <SearchInput type='text' placeholder='계정 검색' name='searchInput' id='searchInput' />
+                <label className='a11yhidden' htmlFor='searchInput'>계정 검색</label>
+                <SearchInput 
+                    type='text' 
+                    placeholder='계정 검색' 
+                    name='searchInput' 
+                    id='searchInput' 
+                    value={value}
+                    onChange={handleKeyword}
+                    autoFocus
+                />
             </SearchForm>
         </SearchHeader>
     );
