@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import heart_icon from "../../../assets/icon-heart.png";
 import heart_icon_fill from "../../../assets/icon-heart-fill.png";
@@ -6,6 +6,7 @@ import comment_icon from "../../../assets/icon-message-circle.png";
 import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
+import PostModal from "../postDetail/PostModal";
 
 const IconWrapper = styled.div`
   display: flex;
@@ -60,6 +61,7 @@ const CommentCount = styled.span`
 
 function IconGroup({ like, comment, liked, id }) {
   const [InfoState, setInfoState] = useContext(AuthContext);
+  const [postModal, setPostModal] = useState(false);
 
   const useHandleLike = () => {
     async function fetchData() {
@@ -142,13 +144,30 @@ function IconGroup({ like, comment, liked, id }) {
     }
     fetchData();
   };
+
+
+  function openPostModal (){
+    setPostModal(true);
+  }
+
   return (
-    <IconWrapper>
-      <Heart Liked={liked} onClick={liked ? useHandleUnlike : useHandleLike} />
-      <HeartCount>{like}</HeartCount>
-      <CommentBtn />
-      <CommentCount>{comment}</CommentCount>
-    </IconWrapper>
+    <>
+      <IconWrapper>
+        <Heart Liked={liked} onClick={liked ? useHandleUnlike : useHandleLike} />
+        <HeartCount>{like}</HeartCount>
+        <CommentBtn 
+          onClick={()=>{
+            openPostModal();
+          }} 
+        />
+        <CommentCount>{comment}</CommentCount>
+      </IconWrapper>
+      
+      <PostModal 
+        postModal={postModal}
+        setPostModal={setPostModal}
+        />
+    </>
   );
 }
 
