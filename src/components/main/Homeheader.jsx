@@ -33,7 +33,7 @@ const Title = styled.h1`
 function Header() {
   return (
     <Head>
-      <Title>감귤마켓 피드</Title>
+      <Title>웨일마켓 피드</Title>
       <Link to="/search">
         <Search />
       </Link>

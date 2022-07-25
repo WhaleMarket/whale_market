@@ -11,6 +11,7 @@ import HomeSearch from "../pages/main_page/HomeSearch";
 import Followers from "../pages/main_page/mainProfile/Followers";
 import useAccountInfo from "../hook/useAccountInfo";
 import Followings from "../pages/main_page/mainProfile/Following";
+import UserProfile from "../pages/main_page/mainProfile/UserProfile";
 
 function MainRouter() {
   useAccountInfo();
@@ -23,6 +24,7 @@ function MainRouter() {
         <Route path="/followers" component={Followers} />
         <Route path="/followings" component={Followings} />
         <Route path="/productupload" component={ProductUpload} />
+        <Route path="/userprofile" component={UserProfile} />
         <>
           <Navbar />
           <Route path="/home" exact component={Home} />
