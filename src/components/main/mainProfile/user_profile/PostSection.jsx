@@ -11,9 +11,12 @@ import postImg from '../../../../assets/postImg.png';
 const ViewTypeNav = styled.nav`
     display: flex;
     justify-content: flex-end;
-    height: 2.750rem;
+    height: 60px;
     padding-right: 20px;
     border-top: 0.5px solid #DBDBDB;
+    @media screen and (max-width: 855px) {
+    height: 44px;
+  }
 `
 
 const ListIconBtn = styled.button`
