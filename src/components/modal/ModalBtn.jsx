@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import ModalIcon from '../../assets/icon-more-vertical.png';
 
 const ModalButton = styled.button`
-    margin-top:${(props)=>(props.className === 'small' ?  '4px' : null )};
+    position:${(props)=>(props.className !== 'comment' ?  null : 'absolute' )};
+    margin-top:${(props)=>(props.className === 'null' ?  null : '4px' )};
     right: ${(props)=>(props.className === 'small' ?  '0' : null )};
     width : ${(props)=>(props.className === 'small' ?  '18px' : '24px' )};
     height : ${(props)=>(props.className === 'small' ?  '18px' : '24px' )};
