@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ModalBtn from "../../../modal/ModalBtn";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
@@ -79,6 +79,12 @@ function PostCard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [InfoState] = useContext(AuthContext);
+  const [targetPost, setTargetPost] = useState('');
+
+  console.log('InfoState : ', InfoState)
+
+  const posts = InfoState.MyInformations[3].id;
+  console.log(posts)
 
   const modalItemList = [
     {
@@ -93,31 +99,28 @@ function PostCard() {
     },
   ];
 
+  const removePost = async (id) => {
+    try {
+      const deleteConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.delete(
+        `${API_URL}/post/`+id,
+        deleteConfig
+      );
+      alert("🐳 게시글이 삭제되었습니다. 🐳");
+      window.location.href = "/main/myprofile";
+    } catch (error) {
+      console.error(error);
+      alert("error");
+    }
+  }
+
   const rendering = () => {
     const result = [];
-
-    const deleteBtn = {
-      content: "삭제",
-      onClick: async () => {
-        try {
-          const deleteConfig = {
-            headers: {
-              Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-              "Content-type": "application/json",
-            },
-          };
-          await axios.delete(
-            `${API_URL}/post/${InfoState.MyInformations[3].id[0]}`,
-            deleteConfig
-          );
-          alert("🐳 게시글이 삭제되었습니다. 🐳");
-          window.location.href = "/main/myprofile";
-        } catch (error) {
-          console.error(error);
-          alert("error");
-        }
-      },
-    };
 
     for (let i = 0; i < InfoState.MyInformations[3].content.length; i++) {
       const createAt = InfoState.MyInformations[3].createdAt[i];
@@ -138,10 +141,13 @@ function PostCard() {
                 {`@${InfoState.MyInformations[0].myAccountname}`}
               </PostInfoId>
             </PostInfoUser>
-            <ModalBtn
-              className="small"
-              onClick={() => setIsOpenModal(!isOpenModal)}
-            />
+                  <ModalBtn 
+                    className="small"
+                    onClick={() => {
+                      setIsOpenModal(!isOpenModal)
+                      setTargetPost(InfoState.MyInformations[3].id[i])
+                    }}
+                  />
           </PostInfo>
           <PostTxt>{InfoState.MyInformations[3].content[i]}</PostTxt>
           <PostImgWrapper>
@@ -168,28 +174,38 @@ function PostCard() {
                   createAt.substr(0, 10).split("-")[1]
                 }월 ${createAt.substr(0, 10).split("-")[2]}일`}
           </PostDate>
-
-          <Modal
-            isOpenModal={isOpenModal}
-            setIsOpenModal={setIsOpenModal}
-            modalItemList={modalItemList}
-          />
-          <AlertModal
-            alertModal={alertModal}
-            setAlertModal={setAlertModal}
-            setIsOpenModal={setIsOpenModal}
-            content={`게시글을 삭제할까요?`}
-            deleteBtn={deleteBtn}
-          />
         </PostContent>
       );
     }
     return result;
   };
+
+  useEffect(() => {
+    console.log('targetPost : ', targetPost)
+  },[targetPost])
   return (
     <>
       <PostWrapper>
-        <PostContentList>{rendering()}</PostContentList>
+        <PostContentList>
+          {rendering()}
+        </PostContentList>
+        <Modal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          modalItemList={modalItemList}
+        />
+        <AlertModal
+          alertModal={alertModal}
+          setAlertModal={setAlertModal}
+          setIsOpenModal={setIsOpenModal}
+          content={'게시글을 삭제할까요?'}
+          deleteBtn={{
+            content: "삭제",
+            onClick: () => {
+              removePost(targetPost)
+            }
+          }}
+        />
       </PostWrapper>
     </>
   );
