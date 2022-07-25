@@ -99,7 +99,14 @@ function PostCard() {
 
   const rendering = () => {
     const result = [];
+
     for (let i = 0; i < InfoState.MyInformations[3].content.length; i++) {
+      const createAt = InfoState.MyInformations[3].createdAt[i];
+      const timeGap = parseInt(Date.now() - new Date(createAt));
+      const hoursGap = Math.floor(timeGap /3600000);
+      const minGap = Math.floor(timeGap / 60000);
+      const secGap = Math.floor(timeGap / 1000);
+
       result.push(
         <PostContent key={i}>
           <PostInfo>
@@ -131,7 +138,7 @@ function PostCard() {
             liked={InfoState.MyInformations[3].hearted[i]}
             comment={InfoState.MyInformations[3].commentCount[i]}
           />
-          <PostDate>{InfoState.MyInformations[3].createdAt[i]}</PostDate>
+          <PostDate>{hoursGap < 24 ? (minGap < 60 ? (secGap < 60 ? `방금 전` : `${minGap}분 전`) : `${hoursGap}시간 전`) : `${createAt.substr(0,10).split("-")[0]}년 ${createAt.substr(0,10).split("-")[1]}월 ${createAt.substr(0,10).split("-")[2]}일`}</PostDate>
         </PostContent>
       );
     }
