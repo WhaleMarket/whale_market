@@ -5,47 +5,65 @@ import IconGroup from "./IconGroup";
 import AuthContext from "../../../context/AuthProvider";
 
 const LayOut = styled.ul`
-  padding: 53px 0 68px 0;
+  width: 50vw;
+  padding: 53px 0 68px ;
+  margin: 0 auto;
   /* position: fixed; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding: 53px 4% 68px;
+  } 
 `;
 
 const FeedWrapper = styled.li`
-  border: 1px solid black;
+  border: solid #DBDBDB 1px;
   border-radius: 10px;
   display: inline-block;
   /* width: calc(100% - 32px); */
-  min-width: 358px;
-  margin: 20px 16px 0;
+  width: 100%;
+  /* min-width: 358px; */
+  margin-top: 20px;
+  /* padding: 53px 4% 68px ; */
+  padding: 0 8% 30px;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  box-sizing: border-box;
 `;
 
 const ContentWrapper = styled.div``;
 
 const ContentText = styled.p`
-  margin: 12px 0 16px 0;
+  margin-bottom: 28px;
   font-size: 14px;
   font-weight: 400;
   line-height: 17.53px;
-`;
-
-const ContentImg = styled.img`
-  overflow: hidden; //
-  max-width: 360px;
-  min-height: 228px;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-bottom: 10px;
+  @media screen and (max-width: 855px) {
+    margin-bottom: 16px;
+  } 
 `;
 
 const ImgWrapper = styled.div`
+  width: 100%;
+  margin: 0 auto 24px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const ContentImg = styled.img`
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  @media screen and (max-width: 855px) {
+    height: 228px;
+  }
 `;
 
 const CreatedDate = styled.p`
@@ -65,6 +83,13 @@ function FeedContent() {
       const index = InfoState.MyInformations[4].accountname.indexOf(
         InfoState.MyInformations[5].accountname[i]
       );
+
+      const createAt = InfoState.MyInformations[3].createdAt[i];
+      const timeGap = parseInt(Date.now() - new Date(createAt));
+      const hoursGap = Math.floor(timeGap / 3600000);
+      const minsGap = Math.floor(timeGap / 60000);
+      const secsGap = Math.floor(timeGap / 1000);
+
       result.push(
         <FeedWrapper key={i}>
           <ProfileSection
@@ -91,7 +116,15 @@ function FeedContent() {
               liked={InfoState.MyInformations[5].hearted[i]}
             />
             <CreatedDate>
-              {InfoState.MyInformations[5].updatedAt[i]}
+              {hoursGap < 24
+                ? minsGap < 60
+                  ? secsGap < 60
+                    ? `방금 전`
+                    : `${minsGap}분 전`
+                  : `${hoursGap}시간 전`
+                : `${createAt.substr(0, 10).split("-")[0]}년 ${
+                    createAt.substr(0, 10).split("-")[1]
+                  }월 ${createAt.substr(0, 10).split("-")[2]}일`}
             </CreatedDate>
           </ContentWrapper>
         </FeedWrapper>
