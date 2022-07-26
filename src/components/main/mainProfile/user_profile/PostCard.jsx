@@ -8,6 +8,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
+import { useHistory  } from 'react-router-dom';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -113,6 +114,7 @@ function PostCard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [targetPost, setTargetPost] = useState("");
+  const history = useHistory();
 
   const modalItemList = [
     {
@@ -123,7 +125,37 @@ function PostCard() {
     },
     {
       content: "수정",
-      onClick: () => {},
+      onClick: () => {
+        const updatePost = async(id)=>{
+          // 내가 수정할 글에 들어가기 
+          history.push('/posting/'+id)
+
+          // 기존 내용 불러오기 .. 
+          try{
+            const updateConfig = {
+              headers: {
+                Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                "Content-type": "application/json",
+              },
+            };
+            const response = await axios.put(
+              `${API_URL}/post/`+id,
+              {
+                post: {
+                  content: "",
+                  image: ""
+                }
+              },
+              updateConfig
+              );
+              return response
+            }catch (error) {
+              console.error(error);
+              alert("error");
+            }
+          }
+        updatePost(targetPost);
+      },
     },
   ];
 
