@@ -57,7 +57,7 @@ function SaveButton() {
       const postBodyData = {
         product: {
           itemName: saveStates.required[1].value,
-          price: parseInt(saveStates.required[2].value.replace(",", "")),
+          price: parseInt(saveStates.required[2].value.replace(/,/g, "")),
           link: saveStates.required[3].value,
           itemImage: `${API_URL}/${imgResponse.data.filename}`,
         },

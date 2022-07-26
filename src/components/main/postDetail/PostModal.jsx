@@ -74,9 +74,54 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
   return (
     <ModalPortal>
       <ModalBg postModal={postModal} onClick={() => setPostModal(false)}>
-        {InfoState.MyInformations[5].image[index] !== "" ? (
+        {src === InfoState.MyInformations[0].myImage ? (
+          InfoState.MyInformations[3].image[index] !== "" ? (
+            <ModalWrapper
+              postModal={postModal}
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
+            >
+              {imgIndex !== 0 && (
+                <MoveBtn
+                  type="button"
+                  direction="prev"
+                  onClick={() => {
+                    setImgIndex(imgIndex - 1);
+                  }}
+                />
+              )}
+              <ContentImg
+                src={
+                  InfoState.MyInformations[3].image[index].split(",")[imgIndex]
+                }
+              />
+              {imgIndex !==
+                InfoState.MyInformations[3].image[index].split(",").length -
+                  1 && (
+                <MoveBtn
+                  type="button"
+                  direction="next"
+                  onClick={() => {
+                    setImgIndex(imgIndex + 1);
+                  }}
+                />
+              )}
+              <PostContent Isimg="exist" src={src} id={id} index={index} />
+            </ModalWrapper>
+          ) : (
+            <ModalWrapper
+              className="NoImg"
+              postModal={postModal}
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
+            >
+              <PostContent IsImage="" src={src} id={id} index={index} />
+            </ModalWrapper>
+          )
+        ) : InfoState.MyInformations[5].image[index] !== "" ? (
           <ModalWrapper
-            IsImage={InfoState.MyInformations[5].image[index]}
             postModal={postModal}
             onClick={(event) => {
               event.stopPropagation();
@@ -107,7 +152,7 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
                 }}
               />
             )}
-            <PostContent src={src} id={id} index={index} />
+            <PostContent Isimg="exist" src={src} id={id} index={index} />
           </ModalWrapper>
         ) : (
           <ModalWrapper
@@ -117,7 +162,7 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
               event.stopPropagation();
             }}
           >
-            <PostContent src={src} id={id} index={index} />
+            <PostContent Isimg="" src={src} id={id} index={index} />
           </ModalWrapper>
         )}
       </ModalBg>
