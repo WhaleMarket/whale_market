@@ -1,12 +1,13 @@
-import React, { useState, useContext } from "react";
-import ModalBtn from "../../../modal/ModalBtn";
-import Modal from "../../../modal/Modal";
-import AlertModal from "../../../modal/AlertModal";
-import styled from "styled-components";
-import PostIconContainer from "./PostIconContainer";
-import AuthContext from "../../../../context/AuthProvider";
-import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
+import React, { useState, useContext } from 'react';
+import { useHistory  } from 'react-router-dom';
+import ModalBtn from '../../../modal/ModalBtn';
+import Modal from '../../../modal/Modal';
+import AlertModal from '../../../modal/AlertModal';
+import styled from 'styled-components';
+import PostIconContainer from './PostIconContainer';
+import AuthContext from '../../../../context/AuthProvider';
+import axios from 'axios';
+import { API_URL } from '../../../../constants/defaultUrl';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -109,7 +110,8 @@ function PostCard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [InfoState] = useContext(AuthContext);
-  const [targetPost, setTargetPost] = useState("");
+  const [targetPost, setTargetPost] = useState('');
+  const history = useHistory();
 
   const modalItemList = [
     {
@@ -120,7 +122,37 @@ function PostCard() {
     },
     {
       content: "수정",
-      onClick: () => {},
+      onClick: () => {
+        const updatePost = async(id)=>{
+          // 내가 수정할 글에 들어가기 
+          history.push('/posting/'+id)
+
+          // 기존 내용 불러오기 .. 
+          try{
+            const updateConfig = {
+              headers: {
+                Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                "Content-type": "application/json",
+              },
+            };
+            const response = await axios.put(
+              `${API_URL}/post/`+id,
+              {
+                post: {
+                  content: "",
+                  image: ""
+                }
+              },
+              updateConfig
+              );
+              return response
+            }catch (error) {
+              console.error(error);
+              alert("error");
+            }
+          }
+        updatePost(targetPost);
+      },
     },
   ];
 
@@ -172,6 +204,7 @@ function PostCard() {
                 setTargetPost(InfoState.MyInformations[3].id[i]);
               }}
             />
+
           </PostInfo>
           <PostTxt>{InfoState.MyInformations[3].content[i]}</PostTxt>
           <PostImgWrapper>
@@ -189,17 +222,8 @@ function PostCard() {
             comment={InfoState.MyInformations[3].commentCount[i]}
           />
 
-          <PostDate>
-            {hoursGap < 24
-              ? minsGap < 60
-                ? secsGap < 60
-                  ? `방금 전`
-                  : `${minsGap}분 전`
-                : `${hoursGap}시간 전`
-              : `${createAt.substr(0, 10).split("-")[0]}년 ${
-                  createAt.substr(0, 10).split("-")[1]
-                }월 ${createAt.substr(0, 10).split("-")[2]}일`}
-          </PostDate>
+          <PostDate>{hoursGap < 24 ? (minsGap < 60 ? (secsGap < 60 ? `방금 전` : `${minsGap}분 전`) : `${hoursGap}시간 전`) : `${createAt.substr(0,10).split("-")[0]}년 ${createAt.substr(0,10).split("-")[1]}월 ${createAt.substr(0,10).split("-")[2]}일`}</PostDate>
+
         </PostContent>
       );
     }
