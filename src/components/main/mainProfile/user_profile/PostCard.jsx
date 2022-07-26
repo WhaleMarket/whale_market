@@ -110,7 +110,6 @@ const PostDate = styled.p`
 
 function PostCard() {
   const [PostingState] = useContext(PostingContext);
-  const [InfoState] = useContext(AuthContext);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [InfoState, setInfoState] = useContext(AuthContext);
