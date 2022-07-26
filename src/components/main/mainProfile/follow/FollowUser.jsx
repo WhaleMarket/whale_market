@@ -202,7 +202,7 @@ function FollowUser() {
       result.push(
         <Wrapper key={i}>
           <InfoWrapper>
-            <StyledLink to={"/" + InfoState.MyInformations[6].accountname[i]}>
+            <StyledLink to={"/profile/" + InfoState.MyInformations[6].accountname[i]}>
               <UserImgDiv src={InfoState.MyInformations[6].image[i]} />
             </StyledLink>
             <FollowInfo>
