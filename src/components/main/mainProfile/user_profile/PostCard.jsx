@@ -6,6 +6,7 @@ import AlertModal from '../../../modal/AlertModal';
 import styled from 'styled-components';
 import PostIconContainer from './PostIconContainer';
 import AuthContext from '../../../../context/AuthProvider';
+import UploadPostingContext from '../../../../context/UploadImageListProvider';
 import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
 
@@ -110,7 +111,8 @@ const PostDate = styled.p`
 function PostCard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-  const [InfoState] = useContext(AuthContext);
+  const [InfoState, setInfoState] = useContext(AuthContext);
+  // const [uploadPostingState, setUploadPostingState] = useContext(UploadPostingContext);
   const [targetPost, setTargetPost] = useState('');
   const history = useHistory();
 
@@ -124,35 +126,31 @@ function PostCard() {
     {
       content: "수정",
       onClick: () => {
-        const updatePost = async(id)=>{
-          // 내가 수정할 글에 들어가기 
-          history.push('/posting/'+id)
-
-          // 기존 내용 불러오기 .. 
-          try{
+        const GetPost = async (id) => {
+          history.push('/postingedit/'+id);
+          try {
             const updateConfig = {
               headers: {
                 Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
                 "Content-type": "application/json",
               },
             };
-            const response = await axios.put(
-              `${API_URL}/post/`+id,
-              {
-                post: {
-                  content: "",
-                  image: ""
+            const response = await axios.get(`${API_URL}/post/`+id, updateConfig);
+            setInfoState((InfoState)=>{
+              InfoState.MyInformations[10] = {
+                ...InfoState.MyInformations[10],
+                content : response.data.post.content,
+                image : response.data.post.image.split(",")
                 }
-              },
-              updateConfig
-              );
-              return response
-            }catch (error) {
-              console.error(error);
-              alert("error");
-            }
+              return {MyInformations : InfoState.MyInformations}
+            }) 
+            console.log(InfoState.MyInformations[10])
+          } catch (error) {
+            console.error(error);
+            alert("error");
           }
-        updatePost(targetPost);
+        };
+        GetPost(targetPost);
       },
     },
   ];

@@ -100,6 +100,12 @@ export const AuthProvider = ({ children }) => {
         link: [],
         itemImage: [],
       },
+      {
+        index: 10,
+        label: "postingEdit",
+        content: [],
+        image: [],
+      },
     ],
   });
 
