@@ -81,6 +81,25 @@ export const AuthProvider = ({ children }) => {
         intro: [],
         isfollow: [],
       },
+      {
+        index: 8,
+        label: "userInformation",
+        image: "",
+        username: "",
+        accountname: "",
+        intro: "",
+        followerCount: "",
+        followingCount: "",
+        followerList: [],
+      },
+      {
+        index: 9,
+        label: "userProduct",
+        itemName: [],
+        price: [],
+        link: [],
+        itemImage: [],
+      },
     ],
   });
 
