@@ -149,7 +149,7 @@ const ProductUploadButton = styled(Link)`
   cursor: pointer;
 `;
 
-function UserProfileCard() {
+function UserProfileCard({ user }) {
   const { pathname } = window.location;
 
   const urlRef = useRef();
@@ -162,24 +162,24 @@ function UserProfileCard() {
   };
 
   // 희: 내 프로필 이미지, 이름, 계정, 소개 연결
-  const [InfoState] = useContext(AuthContext);
+//   const [InfoState] = useContext(AuthContext);
 
   return (
     <>
       <UserProfileContainer>
-        <ImgDiv src={InfoState.MyInformations[8].image} />
-        <UserName>{InfoState.MyInformations[8].username}</UserName>
-        <UserId>{`@${InfoState.MyInformations[8].accountname}`}</UserId>
-        <UserIntro>{InfoState.MyInformations[8].intro}</UserIntro>
+        <ImgDiv src={user.image} />
+        <UserName>{user.username}</UserName>
+        <UserId>{`@${user.accountname}`}</UserId>
+        <UserIntro>{user.intro}</UserIntro>
         <Followers to="/followers">
           <FollowCount>
-            {InfoState.MyInformations[8].followerCount}
+            {user.followerCount}
           </FollowCount>
           <FollowTxt>followers</FollowTxt>
         </Followers>
         <Followings to="/followings">
           <FollowCount>
-            {InfoState.MyInformations[8].followingCount}
+            {user.followingCount}
           </FollowCount>
           <FollowTxt>followings</FollowTxt>
         </Followings>

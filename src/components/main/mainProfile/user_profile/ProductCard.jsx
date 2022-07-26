@@ -33,9 +33,12 @@ const ProductPrice = styled.p`
   text-overflow: ellipsis;
 `;
 
-function ProductCard({ src, name, price }) {
+function ProductCard({ productResult, accountname }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
+
+  // 희: 상품 객체
+  const [product, setProduct] = useState({});
 
   const modalItemList = [
     {
@@ -61,11 +64,26 @@ function ProductCard({ src, name, price }) {
 
   return (
     <>
-      <ProductWrapper onClick={() => setIsOpenModal(!isOpenModal)}>
+      {/* <ProductWrapper onClick={() => setIsOpenModal(!isOpenModal)}>
         <ProductImg src={src} />
         <ProductName>{name}</ProductName>
         <ProductPrice>{price}원</ProductPrice>
-      </ProductWrapper>
+      </ProductWrapper> */}
+        {productResult.map((product, index) => {
+            return (
+                <ProductWrapper 
+                    key={product.id}
+                    onClick={() => setIsOpenModal(!isOpenModal)}
+                >
+                    <ProductImg src={product.itemImage} />
+                    <ProductName>{product.itemName}</ProductName>
+                    <ProductPrice>{`${product.price
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</ProductPrice>
+                </ProductWrapper>
+            );
+        })}
+        
 
       <Modal
         isOpenModal={isOpenModal}

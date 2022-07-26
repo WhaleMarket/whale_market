@@ -12,10 +12,10 @@ const ProfileContainer = styled.section`
     box-sizing: border-box;
 `
 
-function UserProfileSection() {
+function UserProfileSection({ user }) {
     return (
         <ProfileContainer>
-            <UserProfileCard/>
+            <UserProfileCard user={user} />
         </ProfileContainer>
     )
 }

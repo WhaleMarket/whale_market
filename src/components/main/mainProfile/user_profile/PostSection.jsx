@@ -72,7 +72,7 @@ const AlbumImg = styled.img`
     object-fit: cover;
 `
 
-function PostSection() {
+function PostSection({ accountname }) {
     const [viewType, setviewType] = useState(true);
 
     return(
@@ -87,7 +87,7 @@ function PostSection() {
         </ViewTypeNav>
         {viewType ? (
             <PostContainer>
-                <PostCard/>
+                <PostCard accountname={accountname} />
             </PostContainer>
         ) : (
             <AlbumContainer>
