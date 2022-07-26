@@ -5,11 +5,13 @@ import Comment from "./Comment";
 import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
+import AlertModal from "../../modal/AlertModal";
+import Modal from "../../modal/Modal";
 
 const LayOut = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: ${(props) => (props.img === undefined ? "none" : "30%")};
 `;
 
 const UserInfo = styled.div`
@@ -58,10 +60,9 @@ const CommentWrapper = styled.ul`
   border-top: 0.5px solid #bdbdbd;
 `;
 
-function PostContent({ id, index, src }) {
-  const [InfoState] = useContext(AuthContext);
+function PostContent({ id, index, src, Isimg }) {
+  const [InfoState, setInfoState] = useContext(AuthContext);
   const [comments, setComments] = useState([]);
-
   async function fetchData() {
     try {
       const commentconfig = {
@@ -84,36 +85,243 @@ function PostContent({ id, index, src }) {
     fetchData();
   }, []);
 
-  return (
-    <LayOut>
-      <UserInfo>
-        <UserProfile src={src} />
-        <UserAccount>{InfoState.MyInformations[5].username[index]}</UserAccount>
-      </UserInfo>
-      <Wrapper>
-        {InfoState.MyInformations[5].content[index] !== "" && (
-          <TextContent>
-            {InfoState.MyInformations[5].content[index]}
-          </TextContent>
-        )}
-        <CommentWrapper>
-          {comments[0] !== undefined &&
-            (comments[0].length > 0 ? (
-              comments[0].map((value, key) => {
-                return <Comment value={value} key={key} />;
-              })
-            ) : (
-              <p>아직 댓글이 없습니다.</p>
-            ))}
-        </CommentWrapper>
-      </Wrapper>
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [alertModal, setAlertModal] = useState(false);
+  const [targetcomment, setTargetcomment] = useState("");
+  const [targetUser, setTargetUser] = useState("");
 
-      <CommentInput
-        id={id}
-        Liked={InfoState.MyInformations[5].hearted[index]}
-        setComments={setComments}
-      />
-    </LayOut>
+  const modalItemList =
+    targetUser === InfoState.MyInformations[0].myAccountname
+      ? [
+          {
+            content: "삭제",
+            onClick: () => {
+              setAlertModal(true);
+            },
+          },
+        ]
+      : [
+          {
+            content: "신고",
+            onClick: () => {
+              setAlertModal(true);
+            },
+          },
+        ];
+
+  const removePost = async (commentid) => {
+    try {
+      const deleteConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.delete(
+        `${API_URL}/post/${id}/comments/${commentid}`,
+        deleteConfig
+      );
+      fetchData();
+      if (src !== InfoState.MyInformations[0].myImage) {
+        const feedConfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const feedResponse = await axios.get(
+          `${API_URL}/post/feed`,
+          feedConfig
+        );
+        setInfoState((InfoState) => {
+          InfoState.MyInformations[5] = {
+            ...InfoState.MyInformations[5],
+            commentCount: feedResponse.data.posts.map((value) => {
+              return value.commentCount;
+            }),
+          };
+          return { MyInformations: InfoState.MyInformations };
+        });
+      } else {
+        const Postingconfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const Postingresponse = await axios.get(
+          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
+          Postingconfig
+        );
+        setInfoState((InfoState) => {
+          InfoState.MyInformations[3] = {
+            ...InfoState.MyInformations[3],
+            commentCount: Postingresponse.data.post.map((value) => {
+              return value.commentCount;
+            }),
+          };
+          return { MyInformations: InfoState.MyInformations };
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      alert("error");
+    }
+  };
+
+  const reportPost = async (commentid) => {
+    try {
+      const reportConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.post(
+        `${API_URL}/post/${id}/comments/${commentid}/report`,
+        {},
+        reportConfig
+      );
+      if (prompt("신고 사유를 적어주세요.") !== "") {
+        alert("신고 되었습니다.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("error");
+    }
+  };
+  return (
+    <>
+      {src === InfoState.MyInformations[0].myImage ? (
+        <LayOut img={Isimg}>
+          <UserInfo>
+            <UserProfile src={src} />
+            <UserAccount>{InfoState.MyInformations[0].myUsername}</UserAccount>
+          </UserInfo>
+          <Wrapper>
+            {InfoState.MyInformations[3].content[index] !== "" && (
+              <TextContent>
+                {InfoState.MyInformations[3].content[index]}
+              </TextContent>
+            )}
+            <CommentWrapper>
+              {comments[0] !== undefined &&
+                (comments[0].length > 0 ? (
+                  comments[0].map((value, key) => {
+                    return (
+                      <Comment
+                        value={value}
+                        key={key}
+                        setIsOpenModal={setIsOpenModal}
+                        isOpenModal={isOpenModal}
+                        setTargetcomment={setTargetcomment}
+                      />
+                    );
+                  })
+                ) : (
+                  <p>아직 댓글이 없습니다.</p>
+                ))}
+              <Modal
+                isOpenModal={isOpenModal}
+                setIsOpenModal={setIsOpenModal}
+                modalItemList={modalItemList}
+              />
+              <AlertModal
+                alertModal={alertModal}
+                setAlertModal={setAlertModal}
+                setIsOpenModal={setIsOpenModal}
+                content={"댓글을 삭제할까요?"}
+                deleteBtn={{
+                  content: "삭제",
+                  onClick: () => {
+                    removePost(targetcomment);
+                  },
+                }}
+              />
+            </CommentWrapper>
+          </Wrapper>
+
+          <CommentInput
+            index="3"
+            id={id}
+            Liked={InfoState.MyInformations[3].hearted[index]}
+            setComments={setComments}
+          />
+        </LayOut>
+      ) : (
+        <LayOut img={Isimg}>
+          <UserInfo>
+            <UserProfile src={src} />
+            <UserAccount>
+              {InfoState.MyInformations[5].username[index]}
+            </UserAccount>
+          </UserInfo>
+          <Wrapper>
+            {InfoState.MyInformations[5].content[index] !== "" && (
+              <TextContent>
+                {InfoState.MyInformations[5].content[index]}
+              </TextContent>
+            )}
+            <CommentWrapper>
+              {comments[0] !== undefined &&
+                (comments[0].length > 0 ? (
+                  comments[0].map((value, key) => {
+                    return (
+                      <Comment
+                        value={value}
+                        key={key}
+                        setIsOpenModal={setIsOpenModal}
+                        isOpenModal={isOpenModal}
+                        setTargetcomment={setTargetcomment}
+                        setTargetUser={setTargetUser}
+                      />
+                    );
+                  })
+                ) : (
+                  <p>아직 댓글이 없습니다.</p>
+                ))}
+              <Modal
+                isOpenModal={isOpenModal}
+                setIsOpenModal={setIsOpenModal}
+                modalItemList={modalItemList}
+              />
+              <AlertModal
+                alertModal={alertModal}
+                setAlertModal={setAlertModal}
+                setIsOpenModal={setIsOpenModal}
+                content={
+                  targetUser === InfoState.MyInformations[0].myAccountname
+                    ? "댓글을 삭제할까요?"
+                    : "댓글을 신고할까요?"
+                }
+                deleteBtn={
+                  targetUser === InfoState.MyInformations[0].myAccountname
+                    ? {
+                        content: "삭제",
+                        onClick: () => {
+                          removePost(targetcomment);
+                        },
+                      }
+                    : {
+                        content: "신고",
+                        onClick: () => {
+                          reportPost(targetcomment);
+                        },
+                      }
+                }
+              />
+            </CommentWrapper>
+          </Wrapper>
+
+          <CommentInput
+            index="5"
+            id={id}
+            Liked={InfoState.MyInformations[5].hearted[index]}
+            setComments={setComments}
+          />
+        </LayOut>
+      )}
+    </>
   );
 }
 

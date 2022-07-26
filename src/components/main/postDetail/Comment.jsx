@@ -10,6 +10,8 @@ const CommentLi = styled.li`
 const ProfileWrapper = styled.div`
   display: flex;
   margin-bottom: 4px;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ProfileImg = styled.img`
@@ -23,7 +25,6 @@ const ProfileImg = styled.img`
 `;
 const UserName = styled.span`
   display: flex;
-  width: 100%;
   margin-top: 4px;
   /* align-items: center; */
   margin-left: 12px;
@@ -41,13 +42,34 @@ const CommentContent = styled.p`
   margin-left: 48px;
 `;
 
-function Comment({ value, index }) {
+const InfoWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
+function Comment({
+  value,
+  index,
+  setIsOpenModal,
+  isOpenModal,
+  setTargetcomment,
+  setTargetUser,
+}) {
   return (
     <CommentLi key={index}>
       <ProfileWrapper>
-        <ProfileImg src={value.author.image} />
-        <UserName>{value.author.username}</UserName>
-        <ModalBtn className="small" />
+        <InfoWrapper>
+          <ProfileImg src={value.author.image} />
+          <UserName>{value.author.username}</UserName>
+        </InfoWrapper>
+        <ModalBtn
+          className="small"
+          onClick={() => {
+            setIsOpenModal(!isOpenModal);
+            setTargetcomment(value.id);
+            setTargetUser(value.author.accountname);
+          }}
+        />
       </ProfileWrapper>
       <CommentContent>{value.content}</CommentContent>
     </CommentLi>

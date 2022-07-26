@@ -183,6 +183,7 @@ function PostCard() {
                 })}
           </PostImgWrapper>
           <PostIconContainer
+            index={i}
             id={InfoState.MyInformations[3].id[i]}
             like={InfoState.MyInformations[3].heartCount[i]}
             liked={InfoState.MyInformations[3].hearted[i]}
