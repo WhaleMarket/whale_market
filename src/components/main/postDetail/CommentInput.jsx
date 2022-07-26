@@ -141,6 +141,7 @@ function CommentInput({ index, Liked, id, setComments }) {
 
   // 버튼 활성화  // 기본값은 비활성화 , 길이 0 이상되면 false되면서 버튼 활성화
   const [isDisabled, setIsDisabled] = useState(true);
+
   const isPassedComment = () => {
     return comment.length > 0 ? setIsDisabled(false) : setIsDisabled(true);
   };
@@ -149,7 +150,7 @@ function CommentInput({ index, Liked, id, setComments }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     !isDisabled && UploadComment();
-    setIsDisabled(false);
+    setIsDisabled(true);
     setComment("");
     commentinput.current.value = "";
   };

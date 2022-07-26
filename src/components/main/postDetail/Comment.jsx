@@ -4,7 +4,6 @@ import ModalBtn from "../../modal/ModalBtn";
 const CommentLi = styled.li`
   list-style: none;
   flex-direction: column;
-  /* margin-bottom: 16px; */
   padding: 16px 16px 12px;
 `;
 const ProfileWrapper = styled.div`
@@ -26,7 +25,6 @@ const ProfileImg = styled.img`
 const UserName = styled.span`
   display: flex;
   margin-top: 4px;
-  /* align-items: center; */
   margin-left: 12px;
   font-size: 14px;
   font-weight: 500;
@@ -37,8 +35,6 @@ const UserName = styled.span`
 const CommentContent = styled.p`
   font-size: 14px;
   font-weight: 400;
-  /* line-height: 18px; */
-  /* text-align: left; */
   margin-left: 48px;
 `;
 

@@ -11,7 +11,7 @@ import Modal from "../../modal/Modal";
 const LayOut = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.img === undefined ? "none" : "30%")};
+  width: ${(props) => (props.img === undefined ? "100%" : "30%")};
 `;
 
 const UserInfo = styled.div`
@@ -54,10 +54,15 @@ const TextContent = styled.p`
   letter-spacing: 0em;
   text-align: left;
   padding: 0 16px 16px 16px;
+  word-break: break-word;
 `;
 
 const CommentWrapper = styled.ul`
   border-top: 0.5px solid #bdbdbd;
+`;
+
+const Nocomment = styled.li`
+  padding: 50px;
 `;
 
 function PostContent({ id, index, src, Isimg }) {
@@ -215,11 +220,12 @@ function PostContent({ id, index, src, Isimg }) {
                         setIsOpenModal={setIsOpenModal}
                         isOpenModal={isOpenModal}
                         setTargetcomment={setTargetcomment}
+                        setTargetUser={setTargetUser}
                       />
                     );
                   })
                 ) : (
-                  <p>아직 댓글이 없습니다.</p>
+                  <Nocomment>아직 댓글이 없습니다.</Nocomment>
                 ))}
               <Modal
                 isOpenModal={isOpenModal}
@@ -278,7 +284,7 @@ function PostContent({ id, index, src, Isimg }) {
                     );
                   })
                 ) : (
-                  <p>아직 댓글이 없습니다.</p>
+                  <Nocomment>아직 댓글이 없습니다.</Nocomment>
                 ))}
               <Modal
                 isOpenModal={isOpenModal}

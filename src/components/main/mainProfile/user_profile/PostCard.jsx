@@ -65,6 +65,7 @@ const PostContent = styled.li`
   border: solid #dbdbdb 1px;
   border-radius: 10px;
   margin-bottom: 20px;
+  word-break: break-word;
 `;
 
 const PostTxt = styled.p`

@@ -40,7 +40,7 @@ function DetailInput({ id, type, placeholder, index, errorName }) {
       });
       if (id === "price") {
         const KRmoney = parseInt(
-          input_ref.current.value.replaceAll(",", "")
+          input_ref.current.value.replace(/,/g, "")
         ).toLocaleString("ko-KR");
         input_ref.current.value = KRmoney;
       }

@@ -10,6 +10,7 @@ import PostModal from "../../postDetail/PostModal";
 
 const PostIconWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const LikeBtn = styled.button`
@@ -27,7 +28,7 @@ const LikeBtn = styled.button`
 `;
 
 const Count = styled.p`
-  margin-left: 1.625rem;
+  margin-left: 6px;
   color: #767676;
   font-size: 0.75rem;
 `;
@@ -137,16 +138,14 @@ function PostIconContainer({ like, comment, liked, id, index }) {
         <LikeBtn
           Liked={liked}
           onClick={liked ? useHandleUnlike : useHandleLike}
-        >
-          <Count>{like}</Count>
-        </LikeBtn>
+        ></LikeBtn>
+        <Count>{like}</Count>
         <CommentBtn
           onClick={() => {
             openPostModal();
           }}
-        >
-          <Count>{comment}</Count>
-        </CommentBtn>
+        ></CommentBtn>
+        <Count>{comment}</Count>
       </PostIconWrapper>
       <PostModal
         src={InfoState.MyInformations[0].myImage}

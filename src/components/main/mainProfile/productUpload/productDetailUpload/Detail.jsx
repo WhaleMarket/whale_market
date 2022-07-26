@@ -12,7 +12,7 @@ function Detail() {
 
   const numberpattern = /^[0-9]*$/;
   const priceState =
-    !numberpattern.test(saveStates.required[2].value.replaceAll(",", "")) ||
+    !numberpattern.test(saveStates.required[2].value.replace(/,/g, "")) ||
     parseInt(saveStates.required[2].value) === 0;
 
   const urlpattern =
