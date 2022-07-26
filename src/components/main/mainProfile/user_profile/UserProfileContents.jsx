@@ -167,19 +167,19 @@ function UserProfileCard() {
   return (
     <>
       <UserProfileContainer>
-        <ImgDiv src={InfoState.MyInformations[0].myImage} />
-        <UserName>{InfoState.MyInformations[0].myUsername}</UserName>
-        <UserId>{`@${InfoState.MyInformations[0].myAccountname}`}</UserId>
-        <UserIntro>{InfoState.MyInformations[0].myIntro}</UserIntro>
+        <ImgDiv src={InfoState.MyInformations[8].image} />
+        <UserName>{InfoState.MyInformations[8].username}</UserName>
+        <UserId>{`@${InfoState.MyInformations[8].accountname}`}</UserId>
+        <UserIntro>{InfoState.MyInformations[8].intro}</UserIntro>
         <Followers to="/followers">
           <FollowCount>
-            {InfoState.MyInformations[0].myFollowerCount}
+            {InfoState.MyInformations[8].followerCount}
           </FollowCount>
           <FollowTxt>followers</FollowTxt>
         </Followers>
         <Followings to="/followings">
           <FollowCount>
-            {InfoState.MyInformations[0].myFollowingCount}
+            {InfoState.MyInformations[8].followingCount}
           </FollowCount>
           <FollowTxt>followings</FollowTxt>
         </Followings>
