@@ -12,7 +12,6 @@ export function LoginForm() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [notMatchError, setNotMatchError] = useState('');
 
@@ -21,7 +20,7 @@ export function LoginForm() {
     }, [])
 
     useEffect(() => {
-        setErrorMessage('');
+        setNotMatchError('');
     }, [email, password])
 
     const handleSubmit = async (event) => {
