@@ -29,7 +29,8 @@ function MainRouter() {
           <Navbar />
           <Route path="/home" exact component={Home} />
           <Route path="/chatting" component={Chatting} />
-          <Route path="/myprofile" component={MainProfile} />
+          {/* <Route path="/myprofile" component={MainProfile} /> */}
+          <Route path="/profile/:accountname" component={MainProfile} />
           <Route path="/search" component={HomeSearch} />
         </>
       </Switch>
