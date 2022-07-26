@@ -34,7 +34,9 @@ const FeedWrapper = styled.li`
   box-sizing: border-box;
 `;
 
-const ContentWrapper = styled.div``;
+const ContentWrapper = styled.div`
+  word-break: break-word;
+`;
 
 const ContentText = styled.p`
   margin-bottom: 28px;

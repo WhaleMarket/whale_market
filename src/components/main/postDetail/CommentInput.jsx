@@ -62,9 +62,9 @@ const SendBtn = styled.button`
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 `;
 
-function CommentInput({ Liked, id, setComments }) {
+function CommentInput({ index, Liked, id, setComments }) {
   // 댓글 작성 api 확인
-  const [InfoState] = useContext(AuthContext);
+  const [InfoState, setInfoState] = useContext(AuthContext);
   const [comment, setComment] = useState("");
   const commentinput = useRef();
 
@@ -92,6 +92,48 @@ function CommentInput({ Liked, id, setComments }) {
         commentconfig
       );
       setComments([res.data.comments]);
+
+      if (index === "5") {
+        const feedConfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const feedResponse = await axios.get(
+          `${API_URL}/post/feed`,
+          feedConfig
+        );
+        setInfoState((InfoState) => {
+          InfoState.MyInformations[5] = {
+            ...InfoState.MyInformations[5],
+            commentCount: feedResponse.data.posts.map((value) => {
+              return value.commentCount;
+            }),
+          };
+          return { MyInformations: InfoState.MyInformations };
+        });
+      } else {
+        const Postingconfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const Postingresponse = await axios.get(
+          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
+          Postingconfig
+        );
+        setInfoState((InfoState) => {
+          InfoState.MyInformations[3] = {
+            ...InfoState.MyInformations[3],
+            commentCount: Postingresponse.data.post.map((value) => {
+              return value.commentCount;
+            }),
+          };
+          return { MyInformations: InfoState.MyInformations };
+        });
+      }
     } catch (err) {
       console.error(err);
     }
@@ -99,6 +141,7 @@ function CommentInput({ Liked, id, setComments }) {
 
   // 버튼 활성화  // 기본값은 비활성화 , 길이 0 이상되면 false되면서 버튼 활성화
   const [isDisabled, setIsDisabled] = useState(true);
+
   const isPassedComment = () => {
     return comment.length > 0 ? setIsDisabled(false) : setIsDisabled(true);
   };
@@ -107,7 +150,7 @@ function CommentInput({ Liked, id, setComments }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     !isDisabled && UploadComment();
-    setIsDisabled(false);
+    setIsDisabled(true);
     setComment("");
     commentinput.current.value = "";
   };

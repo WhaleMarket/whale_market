@@ -65,6 +65,7 @@ const PostContent = styled.li`
   border: solid #dbdbdb 1px;
   border-radius: 10px;
   margin-bottom: 20px;
+  word-break: break-word;
 `;
 
 const PostTxt = styled.p`
@@ -183,6 +184,7 @@ function PostCard() {
                 })}
           </PostImgWrapper>
           <PostIconContainer
+            index={i}
             id={InfoState.MyInformations[3].id[i]}
             like={InfoState.MyInformations[3].heartCount[i]}
             liked={InfoState.MyInformations[3].hearted[i]}

@@ -11,7 +11,7 @@ const ProductContainer = styled.section`
   box-sizing: border-box;
   @media screen and (max-width: 855px) {
     width: 100vw;
-    }
+  }
 `;
 
 const ProductTitle = styled.h1`

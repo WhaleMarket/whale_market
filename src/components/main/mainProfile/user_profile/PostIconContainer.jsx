@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import likeBtn from "../../../../assets/icon-heart-fill.png";
 import likeBtnOutline from "../../../../assets/icon-heart.png";
@@ -6,9 +6,11 @@ import commentBtn from "../../../../assets/icon-message-circle.png";
 import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
+import PostModal from "../../postDetail/PostModal";
 
 const PostIconWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const LikeBtn = styled.button`
@@ -26,7 +28,7 @@ const LikeBtn = styled.button`
 `;
 
 const Count = styled.p`
-  margin-left: 1.625rem;
+  margin-left: 6px;
   color: #767676;
   font-size: 0.75rem;
 `;
@@ -45,7 +47,7 @@ const CommentBtn = styled.button`
   }
 `;
 
-function PostIconContainer({ like, comment, liked, id }) {
+function PostIconContainer({ like, comment, liked, id, index }) {
   const [InfoState, setInfoState] = useContext(AuthContext);
   const useHandleLike = () => {
     async function fetchData() {
@@ -124,15 +126,35 @@ function PostIconContainer({ like, comment, liked, id }) {
     }
     fetchData();
   };
+
+  const [postModal, setPostModal] = useState(false);
+
+  function openPostModal() {
+    setPostModal(true);
+  }
   return (
-    <PostIconWrapper>
-      <LikeBtn Liked={liked} onClick={liked ? useHandleUnlike : useHandleLike}>
+    <>
+      <PostIconWrapper>
+        <LikeBtn
+          Liked={liked}
+          onClick={liked ? useHandleUnlike : useHandleLike}
+        ></LikeBtn>
         <Count>{like}</Count>
-      </LikeBtn>
-      <CommentBtn>
+        <CommentBtn
+          onClick={() => {
+            openPostModal();
+          }}
+        ></CommentBtn>
         <Count>{comment}</Count>
-      </CommentBtn>
-    </PostIconWrapper>
+      </PostIconWrapper>
+      <PostModal
+        src={InfoState.MyInformations[0].myImage}
+        index={index}
+        id={id}
+        postModal={postModal}
+        setPostModal={setPostModal}
+      />
+    </>
   );
 }
 
