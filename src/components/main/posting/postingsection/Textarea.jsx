@@ -3,6 +3,7 @@ import styled from "styled-components";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import UploadContext from "../../../../context/UploadProvider";
 import ImgWrapper from "./ImgArticle";
+// import AuthContext from '../../../../context/AuthProvider';
 
 const EnterWrapper = styled.div``;
 
@@ -28,6 +29,8 @@ function PostingArea() {
     useContext(UploadPostingContext);
   const [value, setValue] = useState(false);
   const content = useRef();
+  // const [InfoState, setInfoState] = useContext(AuthContext);
+
   function con() {
     if (content) {
       setUploadPostingState((uploadPostingState) => {
@@ -72,7 +75,10 @@ function PostingArea() {
         maxLength="2400"
         height={textareaHeight}
         onInput={checkValue}
-      ></TextArea>
+        // defaultValue={InfoState.MyInformations[10].content && InfoState.MyInformations[10].content}
+      >
+        {/* {InfoState.MyInformations[10].content} */}
+      </TextArea>
       <ImgWrapper text={value} />
     </EnterWrapper>
   );
