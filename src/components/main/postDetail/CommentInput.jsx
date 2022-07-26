@@ -81,13 +81,6 @@ function CommentInput({ Liked, id, setComments }) {
           "Content-type": "application/json",
         },
       });
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async function fetchData() {
-    try {
       const commentconfig = {
         headers: {
           Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
@@ -99,8 +92,8 @@ function CommentInput({ Liked, id, setComments }) {
         commentconfig
       );
       setComments([res.data.comments]);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -114,7 +107,6 @@ function CommentInput({ Liked, id, setComments }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     !isDisabled && UploadComment();
-    fetchData();
     setIsDisabled(false);
     setComment("");
     commentinput.current.value = "";
