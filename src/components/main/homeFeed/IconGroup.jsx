@@ -62,7 +62,7 @@ const CommentCount = styled.span`
   color: #767676;
 `;
 
-function IconGroup({ like, comment, liked, id }) {
+function IconGroup({ like, comment, liked, id, index, src }) {
   const [InfoState, setInfoState] = useContext(AuthContext);
   const [postModal, setPostModal] = useState(false);
 
@@ -148,28 +148,33 @@ function IconGroup({ like, comment, liked, id }) {
     fetchData();
   };
 
-
-  function openPostModal (){
+  function openPostModal() {
     setPostModal(true);
   }
 
   return (
     <>
       <IconWrapper>
-        <Heart Liked={liked} onClick={liked ? useHandleUnlike : useHandleLike} />
+        <Heart
+          Liked={liked}
+          onClick={liked ? useHandleUnlike : useHandleLike}
+        />
         <HeartCount>{like}</HeartCount>
-        <CommentBtn 
-          onClick={()=>{
+        <CommentBtn
+          onClick={() => {
             openPostModal();
-          }} 
+          }}
         />
         <CommentCount>{comment}</CommentCount>
       </IconWrapper>
-      
-      <PostModal 
+
+      <PostModal
+        src={src}
+        index={index}
+        id={id}
         postModal={postModal}
         setPostModal={setPostModal}
-        />
+      />
     </>
   );
 }
