@@ -1,12 +1,12 @@
-import React, { useRef } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import messageIcon from "../../../../assets/icon-message-circle.png";
 import shareIcon from "../../../../assets/icon-share.png";
-import FollowButton from "./FollowButton";
-
-import { useContext } from "react";
 import AuthContext from "../../../../context/AuthProvider";
+import PostingContext from "../../../../context/PostingProvider";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
 
 const UserProfileContainer = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const Followers = styled(Link)`
   text-align: center;
   text-decoration: none;
   @media screen and (max-width: 855px) {
-      left: 56px;
+    left: 56px;
   }
 `;
 
@@ -80,8 +80,8 @@ const Followings = styled(Link)`
   top: 65px;
   text-align: center;
   text-decoration-line: none;
-    @media screen and (max-width: 855px) {
-      right: 56px;
+  @media screen and (max-width: 855px) {
+    right: 56px;
   }
 `;
 
@@ -114,15 +114,6 @@ const ShareButton = styled.button`
   cursor: pointer;
 `;
 
-const TextArea = styled.textarea`
-  position: absolute;
-  width: 0;
-  height: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-`;
-
 const ProfileEditButton = styled(Link)`
   padding: 8px 26px;
   border: 1px solid #dbdbdb;
@@ -149,49 +140,141 @@ const ProductUploadButton = styled(Link)`
   cursor: pointer;
 `;
 
-function UserProfileCard({ user }) {
-  const { pathname } = window.location;
+const FollowButton = styled.button`
+  width: 200px;
+  box-sizing: border-box;
+  padding: 8px 41px;
+  border: ${(props) => (props.follow ? "solid 0.5px grey" : "none")};
+  border-radius: 1.875rem;
+  background-color: ${(props) => (props.follow ? "white" : "#00bcd4")};
+  color: ${(props) => (props.follow ? "black" : "white")};
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  cursor: pointer;
+`;
 
-  const urlRef = useRef();
+function UserProfileCard() {
+  const [InfoState] = useContext(AuthContext);
+  const [PostingState, setPostingState] = useContext(PostingContext);
+
   const copyUrl = () => {
-    urlRef.current.focus();
-    urlRef.current.select();
-    navigator.clipboard.writeText(urlRef.current.value).then(() => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
       alert("URL이 복사되었습니다.");
     });
   };
 
-  // 희: 내 프로필 이미지, 이름, 계정, 소개 연결
-//   const [InfoState] = useContext(AuthContext);
+  const useHandleFollow = () => {
+    async function fetchData() {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        await axios.post(
+          `${API_URL}/profile/${PostingState.data[0].user.accountname}/follow`,
+          {},
+          config
+        );
+
+        const Userconfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const response = await axios.get(
+          `${API_URL}/profile/${PostingState.data[0].user.accountname}`,
+          Userconfig
+        );
+
+        setPostingState((PostingState) => {
+          PostingState.data[0] = {
+            ...PostingState.data[0],
+            user: response.data.profile,
+          };
+          return { data: PostingState.data };
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  };
+
+  const useHandleUnfollow = () => {
+    async function fetchData() {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        await axios.delete(
+          `${API_URL}/profile/${PostingState.data[0].user.accountname}/unfollow`,
+          config
+        );
+
+        const Userconfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const response = await axios.get(
+          `${API_URL}/profile/${PostingState.data[0].user.accountname}`,
+          Userconfig
+        );
+
+        setPostingState((PostingState) => {
+          PostingState.data[0] = {
+            ...PostingState.data[0],
+            user: response.data.profile,
+          };
+          return { data: PostingState.data };
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  };
 
   return (
     <>
       <UserProfileContainer>
-        <ImgDiv src={user.image} />
-        <UserName>{user.username}</UserName>
-        <UserId>{`@${user.accountname}`}</UserId>
-        <UserIntro>{user.intro}</UserIntro>
-        <Followers to="/followers">
-          <FollowCount>
-            {user.followerCount}
-          </FollowCount>
+        <ImgDiv src={PostingState.data[0].user.image} />
+        <UserName>{PostingState.data[0].user.username}</UserName>
+        <UserId>{`@${PostingState.data[0].user.accountname}`}</UserId>
+        <UserIntro>{PostingState.data[0].user.intro}</UserIntro>
+        <Followers to={"/followers/" + PostingState.data[0].user.accountname}>
+          <FollowCount>{PostingState.data[0].user.followerCount}</FollowCount>
           <FollowTxt>followers</FollowTxt>
         </Followers>
-        <Followings to="/followings">
-          <FollowCount>
-            {user.followingCount}
-          </FollowCount>
+        <Followings to={"/followings/" + PostingState.data[0].user.accountname}>
+          <FollowCount>{PostingState.data[0].user.followingCount}</FollowCount>
           <FollowTxt>followings</FollowTxt>
         </Followings>
         <IconWrapper>
-          {pathname === "/main/mainprofile" ? (
+          {window.location.pathname !==
+          `/main/profile/${InfoState.MyInformations[0].myAccountname}` ? (
             <>
               <MessageButton to="/Chatting" />
-              <FollowButton />
+              <FollowButton
+                follow={PostingState.data[0].user.isfollow}
+                type="button"
+                onClick={
+                  PostingState.data[0].user.isfollow
+                    ? useHandleUnfollow
+                    : useHandleFollow
+                }
+              >
+                {PostingState.data[0].user.isfollow ? "언 팔로우" : "팔로우"}
+              </FollowButton>
               <ShareButton onClick={copyUrl} />
-              <form>
-                <TextArea ref={urlRef} value={window.location.href} />
-              </form>
             </>
           ) : (
             <>

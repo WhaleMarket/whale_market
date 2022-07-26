@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import back from "../../../../assets/icon-arrow-left.png";
 
@@ -29,11 +30,13 @@ const FollowTxt = styled.h1`
 `;
 
 function FollowHeader() {
+  const history = useHistory();
+
   return (
     <Head>
-      <BackBtn onClick={() => (window.location.href = "./myprofile")} />
+      <BackBtn onClick={() => history.goBack()} />
       <FollowTxt>
-        {window.location.pathname === "/main/followers"
+        {window.location.pathname.includes("followers")
           ? "Followers"
           : "Followings"}
       </FollowTxt>

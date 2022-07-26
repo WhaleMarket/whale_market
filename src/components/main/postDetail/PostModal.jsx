@@ -5,6 +5,7 @@ import PostContent from "./PostContent";
 import AuthContext from "../../../context/AuthProvider";
 import prev from "../../../assets/prev-icon.png";
 import next from "../../../assets/next-icon.png";
+import PostingContext from "../../../context/PostingProvider";
 
 const ModalBg = styled.section`
   display: flex;
@@ -68,14 +69,23 @@ const MoveBtn = styled.button`
   right: ${(props) => (props.direction === "next" ? `272px` : `none`)};
 `;
 
-function PostModal({ postModal, setPostModal, id, index, src }) {
+function PostModal({
+  postModal,
+  setPostModal,
+  id,
+  index,
+  src,
+  image,
+  content,
+}) {
   const [InfoState] = useContext(AuthContext);
   const [imgIndex, setImgIndex] = useState(0);
+  const [PostingState] = useContext(PostingContext);
   return (
     <ModalPortal>
       <ModalBg postModal={postModal} onClick={() => setPostModal(false)}>
-        {src === InfoState.MyInformations[0].myImage ? (
-          InfoState.MyInformations[3].image[index] !== "" ? (
+        {src === PostingState.data[0].user.image ? (
+          image !== "" ? (
             <ModalWrapper
               postModal={postModal}
               onClick={(event) => {
@@ -91,14 +101,8 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
                   }}
                 />
               )}
-              <ContentImg
-                src={
-                  InfoState.MyInformations[3].image[index].split(",")[imgIndex]
-                }
-              />
-              {imgIndex !==
-                InfoState.MyInformations[3].image[index].split(",").length -
-                  1 && (
+              <ContentImg src={image.split(",")[imgIndex]} />
+              {imgIndex !== image.split(",").length - 1 && (
                 <MoveBtn
                   type="button"
                   direction="next"
@@ -107,7 +111,13 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
                   }}
                 />
               )}
-              <PostContent Isimg="exist" src={src} id={id} index={index} />
+              <PostContent
+                Isimg="exist"
+                src={src}
+                id={id}
+                index={index}
+                content={content}
+              />
             </ModalWrapper>
           ) : (
             <ModalWrapper
@@ -117,7 +127,13 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
                 event.stopPropagation();
               }}
             >
-              <PostContent IsImage="" src={src} id={id} index={index} />
+              <PostContent
+                IsImage=""
+                src={src}
+                id={id}
+                index={index}
+                content={content}
+              />
             </ModalWrapper>
           )
         ) : InfoState.MyInformations[5].image[index] !== "" ? (
@@ -152,7 +168,13 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
                 }}
               />
             )}
-            <PostContent Isimg="exist" src={src} id={id} index={index} />
+            <PostContent
+              Isimg="exist"
+              src={src}
+              id={id}
+              index={index}
+              content={content}
+            />
           </ModalWrapper>
         ) : (
           <ModalWrapper
@@ -162,7 +184,13 @@ function PostModal({ postModal, setPostModal, id, index, src }) {
               event.stopPropagation();
             }}
           >
-            <PostContent Isimg="" src={src} id={id} index={index} />
+            <PostContent
+              Isimg=""
+              src={src}
+              id={id}
+              index={index}
+              content={content}
+            />
           </ModalWrapper>
         )}
       </ModalBg>

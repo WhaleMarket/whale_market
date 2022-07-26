@@ -7,6 +7,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostModal from "../../postDetail/PostModal";
+import PostingContext from "../../../../context/PostingProvider";
 
 const PostIconWrapper = styled.div`
   display: flex;
@@ -47,8 +48,17 @@ const CommentBtn = styled.button`
   }
 `;
 
-function PostIconContainer({ like, comment, liked, id, index }) {
-  const [InfoState, setInfoState] = useContext(AuthContext);
+function PostIconContainer({
+  like,
+  comment,
+  liked,
+  id,
+  index,
+  image,
+  content,
+}) {
+  const [InfoState] = useContext(AuthContext);
+  const [PostingState, setPostingState] = useContext(PostingContext);
   const useHandleLike = () => {
     async function fetchData() {
       try {
@@ -59,27 +69,23 @@ function PostIconContainer({ like, comment, liked, id, index }) {
           },
         };
         await axios.post(`${API_URL}/post/${id}/heart`, {}, config);
-        const Postingconfig = {
+
+        const postconfig = {
           headers: {
             Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
             "Content-type": "application/json",
           },
         };
-        const Postingresponse = await axios.get(
-          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
-          Postingconfig
+        const response = await axios.get(
+          `${API_URL}/post/${PostingState.data[0].user.accountname}/userpost`,
+          postconfig
         );
-        setInfoState((InfoState) => {
-          InfoState.MyInformations[3] = {
-            ...InfoState.MyInformations[3],
-            hearted: Postingresponse.data.post.map((item) => {
-              return item.hearted;
-            }),
-            heartCount: Postingresponse.data.post.map((item) => {
-              return item.heartCount;
-            }),
+        setPostingState((PostingState) => {
+          PostingState.data[0] = {
+            ...PostingState.data[0],
+            postdata: response.data.post,
           };
-          return { MyInformations: InfoState.MyInformations };
+          return { data: PostingState.data };
         });
       } catch (error) {
         console.error(error);
@@ -98,27 +104,23 @@ function PostIconContainer({ like, comment, liked, id, index }) {
           },
         };
         await axios.delete(`${API_URL}/post/${id}/unheart`, config);
-        const Postingconfig = {
+
+        const postconfig = {
           headers: {
             Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
             "Content-type": "application/json",
           },
         };
-        const Postingresponse = await axios.get(
-          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
-          Postingconfig
+        const response = await axios.get(
+          `${API_URL}/post/${PostingState.data[0].user.accountname}/userpost`,
+          postconfig
         );
-        setInfoState((InfoState) => {
-          InfoState.MyInformations[3] = {
-            ...InfoState.MyInformations[3],
-            hearted: Postingresponse.data.post.map((item) => {
-              return item.hearted;
-            }),
-            heartCount: Postingresponse.data.post.map((item) => {
-              return item.heartCount;
-            }),
+        setPostingState((PostingState) => {
+          PostingState.data[0] = {
+            ...PostingState.data[0],
+            postdata: response.data.post,
           };
-          return { MyInformations: InfoState.MyInformations };
+          return { data: PostingState.data };
         });
       } catch (error) {
         console.error(error);
@@ -148,11 +150,13 @@ function PostIconContainer({ like, comment, liked, id, index }) {
         <Count>{comment}</Count>
       </PostIconWrapper>
       <PostModal
-        src={InfoState.MyInformations[0].myImage}
+        src={PostingState.data[0].user.image}
         index={index}
         id={id}
+        image={image}
         postModal={postModal}
         setPostModal={setPostModal}
+        content={content}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import FollowingUser from "./FollowingUser";
-import FollowUser from "./FollowUser";
+import FollowUser from "./FollowerUser";
 
 const FollowWrapper = styled.ul`
   display: flex;
@@ -11,7 +11,7 @@ const FollowWrapper = styled.ul`
 function FollowCard() {
   return (
     <FollowWrapper>
-      {window.location.pathname === "/main/followers" ? (
+      {window.location.pathname.includes("follower") ? (
         <FollowUser />
       ) : (
         <FollowingUser />

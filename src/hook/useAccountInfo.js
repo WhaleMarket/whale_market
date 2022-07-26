@@ -78,46 +78,6 @@ export default function useAccountInfo() {
           });
         });
 
-        //Posting Upload
-        const Postingconfig = {
-          headers: {
-            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-            "Content-type": "application/json",
-          },
-        };
-        const Postingresponse = await axios.get(
-          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
-          Postingconfig
-        );
-        Postingresponse.data.post.map((value) => {
-          return setInfoState((InfoState) => {
-            InfoState.MyInformations[3] = {
-              ...InfoState.MyInformations[3],
-              id: [...InfoState.MyInformations[3].id, value.id],
-              content: [...InfoState.MyInformations[3].content, value.content],
-              image: [...InfoState.MyInformations[3].image, value.image],
-              createdAt: [
-                ...InfoState.MyInformations[3].createdAt,
-                value.createdAt,
-              ],
-              updatedAt: [
-                ...InfoState.MyInformations[3].updatedAt,
-                value.updatedAt,
-              ],
-              hearted: [...InfoState.MyInformations[3].hearted, value.hearted],
-              heartCount: [
-                ...InfoState.MyInformations[3].heartCount,
-                value.heartCount,
-              ],
-              commentCount: [
-                ...InfoState.MyInformations[3].commentCount,
-                value.commentCount,
-              ],
-            };
-            return { MyInformations: InfoState.MyInformations };
-          });
-        });
-
         // 팔로잉 정보
         const FollowingConfig = {
           headers: {
@@ -185,76 +145,6 @@ export default function useAccountInfo() {
               createdAt: [
                 ...InfoState.MyInformations[5].createdAt,
                 value.createdAt,
-              ],
-            };
-            return { MyInformations: InfoState.MyInformations };
-          });
-        });
-
-        //내 팔로워 정보
-        const followerConfig = {
-          headers: {
-            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-            "Content-type": "application/json",
-          },
-        };
-        const followerResponse = await axios.get(
-          `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/follower`,
-          followerConfig
-        );
-
-        followerResponse.data.map((value) => {
-          return setInfoState((InfoState) => {
-            InfoState.MyInformations[6] = {
-              ...InfoState.MyInformations[6],
-              accountname: [
-                ...InfoState.MyInformations[6].accountname,
-                value.accountname,
-              ],
-              username: [
-                ...InfoState.MyInformations[6].username,
-                value.username,
-              ],
-              image: [...InfoState.MyInformations[6].image, value.image],
-              intro: [...InfoState.MyInformations[6].intro, value.intro],
-              isfollow: [
-                ...InfoState.MyInformations[6].isfollow,
-                value.isfollow,
-              ],
-            };
-            return { MyInformations: InfoState.MyInformations };
-          });
-        });
-
-        //내 팔로잉 정보
-        const followingConfig = {
-          headers: {
-            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-            "Content-type": "application/json",
-          },
-        };
-        const followingResponse = await axios.get(
-          `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/following`,
-          followingConfig
-        );
-
-        followingResponse.data.map((value) => {
-          return setInfoState((InfoState) => {
-            InfoState.MyInformations[7] = {
-              ...InfoState.MyInformations[7],
-              accountname: [
-                ...InfoState.MyInformations[7].accountname,
-                value.accountname,
-              ],
-              username: [
-                ...InfoState.MyInformations[7].username,
-                value.username,
-              ],
-              image: [...InfoState.MyInformations[7].image, value.image],
-              intro: [...InfoState.MyInformations[7].intro, value.intro],
-              isfollow: [
-                ...InfoState.MyInformations[7].isfollow,
-                value.isfollow,
               ],
             };
             return { MyInformations: InfoState.MyInformations };

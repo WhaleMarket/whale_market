@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
@@ -33,12 +33,9 @@ const ProductPrice = styled.p`
   text-overflow: ellipsis;
 `;
 
-function ProductCard({ productResult, accountname }) {
+function ProductCard({ productResult }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-
-  // 희: 상품 객체
-  const [product, setProduct] = useState({});
 
   const modalItemList = [
     {
@@ -64,26 +61,20 @@ function ProductCard({ productResult, accountname }) {
 
   return (
     <>
-      {/* <ProductWrapper onClick={() => setIsOpenModal(!isOpenModal)}>
-        <ProductImg src={src} />
-        <ProductName>{name}</ProductName>
-        <ProductPrice>{price}원</ProductPrice>
-      </ProductWrapper> */}
-        {productResult.map((product, index) => {
-            return (
-                <ProductWrapper 
-                    key={product.id}
-                    onClick={() => setIsOpenModal(!isOpenModal)}
-                >
-                    <ProductImg src={product.itemImage} />
-                    <ProductName>{product.itemName}</ProductName>
-                    <ProductPrice>{`${product.price
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`}</ProductPrice>
-                </ProductWrapper>
-            );
-        })}
-        
+      {productResult.map((product, index) => {
+        return (
+          <ProductWrapper
+            key={index}
+            onClick={() => setIsOpenModal(!isOpenModal)}
+          >
+            <ProductImg src={product.itemImage} />
+            <ProductName>{product.itemName}</ProductName>
+            <ProductPrice>{`${product.price.toLocaleString(
+              "ko-KR"
+            )}원`}</ProductPrice>
+          </ProductWrapper>
+        );
+      })}
 
       <Modal
         isOpenModal={isOpenModal}

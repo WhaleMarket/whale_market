@@ -5,6 +5,7 @@ import heart_icon_fill from "../../../assets/icon-heart-fill.png";
 import axios from "axios";
 import AuthContext from "../../../context/AuthProvider";
 import { API_URL } from "../../../constants/defaultUrl";
+import PostingContext from "../../../context/PostingProvider";
 
 const CommentForm = styled.form`
   position: relative;
@@ -65,6 +66,7 @@ const SendBtn = styled.button`
 function CommentInput({ index, Liked, id, setComments }) {
   // 댓글 작성 api 확인
   const [InfoState, setInfoState] = useContext(AuthContext);
+  const [, setPostingState] = useContext(PostingContext);
   const [comment, setComment] = useState("");
   const commentinput = useRef();
 
@@ -124,14 +126,12 @@ function CommentInput({ index, Liked, id, setComments }) {
           `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
           Postingconfig
         );
-        setInfoState((InfoState) => {
-          InfoState.MyInformations[3] = {
-            ...InfoState.MyInformations[3],
-            commentCount: Postingresponse.data.post.map((value) => {
-              return value.commentCount;
-            }),
+        setPostingState((PostingState) => {
+          PostingState.data[0] = {
+            ...PostingState.data[0],
+            postdata: Postingresponse.data.post,
           };
-          return { MyInformations: InfoState.MyInformations };
+          return { data: PostingState.data };
         });
       }
     } catch (err) {

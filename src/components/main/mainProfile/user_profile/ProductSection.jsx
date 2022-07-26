@@ -5,6 +5,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
+import PostingContext from "../../../../context/PostingProvider";
 
 const ProductContainer = styled.section`
   width: 60vw;
@@ -40,83 +41,41 @@ const ProductList = styled.ul`
 
 function ProductSection({ accountname }) {
   const [InfoState] = useContext(AuthContext);
-//   const rendering = () => {
-//     const result = [];
-//     for (let i = 0; i < InfoState.MyInformations[2].price.length; i++) {
-//       result.push(
-//         <ProductCard
-//           key={i}
-//           src={InfoState.MyInformations[2].itemImage[i]}
-//           name={InfoState.MyInformations[2].itemName[i]}
-//           price={parseInt(InfoState.MyInformations[2].price[i]).toLocaleString(
-//             "ko-KR"
-//           )}
-//         />
-//       );
-//     }
-//     return result;
-//   };
-
-  // 희: 유저 상품 정보 받아오기
   const [productResult, setProductResult] = useState([]);
+  const [PostingState] = useContext(PostingContext);
+
+  async function getProduct() {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      const response = await axios.get(
+        `${API_URL}/product/${PostingState.data[0].accountname}`,
+        config
+      );
+      setProductResult(response.data.product);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
-    async function getProduct() {
-        try {
-            const config = {
-                headers: {
-                  Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                  "Content-type": "application/json",
-                },
-              };
-            const response = await axios.get(
-                `${ API_URL }/product/${accountname}`,
-                config,
-            );
+    PostingState.data[0].accountname && getProduct();
+  }, [PostingState.data[0].accountname]);
 
-            console.log(JSON.stringify(response.data.product));
-            setProductResult(response.data.product);
-
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    getProduct();
-
-}, [accountname]);
-
-if (productResult.length > 0) {
+  if (productResult.length > 0) {
     return (
-        <ProductContainer>
+      <ProductContainer>
         <ProductTitle>판매 중인 상품</ProductTitle>
-        {/* <ProductList>{rendering()}</ProductList> */}
         <ProductList>
-            <ProductCard
-                id='product1'
-                productResult={productResult}
-                accountname={accountname}
-            />
+          <ProductCard id="product1" productResult={productResult} />
         </ProductList>
-        </ProductContainer>
+      </ProductContainer>
     );
-}
-
-//   return (
-//     <ProductContainer>
-//       <ProductTitle>판매 중인 상품</ProductTitle>
-//       {/* <ProductList>{rendering()}</ProductList> */}
-//       <ProductList>
-//       <ProductCard
-//           key={i}
-//           src={InfoState.MyInformations[2].itemImage[i]}
-//           name={InfoState.MyInformations[2].itemName[i]}
-//           price={parseInt(InfoState.MyInformations[2].price[i]).toLocaleString(
-//             "ko-KR"
-//           )}
-//         />
-//       </ProductList>
-//     </ProductContainer>
-//   );
+  }
 }
 
 export default ProductSection;

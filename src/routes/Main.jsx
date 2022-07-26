@@ -21,15 +21,14 @@ function MainRouter() {
         <Route path="/chatting/:chatId" component={ChattingView} />
         <Route path="/posting" component={Posting} />
         <Route path="/profileedit" component={ProfileModification} />
-        <Route path="/followers" component={Followers} />
-        <Route path="/followings" component={Followings} />
+        <Route path="/followers/:accountname" component={Followers} />
+        <Route path="/followings/:accountname" component={Followings} />
         <Route path="/productupload" component={ProductUpload} />
         <Route path="/userprofile" component={UserProfile} />
         <>
           <Navbar />
           <Route path="/home" exact component={Home} />
           <Route path="/chatting" component={Chatting} />
-          {/* <Route path="/myprofile" component={MainProfile} /> */}
           <Route path="/profile/:accountname" component={MainProfile} />
           <Route path="/search" component={HomeSearch} />
         </>

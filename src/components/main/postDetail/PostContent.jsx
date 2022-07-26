@@ -7,6 +7,7 @@ import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
 import AlertModal from "../../modal/AlertModal";
 import Modal from "../../modal/Modal";
+import PostingContext from "../../../context/PostingProvider";
 
 const LayOut = styled.div`
   display: flex;
@@ -65,7 +66,8 @@ const Nocomment = styled.li`
   padding: 50px;
 `;
 
-function PostContent({ id, index, src, Isimg }) {
+function PostContent({ id, index, src, Isimg, content }) {
+  const [PostingState, setPostingState] = useContext(PostingContext);
   const [InfoState, setInfoState] = useContext(AuthContext);
   const [comments, setComments] = useState([]);
   async function fetchData() {
@@ -158,14 +160,12 @@ function PostContent({ id, index, src, Isimg }) {
           `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
           Postingconfig
         );
-        setInfoState((InfoState) => {
-          InfoState.MyInformations[3] = {
-            ...InfoState.MyInformations[3],
-            commentCount: Postingresponse.data.post.map((value) => {
-              return value.commentCount;
-            }),
+        setPostingState((PostingState) => {
+          PostingState.data[0] = {
+            ...PostingState.data[0],
+            postdata: Postingresponse.data.post,
           };
-          return { MyInformations: InfoState.MyInformations };
+          return { data: PostingState.data };
         });
       }
     } catch (error) {
@@ -197,18 +197,14 @@ function PostContent({ id, index, src, Isimg }) {
   };
   return (
     <>
-      {src === InfoState.MyInformations[0].myImage ? (
+      {src === PostingState.data[0].user.image ? (
         <LayOut img={Isimg}>
           <UserInfo>
-            <UserProfile src={src} />
+            <UserProfile src={PostingState.data[0].user.image} />
             <UserAccount>{InfoState.MyInformations[0].myUsername}</UserAccount>
           </UserInfo>
           <Wrapper>
-            {InfoState.MyInformations[3].content[index] !== "" && (
-              <TextContent>
-                {InfoState.MyInformations[3].content[index]}
-              </TextContent>
-            )}
+            {content !== "" && <TextContent>{content}</TextContent>}
             <CommentWrapper>
               {comments[0] !== undefined &&
                 (comments[0].length > 0 ? (

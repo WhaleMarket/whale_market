@@ -71,17 +71,17 @@ const FollowButton = styled.button`
 
 const InfoWrapper = styled.div`
   display: flex;
-  margin-left: 16px;
   align-items: center;
+  margin-left: 16px;
 `;
 
-function FollowingUser() {
+function FollowUser() {
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
 
   return (
     <>
-      {PostingState.data[0].followinguser?.map((value, key) => {
+      {PostingState.data[0].followeruser?.map((value, key) => {
         const useHandleFollow = () => {
           async function fetchData() {
             try {
@@ -97,36 +97,23 @@ function FollowingUser() {
                 config
               );
 
-              if (
-                PostingState.data[0].accountname ===
-                InfoState.MyInformations[0].myAccountname
-              ) {
-                setPostingState((PostingState) => {
-                  PostingState.data[0].followinguser[key] = {
-                    ...PostingState.data[0].followinguser[key],
-                    isfollow: true,
-                  };
-                  return { data: PostingState.data };
-                });
-              } else {
-                const Followingconfig = {
-                  headers: {
-                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                    "Content-type": "application/json",
-                  },
+              const Followerconfig = {
+                headers: {
+                  Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                  "Content-type": "application/json",
+                },
+              };
+              const Followerresponse = await axios.get(
+                `${API_URL}/profile/${PostingState.data[0].accountname}/follower`,
+                Followerconfig
+              );
+              setPostingState((PostingState) => {
+                PostingState.data[0] = {
+                  ...PostingState.data[0],
+                  followeruser: Followerresponse.data,
                 };
-                const Followingresponse = await axios.get(
-                  `${API_URL}/profile/${PostingState.data[0].accountname}/following`,
-                  Followingconfig
-                );
-                setPostingState((PostingState) => {
-                  PostingState.data[0] = {
-                    ...PostingState.data[0],
-                    followinguser: Followingresponse.data,
-                  };
-                  return { data: PostingState.data };
-                });
-              }
+                return { data: PostingState.data };
+              });
             } catch (error) {
               console.error(error);
             }
@@ -148,36 +135,24 @@ function FollowingUser() {
                 config
               );
 
-              if (
-                PostingState.data[0].accountname ===
-                InfoState.MyInformations[0].myAccountname
-              ) {
-                setPostingState((PostingState) => {
-                  PostingState.data[0].followinguser[key] = {
-                    ...PostingState.data[0].followinguser[key],
-                    isfollow: false,
-                  };
-                  return { data: PostingState.data };
-                });
-              } else {
-                const Followingconfig = {
-                  headers: {
-                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                    "Content-type": "application/json",
-                  },
+              //follower 변경
+              const Followerconfig = {
+                headers: {
+                  Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                  "Content-type": "application/json",
+                },
+              };
+              const Followerresponse = await axios.get(
+                `${API_URL}/profile/${PostingState.data[0].accountname}/follower`,
+                Followerconfig
+              );
+              setPostingState((PostingState) => {
+                PostingState.data[0] = {
+                  ...PostingState.data[0],
+                  followeruser: Followerresponse.data,
                 };
-                const Followingresponse = await axios.get(
-                  `${API_URL}/profile/${PostingState.data[0].accountname}/following`,
-                  Followingconfig
-                );
-                setPostingState((PostingState) => {
-                  PostingState.data[0] = {
-                    ...PostingState.data[0],
-                    followinguser: Followingresponse.data,
-                  };
-                  return { data: PostingState.data };
-                });
-              }
+                return { data: PostingState.data };
+              });
             } catch (error) {
               console.error(error);
             }
@@ -201,14 +176,7 @@ function FollowingUser() {
               follow={value.isfollow}
               onClick={value.isfollow ? useHandleUnfollow : useHandleFollow}
             >
-              {PostingState.data[0].accountname ===
-              InfoState.MyInformations[0].myAccountname
-                ? value.isfollow
-                  ? "언 팔로우"
-                  : "팔로우"
-                : value.isfollow
-                ? "팔로우 취소"
-                : "팔로우"}
+              {value.isfollow ? "팔로우 취소" : "팔로우"}
             </FollowButton>
           </Wrapper>
         );
@@ -217,4 +185,4 @@ function FollowingUser() {
   );
 }
 
-export default FollowingUser;
+export default FollowUser;

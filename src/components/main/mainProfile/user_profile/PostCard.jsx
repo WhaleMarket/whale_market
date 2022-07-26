@@ -7,6 +7,7 @@ import PostIconContainer from "./PostIconContainer";
 import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
+import PostingContext from "../../../../context/PostingProvider";
 
 const PostWrapper = styled.div`
   display: flex;
@@ -107,9 +108,10 @@ const PostDate = styled.p`
 `;
 
 function PostCard() {
+  const [PostingState] = useContext(PostingContext);
+  const [InfoState] = useContext(AuthContext);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-  const [InfoState] = useContext(AuthContext);
   const [targetPost, setTargetPost] = useState("");
 
   const modalItemList = [
@@ -142,76 +144,65 @@ function PostCard() {
     }
   };
 
-  const rendering = () => {
-    const result = [];
-
-    for (let i = 0; i < InfoState.MyInformations[3].content.length; i++) {
-      const createAt = InfoState.MyInformations[3].createdAt[i];
-      const timeGap = parseInt(Date.now() - new Date(createAt));
-      const hoursGap = Math.floor(timeGap / 3600000);
-      const minsGap = Math.floor(timeGap / 60000);
-      const secsGap = Math.floor(timeGap / 1000);
-
-      result.push(
-        <PostContent key={i}>
-          <PostInfo>
-            <div>
-              <UserImgDiv src={InfoState.MyInformations[0].myImage} />
-              <PostInfoUser>
-                <PostInfoName>
-                  {InfoState.MyInformations[0].myUsername}
-                </PostInfoName>
-                <PostInfoId>
-                  {`@${InfoState.MyInformations[0].myAccountname}`}
-                </PostInfoId>
-              </PostInfoUser>
-            </div>
-            <ModalBtn
-              className="small"
-              onClick={() => {
-                setIsOpenModal(!isOpenModal);
-                setTargetPost(InfoState.MyInformations[3].id[i]);
-              }}
-            />
-          </PostInfo>
-          <PostTxt>{InfoState.MyInformations[3].content[i]}</PostTxt>
-          <PostImgWrapper>
-            {InfoState.MyInformations[3].image[i] !== "" &&
-              InfoState.MyInformations[3].image[i]
-                .split(",")
-                .map((value, key) => {
-                  return <PostImg key={key} src={value} />;
-                })}
-          </PostImgWrapper>
-          <PostIconContainer
-            index={i}
-            id={InfoState.MyInformations[3].id[i]}
-            like={InfoState.MyInformations[3].heartCount[i]}
-            liked={InfoState.MyInformations[3].hearted[i]}
-            comment={InfoState.MyInformations[3].commentCount[i]}
-          />
-
-          <PostDate>
-            {hoursGap < 24
-              ? minsGap < 60
-                ? secsGap < 60
-                  ? `방금 전`
-                  : `${minsGap}분 전`
-                : `${hoursGap}시간 전`
-              : `${createAt.substr(0, 10).split("-")[0]}년 ${
-                  createAt.substr(0, 10).split("-")[1]
-                }월 ${createAt.substr(0, 10).split("-")[2]}일`}
-          </PostDate>
-        </PostContent>
-      );
-    }
-    return result;
-  };
-
   return (
     <>
       <PostWrapper>
-        <PostContentList>{rendering()}</PostContentList>
+        <PostContentList>
+          {PostingState.data[0].postdata?.map((post, index) => {
+            let createAt = post.createdAt;
+            let timeGap = parseInt(Date.now() - new Date(createAt));
+            let hoursGap = Math.floor(timeGap / 3600000);
+            let minsGap = Math.floor(timeGap / 60000);
+            let secsGap = Math.floor(timeGap / 1000);
+            return (
+              <PostContent key={index}>
+                <PostInfo>
+                  <div>
+                    <UserImgDiv src={PostingState.data[0].user.image} />
+                    <PostInfoUser>
+                      <PostInfoName>{post.author.username}</PostInfoName>
+                      <PostInfoId>{`@${post.author.accountname}`}</PostInfoId>
+                    </PostInfoUser>
+                  </div>
+                  <ModalBtn
+                    className="small"
+                    onClick={() => {
+                      setIsOpenModal(!isOpenModal);
+                      setTargetPost(post.id);
+                    }}
+                  />
+                </PostInfo>
+                <PostTxt>{post.content}</PostTxt>
+                <PostImgWrapper>
+                  {post.image !== "" &&
+                    post.image.split(",").map((value, key) => {
+                      return <PostImg key={key} src={value} />;
+                    })}
+                </PostImgWrapper>
+                <PostIconContainer
+                  index={index}
+                  id={post.id}
+                  like={post.heartCount}
+                  liked={post.hearted}
+                  comment={post.commentCount}
+                  image={post.image}
+                  content={post.content}
+                />
+                <PostDate>
+                  {hoursGap < 24
+                    ? minsGap < 60
+                      ? secsGap < 60
+                        ? `방금 전`
+                        : `${minsGap}분 전`
+                      : `${hoursGap}시간 전`
+                    : `${createAt.substr(0, 10).split("-")[0]}년 ${
+                        createAt.substr(0, 10).split("-")[1]
+                      }월 ${createAt.substr(0, 10).split("-")[2]}일`}
+                </PostDate>
+              </PostContent>
+            );
+          })}
+        </PostContentList>
         <Modal
           isOpenModal={isOpenModal}
           setIsOpenModal={setIsOpenModal}
