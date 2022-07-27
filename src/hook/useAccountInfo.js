@@ -48,36 +48,6 @@ export default function useAccountInfo() {
           return { MyInformations: InfoState.MyInformations };
         });
 
-        //Product Upload
-        const Productconfig = {
-          headers: {
-            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-            "Content-type": "application/json",
-          },
-        };
-        const Productresponse = await axios.get(
-          `${API_URL}/product/${InfoState.MyInformations[0].myAccountname}`,
-          Productconfig
-        );
-        Productresponse.data.product.map((value) => {
-          return setInfoState((InfoState) => {
-            InfoState.MyInformations[2] = {
-              ...InfoState.MyInformations[2],
-              itemName: [
-                ...InfoState.MyInformations[2].itemName,
-                value.itemName,
-              ],
-              price: [...InfoState.MyInformations[2].price, value.price],
-              link: [...InfoState.MyInformations[2].link, value.link],
-              itemImage: [
-                ...InfoState.MyInformations[2].itemImage,
-                value.itemImage,
-              ],
-            };
-            return { MyInformations: InfoState.MyInformations };
-          });
-        });
-
         // 팔로잉 정보
         const FollowingConfig = {
           headers: {

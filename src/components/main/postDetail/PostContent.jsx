@@ -12,7 +12,7 @@ import PostingContext from "../../../context/PostingProvider";
 const LayOut = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.img === undefined ? "100%" : "30%")};
+  width: ${(props) => (props.img === "" || props.img === undefined ? "100%" : "30%")};
 `;
 
 const UserInfo = styled.div`
@@ -195,6 +195,8 @@ function PostContent({ id, index, src, Isimg, content }) {
       alert("error");
     }
   };
+
+  console.log(Isimg)
   return (
     <>
       {src === PostingState.data[0].user.image ? (
