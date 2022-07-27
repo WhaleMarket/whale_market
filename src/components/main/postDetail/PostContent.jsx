@@ -196,7 +196,6 @@ function PostContent({ id, index, src, Isimg, content }) {
     }
   };
 
-  console.log(Isimg)
   return (
     <>
       {src === PostingState.data[0].user.image ? (
