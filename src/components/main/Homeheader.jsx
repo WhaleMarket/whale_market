@@ -34,7 +34,7 @@ function Header() {
   return (
     <Head>
       <Title>🐳웨일마켓 피드</Title>
-      <Link to="/search">
+      <Link to="/home/search">
         <Search />
       </Link>
     </Head>
