@@ -1,8 +1,11 @@
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
-import back from '../../../../assets/icon-arrow-left.png'
-import save from '../../../../assets/Ms-button.png'
-import disabledSave from '../../../../assets/Ms--Disabled-button.png'
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import back from '../../../../assets/icon-arrow-left.png';
+import save from '../../../../assets/Ms-button.png';
+import disabledSave from '../../../../assets/Ms--Disabled-button.png';
+import AuthContext from "../../../../context/AuthProvider";
+
 
 const Head = styled.header`
     display: flex;
@@ -17,7 +20,7 @@ const Head = styled.header`
     background-color: white;
 `
 
-const BackBtn = styled.button`
+const BackBtn = styled(Link)`
     width: 1.5rem;
     height: 1.5rem;
     border: none;
@@ -44,11 +47,11 @@ const SaveBtn = styled.button`
 `
 
 function ProfileEditHeader({disabled}){
-    const history = useHistory();
+    const [InfoState] = useContext(AuthContext);
 
     return(
         <Head>
-            <BackBtn onClick={() => history.goBack()}/>
+            <BackBtn to = {`/profile/${InfoState.MyInformations[0].myAccountname}`}/>
             <SaveBtn disabled={disabled}/>
         </Head>
     )

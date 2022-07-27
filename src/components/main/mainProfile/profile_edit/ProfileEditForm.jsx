@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
-import ProfileEditHeader from './ProfileEditHeader';
-import profile_icon from '../../../../assets/basic-profile-img.png';
+import ProfileEditHeader from './ProfileEditHeader'
 import upload_icon from '../../../../assets/upload-file.png';
 import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
+import AuthContext from "../../../../context/AuthProvider";
 
 
 const Form = styled.form`
@@ -16,7 +16,7 @@ const Form = styled.form`
 const Fieldset = styled.fieldset`
     display: flex;
     flex-direction: column;
-    margin-top: 1.875rem;
+    margin-top: 30PX;
 `
 
 const Legend = styled.legend`
@@ -31,7 +31,7 @@ const ProfileImgWrapper = styled.div`
     position:relative; 
     width: 110px;
     height: 110px;
-    background-image: url(${profile_icon});
+    background-image: url(${(props) => props.src});
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -46,7 +46,7 @@ const ProfileImgLable = styled.label`
 
 const Img = styled.img`
     position: absolute;
-    width: 2.250rem;
+    width: 36px;
     right: 0;
     bottom: 0;
     border-radius: 50%;
@@ -62,17 +62,17 @@ const ProfileImgInput = styled.input`
     text-indent: -9999px;
 `
 const FormLabel = styled.label`
-    margin: 1rem 0 0.625rem 0;
+    margin: 16px 0 10px 0;
     color: #767676;
-    font-size: 0.750rem;
+    font-size: 12px;
 `
 
 const FormInput = styled.input`
-    width: 20.125rem;
+    width: 322px;
     border: none;
     border-bottom: 1px solid #DBDBDB;
     color: #000000;
-    font-size: 0.875rem;
+    font-size: 14px;
     &:focus {
         outline: none;
         border-bottom: 1px solid #00BCD4;
@@ -83,23 +83,24 @@ const FormInput = styled.input`
 `
 
 const ErrorMessage = styled.p`
-    margin-top: 0.375rem;
+    margin-top: 6px;
     color: #EB5757;
-    font-size: 0.750rem;
+    font-size: 12px;
 `
 
 function ProfileEditForm() {
+    const [InfoState] = useContext(AuthContext);
+
     const usernameRef = useRef();
     const accountnameRef = useRef();
     const imgRef = useRef();
     const previewImage = useRef();
     
-    const [username, setUsername] = useState('');
-    const [accountname, setAccountname] = useState('');
-    const [intro, setIntro] = useState('');
-    const [image, setImage] = useState('https://mandarin.api.weniv.co.kr/1658318303337.png')
+    const [username, setUsername] = useState(InfoState.MyInformations[0].myUsername);
+    const [accountname, setAccountname] = useState(InfoState.MyInformations[0].myAccountname);
+    const [intro, setIntro] = useState(InfoState.MyInformations[0].myIntro);
+    const [image, setImage] = useState(InfoState.MyInformations[0].myImage);
     const [success, setSuccess] = useState(false);
-
     const [errMsgForUsername, setErrMsgForUsername] = useState('');
     const [errMsgForAccountname, setErrMsgForAccountname] = useState('');
 
@@ -154,6 +155,7 @@ function ProfileEditForm() {
         }
     };
 
+    // preview 이미지 설정
     function preview(loadImage) {
         const reader = new FileReader();
         reader.onload = () => (
@@ -162,14 +164,7 @@ function ProfileEditForm() {
         reader.readAsDataURL(loadImage[0]);
     };
 
-    function preview(loadImage) {
-        const reader = new FileReader();
-        reader.onload = () => (
-            previewImage.current.style.backgroundImage = `url(${reader.result})`
-        );
-        reader.readAsDataURL(loadImage[0]);
-    };
-
+    // 사용자 이름 유효성 검사
     const handleOnBlurUsername = async (event) => {
         event.preventDefault();
         setErrMsgForUsername('');
@@ -178,11 +173,13 @@ function ProfileEditForm() {
                 setErrMsgForUsername('*2글자 이상 10글자 미만이어야 합니다.');
                 setIsDisabled(true);
             }
+            // console.log(username);
         } catch(error) {
             console.error(error);
         }
     };
 
+    // 사용자 ID 유효성 검사
     const handleOnBlur = async (event) => {
         event.preventDefault();
         setErrMsgForAccountname('');
@@ -201,8 +198,11 @@ function ProfileEditForm() {
                 reqData,
                 config
             );
-
-            if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
+            
+            if (defaultAccountname === InfoState.MyInformations[0].myAccountname) {
+                setIsValidAccountname(true);
+            }
+            else if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
                 setErrMsgForAccountname('*' + response.data.message);
                 setIsDisabled(true);
             } else if (!accountname) {
@@ -212,24 +212,18 @@ function ProfileEditForm() {
             } else if (response?.data?.message === '사용 가능한 계정ID 입니다.') {
                 setErrMsgForAccountname('*' + response.data.message);
                 setIsValidAccountname(true);
-            }            
+            }           
         } catch (error) {
             console.error(error);
         }
-    };
-
-    // 소개
-    function handleChangeIntro(event) {
-        setIntro(event.target.value);
     };
 
     // 프로필 정보 제출
     const handleSubmit = async (event) => {
         alert('🐳 프로필이 수정되었습니다. 🐳');
         event.preventDefault();
-        window.location.href = '/main/myprofile';
+        window.location.href = `/main/profile/${InfoState.MyInformations[0].myAccountname}`;
         try {
-            const token = window.localStorage.getItem('token');
             const reqData = {
                 user: {
                     username: username,
@@ -240,61 +234,66 @@ function ProfileEditForm() {
             };
             const config = {
                 headers: {
-                    "Authorization" : `Bearer ${token}`,
+                    "Authorization" : `Bearer ${InfoState.MyInformations[0].token}`,
                     "Content-Type": "application/json",
                 },
             };
-            const response = await axios.post(
+            const response = await axios.put(
                 `${API_URL}/user`,
                 reqData,
                 config
             );
-            console.log(JSON.stringify(response));
+            // console.log(JSON.stringify(response));
         } catch(error) {
             console.error(error);
             }
         };
         
-        const [isDisabled, setIsDisabled] = useState(true);
-        const accountnameRegex = /^[-._a-zA-Z0-9]+$/;
-        const isPassedProfile = () => {
-            return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
-        };
+    // 버튼 활성화
+    const [isDisabled, setIsDisabled] = useState(true);
+    const accountnameRegex = /^[-._a-zA-Z0-9]+$/;
+    const isPassedProfile = () => {
+        return accountnameRegex.test(accountname) || isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
+    };
+        
+    // form input 기본값 설정
+    const defaultUsername = InfoState.MyInformations[0].myUsername;
+    const defaultAccountname = InfoState.MyInformations[0].myAccountname;
+    const defaultIntro = InfoState.MyInformations[0].myIntro;
 
-        return (
-            <>
-            {success ? (
-                window.location.href = '/main/myprofile'
-            ): (
-            <Form onSubmit={handleSubmit}>
-            <Fieldset>
-            <Legend>프로필 사진 변경</Legend>
-            <ProfileImgWrapper ref={previewImage}>
-            <ProfileImgLable htmlFor="profileImg">
-                <Img src={upload_icon} alt="프로필 이미지 업로드"/>
-            </ProfileImgLable>
-            </ProfileImgWrapper>
-            <ProfileImgInput ref={imgRef} type="file" onChange={handleImageChange} accept="image/*" id="profileImg"/>
-            </Fieldset>
-    
-            <Fieldset>
-            <Legend>개인정보 변경</Legend>
-            <FormLabel htmlFor="username">사용자 이름</FormLabel>
-            <FormInput type="text" id="username" placeholder="2~10자 이내여야 합니다." required ref={usernameRef} onChange={(event) => setUsername(event.target.value)} onKeyUp={isPassedProfile} onBlur={handleOnBlurUsername}/>
-            {errMsgForUsername && <ErrorMessage>*2~10자 이내여야 합니다.</ErrorMessage>}
-    
-            <FormLabel htmlFor="accountname">계정 ID</FormLabel>
-            <FormInput type="text" id="accountname" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." required ref={accountnameRef} onChange={(event) => setAccountname(event.target.value)} onKeyUp={isPassedProfile} onBlur={handleOnBlur}/>
-            {errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>}
-    
-            <FormLabel htmlFor="intro">소개</FormLabel>
-            <FormInput type="text" id="intro" placeholder="자신과 판매할 상품에 대해 소개해 주세요!" onChange={handleChangeIntro}/>
-            </Fieldset>
-            <ProfileEditHeader type="submit" disabled={isDisabled}/>
-            </Form>
-            )}
-            </>
-        );
+    return (
+        <>
+        {success ? (
+            window.location.href = '/main/myprofile'
+        ): (
+        <Form onSubmit={handleSubmit}>
+        <Fieldset>
+        <Legend>프로필 사진 변경</Legend>
+        <ProfileImgWrapper ref={previewImage} src={InfoState.MyInformations[0].myImage}>
+        <ProfileImgLable htmlFor="profileImg">
+            <Img src={upload_icon} alt="프로필 이미지 업로드"/>
+        </ProfileImgLable>
+        </ProfileImgWrapper>
+        <ProfileImgInput ref={imgRef} type="file" onChange={handleImageChange} accept="image/*" id="profileImg"/>
+        </Fieldset>
+        <Fieldset>
+        <Legend>개인정보 변경</Legend>
+        <FormLabel htmlFor="username">사용자 이름</FormLabel>
+        <FormInput type="text" id="username" placeholder="2~10자 이내여야 합니다." required ref={usernameRef} onInput={(event) => setUsername(event.target.value)} onKeyUp={isPassedProfile} onBlur={handleOnBlurUsername} defaultValue={defaultUsername}/>
+        {errMsgForUsername && <ErrorMessage>*2~10자 이내여야 합니다.</ErrorMessage>}
+
+        <FormLabel htmlFor="accountname">계정 ID</FormLabel>
+        <FormInput type="text" id="accountname" placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." required ref={accountnameRef} onInput={(event) => setAccountname(event.target.value)} onKeyUp={isPassedProfile} onBlur={handleOnBlur} defaultValue={defaultAccountname}/>
+        {errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>}
+
+        <FormLabel htmlFor="intro">소개</FormLabel>
+        <FormInput type="text" id="intro" placeholder="자신과 판매할 상품에 대해 소개해 주세요!" onInput={(event) => setIntro(event.target.value)} defaultValue={defaultIntro}/>
+        </Fieldset>
+        <ProfileEditHeader type="submit" disabled={isDisabled}/>
+        </Form>
+        )}
+        </>
+    );
 };
 
 
