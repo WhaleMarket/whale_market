@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Modal from "../../../modal/Modal";
-import AlertModal from "../../../modal/AlertModal";
+import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
+import AuthContext from '../../../../context/AuthProvider';
+import axios from 'axios';
+import { API_URL } from '../../../../constants/defaultUrl';
+import Modal from '../../../modal/Modal';
+import AlertModal from '../../../modal/AlertModal';
 
 const ProductWrapper = styled.li`
   display: flex;
@@ -10,24 +13,24 @@ const ProductWrapper = styled.li`
   cursor: pointer;
 `;
 const ProductImg = styled.img`
-  width: 8.75rem;
-  height: 5.625rem;
-  border-radius: 0.5rem;
+  width: 140px;
+  height: 90px;
+  border-radius: 8px;
   object-fit: cover;
 `;
 
 const ProductName = styled.strong`
-  width: 8.75rem;
-  margin: 0.375rem 0 0.25rem;
-  font-size: 0.875rem;
+  width: 140px;
+  margin: 6px 0 4px;
+  font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
 `;
 
 const ProductPrice = styled.p`
-  width: 8.75rem;
+  width: 140px;
   color: #00bcd4;
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -36,6 +39,8 @@ const ProductPrice = styled.p`
 function ProductCard({ productResult }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
+  const [targetProduct, setTargetProduct] = useState('');
+  const [InfoState] = useContext(AuthContext);
 
   const modalItemList = [
     {
@@ -48,15 +53,23 @@ function ProductCard({ productResult }) {
       content: "수정",
       onClick: () => {},
     },
-    {
-      content: "웹사이트에서 상품보기",
-      onClick: () => {},
-    },
   ];
 
-  const deleteBtn = {
-    content: "삭제",
-    onClick: () => {},
+  const removeProduct = async (id) => {
+    try {
+      const deleteConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.delete(`${API_URL}/product/` + id, deleteConfig);
+      alert("🐳 상품이 삭제되었습니다. 🐳");
+      window.location.href = "./" + InfoState.MyInformations[0].myAccountname;
+    } catch (error) {
+      console.error(error);
+      alert("error");
+    }
   };
 
   return (
@@ -65,7 +78,10 @@ function ProductCard({ productResult }) {
         return (
           <ProductWrapper
             key={index}
-            onClick={() => setIsOpenModal(!isOpenModal)}
+            onClick={() => {
+              setIsOpenModal(!isOpenModal);
+              setTargetProduct(product.id);
+            }}
           >
             <ProductImg src={product.itemImage} />
             <ProductName>{product.itemName}</ProductName>
@@ -86,7 +102,12 @@ function ProductCard({ productResult }) {
         setAlertModal={setAlertModal}
         setIsOpenModal={setIsOpenModal}
         content={"상품을 삭제할까요?"}
-        deleteBtn={deleteBtn}
+        deleteBtn={{
+          content: "삭제",
+          onClick: () => {
+            removeProduct(targetProduct);
+          }
+        }}
       />
     </>
   );
