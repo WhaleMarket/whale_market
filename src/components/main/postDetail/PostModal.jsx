@@ -81,7 +81,6 @@ function PostModal({
   const [InfoState] = useContext(AuthContext);
   const [imgIndex, setImgIndex] = useState(0);
   const [PostingState] = useContext(PostingContext);
-  console.log(image)
   return (
     <ModalPortal>
       <ModalBg postModal={postModal} onClick={() => setPostModal(false)}>

@@ -8,6 +8,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
+import { useHistory  } from 'react-router-dom';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -109,10 +110,11 @@ const PostDate = styled.p`
 
 function PostCard() {
   const [PostingState] = useContext(PostingContext);
-  const [InfoState] = useContext(AuthContext);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-  const [targetPost, setTargetPost] = useState("");
+  const [InfoState] = useContext(AuthContext);
+  const [targetPost, setTargetPost] = useState('');
+  const history = useHistory();
 
   const modalItemList = [
     {
@@ -123,7 +125,12 @@ function PostCard() {
     },
     {
       content: "수정",
-      onClick: () => {},
+      onClick: () => {
+        const GetPost = async (id) => {
+          history.push('/postingedit/'+id);
+        };
+        GetPost(targetPost);
+      },
     },
   ];
 
@@ -143,7 +150,7 @@ function PostCard() {
       alert("error");
     }
   };
-
+  
   return (
     <>
       <PostWrapper>

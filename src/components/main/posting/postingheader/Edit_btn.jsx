@@ -1,12 +1,14 @@
-import { useContext } from "react";
-import styled from "styled-components";
-import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
-import UploadPostingContext from "../../../../context/UploadImageListProvider";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import AuthContext from "../../../../context/AuthProvider";
+import UploadContext from "../../../../context/UploadProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
+import PostingModificationContext from "../../../../context/PostingModificationProvider";
+import styled from "styled-components";
 
-const Upload = styled.button`
+const Edit = styled.button`
   width: 90px;
   height: 32px;
   border: none;
@@ -20,10 +22,13 @@ const Upload = styled.button`
   }
 `;
 
-function UploadButton() {
+function EditButton() {
   const [uploadState] = useContext(UploadContext);
-  const [InfoState] = useContext(AuthContext);
   const [uploadPostingState] = useContext(UploadPostingContext);
+  const [InfoState] = useContext(AuthContext);
+  const [PostingModificationState] = useContext(PostingModificationContext)
+  const params = useParams();
+  const postId = params.postId;
 
   const onSubmit = async () => {
     try {
@@ -47,21 +52,20 @@ function UploadButton() {
 
       const postBodyData = {
         post: {
-          content: uploadPostingState.required[0].value,
+          content: uploadPostingState.required[0].value !== "" ? uploadPostingState.required[0].value : PostingModificationState.post[0].content,
           image: imgResponse.data
-            .map((img) => `${API_URL}/${img.filename}`)
+            .map((img) => `${API_URL}/${img.filename}`).concat(PostingModificationState.post[0].image.split(',').filter((value) => {return value !== ""}))
             .join(","),
         },
       };
 
-      const response = await axios.post(
-        `${API_URL}/post`,
+      const response = await axios.put(
+        `${API_URL}/post/${postId}`,
         postBodyData,
         headerData
       );
-
       if (response) {
-        alert("🐳 성공적으로 업로드 되었습니다! 🐳");
+        alert("🚀 성공적으로 수정되었습니다!");
         window.location.href = "/main/profile/" + InfoState.MyInformations[0].myAccountname;
       }
     } catch (error) {
@@ -71,11 +75,11 @@ function UploadButton() {
 
   return (
     <>
-      <Upload onClick={onSubmit} state={uploadState} disabled={!uploadState}>
-        업로드
-      </Upload>
+      <Edit onClick={onSubmit} state={uploadState} disabled={!uploadState}>
+        수정하기
+      </Edit>
     </>
   );
 }
 
-export default UploadButton;
+export default EditButton;

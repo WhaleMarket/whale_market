@@ -1,8 +1,13 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import UploadContext from "../../../../context/UploadProvider";
 import ImgWrapper from "./ImgArticle";
+import AuthContext from '../../../../context/AuthProvider';
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
+import PostingModificationContext from "../../../../context/PostingModificationProvider";
 
 const EnterWrapper = styled.div``;
 
@@ -26,8 +31,12 @@ function PostingArea() {
   const [, setUploadState] = useContext(UploadContext);
   const [uploadPostingState, setUploadPostingState] =
     useContext(UploadPostingContext);
+  const [PostingModificationState, setPostingModificationState] = useContext(PostingModificationContext);
   const [value, setValue] = useState(false);
   const content = useRef();
+  const [InfoState] = useContext(AuthContext);
+  const postId = useParams().postId;
+
   function con() {
     if (content) {
       setUploadPostingState((uploadPostingState) => {
@@ -52,6 +61,32 @@ function PostingArea() {
     }
   }
 
+  useEffect(() => {
+    async function getPost() {
+        try {
+            const updateConfig = {
+              headers: {
+                Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                "Content-type": "application/json",
+              },
+            };
+            const response = await axios.get(`${API_URL}/post/`+ postId, updateConfig);
+            setPostingModificationState((PostingModificationState) => {
+                PostingModificationState.post[0] = {
+                    ...PostingModificationState.post[0],
+                    content: response.data.post.content
+                };
+                return { post: PostingModificationState.post }
+            });
+            
+          } catch (error) {
+            console.error(error);
+            alert("error");
+          }
+    } 
+    postId && getPost()
+  }, [postId]);
+
   const [textareaHeight, setTextareaHeight] = useState("20px");
   const checkValue = (event) => {
     setTextareaHeight(
@@ -72,9 +107,12 @@ function PostingArea() {
         maxLength="2400"
         height={textareaHeight}
         onInput={checkValue}
-      ></TextArea>
+        defaultValue={postId && PostingModificationState.post[0].content}
+      >
+      </TextArea>
       <ImgWrapper text={value} />
     </EnterWrapper>
+
   );
 }
 
