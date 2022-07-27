@@ -24,7 +24,6 @@ function UploadButton() {
   const [uploadState] = useContext(UploadContext);
   const [InfoState] = useContext(AuthContext);
   const [uploadPostingState] = useContext(UploadPostingContext);
-  const [InfoState] = useContext(AuthContext)
 
   const onSubmit = async () => {
     try {
