@@ -1,17 +1,22 @@
+import { useContext } from "react";
+import AuthContext from "../../../../context/AuthProvider";
 import styled from "styled-components";
-import basicImg from "../../../../assets/basic-profile-img.png";
 
 const Image = styled.img`
-  width: 42px;
-  height: auto;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
 `;
 
 function Profile() {
-  return (
-    <>
-      <Image src={basicImg} alt="profile image" />
-    </>
-  );
+    const [InfoState] = useContext(AuthContext);
+
+    return (
+        <>
+            <Image src={InfoState.MyInformations[0].myImage} alt="profile image" />
+        </>
+    );
 }
 
 export default Profile;
