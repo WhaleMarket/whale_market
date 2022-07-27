@@ -16,7 +16,7 @@ const Input = styled.input`
   }
 `;
 
-function DetailInput({ id, type, placeholder, index, errorName }) {
+function DetailInput({ id, type, placeholder, index, errorName, defaultValue }) {
   const [, setSaveStates] = useContext(SaveProductContext);
   const input_ref = useRef();
 
@@ -84,6 +84,7 @@ function DetailInput({ id, type, placeholder, index, errorName }) {
         type={type}
         placeholder={placeholder}
         onBlur={errorState}
+        defaultValue={defaultValue}
       />
     </>
   );

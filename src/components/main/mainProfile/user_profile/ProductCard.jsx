@@ -5,6 +5,8 @@ import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
 import Modal from '../../../modal/Modal';
 import AlertModal from '../../../modal/AlertModal';
+import { useHistory  } from 'react-router-dom';
+
 
 const ProductWrapper = styled.li`
   display: flex;
@@ -41,6 +43,7 @@ function ProductCard({ productResult }) {
   const [alertModal, setAlertModal] = useState(false);
   const [targetProduct, setTargetProduct] = useState('');
   const [InfoState] = useContext(AuthContext);
+  const history = useHistory();
 
   const modalItemList = [
     {
@@ -51,9 +54,31 @@ function ProductCard({ productResult }) {
     },
     {
       content: "수정",
-      onClick: () => {},
-    },
+      onClick: () => {             
+        const GetProduct = async (id) => {
+          history.push('/productedit/'+id);
+        };
+        GetProduct(targetProduct);
+      },
+      },
   ];
+
+  const EditProduct = async (id) => {
+    try {
+      const editConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.put(`${API_URL}/product/` + id, editConfig);
+      alert("🐳 상품이 수정되었습니다. 🐳");
+      window.location.href = "./" + InfoState.MyInformations[0].myAccountname;
+    }catch (error) {
+      console.error(error);
+      alert("error");
+    }
+  };
 
   const removeProduct = async (id) => {
     try {

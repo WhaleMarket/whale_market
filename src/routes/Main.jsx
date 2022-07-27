@@ -12,6 +12,7 @@ import useAccountInfo from "../hook/useAccountInfo";
 import Followings from "../pages/main_page/mainProfile/Following";
 import UserProfile from "../pages/main_page/mainProfile/UserProfile";
 import PostingEdit from "../pages/main_page/mainProfile/PostingEdit";
+import ProductEdit from "../pages/main_page/mainProfile/ProductEdit";
 
 function MainRouter() {
   useAccountInfo();
@@ -25,6 +26,8 @@ function MainRouter() {
         <Route path="/productupload" component={ProductUpload} />
         <Route path="/userprofile" component={UserProfile} />
         <Route path="/postingedit/:postId" component={PostingEdit} />
+        <Route path="/productedit/:postId" component={ProductEdit} />
+
         <>
           <Navbar />
           <Route path="/home" exact component={Home} />
