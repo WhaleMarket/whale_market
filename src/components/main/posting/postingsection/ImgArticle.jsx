@@ -2,8 +2,12 @@ import styled from "styled-components";
 import PostingImg from "./PostingImg";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import UploadContext from "../../../../context/UploadProvider";
-// import AuthContext from '../../../../context/AuthProvider';
+import AuthContext from '../../../../context/AuthProvider';
 import { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
+import PostingModificationContext from "../../../../context/PostingModificationProvider";
 
 const Wrapper = styled.article`
   display: flex;
@@ -13,8 +17,11 @@ const Wrapper = styled.article`
 
 function ImgWrapper({ text }) {
   const [uploadPostingState] = useContext(UploadPostingContext);
+  const [PostingModificationState, setPostingModificationState] = useContext(PostingModificationContext);
   const [, setUploadState] = useContext(UploadContext);
-  // const [InfoState, setInfoState] = useContext(AuthContext);
+  const [InfoState] = useContext(AuthContext);
+  const params = useParams();
+  const postId = params.postId;
 
   useEffect(() => {
     if (uploadPostingState.required[1].prevUrl.length === 0 && !text) {
@@ -23,20 +30,49 @@ function ImgWrapper({ text }) {
       setUploadState(true);
     }
   }, [uploadPostingState, setUploadState, text]);
+
+  useEffect(() => {
+    async function getPost() {
+        try {
+            const updateConfig = {
+              headers: {
+                Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                "Content-type": "application/json",
+              },
+            };
+            const response = await axios.get(`${API_URL}/post/`+ postId, updateConfig);
+            setPostingModificationState((PostingModificationState) => {
+                PostingModificationState.post[0] = {
+                    ...PostingModificationState.post[0],
+                    image: response.data.post.image
+                };
+                return { post: PostingModificationState.post }
+            });
+            
+          } catch (error) {
+            console.error(error);
+            alert("error");
+          }
+    } 
+    postId && getPost()
+  }, [postId]);
+
   return (
     <>
       <Wrapper>
-        {uploadPostingState.required[1].prevUrl.length !== 0
-          ? uploadPostingState.required[1].prevUrl.map((index, key) => (
-              <PostingImg key={key} src={index} alt={`${key} Image`} />
-            ))
-          : ""}
-
-        {/* {InfoState.MyInformations[10].image.length !== 0
-          ? InfoState.MyInformations[10].image.map((index, key) => (
-              <PostingImg key={key} src={index} alt={`${key} Image`} />
-            ))
-          : ""} */}
+        {postId ? (
+            (PostingModificationState.post[0].image || uploadPostingState.required[1].prevUrl.length !== 0) && 
+            (PostingModificationState.post[0].image.split(",").concat(uploadPostingState.required[1].prevUrl)).filter((index) => {
+                return index !== ""}).map((index, key) => {
+                    return <PostingImg key={key} src={index} alt={`${key} Image`} />
+                })
+        ) : (
+            uploadPostingState.required[1].prevUrl.length !== 0
+                ? uploadPostingState.required[1].prevUrl.map((index, key) => (
+                    <PostingImg key={key} src={index} alt={`${key} Image`} />
+                  ))
+                : ""
+        )}
       </Wrapper>
     </>
   );

@@ -3,6 +3,8 @@ import { useContext, useRef } from "react";
 import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
 import ImageUpload from "../../../../assets/upload-file.png";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
+import PostingModificationContext from "../../../../context/PostingModificationProvider";
+import { useParams } from "react-router-dom";
 
 const ImgUploadBtn = styled.img`
   position: fixed;
@@ -17,8 +19,10 @@ const UploadInput = styled.input`
 `;
 
 function ImageUploadButton() {
+  const postId = useParams().postId;  
   const [uploadPostingState, setUploadPostingState] =
     useContext(UploadPostingContext);
+  const [PostingModificationState] = useContext(PostingModificationContext);
   const Upload_Input = useRef();
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
@@ -67,7 +71,7 @@ function ImageUploadButton() {
         src={ImageUpload}
         alt="Image Upload Button"
         onClick={() =>
-          uploadPostingState.required[1].prevUrl.length === 3
+          uploadPostingState.required[1].prevUrl.length + PostingModificationState.post[0].image.split(',').filter((index)=>{return index !== ""}).length === 3
             ? alert("이미지는 3개까지만 업로드할 수 있습니다.")
             : Upload_Input.current.click()
         }

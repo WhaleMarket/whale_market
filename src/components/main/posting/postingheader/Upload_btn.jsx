@@ -24,6 +24,7 @@ function UploadButton() {
   const [uploadState] = useContext(UploadContext);
   const [InfoState] = useContext(AuthContext);
   const [uploadPostingState] = useContext(UploadPostingContext);
+  const [InfoState] = useContext(AuthContext)
 
   const onSubmit = async () => {
     try {
@@ -62,8 +63,7 @@ function UploadButton() {
 
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
-        window.location.href =
-          "./profile/" + InfoState.MyInformations[0].myAccountname;
+        window.location.href = "/main/profile/" + InfoState.MyInformations[0].myAccountname;
       }
     } catch (error) {
       console.error(error);

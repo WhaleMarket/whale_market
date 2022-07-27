@@ -112,7 +112,7 @@ function PostCard() {
   const [PostingState] = useContext(PostingContext);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-  const [InfoState, setInfoState] = useContext(AuthContext);
+  const [InfoState] = useContext(AuthContext);
   const [targetPost, setTargetPost] = useState('');
   const history = useHistory();
 
@@ -128,27 +128,6 @@ function PostCard() {
       onClick: () => {
         const GetPost = async (id) => {
           history.push('/postingedit/'+id);
-          try {
-            const updateConfig = {
-              headers: {
-                Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                "Content-type": "application/json",
-              },
-            };
-            const response = await axios.get(`${API_URL}/post/`+id, updateConfig);
-            setInfoState((InfoState)=>{
-              InfoState.MyInformations[10] = {
-                ...InfoState.MyInformations[10],
-                content : response.data.post.content,
-                image : response.data.post.image.split(",")
-                }
-              return {MyInformations : InfoState.MyInformations}
-            }) 
-            console.log(InfoState.MyInformations[10])
-          } catch (error) {
-            console.error(error);
-            alert("error");
-          }
         };
         GetPost(targetPost);
       },
@@ -171,7 +150,7 @@ function PostCard() {
       alert("error");
     }
   };
-
+  
   return (
     <>
       <PostWrapper>

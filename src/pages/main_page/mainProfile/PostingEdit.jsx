@@ -4,15 +4,18 @@ import PostingSection from "../../../components/main/posting/postingsection";
 import ImageUploadButton from "../../../components/main/posting/imageuploadbutton";
 import { UploadPostingProvider } from "../../../context/UploadImageListProvider";
 import { UploadProvider } from "../../../context/UploadProvider";
+import { PostingModificationProvider } from "../../../context/PostingModificationProvider";
 
 function PostingEdit() {
     return (
         <>
             <UploadProvider>
             <UploadPostingProvider>
+            <PostingModificationProvider>
                 <PostingHeader />
                 <PostingSection />
                 <ImageUploadButton />
+                </PostingModificationProvider>
             </UploadPostingProvider>
             </UploadProvider>
         </>
