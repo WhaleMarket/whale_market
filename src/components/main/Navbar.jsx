@@ -2,8 +2,8 @@ import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import home_icon_fill from "../../assets/icon-home-fill.png";
 import home_icon from "../../assets/icon-home.png";
-import chatting_icon_fill from "../../assets/icon-message-circle-fill.png";
-import chatting_icon from "../../assets/icon-message-circle.png";
+import award_icon_fill from "../../assets/icon-award-fill.png";
+import award_icon from "../../assets/icon-award.png";
 import posting_icon from "../../assets/icon-edit.png";
 import user_icon_fill from "../../assets/icon-user-fill.png";
 import user_icon from "../../assets/icon-user.png";
@@ -26,8 +26,9 @@ const Bottomnav = styled.ul`
 const List = styled.li`
   width: 64px;
   padding-bottom: 6px;
-  color: ${(props) => (props.current ? "#00BCD4" : "black")};
+  color: ${(props) => (props.current ? "#607D8B" : "#767676")};
   font-size: 10px;
+  font-weight: 600;
   text-align: center;
   & a {
     text-decoration: none;
@@ -64,8 +65,8 @@ const Navbar = ({ location }) => {
       >
         <defs>
           <linearGradient id="gradient" gradientTransform="rotate(90)">
-            <stop offset="10%" stopColor="#00bcd4" />
-            <stop offset="90%" stopColor="white" />
+            <stop offset="10%" stopColor="#039be5" />
+            <stop offset="90%" stopColor="#fff" />
           </linearGradient>
         </defs>
       </Wave>
@@ -93,8 +94,8 @@ const Navbar = ({ location }) => {
               className="Home"
               src={
                 location.pathname === "/chatting"
-                  ? chatting_icon_fill
-                  : chatting_icon
+                  ? award_icon_fill
+                  : award_icon
               }
               alt="home icon"
             />
