@@ -7,7 +7,7 @@ import chatting_icon from "../../assets/icon-message-circle.png";
 import posting_icon from "../../assets/icon-edit.png";
 import user_icon_fill from "../../assets/icon-user-fill.png";
 import user_icon from "../../assets/icon-user.png";
-
+import Wave from "react-wavify";
 import AuthContext from "../../context/AuthProvider";
 import { useContext } from "react";
 
@@ -19,8 +19,7 @@ const Bottomnav = styled.ul`
   bottom: 0;
   width: 100%;
   padding: 0 6px;
-  border-top: 0.5px solid #dbdbdb;
-  background-color: white;
+  background-color: transparent;
   box-sizing: border-box;
 `;
 
@@ -46,66 +45,92 @@ const Logo = styled.img`
 const Navbar = ({ location }) => {
   const [InfoState] = useContext(AuthContext);
   return (
-    <Bottomnav>
-      <List
-        className="home"
-        current={location.pathname.substr(0, 5) === "/home"}
+    <>
+      <Wave
+        style={{ position: "fixed", bottom: "0" }}
+        fill="url(#gradient)"
+        paused={false}
+        mask="url(#mask)"
+        options={{
+          height: 70,
+          amplitude: 20,
+          speed: 0.3,
+          points: 4,
+        }}
       >
-        <Link to="/home">
-          <Logo
-            className="Home"
-            src={
-              location.pathname.substr(0, 5) === "/home"
-                ? home_icon_fill
-                : home_icon
-            }
-            alt="home icon"
-          />
-          홈
-        </Link>
-      </List>
-      <List className="chatting" current={location.pathname === "/chatting"}>
-        <Link to="/chatting">
-          <Logo
-            className="Home"
-            src={
-              location.pathname === "/chatting"
-                ? chatting_icon_fill
-                : chatting_icon
-            }
-            alt="home icon"
-          />
-          채팅
-        </Link>
-      </List>
-      <List className="posting" current={location.pathname === "/posting"}>
-        <Link to="/posting">
-          <Logo className="Home" src={posting_icon} alt="home icon" />
-          게시물 작성
-        </Link>
-      </List>
-      <List
-        className="profile"
-        current={
-          location.pathname ===
-          `/profile/${InfoState.MyInformations[0].myAccountname}`
-        }
-      >
-        <Link to={`/profile/${InfoState.MyInformations[0].myAccountname}`}>
-          <Logo
-            className="Home"
-            src={
-              location.pathname ===
-              `/profile/${InfoState.MyInformations[0].myAccountname}`
-                ? user_icon_fill
-                : user_icon
-            }
-            alt="home icon"
-          />
-          프로필
-        </Link>
-      </List>
-    </Bottomnav>
+        <defs>
+          <linearGradient id="gradient" gradientTransform="rotate(90)">
+            <stop offset="10%" stopColor="#00bcd4" />
+            <stop offset="90%" stopColor="white" />
+          </linearGradient>
+        </defs>
+        <mask id="mask">
+          <rect x="0" y="0" width="2000" height="200" fill="url(#gradient)">
+            <div>hello</div>
+          </rect>
+        </mask>
+      </Wave>
+      <Bottomnav>
+        <List
+          className="home"
+          current={location.pathname.substr(0, 5) === "/home"}
+        >
+          <Link to="/home">
+            <Logo
+              className="Home"
+              src={
+                location.pathname.substr(0, 5) === "/home"
+                  ? home_icon_fill
+                  : home_icon
+              }
+              alt="home icon"
+            />
+            홈
+          </Link>
+        </List>
+        <List className="chatting" current={location.pathname === "/chatting"}>
+          <Link to="/chatting">
+            <Logo
+              className="Home"
+              src={
+                location.pathname === "/chatting"
+                  ? chatting_icon_fill
+                  : chatting_icon
+              }
+              alt="home icon"
+            />
+            채팅
+          </Link>
+        </List>
+        <List className="posting" current={location.pathname === "/posting"}>
+          <Link to="/posting">
+            <Logo className="Home" src={posting_icon} alt="home icon" />
+            게시물 작성
+          </Link>
+        </List>
+        <List
+          className="profile"
+          current={
+            location.pathname ===
+            `/profile/${InfoState.MyInformations[0].myAccountname}`
+          }
+        >
+          <Link to={`/profile/${InfoState.MyInformations[0].myAccountname}`}>
+            <Logo
+              className="Home"
+              src={
+                location.pathname ===
+                `/profile/${InfoState.MyInformations[0].myAccountname}`
+                  ? user_icon_fill
+                  : user_icon
+              }
+              alt="home icon"
+            />
+            프로필
+          </Link>
+        </List>
+      </Bottomnav>
+    </>
   );
 };
 
