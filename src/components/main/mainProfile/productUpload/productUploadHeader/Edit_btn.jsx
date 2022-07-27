@@ -64,7 +64,7 @@ function EditButton() {
             const postBodyData = {
               product: {
                 itemName: saveStates.required[1].value !== "" ? saveStates.required[1].value : ProductModificationState.product[0].itemName,
-                price: parseInt(saveStates.required[2].value.replace(/,/g, "")) !== "" ? parseInt(saveStates.required[2].value.replace(/,/g, "")) : parseInt(ProductModificationState.product[0].price.replace(/,/g, "")),
+                price: parseInt(saveStates.required[2].value.replace(/,/g, "")) !== "" ? parseInt(saveStates.required[2].value.replace(/,/g, "")) : parseInt(ProductModificationState.product[0].price),
                 link: saveStates.required[3].value !== "" ? saveStates.required[3].value : ProductModificationState.product[0].url,
                 itemImage: saveStates.required[0].file !== "" ? `${API_URL}/${imgResponse.data.filename}` : ProductModificationState.product[0].image,
               },
