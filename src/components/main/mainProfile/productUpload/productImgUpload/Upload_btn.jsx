@@ -1,8 +1,14 @@
 import Img_logo from "../../../../../assets/image_logo.png";
 import styled from "styled-components";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
 import { IMG_EXTENSION } from "../../../../../constants/defaultUrl";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import ProductModificationContext from "../../../../../context/ProductModification";
+import { API_URL } from "../../../../../constants/defaultUrl";
+import AuthContext from "../../../../../context/AuthProvider";
+
 
 const Uploadbtn = styled.button`
   position: absolute;
@@ -28,6 +34,39 @@ const UploadInput = styled.input`
 function UploadBtn({ setUrl }) {
   const [, setSaveStates] = useContext(SaveProductContext);
   const Upload_input = useRef();
+  const postId = useParams().postId;
+  const [, setProductModificationState] = useContext(ProductModificationContext);
+  const [InfoState] = useContext(AuthContext)
+
+  useEffect(() => {
+    async function getProduct() {
+      try {
+        const editConfig = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const response = await axios.get(`${API_URL}/product/detail/${postId}`, editConfig);
+        setProductModificationState((ProductModificationState) => {
+          ProductModificationState.product[0] = {
+            ...ProductModificationState.product[0],
+            itemName: response.data.product.itemName,
+            image: response.data.product.itemImage,
+            price: response.data.product.price,
+            url: response.data.product.link
+          };
+          return { product: ProductModificationState.product }
+        });
+      } catch (error) {
+        console.error(error);
+        alert("error");
+      }
+    }
+    postId && getProduct()
+  }, [postId]);
+
+
   const ImgUpload = (event) => {
     const Blob = event.target.files[0];
     if (

@@ -4,8 +4,7 @@ import ProductImgUploadSection from "../../../components/main/mainProfile/produc
 import ProductDetail from "../../../components/main/mainProfile/productUpload/productDetailUpload";
 import { ProductModificationProvider } from "../../../context/ProductModification";
 
-
-function ProductUpload() {
+function ProductEdit() {
   return (
     <>
     <ProductModificationProvider>
@@ -19,4 +18,4 @@ function ProductUpload() {
   );
 }
 
-export default ProductUpload;
+export default ProductEdit;
