@@ -99,7 +99,7 @@ const Navbar = ({ location }) => {
               }
               alt="home icon"
             />
-            채팅
+            리워드
           </Link>
         </List>
         <List className="posting" current={location.pathname === "/posting"}>
