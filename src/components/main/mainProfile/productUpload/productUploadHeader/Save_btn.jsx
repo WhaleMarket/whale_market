@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
 import axios from "axios";
 import { API_URL } from "../../../../../constants/defaultUrl";
+import AuthContext from "../../../../../context/AuthProvider";
 
 const Save = styled.button`
   width: 90px;
@@ -19,6 +20,7 @@ const Save = styled.button`
 `;
 
 function SaveButton() {
+  const [InfoState] = useContext(AuthContext);
   const [saveStates] = useContext(SaveProductContext);
   const [save, setSave] = useState(false);
 
@@ -71,7 +73,8 @@ function SaveButton() {
 
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
-        window.location.href = "./myprofile";
+        window.location.href =
+          "./profile/" + InfoState.MyInformations[0].myAccountname;
       }
     } catch (event) {
       console.error(event);

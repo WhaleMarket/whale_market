@@ -1,7 +1,6 @@
 import Navbar from "../components/main/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Chatting from "../pages/main_page/chat/Chatting";
-import ChattingView from "../pages/main_page/chat/ChattingView";
+import Chatting from "../pages/main_page/Chatting";
 import MainProfile from "../pages/main_page/mainProfile/MyProfile";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
 import ProfileModification from "../pages/main_page/mainProfile/ProfileEdit";
@@ -18,7 +17,6 @@ function MainRouter() {
   return (
     <>
       <Switch>
-        <Route path="/chatting/:chatId" component={ChattingView} />
         <Route path="/posting" component={Posting} />
         <Route path="/profileedit" component={ProfileModification} />
         <Route path="/followers/:accountname" component={Followers} />

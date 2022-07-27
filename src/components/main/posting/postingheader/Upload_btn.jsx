@@ -4,6 +4,7 @@ import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
+import AuthContext from "../../../../context/AuthProvider";
 
 const Upload = styled.button`
   width: 90px;
@@ -21,6 +22,7 @@ const Upload = styled.button`
 
 function UploadButton() {
   const [uploadState] = useContext(UploadContext);
+  const [InfoState] = useContext(AuthContext);
   const [uploadPostingState] = useContext(UploadPostingContext);
 
   const onSubmit = async () => {
@@ -60,7 +62,8 @@ function UploadButton() {
 
       if (response) {
         alert("🐳 성공적으로 업로드 되었습니다! 🐳");
-        window.location.href = "./myprofile";
+        window.location.href =
+          "./profile/" + InfoState.MyInformations[0].myAccountname;
       }
     } catch (error) {
       console.error(error);
