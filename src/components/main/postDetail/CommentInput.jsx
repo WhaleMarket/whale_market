@@ -133,9 +133,10 @@ function CommentInput({ index, Liked, id, setComments }) {
           };
           return { data: PostingState.data };
         });
+        console.log("good")
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   }
 

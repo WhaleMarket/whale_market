@@ -169,6 +169,7 @@ function IconGroup({ like, comment, liked, id, index, src }) {
       </IconWrapper>
 
       <PostModal
+        feed={true}
         src={src}
         index={index}
         id={id}

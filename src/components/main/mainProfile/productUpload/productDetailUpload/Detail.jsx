@@ -3,9 +3,14 @@ import SaveProductContext from "../../../../../context/SaveProductProvider";
 import DetailInput from "./DetailInput";
 import DetailLabel from "./DetailLabel";
 import ErrorMessage from "./ErrorMessage";
+import ProductModificationContext from "../../../../../context/ProductModification";
+import { useParams } from "react-router-dom";
 
 function Detail() {
   const [saveStates] = useContext(SaveProductContext);
+  const [ProductModificationState] = useContext(ProductModificationContext);
+  const postId = useParams().postId;
+  
   const nameState =
     saveStates.required[1].value.split("").length < 2 ||
     saveStates.required[1].value.split("").length > 15;
@@ -29,6 +34,7 @@ function Detail() {
         id="name"
         type="text"
         placeholder="2~15자 이내여야 합니다."
+        defaultValue={postId && ProductModificationState.product[0].itemName}
       />
       {saveStates.required[1].error && (
         <ErrorMessage message="2~15자 이내로 입력해주세요." />
@@ -40,6 +46,7 @@ function Detail() {
         id="price"
         type="text"
         placeholder="0보다 큰 숫자만 입력 가능합니다."
+        defaultValue={postId && ProductModificationState.product[0].price.toLocaleString("ko-KR")}
       />
       {saveStates.required[2].error && (
         <ErrorMessage message="0보다 큰 숫자만 입력해주세요." />
@@ -51,6 +58,7 @@ function Detail() {
         id="link"
         type="url"
         placeholder="URL을 입력해 주세요."
+        defaultValue={postId && ProductModificationState.product[0].url}
       />
       {saveStates.required[3].error && (
         <ErrorMessage message="URL을 입력해 주세요." />

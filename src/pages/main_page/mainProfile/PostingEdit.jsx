@@ -10,13 +10,13 @@ function PostingEdit() {
     return (
         <>
             <UploadProvider>
-            <UploadPostingProvider>
-            <PostingModificationProvider>
-                <PostingHeader />
-                <PostingSection />
-                <ImageUploadButton />
-                </PostingModificationProvider>
-            </UploadPostingProvider>
+                <UploadPostingProvider>
+                    <PostingModificationProvider>
+                        <PostingHeader />
+                        <PostingSection />
+                        <ImageUploadButton />
+                    </PostingModificationProvider>
+                </UploadPostingProvider>
             </UploadProvider>
         </>
         );

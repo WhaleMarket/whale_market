@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import UploadBtn from "./Upload_btn";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ProductModificationContext from "../../../../../context/ProductModification";
 
 const Blank = styled.div`
   position: relative;
@@ -15,10 +16,11 @@ const Blank = styled.div`
 `;
 
 function UploadSection() {
+  const [ProductModificationState] = useContext(ProductModificationContext);
   const [url, setUrl] = useState("");
   return (
     <>
-      <Blank url={url}>
+      <Blank url={url === "" ? ProductModificationState.product[0].image : url}>
         <UploadBtn setUrl={setUrl} />
       </Blank>
     </>
