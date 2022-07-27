@@ -24,7 +24,7 @@ function MainRouter() {
         <Route path="/followings/:accountname" component={Followings} />
         <Route path="/productupload" component={ProductUpload} />
         <Route path="/userprofile" component={UserProfile} />
-        <Route path="/postingedit/:id" component={PostingEdit} />
+        <Route path="/postingedit/:postId" component={PostingEdit} />
         <>
           <Navbar />
           <Route path="/home" exact component={Home} />
