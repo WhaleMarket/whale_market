@@ -24,7 +24,7 @@ function Followers() {
           },
         };
         const followerResponse = await axios.get(
-          `${API_URL}/profile/${accountname}/follower`,
+          `${API_URL}/profile/${accountname}/follower/?limit=100&skip=0`,
           followerConfig
         );
         setPostingState((PostingState) => {
