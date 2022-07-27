@@ -10,6 +10,7 @@ import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
 import { useHistory  } from 'react-router-dom';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import ModalBtn from '../../../modal/ModalBtn';
 import Modal from '../../../modal/Modal';
@@ -21,6 +22,8 @@ import UploadPostingContext from '../../../../context/UploadImageListProvider';
 import axios from 'axios';
 import { API_URL } from '../../../../constants/defaultUrl';
 >>>>>>> 95901ee (:sparkles: 게시글 수정 기능 구현중)
+=======
+>>>>>>> ffc2292fdc158a2788b5f47af83be03c4622476d
 
 const PostWrapper = styled.div`
   display: flex;
@@ -127,11 +130,14 @@ function PostCard() {
   const [alertModal, setAlertModal] = useState(false);
 <<<<<<< HEAD
   const [targetPost, setTargetPost] = useState("");
+<<<<<<< HEAD
 =======
   const [InfoState, setInfoState] = useContext(AuthContext);
   // const [uploadPostingState, setUploadPostingState] = useContext(UploadPostingContext);
   const [targetPost, setTargetPost] = useState('');
 >>>>>>> 95901ee (:sparkles: 게시글 수정 기능 구현중)
+=======
+>>>>>>> ffc2292fdc158a2788b5f47af83be03c4622476d
   const history = useHistory();
 
   const modalItemList = [
