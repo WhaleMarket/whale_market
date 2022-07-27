@@ -157,6 +157,7 @@ function PostIconContainer({
         postModal={postModal}
         setPostModal={setPostModal}
         content={content}
+        feed={false}
       />
     </>
   );

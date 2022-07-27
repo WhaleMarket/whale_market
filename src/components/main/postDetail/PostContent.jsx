@@ -66,7 +66,7 @@ const Nocomment = styled.li`
   padding: 50px;
 `;
 
-function PostContent({ id, index, src, Isimg, content }) {
+function PostContent({ id, index, src, Isimg, content, feed }) {
   const [PostingState, setPostingState] = useContext(PostingContext);
   const [InfoState, setInfoState] = useContext(AuthContext);
   const [comments, setComments] = useState([]);
@@ -90,7 +90,7 @@ function PostContent({ id, index, src, Isimg, content }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
@@ -129,7 +129,7 @@ function PostContent({ id, index, src, Isimg, content }) {
         deleteConfig
       );
       fetchData();
-      if (src !== InfoState.MyInformations[0].myImage) {
+      if (feed) {
         const feedConfig = {
           headers: {
             Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
@@ -198,7 +198,7 @@ function PostContent({ id, index, src, Isimg, content }) {
 
   return (
     <>
-      {src === PostingState.data[0].user.image ? (
+      {feed === false ? (
         <LayOut img={Isimg}>
           <UserInfo>
             <UserProfile src={PostingState.data[0].user.image} />
@@ -247,7 +247,7 @@ function PostContent({ id, index, src, Isimg, content }) {
           <CommentInput
             index="3"
             id={id}
-            Liked={InfoState.MyInformations[3].hearted[index]}
+            Liked={PostingState.data[0].postdata[index].hearted}
             setComments={setComments}
           />
         </LayOut>

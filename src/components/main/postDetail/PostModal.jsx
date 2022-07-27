@@ -5,7 +5,6 @@ import PostContent from "./PostContent";
 import AuthContext from "../../../context/AuthProvider";
 import prev from "../../../assets/prev-icon.png";
 import next from "../../../assets/next-icon.png";
-import PostingContext from "../../../context/PostingProvider";
 
 const ModalBg = styled.section`
   display: flex;
@@ -77,15 +76,15 @@ function PostModal({
   src,
   image,
   content,
+  feed
 }) {
   const [InfoState] = useContext(AuthContext);
   const [imgIndex, setImgIndex] = useState(0);
-  const [PostingState] = useContext(PostingContext);
   return (
     <ModalPortal>
       <ModalBg postModal={postModal} onClick={() => setPostModal(false)}>
-        {src === PostingState.data[0].user.image ? (
-          image !== ( "" || undefined )? (
+        { feed === false ? (
+          image !==  "" ? (
             <ModalWrapper
               postModal={postModal}
               onClick={(event) => {
@@ -117,6 +116,7 @@ function PostModal({
                 id={id}
                 index={index}
                 content={content}
+                feed={feed}
               />
             </ModalWrapper>
           ) : (
@@ -133,6 +133,7 @@ function PostModal({
                 id={id}
                 index={index}
                 content={content}
+                feed={feed}
               />
             </ModalWrapper>
           )
@@ -174,6 +175,7 @@ function PostModal({
               id={id}
               index={index}
               content={content}
+              feed={feed}
             />
           </ModalWrapper>
         ) : (
@@ -190,6 +192,7 @@ function PostModal({
               id={id}
               index={index}
               content={content}
+              feed={feed}
             />
           </ModalWrapper>
         )}
