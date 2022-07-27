@@ -27,7 +27,7 @@ function HomeSearch(){
                         },
                     };
                     const response = await axios.get(
-                        `${API_URL}/user/searchuser/?keyword=${keyword}`,
+                        `${API_URL}/user/searchuser/?keyword=${keyword}/?limit=100&skip=0`,
                         config
                     );
                     setSearchResult(response.data);

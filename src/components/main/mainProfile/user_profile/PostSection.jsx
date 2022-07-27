@@ -90,7 +90,7 @@ function PostSection() {
         },
       };
       const response = await axios.get(
-        `${API_URL}/post/${PostingState.data[0].user.accountname}/userpost`,
+        `${API_URL}/post/${PostingState.data[0].user.accountname}/userpost/?limit=100&skip=0`,
         config
       );
       setPostingState((PostingState) => {

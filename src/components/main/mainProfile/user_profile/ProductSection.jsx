@@ -53,7 +53,7 @@ function ProductSection({ accountname }) {
         },
       };
       const response = await axios.get(
-        `${API_URL}/product/${PostingState.data[0].accountname}`,
+        `${API_URL}/product/${PostingState.data[0].accountname}/?limit=100&skip=0`,
         config
       );
       setProductResult(response.data.product);

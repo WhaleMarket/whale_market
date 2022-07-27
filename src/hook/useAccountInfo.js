@@ -81,7 +81,7 @@ export default function useAccountInfo() {
           },
         };
         const feedResponse = await axios.get(
-          `${API_URL}/post/feed`,
+          `${API_URL}/post/feed/?limit=100&skip=0`,
           feedConfig
         );
         feedResponse.data.posts.map((value) => {

@@ -90,7 +90,7 @@ function CommentInput({ index, Liked, id, setComments }) {
         },
       };
       const res = await axios.get(
-        `${API_URL}/post/${id}/comments`,
+        `${API_URL}/post/${id}/comments/?limit=100&skip=0`,
         commentconfig
       );
       setComments([res.data.comments]);
@@ -103,7 +103,7 @@ function CommentInput({ index, Liked, id, setComments }) {
           },
         };
         const feedResponse = await axios.get(
-          `${API_URL}/post/feed`,
+          `${API_URL}/post/feed/?limit=100&skip=0`,
           feedConfig
         );
         setInfoState((InfoState) => {
@@ -123,7 +123,7 @@ function CommentInput({ index, Liked, id, setComments }) {
           },
         };
         const Postingresponse = await axios.get(
-          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
+          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost/?limit=100&skip=0`,
           Postingconfig
         );
         setPostingState((PostingState) => {
