@@ -173,7 +173,6 @@ function ProfileEditForm() {
                 setErrMsgForUsername('*2글자 이상 10글자 미만이어야 합니다.');
                 setIsDisabled(true);
             }
-            // console.log(username);
         } catch(error) {
             console.error(error);
         }
@@ -243,7 +242,6 @@ function ProfileEditForm() {
                 reqData,
                 config
             );
-            // console.log(JSON.stringify(response));
         } catch(error) {
             console.error(error);
             }

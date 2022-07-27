@@ -50,9 +50,6 @@ function EditButton() {
         },
       };
 
-      console.log(PostingModificationState.post[0].image.split(',').filter((value) => {return value !== ""})
-      .map((img) => `${API_URL}/${img.filename}`)
-      .join(","))
       const postBodyData = {
         post: {
           content: uploadPostingState.required[0].value !== "" ? uploadPostingState.required[0].value : PostingModificationState.post[0].content,
