@@ -22,7 +22,7 @@ const ProfileImg = styled.img`
   width: 42px;
   height: 42px;
   margin-right: 12px;
-  border: 0.5px solid #dbdbdb;
+  border: 0.5px solid #DBDBDB;
   border-radius: 50%;
   background: url(${defaultImg});
 `;

@@ -15,14 +15,14 @@ const PostIconWrapper = styled.div`
 `;
 
 const LikeBtn = styled.button`
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 20px;
+  height: 20px;
   padding: 0;
   border-style: none;
   background-color: inherit;
   background-image: ${(props) =>
     props.Liked === true ? `url(${likeBtn})` : `url(${likeBtnOutline})`};
-  background-size: 1.25rem 1.25rem;
+  background-size: 20px 20px;
   &:hover {
     cursor: pointer;
   }
@@ -31,18 +31,18 @@ const LikeBtn = styled.button`
 const Count = styled.p`
   margin-left: 6px;
   color: #767676;
-  font-size: 0.75rem;
+  font-size: 12px;
 `;
 
 const CommentBtn = styled.button`
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 20px;
+  height: 20px;
   padding: 0;
-  margin-left: 2.313rem;
+  margin-left: 16px;
   border-style: none;
   background-color: inherit;
   background-image: url(${commentBtn});
-  background-size: 1.25rem 1.25rem;
+  background-size: 20px 20px;
   &:hover {
     cursor: pointer;
   }

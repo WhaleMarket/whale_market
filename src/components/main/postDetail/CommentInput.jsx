@@ -8,24 +8,21 @@ import { API_URL } from "../../../constants/defaultUrl";
 import PostingContext from "../../../context/PostingProvider";
 
 const CommentForm = styled.form`
-  position: relative;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
   justify-content: space-between;
-  align-items: center;
-  background-color: #ffffff;
   padding: 16px;
   border-top: 0.5px solid #dbdbdb;
   border-radius: 0 0 10px 10px;
+  background-color: #FFFFFF;
 `;
 
 const Heart = styled.button`
-  background-color: inherit;
-  margin-right: 6px;
   width: 20px;
   height: 20px;
+  margin-right: 6px;
   border: none;
+  background-color: inherit;
   background-image: ${(props) =>
     props.Liked ? `url(${heart_icon_fill})` : `url(${heart_icon})`};
   background-repeat: no-repeat;
@@ -44,21 +41,21 @@ const Input = styled.input`
   font-weight: 400;
   line-height: 18px;
   &::placeholder {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
     color: #c4c4c4;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
   }
 `;
 
 const SendBtn = styled.button`
-  background: inherit;
   border: none;
-  box-shadow: none;
   border-radius: 0;
+  background: inherit;
   font-size: 14px;
   font-weight: 500;
   line-height: 17.53px;
+  box-shadow: none;
   color: ${(props) => (props.disabled ? "#C4C4C4" : "#00BCD4")};
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 `;

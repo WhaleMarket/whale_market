@@ -10,22 +10,19 @@ import PostModal from "../postDetail/PostModal";
 
 const IconWrapper = styled.div`
   display: flex;
+  align-items: center;
+  margin-bottom: 16px;
   font-weight: 400;
   font-size: 12px;
   line-height: 12px;
-  align-items: center;
-  margin: 24px 0 24px;
-  @media screen and (max-width: 855px) {
-    margin-top: 12px 0 16px 0;
-  }
 `;
 
 const Heart = styled.button`
-  background-color: inherit;
-  margin-right: 6px;
   width: 20px;
   height: 20px;
+  margin-right: 6px;
   border: none;
+  background-color: inherit;
   background-image: ${(props) =>
     props.Liked ? `url(${heart_icon_fill})` : `url(${heart_icon})`};
   background-repeat: no-repeat;
@@ -37,19 +34,19 @@ const Heart = styled.button`
 `;
 
 const HeartCount = styled.span`
+  color: #767676;
   font-size: 12px;
   line-height: 20px;
-  color: #767676;
 `;
 
 const CommentBtn = styled.a`
-  margin-right: 6px;
-  background-color: inherit;
   display: inline-block;
-  margin-left: 16px;
   width: 20px;
+  margin-left: 16px;
+  margin-right: 6px;
   height: 20px;
   border: none;
+  background-color: inherit;
   background: url(${comment_icon}) no-repeat center / 20px 20px;
   &:hover {
     cursor: pointer;
@@ -57,9 +54,9 @@ const CommentBtn = styled.a`
 `;
 
 const CommentCount = styled.span`
-  line-height: 20px;
-  font-size: 12px;
   color: #767676;
+  font-size: 12px;
+  line-height: 20px;
 `;
 
 function IconGroup({ like, comment, liked, id, index, src }) {

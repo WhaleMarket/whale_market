@@ -12,13 +12,18 @@ import PostingContext from "../../../context/PostingProvider";
 const LayOut = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.img === "" || props.img === undefined ? "100%" : "30%")};
+  width: ${(props) => (props.img === undefined ? "380px" : "280px")};
+  @media screen and (max-width: 768px) {
+    width: 380px;
+    height: 540px;
+  }
 `;
 
 const UserInfo = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 4px 10px 16px;
+  border-bottom: 0.5px solid #BDBDBD;
 `;
 
 const UserProfile = styled.img`
@@ -54,16 +59,23 @@ const TextContent = styled.p`
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
-  padding: 0 16px 16px 16px;
+  padding: 16px;
   word-break: break-word;
 `;
 
 const CommentWrapper = styled.ul`
-  border-top: 0.5px solid #bdbdbd;
+  border-top: 0.5px solid #BDBDBD;
 `;
 
 const Nocomment = styled.li`
   padding: 50px;
+  font-size: 13px;
+  color: #BDBDBD;
+  text-align: center;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 `;
 
 function PostContent({ id, index, src, Isimg, content, feed }) {
@@ -79,7 +91,7 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
         },
       };
       const res = await axios.get(
-        `${API_URL}/post/${id}/comments`,
+        `${API_URL}/post/${id}/comments/?limit=3&skip=0`,
         commentconfig
       );
       setComments([res.data.comments]);
