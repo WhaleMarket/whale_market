@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
+import AuthContext from "../../../../context/AuthProvider";
 
 const ProductWrapper = styled.li`
   display: flex;
@@ -36,6 +39,8 @@ const ProductPrice = styled.p`
 function ProductCard({ productResult }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
+  const [targetProduct, setTargetProduct] = useState('');
+  const [InfoState] = useContext(AuthContext);
 
   const modalItemList = [
     {
@@ -48,15 +53,23 @@ function ProductCard({ productResult }) {
       content: "수정",
       onClick: () => {},
     },
-    {
-      content: "웹사이트에서 상품보기",
-      onClick: () => {},
-    },
   ];
 
-  const deleteBtn = {
-    content: "삭제",
-    onClick: () => {},
+  const removeProduct = async (id) => {
+    try {
+      const deleteConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.delete(`${API_URL}/product/` + id, deleteConfig);
+      alert("🐳 상품이 삭제되었습니다. 🐳");
+      window.location.href = "./" + InfoState.MyInformations[0].myAccountname;
+    } catch (error) {
+      console.error(error);
+      alert("error");
+    }
   };
 
   return (
@@ -65,7 +78,10 @@ function ProductCard({ productResult }) {
         return (
           <ProductWrapper
             key={index}
-            onClick={() => setIsOpenModal(!isOpenModal)}
+            onClick={() => {
+              setIsOpenModal(!isOpenModal);
+              setTargetProduct(product.id);
+            }}
           >
             <ProductImg src={product.itemImage} />
             <ProductName>{product.itemName}</ProductName>
@@ -86,7 +102,12 @@ function ProductCard({ productResult }) {
         setAlertModal={setAlertModal}
         setIsOpenModal={setIsOpenModal}
         content={"상품을 삭제할까요?"}
-        deleteBtn={deleteBtn}
+        deleteBtn={{
+          content: "삭제",
+          onClick: () => {
+            removeProduct(targetProduct);
+          }
+        }}
       />
     </>
   );
