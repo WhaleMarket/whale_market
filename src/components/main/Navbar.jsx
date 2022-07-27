@@ -47,7 +47,11 @@ const Navbar = ({ location }) => {
   return (
     <>
       <Wave
-        style={{ position: "fixed", bottom: "0" }}
+        style={{
+          position: "fixed",
+          bottom: "0",
+          background: "linear-gradient(transparent 95%, #ffffff 5%)",
+        }}
         fill="url(#gradient)"
         paused={false}
         mask="url(#mask)"
@@ -64,11 +68,6 @@ const Navbar = ({ location }) => {
             <stop offset="90%" stopColor="white" />
           </linearGradient>
         </defs>
-        <mask id="mask">
-          <rect x="0" y="0" width="2000" height="200" fill="url(#gradient)">
-            <div>hello</div>
-          </rect>
-        </mask>
       </Wave>
       <Bottomnav>
         <List
