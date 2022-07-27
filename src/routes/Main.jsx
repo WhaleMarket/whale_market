@@ -13,6 +13,7 @@ import Followings from "../pages/main_page/mainProfile/Following";
 import UserProfile from "../pages/main_page/mainProfile/UserProfile";
 import PostingEdit from "../pages/main_page/mainProfile/PostingEdit";
 import ProductEdit from "../pages/main_page/mainProfile/ProductEdit";
+import Login from "../pages/login_page/Login";
 
 function MainRouter() {
   useAccountInfo();
@@ -33,7 +34,7 @@ function MainRouter() {
           <Route path="/home" exact component={Home} />
           <Route path="/chatting" component={Chatting} />
           <Route path="/profile/:accountname" component={MainProfile} />
-          <Route path="/search" component={HomeSearch} />
+          <Route path="/home/search" component={HomeSearch} />
         </>
       </Switch>
     </>
@@ -41,13 +42,15 @@ function MainRouter() {
 }
 
 function Main() {
-  return (
-    <>
-      <BrowserRouter basename="/main">
-        <MainRouter />
-      </BrowserRouter>
-    </>
-  );
+    return (
+        (window.localStorage.getItem('token') && window.localStorage.getItem('token') !== 'undefined') ? 
+            <>
+            <BrowserRouter basename='/main'>
+                <MainRouter />
+            </BrowserRouter>
+            </>
+        : <Login/>
+    );
 }
 
 export default Main;

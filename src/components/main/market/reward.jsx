@@ -39,8 +39,8 @@ function Reward({ data }) {
         },
       });
       setAcquired(res.data.comments);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   }
 
