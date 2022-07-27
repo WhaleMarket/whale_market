@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import styled from "styled-components";
-import Modal from "../../../modal/Modal";
-import AlertModal from "../../../modal/AlertModal";
-import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
-import AuthContext from "../../../../context/AuthProvider";
+import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
+import AuthContext from '../../../../context/AuthProvider';
+import axios from 'axios';
+import { API_URL } from '../../../../constants/defaultUrl';
+import Modal from '../../../modal/Modal';
+import AlertModal from '../../../modal/AlertModal';
 
 const ProductWrapper = styled.li`
   display: flex;
@@ -13,24 +13,24 @@ const ProductWrapper = styled.li`
   cursor: pointer;
 `;
 const ProductImg = styled.img`
-  width: 8.75rem;
-  height: 5.625rem;
-  border-radius: 0.5rem;
+  width: 140px;
+  height: 90px;
+  border-radius: 8px;
   object-fit: cover;
 `;
 
 const ProductName = styled.strong`
-  width: 8.75rem;
-  margin: 0.375rem 0 0.25rem;
-  font-size: 0.875rem;
+  width: 140px;
+  margin: 6px 0 4px;
+  font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
 `;
 
 const ProductPrice = styled.p`
-  width: 8.75rem;
+  width: 140px;
   color: #00bcd4;
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
