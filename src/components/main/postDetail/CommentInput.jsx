@@ -135,8 +135,8 @@ function CommentInput({ index, Liked, id, setComments }) {
         });
         console.log("good")
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   }
 
