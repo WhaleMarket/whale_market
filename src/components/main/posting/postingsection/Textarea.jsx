@@ -31,11 +31,11 @@ function PostingArea() {
   const [, setUploadState] = useContext(UploadContext);
   const [uploadPostingState, setUploadPostingState] =
     useContext(UploadPostingContext);
+  const postId = useParams().postId;
   const [PostingModificationState, setPostingModificationState] = useContext(PostingModificationContext);
   const [value, setValue] = useState(false);
   const content = useRef();
   const [InfoState] = useContext(AuthContext);
-  const postId = useParams().postId;
 
   function con() {
     if (content) {
