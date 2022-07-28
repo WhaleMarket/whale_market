@@ -18,8 +18,8 @@ const ProductContainer = styled.section`
 `;
 
 const ProductTitle = styled.h1`
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  margin-bottom: 16px;
+  font-size: 16px;
   font-weight: 700;
 `;
 

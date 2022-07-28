@@ -40,7 +40,7 @@ const ProfileImgWrapper = styled.div`
 `
 
 const ProfileImgLable = styled.label`
-    width: 6.875rem;
+    width: 110px;
     margin: 0 auto;
 `
 

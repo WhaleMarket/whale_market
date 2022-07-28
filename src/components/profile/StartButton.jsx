@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StartBtn = styled.button`
-    padding: 0.813rem 6.688rem 0.813rem 6.75em;
+    padding: 13px 107px 13px 108px;
     border-style: none;
-    border-radius: 2.750rem;
+    border-radius: 44px;
     background-color: ${(props) => props.disabled ? '#B2EBF2' : '#00BCD4'};
     color: #fff;
     font-size: 0.875em;

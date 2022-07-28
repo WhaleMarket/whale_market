@@ -14,30 +14,32 @@ const Head = styled.header`
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% - 28px);
-    padding: 0.813rem 0.750rem 0.813rem 1rem;
-    border-bottom: 0.031rem solid #BDBDBD;
-    background-color: white;
+    width: 100%;
+    height: 54px;
+    padding: 13px 12px 13px 16px;
+    border-bottom: 0.5px solid #BDBDBD;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
 `
 
 const BackBtn = styled(Link)`
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 24px;
+    height: 24px;
     border: none;
     background-color: inherit;
     background-image: url(${back});
-    background-size: 1.5rem 1.5rem;
+    background-size: 22px 22px;
     &:hover{
         cursor: pointer;
     }
 `
 const SaveBtn = styled.button`
-    width: 5.625rem;
-    height: 2rem;
+    width: 90px;
+    height: 32px;
     border: none;
     background-color: inherit;
     background-image: url(${save});
-    background-size: 5.625rem 2rem;
+    background-size: 90px 32px;
     :disabled {
         background-image: url(${disabledSave});
     }

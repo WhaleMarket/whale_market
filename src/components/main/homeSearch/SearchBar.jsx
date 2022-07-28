@@ -8,9 +8,10 @@ const SearchHeader = styled.header`
     align-items: center;
     position: fixed;
     width: 100%;
+    height: 54px;
     padding: 8px 16px;
     border-bottom: 0.5px solid #BDBDBD;
-    background-color: white;
+    background-color: #FFFFFF;
     box-sizing: border-box;
 `;
 

@@ -11,11 +11,12 @@ const Head = styled.header`
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    width: calc(100% - 28px);
+    width: 100%;
+    height: 54px;
     padding: 13px 12px 13px 16px;
     border-bottom: 0.5px solid #BDBDBD;
-    background-color: white;
-    z-index: 1;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
 `;
 
 const Search = styled.button`

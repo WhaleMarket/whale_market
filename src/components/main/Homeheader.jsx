@@ -7,19 +7,21 @@ const Head = styled.header`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  width: calc(100% - 28px);
+  width: 100%;
+  height: 54px;
   padding: 13px 12px 13px 16px;
-  border-bottom: 0.5px solid #bdbdbd;
-  background-color: white;
+  border-bottom: 0.5px solid #BDBDBD;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
 `;
 
 const Search = styled.button`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 24px;
+  height: 24px;
   border: none;
   background-color: inherit;
   background-image: url(${search_icon});
-  background-size: 1.5rem 1.5rem;
+  background-size: 24px 24px;
   &:hover {
     cursor: pointer;
   }

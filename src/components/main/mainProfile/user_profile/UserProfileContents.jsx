@@ -37,18 +37,18 @@ const ImgDiv = styled.div`
 
 const UserName = styled.h1`
   font-weight: 700;
-  margin: 1rem 0 0.375rem 0;
+  margin: 16px 0 6px 0;
 `;
 
 const UserId = styled.span`
   color: #767676;
-  font-size: 0.75rem;
+  font-size: 12px;
 `;
 
 const UserIntro = styled.span`
-  margin: 1rem 0 1.5rem;
+  margin: 16px 0 24px;
   color: #767676;
-  font-size: 0.75rem;
+  font-size: 12px;
 `;
 
 const Followers = styled(Link)`
@@ -65,13 +65,13 @@ const Followers = styled(Link)`
 const FollowCount = styled.span`
   display: block;
   color: #000000;
-  font-size: 1.125rem;
+  font-size: 18px;
   font-weight: 700;
 `;
 
 const FollowTxt = styled.span`
   color: #767676;
-  font-size: 0.625rem;
+  font-size: 10px;
 `;
 
 const Followings = styled(Link)`
@@ -117,7 +117,7 @@ const ShareButton = styled.button`
 const ProfileEditButton = styled(Link)`
   padding: 8px 26px;
   border: 1px solid #dbdbdb;
-  border-radius: 1.875rem;
+  border-radius: 30px;
   background-color: #fff;
   color: #767676;
   font-size: 14px;
@@ -130,7 +130,7 @@ const ProfileEditButton = styled(Link)`
 const ProductUploadButton = styled(Link)`
   padding: 8px 23px;
   border: 1px solid #dbdbdb;
-  border-radius: 1.875rem;
+  border-radius: 30px;
   background-color: #fff;
   color: #767676;
   font-size: 14px;
@@ -145,7 +145,7 @@ const FollowButton = styled.button`
   box-sizing: border-box;
   padding: 8px 41px;
   border: ${(props) => (props.follow ? "solid 0.5px grey" : "none")};
-  border-radius: 1.875rem;
+  border-radius: 30px;
   background-color: ${(props) => (props.follow ? "white" : "#00bcd4")};
   color: ${(props) => (props.follow ? "black" : "white")};
   font-size: 14px;

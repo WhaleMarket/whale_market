@@ -4,12 +4,12 @@ import { useHistory } from 'react-router-dom';
 import BackBtnIcon from '../../../assets/icon-arrow-left.png';
 
 const BackBtn = styled.button`
-    width: 1.375rem;
-    height: 1.375rem;
+    width: 22px;
+    height: 22px;
     border: none;
     background-color: inherit;
     background-image: url(${BackBtnIcon});
-    background-size: 1.375rem 1.375rem;
+    background-size: 22px 22px;
     &:hover{
         cursor: pointer;
     }

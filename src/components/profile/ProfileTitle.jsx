@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ProfileTit = styled.h1`
-    font-size: 1.500rem;
+    font-size: 24px;
     font-weight: 500;
-    line-height: 1.875rem;
+    line-height: 30px;
 `;
 
 const ProfileSubTit = styled.p`
-    margin-top: 0.750rem;
-    font-size: 0.875rem;
+    margin-top: 12px;
+    font-size: 14px;
     font-weight: 400;
 `;
 

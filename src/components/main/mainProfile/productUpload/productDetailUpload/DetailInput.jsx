@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Input = styled.input`
   border: none;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid #DBDBDB;
   display: block;
   padding: 10px 0 8px 0;
   width: ${(props) => props.width + "px"};
@@ -12,7 +12,7 @@ const Input = styled.input`
     outline: none;
   }
   &::placeholder {
-    color: #dbdbdb;
+    color: #DBDBDB;
   }
 `;
 
