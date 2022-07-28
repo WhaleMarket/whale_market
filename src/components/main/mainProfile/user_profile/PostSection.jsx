@@ -19,9 +19,7 @@ const ViewTypeNav = styled.nav`
   height: 60px;
   padding-right: 20px;
   border-top: 0.5px solid #dbdbdb;
-  @media screen and (max-width: 855px) {
-    height: 44px;
-  }
+
 `;
 
 const ListIconBtn = styled.button`

@@ -14,20 +14,16 @@ const UserProfileContainer = styled.div`
   align-items: center;
   flex-direction: column;
   position: relative;
-  width: 60vw;
+  width: 400px;
   padding: 30px 55px 26px;
   margin: 48px auto 0 auto;
   box-sizing: border-box;
-  @media screen and (max-width: 1100px) {
-    width: 100vw;
-    margin-top: 48px;
-  }
 `;
 
 const ImgDiv = styled.div`
   width: 110px;
   height: 110px;
-  margin: 0 auto;
+  margin: 20px auto 0;
   background-image: url(${(props) => props.src});
   background-position: center;
   background-repeat: no-repeat;
@@ -49,22 +45,17 @@ const UserId = styled.span`
 const UserIntro = styled.span`
   margin: 16px 0 24px;
   color: #767676;
-<<<<<<< HEAD
   font-size: 12px;
-=======
-  font-size: 0.75rem;
-  line-height: 16px;
->>>>>>> e60ff47e3e7fb5f6b998fd67f58c36475591b28f
 `;
 
 const Followers = styled(Link)`
   position: absolute;
-  left: 150px;
-  top: 65px;
+  left: 15px;
+  top: 120px;
   text-align: center;
   text-decoration: none;
-  @media screen and (max-width: 855px) {
-    left: 56px;
+  @media screen and (max-width: 768px) {
+    left: 65px;
   }
 `;
 
@@ -82,12 +73,12 @@ const FollowTxt = styled.span`
 
 const Followings = styled(Link)`
   position: absolute;
-  right: 150px;
-  top: 65px;
+  right: 15px;
+  top: 120px;
   text-align: center;
   text-decoration-line: none;
-  @media screen and (max-width: 855px) {
-    right: 56px;
+  @media screen and (max-width: 768px) {
+    right: 65px;
   }
 `;
 
@@ -135,9 +126,9 @@ const ProfileEditButton = styled(Link)`
 
 const ProductUploadButton = styled(Link)`
   padding: 8px 23px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #DBDBDB;
   border-radius: 30px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   color: #767676;
   font-size: 14px;
   font-weight: 500;

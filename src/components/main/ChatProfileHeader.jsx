@@ -11,28 +11,17 @@ import axios from "axios";
 import { API_URL } from "../../constants/defaultUrl";
 
 const Head = styled.header`
-<<<<<<< HEAD
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
+    z-index: 1;
     width: 100%;
     height: 54px;
     padding: 13px 12px 13px 16px;
     border-bottom: 0.5px solid #BDBDBD;
     background-color: #FFFFFF;
     box-sizing: border-box;
-=======
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  width: calc(100% - 28px);
-  padding: 13px 12px 13px 16px;
-  border-bottom: 0.5px solid #bdbdbd;
-  background-color: white;
-  z-index: 1;
->>>>>>> e60ff47e3e7fb5f6b998fd67f58c36475591b28f
 `;
 
 const Search = styled.button`
