@@ -7,6 +7,7 @@ import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
 import PostModal from "../postDetail/PostModal";
+import HeartEvent from "../../../theme/heartClickEvent";
 
 const IconWrapper = styled.div`
   display: flex;
@@ -28,6 +29,10 @@ const Heart = styled.button`
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px 20px;
+  transition: 0.5s ease-in-out;
+  &.like {
+    animation: ${HeartEvent} 0.5s ease-in-out;
+  }
   &:hover {
     cursor: pointer;
   }
@@ -154,6 +159,7 @@ function IconGroup({ like, comment, liked, id, index, src }) {
       <IconWrapper>
         <Heart
           Liked={liked}
+          className={`${liked ? "like" : ""}`}
           onClick={liked ? useHandleUnlike : useHandleLike}
         />
         <HeartCount>{like}</HeartCount>
