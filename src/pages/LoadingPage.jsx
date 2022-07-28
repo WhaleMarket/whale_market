@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Loading from "../assets/loadingDot.gif";
+import Loading from "../assets/loadingItem.gif";
 
 const Background = styled.div`
   position: absolute;

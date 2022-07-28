@@ -13,7 +13,7 @@ const Wrapper = styled.li`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #767676;
+  border-bottom: 0.5px solid #BDBDBD;
   padding: 10px 0;
 `;
 
@@ -36,6 +36,7 @@ const UserImgDiv = styled.div`
 
 const FollowInfo = styled.div`
   margin-left: 10px;
+  width: 50vw;
 `;
 
 const FollowName = styled.strong`

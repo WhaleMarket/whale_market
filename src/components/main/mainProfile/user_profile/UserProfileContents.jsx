@@ -340,7 +340,7 @@ function UserProfileCard() {
           ) : (
             <>
               <ProfileEditButton
-                click={PostingState.data[0].accountname ? true : false}
+                click={PostingState.data[0].accountname ? "true" : "false"}
                 to="/profileedit"
               >
                 프로필 수정
