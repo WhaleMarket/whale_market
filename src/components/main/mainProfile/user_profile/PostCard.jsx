@@ -13,19 +13,19 @@ import { useHistory  } from 'react-router-dom';
 const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60vw;
-  margin-bottom: 34px;
-  padding: 0 4%;
+  width: 600px;
+  margin-bottom: 0 auto 34px;
   box-sizing: border-box;
-  @media screen and (max-width: 500px) {
-    width: 100%;
+
+  @media screen and (max-width: 768px) {
+    width: 400px;
   }
 `;
 
 const PostInfo = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 16px 0;
+  padding-bottom: 16px;
 `;
 
 const UserImgDiv = styled.div`
@@ -63,48 +63,51 @@ const PostContentList = styled.ul`
 `;
 
 const PostContent = styled.li`
-  padding: 0 8% 30px;
-  border: solid #dbdbdb 1px;
+  padding: 36px 50px 32px;
+  border: solid #DBDBDB 1px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   word-break: break-word;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    width: 400px;
+    padding: 26px 30px 25px;
+  }
 `;
 
 const PostTxt = styled.p`
-  margin-bottom: 28px;
+  margin-bottom: 16px;
   font-size: 14px;
   line-height: 18px;
-  @media screen and (max-width: 855px) {
+  @media screen and (max-width: 768px) {
     margin-bottom: 16px;
   }
 `;
 
 const PostImgWrapper = styled.div`
-  width: 100%;
   margin: 0 auto 24px auto;
-  text-align: center;
-  @media screen and (max-width: 855px) {
-    margin-bottom: 12px;
-  }
+  margin-bottom: 16px;
 `;
 
 const PostImg = styled.img`
   overflow: hidden;
-  width: 100%;
-  height: 400px;
+  width: 502px;
+  height: 401px;
   border-radius: 10px;
   object-fit: cover;
-  @media screen and (max-width: 855px) {
-    height: 228px;
+
+  @media screen and (max-width: 768px) {
+    width: 338px;
+    height: 270px;
   }
 `;
 
 const PostDate = styled.p`
-  margin-top: 24px;
+  margin-top: 16px;
   color: #767676;
   font-size: 10px;
-  @media screen and (max-width: 855px) {
-    margin-top: 16px;
+  @media screen and (max-width: 768px) {
   }
 `;
 

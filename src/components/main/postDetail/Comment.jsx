@@ -2,24 +2,36 @@ import styled from "styled-components";
 import ModalBtn from "../../modal/ModalBtn";
 
 const CommentLi = styled.li`
-  list-style: none;
   flex-direction: column;
-  padding: 16px 16px 12px;
+  padding: 6px 16px;
+  list-style: none;
+
+  &:first-child{
+    padding-top: 16px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 380px;
+  }
 `;
+
 const ProfileWrapper = styled.div`
   display: flex;
-  margin-bottom: 4px;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    padding-right: 30px;
+  }
 `;
 
 const ProfileImg = styled.img`
+  overflow: hidden;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   background: url(${(props) => props.src});
   background-size: 36px 36px;
-  overflow: hidden;
   object-fit: cover;
 `;
 const UserName = styled.span`
@@ -33,9 +45,15 @@ const UserName = styled.span`
 `;
 
 const CommentContent = styled.p`
+  width: 200px;
+  margin-left: 48px;
   font-size: 14px;
   font-weight: 400;
-  margin-left: 48px;
+  word-break:break-all;
+
+  @media screen and (max-width: 768px) {
+    width: 300px;
+  }
 `;
 
 const InfoWrapper = styled.div`
@@ -52,23 +70,23 @@ function Comment({
   setTargetUser,
 }) {
   return (
-    <CommentLi key={index}>
-      <ProfileWrapper>
-        <InfoWrapper>
-          <ProfileImg src={value.author.image} />
-          <UserName>{value.author.username}</UserName>
-        </InfoWrapper>
-        <ModalBtn
-          className="small"
-          onClick={() => {
-            setIsOpenModal(!isOpenModal);
-            setTargetcomment(value.id);
-            setTargetUser(value.author.accountname);
-          }}
-        />
-      </ProfileWrapper>
-      <CommentContent>{value.content}</CommentContent>
-    </CommentLi>
+      <CommentLi key={index}>
+        <ProfileWrapper>
+          <InfoWrapper>
+            <ProfileImg src={value.author.image} />
+            <UserName>{value.author.username}</UserName>
+          </InfoWrapper>
+          <ModalBtn
+            className="small"
+            onClick={() => {
+              setIsOpenModal(!isOpenModal);
+              setTargetcomment(value.id);
+              setTargetUser(value.author.accountname);
+            }}
+          />
+        </ProfileWrapper>
+        <CommentContent>{value.content}</CommentContent>
+      </CommentLi>
   );
 }
 

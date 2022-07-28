@@ -5,33 +5,34 @@ import IconGroup from "./IconGroup";
 import AuthContext from "../../../context/AuthProvider";
 
 const LayOut = styled.ul`
-  width: 50vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 600px;
   padding: 53px 0 68px;
   margin: 0 auto;
-  /* position: fixed; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   box-sizing: border-box;
-  @media screen and (max-width: 500px) {
-    width: 100%;
+  
+  @media screen and (max-width: 768px) {
+    width: 400px;
     padding: 53px 4% 68px;
   }
 `;
 
 const FeedWrapper = styled.li`
-  border: solid #dbdbdb 1px;
-  border-radius: 10px;
-  display: inline-block;
-  /* width: calc(100% - 32px); */
-  width: 100%;
-  /* min-width: 358px; */
-  margin-top: 20px;
-  /* padding: 53px 4% 68px ; */
-  padding: 0 8% 30px;
   display: flex;
   flex-direction: column;
+  width: 600px;
+  padding: 20px 50px 30px;
+  margin-top: 30px;
+  border: solid #DBDBDB 1px;
+  border-radius: 10px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    width: 400px;
+    padding: 10px 30px 25px;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -39,37 +40,40 @@ const ContentWrapper = styled.div`
 `;
 
 const ContentText = styled.p`
-  margin-bottom: 28px;
+  /* margin-bottom: 16px; */
   font-size: 14px;
   font-weight: 400;
   line-height: 17.53px;
-  @media screen and (max-width: 855px) {
-    margin-bottom: 16px;
-  }
 `;
 
 const ImgWrapper = styled.div`
-  width: 100%;
-  margin: 0 auto 24px auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-`;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  margin-bottom: 16px;
+  `;
 
 const ContentImg = styled.img`
   overflow: hidden;
-  width: 100%;
-  height: 400px;
+  width: 502px;
+  height: 401px;
+  margin-bottom: 10px;
   border-radius: 10px;
   object-fit: cover;
-  margin-bottom: 10px;
-  @media screen and (max-width: 855px) {
-    height: 228px;
+
+  &:first-child{
+    margin-top: 16px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 338px;
+    height: 270px;
   }
 `;
 
 const CreatedDate = styled.p`
-  margin-bottom: 4px;
   color: #767676;
   font-size: 10px;
   font-weight: 400;
