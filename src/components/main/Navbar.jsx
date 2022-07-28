@@ -104,11 +104,11 @@ const Navbar = ({ location }) => {
           </Link>
         </List>
         <List className="chatting" current={location.pathname === "/chatting"}>
-          <Link to="/chatting">
+          <Link to="/reward">
             <Logo
               className={`${homecurrent[1] ? "Home current" : "Home"}`}
               src={
-                location.pathname === "/chatting" ? award_icon_fill : award_icon
+                location.pathname === "/reward" ? award_icon_fill : award_icon
               }
               alt="home icon"
             />
