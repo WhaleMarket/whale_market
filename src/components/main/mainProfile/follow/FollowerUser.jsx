@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import AuthContext from "../../../../context/AuthProvider";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
+import LoadingPage from "../../../../pages/LoadingPage";
 
 const Wrapper = styled.li`
   display: flex;
@@ -78,12 +79,14 @@ const InfoWrapper = styled.div`
 function FollowUser() {
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
       {PostingState.data[0].followeruser?.map((value, key) => {
         const useHandleFollow = () => {
           async function fetchData() {
+            setLoading(true);
             try {
               const config = {
                 headers: {
@@ -114,6 +117,7 @@ function FollowUser() {
                 };
                 return { data: PostingState.data };
               });
+              setLoading(false);
             } catch (error) {
               console.error(error);
             }
@@ -123,6 +127,7 @@ function FollowUser() {
 
         const useHandleUnfollow = () => {
           async function fetchData() {
+            setLoading(true);
             try {
               const config = {
                 headers: {
@@ -153,6 +158,7 @@ function FollowUser() {
                 };
                 return { data: PostingState.data };
               });
+              setLoading(false);
             } catch (error) {
               console.error(error);
             }
@@ -160,25 +166,26 @@ function FollowUser() {
           fetchData();
         };
         return (
-          <Wrapper key={key}>
-            <InfoWrapper>
-              <StyledLink to={"/profile/" + value.accountname}>
-                <UserImgDiv src={value.image} />
-              </StyledLink>
-              <FollowInfo>
-                <FollowName>{value.username}</FollowName>
-                <FollowIntro>{value.intro}</FollowIntro>
-              </FollowInfo>
-            </InfoWrapper>
+            loading ? <LoadingPage /> :
+                <Wrapper key={key}>
+                <InfoWrapper>
+                  <StyledLink to={"/profile/" + value.accountname}>
+                    <UserImgDiv src={value.image} />
+                  </StyledLink>
+                  <FollowInfo>
+                    <FollowName>{value.username}</FollowName>
+                    <FollowIntro>{value.intro}</FollowIntro>
+                  </FollowInfo>
+                </InfoWrapper>
 
-            <FollowButton
-              type="button"
-              follow={value.isfollow}
-              onClick={value.isfollow ? useHandleUnfollow : useHandleFollow}
-            >
-              {value.isfollow ? "팔로우 취소" : "팔로우"}
-            </FollowButton>
-          </Wrapper>
+                <FollowButton
+                  type="button"
+                  follow={value.isfollow}
+                  onClick={value.isfollow ? useHandleUnfollow : useHandleFollow}
+                >
+                  {value.isfollow ? "팔로우 취소" : "팔로우"}
+                </FollowButton>
+              </Wrapper>
         );
       })}
     </>

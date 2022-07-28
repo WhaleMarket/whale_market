@@ -11,6 +11,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import { API_URL } from "../../../../constants/defaultUrl";
 import axios from "axios";
 import PostingContext from "../../../../context/PostingProvider";
+import LoadingPage from "../../../../pages/LoadingPage";
 
 const ViewTypeNav = styled.nav`
   display: flex;
@@ -80,8 +81,10 @@ function PostSection() {
   const [viewType, setviewType] = useState(true);
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
+  const [loading, setLoading] = useState(false);
 
   async function getPost() {
+    setLoading(true);
     try {
       const config = {
         headers: {
@@ -100,6 +103,7 @@ function PostSection() {
         };
         return { data: PostingState.data };
       });
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -111,6 +115,7 @@ function PostSection() {
 
   if (PostingState.data[0].postdata.length > 0) {
     return (
+        loading ? <LoadingPage /> :
       <>
         <ViewTypeNav>
           <ListIconBtn
