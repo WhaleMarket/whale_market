@@ -92,10 +92,11 @@ const IconWrapper = styled.div`
   gap: 10px;
 `;
 
-const MessageButton = styled(Link)`
+const MessageButton = styled.button`
   width: 34px;
   height: 34px;
   border: 1px solid #dbdbdb;
+  background-color: white;
   border-radius: 30px;
   background-image: url(${messageIcon});
   background-position: center center;
@@ -269,22 +270,20 @@ function UserProfileCard() {
     PostingState.data[0].accountname && getProduct();
   }, [PostingState.data[0].accountname]);
 
-  let allprice = 0;
-  useEffect(() => {
-    productResult.map((value) => {
-      return (allprice += value.price);
-    });
-    CountUp(allprice / 100000000, domRef);
-  }, []);
-
   return (
     <>
       <UserProfileContainer>
         <p>
-          현재 {PostingState.data[0].user.accountname}님의 값어치는 대략{" "}
-          <strong ref={domRef}>{allprice / 100000000}</strong>억{" "}
-          <strong ref={domRef}>{(allprice % 100000000) / 10000}</strong>만원
-          상승 했습니다! 대단해요!
+          현재 {PostingState.data[0].user.accountname}님의 값어치는{" "}
+          <strong ref={domRef}>
+            {productResult.length !== 0 &&
+              productResult
+                .map((value) => {
+                  return value.price;
+                })
+                .reduce((a, b) => a + b)}
+          </strong>
+          원 상승 했습니다! 대단해요!
         </p>
         <ImgDiv src={PostingState.data[0].user.image} />
         <UserName>{PostingState.data[0].user.username}</UserName>
@@ -302,7 +301,7 @@ function UserProfileCard() {
           {window.location.pathname !==
           `/main/profile/${InfoState.MyInformations[0].myAccountname}` ? (
             <>
-              <MessageButton to="/Chatting" />
+              <MessageButton />
               <FollowButton
                 follow={PostingState.data[0].user.isfollow}
                 type="button"
