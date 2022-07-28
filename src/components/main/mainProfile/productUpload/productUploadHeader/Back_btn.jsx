@@ -8,7 +8,7 @@ const Back = styled.button`
   border: none;
   background-color: inherit;
   background-image: url(${back});
-  background-size: cover;
+  background-size: 22px 22px;
   &:hover {
     cursor: pointer;
   }

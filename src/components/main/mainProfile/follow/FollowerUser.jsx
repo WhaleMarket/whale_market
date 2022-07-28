@@ -62,7 +62,7 @@ const FollowIntro = styled.p`
 const FollowButton = styled.button`
   width: 100px;
   padding: 10px 0;
-  border-radius: 1.625rem;
+  border-radius: 26px;
   font-size: 12px;
   vertical-align: baseline;
   margin-right: 16px;

@@ -40,7 +40,7 @@ const List = styled.li`
 
 const Logo = styled.img`
   display: block;
-  width: 1.5rem;
+  width: 24px;
   padding: 12px 0 4px 0;
   margin: 0 auto;
   transform-origin: bottom;

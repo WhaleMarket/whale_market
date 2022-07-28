@@ -9,18 +9,18 @@ import PostingContext from "../../../../context/PostingProvider";
 import LoadingPage from "../../../../pages/LoadingPage";
 
 const ProductContainer = styled.section`
-  width: 60vw;
-  padding: 20px 4%;
+  width: 600px;
+  padding: 20px 0;
   margin: 0 auto;
   box-sizing: border-box;
-  @media screen and (max-width: 855px) {
-    width: 100vw;
+  @media screen and (max-width: 768px) {
+    width: 400px;
   }
 `;
 
 const ProductTitle = styled.h1`
-  margin-bottom: 1rem;
-  font-size: 1rem;
+  margin-bottom: 16px;
+  font-size: 16px;
   font-weight: 700;
 `;
 

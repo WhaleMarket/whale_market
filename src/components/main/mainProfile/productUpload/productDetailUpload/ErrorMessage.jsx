@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const Error = styled.p`
-    margin-top: 0.375rem;
+    margin-top: 6px;
     color: #EB5757;
-    font-size: 0.750rem;
+    font-size: 12px;
 `
 
 function ErrorMessage({ message }) {

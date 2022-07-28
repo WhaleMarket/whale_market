@@ -10,7 +10,7 @@ import AuthContext from '../../context/AuthProvider';
 const Form = styled.form`
     display: flex;
     flex-direction: column;
-    margin-top: 1.875rem;
+    margin-top: 30px;
 `
 
 const Fieldset = styled.fieldset`
@@ -32,13 +32,13 @@ const ProfileImgWrapper = styled.div`
 `
 
 const ProfileImgLable = styled.label`
-    width: 6.875rem;
+    width: 110px;
     margin: 0 auto;
 `
 
 const Img = styled.img`
     position: absolute;
-    width: 2.250rem;
+    width: 36px;
     right: 0;
     bottom: 0;
     cursor: pointer;
@@ -53,17 +53,17 @@ const ProfileImgInput = styled.input`
     text-indent: -9999px;
 `
 const FormLabel = styled.label`
-    margin: 1rem 0 0.625rem 0;
+    margin: 16px 0 10px 0;
     color: #767676;
-    font-size: 0.750rem;
+    font-size: 12px;
 `
 
 const FormInput = styled.input`
-    width: 20.125rem;
+    width: 322px;
     border: none;
     border-bottom: 1px solid #DBDBDB;
     color: #000000;
-    font-size: 0.875rem;
+    font-size: 14px;
     &:focus {
         outline: none;
         border-bottom: 1px solid #00BCD4;
@@ -78,9 +78,9 @@ const FormInput = styled.input`
 `
 
 const ErrorMessage = styled.p`
-    margin-top: 0.375rem;
+    margin-top: 6px;
     color: #EB5757;
-    font-size: 0.750rem;
+    font-size: 12px;
 `
 
 const SuccessMessage = styled.strong`

@@ -7,7 +7,7 @@ const ProfileContainer = styled.section`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-bottom: 0.031rem solid #dbdbdb;
+  border-bottom: 0.5px solid #dbdbdb;
   box-sizing: border-box;
 `;
 

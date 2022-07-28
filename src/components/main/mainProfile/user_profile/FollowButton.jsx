@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const FollowBtn = styled.button`
     padding: 8px 41px;
     border-style: none;
-    border-radius: 1.875rem;
+    border-radius: 30px;
     background-color: #00BCD4;
-    color: #fff;
+    color: #FFFFFF;
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
@@ -15,9 +15,9 @@ const FollowBtn = styled.button`
 
 const UnFollowBtn = styled.button`
     padding: 7px 33px;
-    border: 0.063rem solid #DBDBDB;
-    border-radius: 1.875rem;
-    background-color: #fff;
+    border: 1px solid #DBDBDB;
+    border-radius: 30px;
+    background-color: #FFFFFF;
     color: #767676;
     font-size: 14px;
     font-weight: 500;

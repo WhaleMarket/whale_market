@@ -25,12 +25,12 @@ const FeedWrapper = styled.li`
   width: 600px;
   padding: 20px 50px 30px;
   margin-top: 30px;
-  border: solid #DBDBDB 1px;
+  border: 1px solid #DBDBDB;
   border-radius: 10px;
   box-sizing: border-box;
 
   @media screen and (max-width: 768px) {
-    width: 400px;
+    width: 400px; // 360px 
     padding: 10px 30px 25px;
   }
 `;

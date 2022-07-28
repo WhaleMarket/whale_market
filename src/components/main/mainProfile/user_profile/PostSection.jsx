@@ -19,9 +19,7 @@ const ViewTypeNav = styled.nav`
   height: 60px;
   padding-right: 20px;
   border-top: 0.5px solid #dbdbdb;
-  @media screen and (max-width: 855px) {
-    height: 44px;
-  }
+
 `;
 
 const ListIconBtn = styled.button`
@@ -32,8 +30,8 @@ const ListIconBtn = styled.button`
 `;
 
 const ListIcon = styled.img`
-  width: 1.625rem;
-  height: 1.625rem;
+  width: 26px;
+  height: 26px;
 `;
 
 const AlbumIconBtn = styled.button`
@@ -44,8 +42,8 @@ const AlbumIconBtn = styled.button`
 `;
 
 const AlbumIcon = styled.img`
-  width: 1.625rem;
-  height: 1.625rem;
+  width: 26px;
+  height: 26px;
 `;
 
 const PostContainer = styled.section`
@@ -61,7 +59,7 @@ const AlbumContainer = styled.section`
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 1fr;
   gap: 8px;
-  width: 24.375rem;
+  width: 390px;
   padding-bottom: 70px;
   margin: 16px auto;
 `;

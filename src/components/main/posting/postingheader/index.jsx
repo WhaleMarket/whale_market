@@ -9,10 +9,12 @@ const Head = styled.header`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  width: calc(100% - 28px);
+  width: 100%;
+  height: 54px;
   padding: 9px 12px 9px 16px;
   border-bottom: 0.5px solid #bdbdbd;
-  background-color: white;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
 `;
 
 function PostingHeader() {
