@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import heart_icon from "../../../assets/icon-heart.png";
-import heart_icon_fill from "../../../assets/icon-heart-fill.png";
-import comment_icon from "../../../assets/icon-message-circle.png";
+import praise_icon from "../../../assets/icon-praise.png";
+import praise_icon_fill from "../../../assets/icon-praise-fill.png";
+import comment_icon from "../../../assets/icon-comment.png";
 import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
@@ -19,16 +19,16 @@ const IconWrapper = styled.div`
 `;
 
 const Heart = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 18px;
   margin-right: 6px;
   border: none;
   background-color: inherit;
   background-image: ${(props) =>
-    props.Liked ? `url(${heart_icon_fill})` : `url(${heart_icon})`};
+    props.Liked ? `url(${praise_icon_fill})` : `url(${praise_icon})`};
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 20px 20px;
+  background-size: 26px 19px;
   transition: 0.5s ease-in-out;
   &.like {
     animation: ${HeartEvent} 0.5s ease-in-out;
@@ -46,13 +46,13 @@ const HeartCount = styled.span`
 
 const CommentBtn = styled.a`
   display: inline-block;
-  width: 20px;
+  width: 26px;
   margin-left: 16px;
   margin-right: 6px;
-  height: 20px;
+  height: 18px;
   border: none;
   background-color: inherit;
-  background: url(${comment_icon}) no-repeat center / 20px 20px;
+  background: url(${comment_icon}) no-repeat center / 26px 19px;
   &:hover {
     cursor: pointer;
   }

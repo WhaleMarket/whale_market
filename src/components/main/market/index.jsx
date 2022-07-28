@@ -20,7 +20,14 @@ const RewardWrapper = styled.ul`
     gap: 16px;
   }
 
-`;
+  @media screen and (max-width: 390px) {
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    margin: 0 auto;
+    padding: 53px 4% 68px;
+  }
+`
 
 function Market({ List }) {
   return (
