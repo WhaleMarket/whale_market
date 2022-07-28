@@ -2,17 +2,18 @@ import { useRef, useState, useEffect, useContext } from 'react';
 import AuthContext from "../../../context/AuthProvider";
 import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
+import LoadingPage from '../../../pages/LoadingPage';
 import Button from '../../emaillogin/button/Button';
 import { Wrapper, Title, Form, Label, Input, ErrorMessage, StyledLink } from './index.style';
 
 export function LoginForm() {
     const [, setInfoState] = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
     const emailRef = useRef();
     const errorRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [success, setSuccess] = useState(false);
     const [notMatchError, setNotMatchError] = useState('');
 
@@ -20,14 +21,10 @@ export function LoginForm() {
         emailRef.current.focus();
     }, [])
 
-    useEffect(() => {
-        setErrorMessage('');
-    }, [email, password])
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         setPassword('');
-
+        setLoading(true);
         try {
             const reqData = {
                 user: { email: email, password: password },
@@ -69,7 +66,7 @@ export function LoginForm() {
                 setSuccess(false);
                 setNotMatchError('*' + response?.data?.message);
             } 
-
+            setLoading(false);
         } catch (error) {
             console.error(error);
             errorRef.current.focus();
@@ -85,6 +82,7 @@ export function LoginForm() {
     };
 
     return (
+        loading ? <LoadingPage /> :
         <>
             {success ? (
                 window.location.href = '/main/home'
