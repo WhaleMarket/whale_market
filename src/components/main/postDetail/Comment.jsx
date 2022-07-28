@@ -2,7 +2,6 @@ import styled from "styled-components";
 import ModalBtn from "../../modal/ModalBtn";
 
 const CommentLi = styled.li`
-  /* width: 380px; */
   flex-direction: column;
   padding: 6px 16px;
   list-style: none;

@@ -29,7 +29,7 @@ const ModalWrapper = styled.section`
   width: ${(props) =>
     props.className === "NoImg" ? null : "700px"};
   width: ${(props) => (props.IsImage !== "" ? null : "700px")};
-  height: 400px;
+  height: ${(props) => (props.IsImage !== "" ? "400px" : "400px")};
   margin: 0 auto;
   border-radius: 10px;
   background-color: #FFFFFF;
@@ -43,7 +43,8 @@ const ModalWrapper = styled.section`
 
 const ContentImg = styled.img`
   width: 420px;
-  overflow: hidden;
+  height: 400px;
+  overflow: inherit;
   border-radius: 10px 0 0 10px;
   background-color: #000000;
   object-fit: contain;
@@ -59,7 +60,7 @@ const MoveBtn = styled.button`
   position: absolute;
   top: 170px;
   left: ${(props) => (props.direction === "prev" ? `5px` : `none`)};
-  right: ${(props) => (props.direction === "next" ? `285px` : `none`)};
+  right: ${(props) => (props.direction === "next" ? `315px` : `none`)};
   width: 50px;
   height: 50px;
   border: 0;
@@ -72,7 +73,7 @@ const MoveBtn = styled.button`
   cursor: pointer;
 
   @media screen and (max-width: 768px) {
-    top: 70px;
+    top: 105px;
     left: ${(props) => (props.direction === "prev" ? `20px` : `none`)};
     right: ${(props) => (props.direction === "next" ? `20px` : `none`)};
     width: 20px;

@@ -12,7 +12,7 @@ const CommentForm = styled.form`
   flex-direction: row;
   justify-content: space-between;
   padding: 16px;
-  border-top: 0.5px solid #dbdbdb;
+  border-top: 0.5px solid #DBDBDB;
   border-radius: 0 0 10px 10px;
   background-color: #FFFFFF;
 `;
