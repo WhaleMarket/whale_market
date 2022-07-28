@@ -91,7 +91,7 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
         },
       };
       const res = await axios.get(
-        `${API_URL}/post/${id}/comments/?limit=3&skip=0`,
+        `${API_URL}/post/${id}/comments/?limit=100&skip=0`,
         commentconfig
       );
       setComments([res.data.comments]);
