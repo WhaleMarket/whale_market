@@ -4,7 +4,6 @@ import { useContext, useState, useEffect } from "react";
 import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
-import { render } from "react-dom";
 
 const RankingSection = styled.section`
   margin: 50px;
@@ -46,8 +45,8 @@ const RankingTit = styled.h1`
 
 const UserWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 80%;
+  grid-template-columns: 2fr 1fr;
+  width: 60%;
   margin: 50px auto;
   @media screen and (max-width: 1200px) {
     margin: 30px auto;
@@ -58,7 +57,9 @@ const UserWrapper = styled.div`
   }
 `;
 
-const FollowWrapper = styled.div``;
+const FollowWrapper = styled.div`
+  text-align: initial;
+`;
 
 const UserList = styled.p`
   font-size: 16px;
@@ -133,7 +134,7 @@ function Ranking() {
       i++
     ) {
       result.push(
-        <UserList>
+        <UserList key={i}>
           {i + 1}. {followingPosting[i][0]} @{followingPosting[i][1]}{" "}
           {followingPosting[i][2]}개
         </UserList>
@@ -150,7 +151,7 @@ function Ranking() {
       i++
     ) {
       result.push(
-        <UserList>
+        <UserList key={i}>
           {i + 1}. {followingPosting[i][0]} @{followingPosting[i][1]}{" "}
           {followingPosting[i][2]}개
         </UserList>
