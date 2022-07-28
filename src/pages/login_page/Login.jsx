@@ -9,7 +9,7 @@ const Wrapper = styled.main`
     width: 100vw;
     background-color: #00BCD4;
     text-align: center;
-    padding-top: 25vh;
+    padding-top: 27vh;
 `;
 
 const LogoImage = styled.img`
@@ -17,9 +17,8 @@ const LogoImage = styled.img`
 `;
 
 const Container = styled.section`
-    height: 100%;
-    margin-top: 200px;
-    padding: 50px 30px 125px;
+    margin-top: 110px;
+    padding: 50px 30px 100px;
     background-color: white;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -27,10 +26,10 @@ const Container = styled.section`
 
     @keyframes loginbar {
         from {
-            margin-top: 400px;
+            margin-top: 300px;
         }
         to {
-            margin-top: 200px;
+            margin-top: 110px;
         }
     }
 `;
@@ -42,7 +41,7 @@ const ButtonList = styled.div`
     margin-left: auto;
     margin-right: auto;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `;
 
 const LinkList = styled.div`
@@ -61,7 +60,7 @@ const StyledLink = styled(Link)`
     color: #767676;
     text-decoration: none;
 
-    :last-child::before {
+    &:last-child::before {
         content: "|";
         display: block;
         position: absolute;

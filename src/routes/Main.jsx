@@ -1,5 +1,5 @@
 import Navbar from "../components/main/Navbar";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import Chatting from "../pages/main_page/Chatting";
 import MainProfile from "../pages/main_page/mainProfile/MyProfile";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
@@ -16,7 +16,8 @@ import ProductEdit from "../pages/main_page/mainProfile/ProductEdit";
 import Login from "../pages/login_page/Login";
 
 function MainRouter() {
-  useAccountInfo();
+    useAccountInfo();
+
   return (
     <>
       <Switch>
@@ -31,7 +32,7 @@ function MainRouter() {
 
         <>
           <Navbar />
-          <Route path="/home" exact component={Home} />
+          <Route path="/home" exact render={Home} />
           <Route path="/chatting" component={Chatting} />
           <Route path="/profile/:accountname" component={MainProfile} />
           <Route path="/home/search" component={HomeSearch} />
@@ -42,6 +43,12 @@ function MainRouter() {
 }
 
 function Main() {
+    const history = useHistory();
+
+    if (window.location.pathname === '/main') {
+        history.push('/main/home');
+    }
+
     return (
         (window.localStorage.getItem('token') && window.localStorage.getItem('token') !== 'undefined') ? 
             <>

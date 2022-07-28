@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import messageIcon from "../../../../assets/icon-message-circle.png";
@@ -7,6 +7,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import PostingContext from "../../../../context/PostingProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
+import LoadingPage from "../../../../pages/LoadingPage";
 
 const UserProfileContainer = styled.div`
   display: flex;
@@ -157,6 +158,7 @@ const FollowButton = styled.button`
 function UserProfileCard() {
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
+  const [loading, setLoading] = useState(false);
 
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -166,6 +168,7 @@ function UserProfileCard() {
 
   const useHandleFollow = () => {
     async function fetchData() {
+        setLoading(true);
       try {
         const config = {
           headers: {
@@ -197,6 +200,7 @@ function UserProfileCard() {
           };
           return { data: PostingState.data };
         });
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -206,6 +210,7 @@ function UserProfileCard() {
 
   const useHandleUnfollow = () => {
     async function fetchData() {
+        setLoading(true);
       try {
         const config = {
           headers: {
@@ -236,6 +241,7 @@ function UserProfileCard() {
           };
           return { data: PostingState.data };
         });
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -244,6 +250,7 @@ function UserProfileCard() {
   };
 
   return (
+    loading ? <LoadingPage/> :
     <>
       <UserProfileContainer>
         <ImgDiv src={PostingState.data[0].user.image} />

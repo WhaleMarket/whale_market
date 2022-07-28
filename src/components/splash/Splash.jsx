@@ -2,37 +2,46 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoSrc from '../../assets/Logo.png';
+import Wave from 'react-wavify';
 
 const Logo = styled.img`
     display: block;
+    z-index: -1;
     width: 200px;
-    margin: 25vh auto;
+    /* margin: 27vh auto; */
+    margin-top: 27vh;
+    position: relative;
+    transition: all ease 10s;
+    
+
+    animation: loop 10s infinite;
+    @keyframes loop {
+        0% {
+            left: 30px;
+            transform: rotate( -50deg );
+        }
+        50% {
+            left: 75vw;
+            transform: rotate( 50deg );
+        }
+        100% {
+            left: 0px;
+            
+        }
+    }
 `;
 
 const SplashBody = styled.div`
     width: 100vw;
     height: 100vh;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    animation: change-background 3.1s ease;
-    
-    @keyframes change-background {
-    0% {
-        background: #FFFFFF;
-    }
-    100% {
-        background: #00BCD4;
-    }
-}
-`
+`;
 
 function Splash(){
     const history = useHistory();
     const timeOut = () => {
         setTimeout(()=>{
             history.push('/login');
-        },3000);
+        },2000);
     };
 
     useEffect(()=>{
@@ -45,6 +54,19 @@ function Splash(){
     return(
         <SplashBody>
             <Logo src={LogoSrc} />
+            <Wave 
+                style={{ 
+                    zIndex: 100,
+                    // paddingTop: "10px",
+                    marginTop: "-130px",
+                    height: "800px"
+                }} 
+                options={{ 
+                    speed: 0.5,
+                    height: 70
+                }} 
+                fill="#00BCD4" 
+            />
         </SplashBody>
     )
 }

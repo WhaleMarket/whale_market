@@ -34,7 +34,7 @@ export const Label = styled.label`
     font-size: 12px;
     line-height: 15px;
     color: #767676;
-    margin-top: ${(props) => props.id === 'labelPassword' ? '16px' : null};
+    margin-top: ${(props) => props.className === 'password' ? '16px' : null};
 `;
 
 export const Input = styled.input`
@@ -61,6 +61,14 @@ export const Input = styled.input`
 export const ErrorMessage = styled.strong`
     display: inline-block;
     color: #EB5757;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1;
+`;
+
+export const SuccessMessage = styled.strong`
+    display: inline-block;
+    color: green;
     font-weight: 500;
     font-size: 12px;
     line-height: 1;
