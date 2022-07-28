@@ -4,20 +4,22 @@ import Ranking from "./Ranking";
 
 const RewardWrapper = styled.ul`
   display: flex;
-  padding: 100px 16px 0 16px;
+  justify-content: space-between;
+  width: 1000px;
+  padding-top: 90px;
   margin: 0 auto;
-  gap: 20px;
   box-sizing: border-box;
-  @media screen and (max-width: 1200px) {
-    width: 80%;
-    padding-top: 90px;
-    gap: 15px;
+  
+  @media screen and (max-width: 768px) {
+    width: 230px;
+    padding-top: 80px;
+    margin: 0 26px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px;
   }
-  @media screen and (max-width: 480px) {
-    flex-direction: column;
-    padding-bottom: 30px;
-    gap: 24px;
-  }
+
 `;
 
 function Market({ List }) {

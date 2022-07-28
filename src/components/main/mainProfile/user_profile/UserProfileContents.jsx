@@ -51,7 +51,7 @@ const UserIntro = styled.span`
 const Followers = styled(Link)`
   position: absolute;
   left: 15px;
-  top: 120px;
+  top: 160px;
   text-align: center;
   text-decoration: none;
   @media screen and (max-width: 768px) {
@@ -74,7 +74,7 @@ const FollowTxt = styled.span`
 const Followings = styled(Link)`
   position: absolute;
   right: 15px;
-  top: 120px;
+  top: 160px;
   text-align: center;
   text-decoration-line: none;
   @media screen and (max-width: 768px) {
@@ -90,7 +90,7 @@ const IconWrapper = styled.div`
 const MessageButton = styled.button`
   width: 34px;
   height: 34px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #DBDBDB;
   border-radius: 30px;
   background-color: white;
   background-image: url(${messageIcon});
@@ -102,7 +102,7 @@ const MessageButton = styled.button`
 const ShareButton = styled.button`
   width: 34px;
   height: 34px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #DBDBDB;
   border-radius: 30px;
   background-color: inherit;
   background-image: url(${shareIcon});
@@ -114,9 +114,9 @@ const ShareButton = styled.button`
 
 const ProfileEditButton = styled(Link)`
   padding: 8px 26px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #DBDBDB;
   border-radius: 30px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   color: #767676;
   font-size: 14px;
   font-weight: 500;
@@ -128,9 +128,9 @@ const ProfileEditButton = styled(Link)`
 
 const ProductUploadButton = styled(Link)`
   padding: 8px 23px;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #DBDBDB;
   border-radius: 30px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   color: #767676;
   font-size: 14px;
   font-weight: 500;
@@ -154,11 +154,16 @@ const FollowButton = styled.button`
 `;
 
 const PriceContent = styled.p`
+  text-align: center;
+  color: #515151;
+  font-size: 16px;
   line-height: 20px;
 `;
 
 const PriceStrong = styled.strong`
-  font-size: 20px;
+  font-size: 19px;
+  font-weight: 600;
+  color: #00bcd4;
 `;
 
 function UserProfileCard() {
@@ -294,12 +299,12 @@ function UserProfileCard() {
                 .reduce((a, b) => a + b)
                 .toLocaleString("ko-KR")}
             </PriceStrong>
-            원 상승 했습니다! 대단해요!
+            원 상승 했습니다!<br/>대단해요!
           </PriceContent>
         ) : (
           <PriceContent>
             현재 {PostingState.data[0].user.accountname}님의 값어치는 따로 높일
-            필요가 없을 정도로 충분히 높습니다! 대단해요!
+            필요가 없을 정도로 충분히 높습니다!<br/>대단해요!
           </PriceContent>
         )}
         <ImgDiv src={PostingState.data[0].user.image} />

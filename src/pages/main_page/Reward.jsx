@@ -5,7 +5,7 @@ import { API_URL } from "../../constants/defaultUrl";
 import AuthContext from "../../context/AuthProvider";
 import Market from "../../components/main/market";
 
-function Chatting() {
+function Reward() {
   const [InfoState] = useContext(AuthContext);
   const [RewardList, setRewardList] = useState([]);
 
@@ -37,4 +37,4 @@ function Chatting() {
   );
 }
 
-export default Chatting;
+export default Reward;
