@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import search_icon from "../../assets/icon-search.png";
 import { Link } from "react-router-dom";
+import whale from "../../assets/whale-small.png";
 
 const Head = styled.header`
   display: flex;
@@ -30,12 +31,25 @@ const Search = styled.button`
 const Title = styled.h1`
   font-size: 18px;
   font-weight: 500;
+
+  ::before {
+    display: inline-block;
+    left: 0;
+    vertical-align: middle;
+    width: 28px;
+    height: 18px;
+    margin-right: 5px;
+    background-image: url(${whale});
+    background-size: 28px 18px;
+    background-repeat: no-repeat;
+    content: "";
+  }
 `;
 
 function Header() {
   return (
     <Head>
-      <Title>🐳웨일마켓 피드</Title>
+      <Title>웨일마켓 피드</Title>
       <Link to="/home/search">
         <Search />
       </Link>

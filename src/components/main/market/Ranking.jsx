@@ -4,73 +4,102 @@ import { useContext, useState, useEffect } from "react";
 import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
+import '../../../fonts/font.css';
 
 const RankingSection = styled.section`
-  margin: 20px;
-  padding-bottom: 100px;
-  text-align: center;
-  color: #515151;
+    margin: 40px 20px 20px;
+    padding-bottom: 100px;
+    text-align: center;
+    color: #515151;
+    box-sizing: border-box;
 
-  @media screen and (max-width: 768px) {
-    margin-top: 40px;
-  }
+    @media screen and (max-width: 768px) {
+      margin-top: 40px;
+    }
 
+    @media screen and (max-width: 390px) {
+      width: 330px;
+      margin: 0;
+      padding: 0 4% 100px;
+    }
 `;
 
 const RankingTit = styled.h1`
-  font-size: 26px;
-  font-weight: 600;
-  color: #515151;
-
-  @media screen and (max-width: 768px) {
-    font-size: 20px;
-  }
-
-  ::before {
-    display: inline-block;
-    left: 0;
-    vertical-align: middle;
-    width: 48px;
-    height: 48px;
-    margin-right: 16px;
-    background-image: url(${crown});
-    background-size: 48px 48px;
-    background-repeat: no-repeat;
-    content: "";
+    font-family: 'TmoneyRoundWindExtraBold';
+    font-size: 26px;
+    color: #515151;
 
     @media screen and (max-width: 768px) {
-    font-size: 20px;
-    width: 30px;
-    height: 30px;
-    background-size: 30px 30px;
+      font-size: 20px;
     }
-  }
+
+    @media screen and (max-width: 390px) {
+    font-size: 22px;
+    }
+
+    ::before {
+      display: inline-block;
+      left: 0;
+      vertical-align: middle;
+      width: 48px;
+      height: 48px;
+      margin-right: 16px;
+      background-image: url(${crown});
+      background-size: 48px 48px;
+      background-repeat: no-repeat;
+      content: "";
+
+      @media screen and (max-width: 768px) {
+      font-size: 20px;
+      width: 30px;
+      height: 30px;
+      background-size: 30px 30px;
+      }
+      
+      @media screen and (max-width: 390px) {
+      margin-right: 3px;
+      }
+    }
 `;
 
 const UserWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  width: 550px;
-  margin: 40px auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    width: 600px;
+    margin: 20px auto;
 
-  @media screen and (max-width: 768px) {
-    margin: 30px auto;
-    width: 380px;
-  }
+    @media screen and (max-width: 768px) {
+      margin: 30px auto;
+      width: 380px;
+    }
+
+    @media screen and (max-width: 560px) {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+      margin: 40px 5%;
+    }
 `;
 
 const FollowWrapper = styled.div`
-  text-align: initial;
+    text-align: initial;
 `;
 
 const UserList = styled.p`
-  font-size: 16px;
-  line-height: 28px;
+    font-size: 16px;
+    line-height: 40px;
 
-  @media screen and (max-width: 768px) {
-    font-size: 14px;
-    line-height: 24px;
-  }
+    @media screen and (max-width: 768px) {
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    @media screen and (max-width: 390px) {
+      font-size: 16px;
+      line-height: 40px;
+    }
 `;
 
 function Ranking() {

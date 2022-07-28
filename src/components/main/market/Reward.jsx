@@ -15,17 +15,28 @@ const RewardCard = styled.li`
   @media screen and (max-width: 768px) {
     width: 190px;
   }
+
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px 5% 25px;
+  }
 `;
 
 const Img = styled.img`
-  width: 198px;
-  height: 158px;
-  border-radius: 10px;
-  object-fit: fill;
+    width: 198px;
+    height: 158px;
+    border-radius: 10px;
+    object-fit: fill;
 
   @media screen and (max-width: 768px) {
     width: 158px;
     height: 126px;
+  }
+
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    height: 230px;
   }
 `;
 
@@ -42,6 +53,10 @@ const TextWrapper = styled.div`
     column-gap: 0;
     row-gap: 14px;
     width: 160px
+  }
+
+  @media screen and (max-width: 390px) {
+    margin: 30px auto;
   }
 `;
 
@@ -66,6 +81,11 @@ const RewardTit = styled.p`
     font-size: 12px;
     line-height: 12px;
   }
+
+  @media screen and (max-width: 390px) {
+    font-size: 14px;
+    line-height: 14px;
+  }
 `;
 
 const RewardCont = styled.strong`
@@ -77,6 +97,11 @@ const RewardCont = styled.strong`
   @media screen and (max-width: 768px) {
     font-size: 12px;
     line-height: 12px;
+  }
+
+  @media screen and (max-width: 390px) {
+    font-size: 14px;
+    line-height: 14px;
   }
 `;
 
@@ -93,6 +118,13 @@ const GetBtn = styled.button`
   text-align: center;
   box-sizing: border-box;
   cursor: pointer;
+
+  @media screen and (max-width: 390px) {
+    width: 90px;
+    padding: 10px 18px;
+    font-size: 14px;
+    line-height: 14px;
+  }
 `;
 
 function Reward({ data }) {

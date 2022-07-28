@@ -1,4 +1,4 @@
-import ChatProfileHeader from "../../components/main/ChatProfileHeader";
+import RewardProfileHeader from "../../components/main/RewardProfileHeader";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../constants/defaultUrl";
@@ -31,7 +31,7 @@ function Reward() {
   }, [InfoState.MyInformations]);
   return (
     <>
-      <ChatProfileHeader />
+      <RewardProfileHeader />
       <Market List={RewardList} />
     </>
   );

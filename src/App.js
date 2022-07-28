@@ -9,15 +9,35 @@ import Join from './pages/login_page/Join';
 import Profile from './pages/login_page/Profile';
 import Main from './routes/Main'
 import NotFound from './pages/NotFoundPage';
+import './fonts/font.css';
 
 const Globalstyle = createGlobalStyle`
     ${reset}
-    
+
     html, body, #root {
         height: 100%;
+        /* font-family: 'GangwonEdu_OTFBoldA'; */
+        font-family: 'TmoneyRoundWindRegular';
+        overflow: auto;
+        white-space: nowrap;
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(179, 229, 252, 0.8);
+            border-radius: 10px;
+
+        }
+        ::-webkit-scrollbar-track {
+        background-color: rgba(225, 245, 254, 0.7);
+        }
     }
 
-    .a11yhidden {
+    input::placeholder, textarea::placeholder, button {
+        font-family: 'TmoneyRoundWindRegular';
+    }
+
+        .a11yhidden {
         position: absolute;
         clip: rect(0 0 0 0);
         width: 1px;

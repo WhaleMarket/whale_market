@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from "react";
 import styled from "styled-components";
-import heart_icon from "../../../assets/icon-heart.png";
-import heart_icon_fill from "../../../assets/icon-heart-fill.png";
+import praise_icon from "../../../assets/icon-praise.png";
+import praise_icon_fill from "../../../assets/icon-praise-fill.png";
 import axios from "axios";
 import AuthContext from "../../../context/AuthProvider";
 import { API_URL } from "../../../constants/defaultUrl";
@@ -18,16 +18,16 @@ const CommentForm = styled.form`
 `;
 
 const Heart = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 18px;
   margin-right: 6px;
   border: none;
   background-color: inherit;
   background-image: ${(props) =>
-    props.Liked ? `url(${heart_icon_fill})` : `url(${heart_icon})`};
+    props.Liked ? `url(${praise_icon_fill})` : `url(${praise_icon})`};
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 20px 20px;
+  background-size: 26px 19px;
   &:hover {
     cursor: pointer;
   }

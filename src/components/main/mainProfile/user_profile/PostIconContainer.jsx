@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import likeBtn from "../../../../assets/icon-heart-fill.png";
-import likeBtnOutline from "../../../../assets/icon-heart.png";
-import commentBtn from "../../../../assets/icon-message-circle.png";
+import praise_icon_fill from "../../../../assets/icon-praise-fill.png";
+import praise_icon from "../../../../assets/icon-praise.png";
+import comment_icon from "../../../../assets/icon-comment.png";
 import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
@@ -16,14 +16,14 @@ const PostIconWrapper = styled.div`
 `;
 
 const LikeBtn = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 18px;
   padding: 0;
   border-style: none;
   background-color: inherit;
   background-image: ${(props) =>
-    props.Liked === true ? `url(${likeBtn})` : `url(${likeBtnOutline})`};
-  background-size: 20px 20px;
+    props.Liked === true ? `url(${praise_icon_fill})` : `url(${praise_icon})`};
+  background-size: 26px 19px;
   transition: 0.5s ease-in-out;
   &.like {
     animation: ${HeartEvent} 0.5s ease-in-out;
@@ -40,14 +40,14 @@ const Count = styled.p`
 `;
 
 const CommentBtn = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 18px;
   padding: 0;
   margin-left: 16px;
   border-style: none;
   background-color: inherit;
-  background-image: url(${commentBtn});
-  background-size: 20px 20px;
+  background-image: url(${comment_icon});
+  background-size: 26px 19px;
   &:hover {
     cursor: pointer;
   }
