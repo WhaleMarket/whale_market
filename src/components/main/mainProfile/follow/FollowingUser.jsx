@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import AuthContext from "../../../../context/AuthProvider";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
+import LoadingPage from "../../../../pages/LoadingPage";
 
 const Wrapper = styled.li`
   display: flex;
@@ -78,12 +79,14 @@ const InfoWrapper = styled.div`
 function FollowingUser() {
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
       {PostingState.data[0].followinguser?.map((value, key) => {
         const useHandleFollow = () => {
           async function fetchData() {
+            setLoading(true);
             try {
               const config = {
                 headers: {
@@ -127,6 +130,7 @@ function FollowingUser() {
                   return { data: PostingState.data };
                 });
               }
+              setLoading(false);
             } catch (error) {
               console.error(error);
             }
@@ -136,6 +140,7 @@ function FollowingUser() {
 
         const useHandleUnfollow = () => {
           async function fetchData() {
+            setLoading(true);
             try {
               const config = {
                 headers: {
@@ -178,6 +183,7 @@ function FollowingUser() {
                   return { data: PostingState.data };
                 });
               }
+              setLoading(false);
             } catch (error) {
               console.error(error);
             }
@@ -185,6 +191,7 @@ function FollowingUser() {
           fetchData();
         };
         return (
+            loading ? <LoadingPage /> :
           <Wrapper key={key}>
             <InfoWrapper>
               <StyledLink to={"/profile/" + value.accountname}>

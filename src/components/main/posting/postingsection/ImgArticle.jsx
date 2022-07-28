@@ -3,11 +3,12 @@ import PostingImg from "./PostingImg";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import UploadContext from "../../../../context/UploadProvider";
 import AuthContext from '../../../../context/AuthProvider';
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingModificationContext from "../../../../context/PostingModificationProvider";
+import LoadingPage from "../../../../pages/LoadingPage";
 
 const Wrapper = styled.article`
   display: flex;
@@ -20,6 +21,7 @@ function ImgWrapper({ text }) {
   const [PostingModificationState, setPostingModificationState] = useContext(PostingModificationContext);
   const [, setUploadState] = useContext(UploadContext);
   const [InfoState] = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   const postId = params.postId;
 
@@ -33,6 +35,7 @@ function ImgWrapper({ text }) {
 
   useEffect(() => {
     async function getPost() {
+        setLoading(true);
         try {
             const updateConfig = {
               headers: {
@@ -48,7 +51,7 @@ function ImgWrapper({ text }) {
                 };
                 return { post: PostingModificationState.post }
             });
-            
+            setLoading(false);
           } catch (error) {
             console.error(error);
             alert("error");
@@ -58,6 +61,7 @@ function ImgWrapper({ text }) {
   }, [postId]);
 
   return (
+    loading ? <LoadingPage /> :
     <>
       <Wrapper>
         {postId ? (

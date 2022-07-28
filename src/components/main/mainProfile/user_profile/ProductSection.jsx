@@ -6,6 +6,7 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
+import LoadingPage from "../../../../pages/LoadingPage";
 
 const ProductContainer = styled.section`
   width: 60vw;
@@ -43,8 +44,10 @@ function ProductSection({ accountname }) {
   const [InfoState] = useContext(AuthContext);
   const [productResult, setProductResult] = useState([]);
   const [PostingState] = useContext(PostingContext);
+  const [loading, setLoading] = useState(false);
 
   async function getProduct() {
+    setLoading(true);
     try {
       const config = {
         headers: {
@@ -57,6 +60,7 @@ function ProductSection({ accountname }) {
         config
       );
       setProductResult(response.data.product);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -68,6 +72,7 @@ function ProductSection({ accountname }) {
 
   if (productResult.length > 0) {
     return (
+        loading ? <LoadingPage/> :
       <ProductContainer>
         <ProductTitle>판매 중인 상품</ProductTitle>
         <ProductList>

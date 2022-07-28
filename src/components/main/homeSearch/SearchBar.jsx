@@ -39,6 +39,7 @@ function SearchBar({ value, handleKeyword }) {
             <GoBackBtn />
             <SearchForm>
                 <label className='a11yhidden' htmlFor='searchInput'>계정 검색</label>
+                <input hidden='hidden' />
                 <SearchInput 
                     type='text' 
                     placeholder='계정 검색' 

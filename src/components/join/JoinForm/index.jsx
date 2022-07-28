@@ -3,18 +3,24 @@ import Button from '../../emaillogin/button/Button';
 import AuthContext from "../../../context/AuthProvider";
 import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
-import { Wrapper, Title, Form, Fieldset, Legend, Label, Input, ErrorMessage } from './index.style';
+import { Wrapper, Title, Form, Fieldset, Legend, Label, Input, ErrorMessage, SuccessMessage } from './index.style';
 
 export function JoinForm({ setNextPage }) {
     const [, setInfoState] = useContext(AuthContext);
     const emailRef = useRef();
     const passwordRef = useRef();
+    const passwordRecheckRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordRecheck, setPasswordRecheck] = useState('');
+
     const [success, setSuccess] = useState(false);
     const [notMatchError, setNotMatchError] = useState('');
+    const [possibleEmailMessage, setPossibleEmailMessage] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
+    const [passwordMatch, setPasswordMatch] = useState('');
+    const [passwordNotMatch, setPasswordNotMatch] = useState('');
 
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [isValidPassword, setIsValidPassword] = useState(false);
@@ -24,10 +30,10 @@ export function JoinForm({ setNextPage }) {
     }, []);
 
     useEffect(() => {
-        if (password.length > 5) {
+        if (password.length > 5 && password === passwordRecheck) {
             setIsValidPassword(true);
         }
-    }, [email, password]);
+    }, [email, password, passwordRecheck]);
 
     useEffect(() => {
         if (isValidEmail && isValidPassword) {
@@ -79,7 +85,7 @@ export function JoinForm({ setNextPage }) {
             } else if (!email) {
                 setNotMatchError('*이메일을 입력해주세요.');
             } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
-                setNotMatchError('*' + response.data.message);
+                setPossibleEmailMessage('*' + response.data.message);
                 setIsValidEmail(true);
             } 
         } catch (error) {
@@ -101,11 +107,26 @@ export function JoinForm({ setNextPage }) {
         }
     };
 
+    const handleOnBlurForPasswordRecheck = (event) => {
+        event.preventDefault();
+        setPasswordMatch('');
+        setPasswordNotMatch('');
+        try {
+            if (password.length > 5 && password === passwordRecheck) {
+                setPasswordMatch('*비밀번호가 일치합니다.');
+            } else {
+                setPasswordNotMatch('*비밀번호를 다시 확인해주세요.');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     const isPassedJoin = () => {
-        return emailRegex.test(email) && password.length > 5 ? setIsDisabled(false) : setIsDisabled(true);
+        return emailRegex.test(email) && password.length > 5 && password === passwordRecheck ? setIsDisabled(false) : setIsDisabled(true);
     };
     
     return (
@@ -128,20 +149,35 @@ export function JoinForm({ setNextPage }) {
                             placeholder='이메일 주소를 입력해 주세요.'
                         />
                         {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
+                        {possibleEmailMessage && <SuccessMessage>{possibleEmailMessage}</SuccessMessage>}
 
-                        <Label htmlFor='password' id='labelPassword'>비밀번호</Label>
+                        <Label htmlFor='password' id='labelPassword' className='password'>비밀번호</Label>
                         <Input
                             type='password'
                             id='password'
                             ref={passwordRef}
                             onChange={(event) => setPassword(event.target.value)}
                             required
-                            value={password}
                             onKeyUp={isPassedJoin}
                             onBlur={handleOnBlurForPassword}
                             placeholder='비밀번호를 설정해 주세요.'
                         />
                         {passwordMessage && <ErrorMessage>{passwordMessage}</ErrorMessage>}
+
+                        <Label htmlFor='passwordRecheck' id='labelPasswordRecheck' className='password'>비밀번호 재확인</Label>
+                        <Input
+                            type='password'
+                            id='passwordRecheck'
+                            ref={passwordRecheckRef}
+                            onChange={(event) => setPasswordRecheck(event.target.value)}
+                            required
+                            onKeyUp={isPassedJoin}
+                            onBlur={handleOnBlurForPasswordRecheck}
+                            placeholder='비밀번호를 다시 입력해 주세요.'
+                        />
+                        {passwordMatch && <SuccessMessage>{passwordMatch}</SuccessMessage>}
+                        {passwordNotMatch && <ErrorMessage>{passwordNotMatch}</ErrorMessage>}
+
                         
                         <Button 
                             type='submit' 
