@@ -18,6 +18,11 @@ const LayOut = styled.ul`
     width: 400px;
     padding: 53px 4% 68px;
   }
+  @media screen and (max-width: 390px) {
+    width: 330px;
+    margin: 0 auto;
+    padding: 53px 4% 68px;
+  }
 `;
 
 const FeedWrapper = styled.li`
@@ -31,8 +36,14 @@ const FeedWrapper = styled.li`
   box-sizing: border-box;
 
   @media screen and (max-width: 768px) {
-    width: 400px; // 360px 
+    width: 400px;
     padding: 10px 30px 25px;
+  }
+
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px 5% 25px;
   }
 `;
 
@@ -42,10 +53,10 @@ const PassLink = styled(Link)`
 
 const ContentWrapper = styled.div`
   word-break: break-word;
+  white-space: pre-wrap;
 `;
 
 const ContentText = styled.p`
-  /* margin-bottom: 16px; */
   font-size: 14px;
   font-weight: 400;
   line-height: 17.53px;
@@ -75,6 +86,11 @@ const ContentImg = styled.img`
   @media screen and (max-width: 768px) {
     width: 338px;
     height: 270px;
+  }
+  
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    height: 230px;
   }
 `;
 

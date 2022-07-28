@@ -18,6 +18,7 @@ const UserProfileContainer = styled.div`
   padding: 30px 55px 26px;
   margin: 48px auto 0 auto;
   box-sizing: border-box;
+  white-space: pre-wrap;
 `;
 
 const ImgDiv = styled.div`
@@ -290,7 +291,7 @@ function UserProfileCard() {
       <UserProfileContainer>
         {productResult.length !== 0 ? (
           <PriceContent>
-            현재 {PostingState.data[0].user.accountname}님의 값어치는{" "}
+            현재 {PostingState.data[0].user.accountname}님의 웨일 포인트는{" "}
             <PriceStrong>
               {productResult
                 .map((value) => {
@@ -299,11 +300,11 @@ function UserProfileCard() {
                 .reduce((a, b) => a + b)
                 .toLocaleString("ko-KR")}
             </PriceStrong>
-            원 상승 했습니다!<br/>대단해요!
+            원 적립됐습니다!<br/>대단해요!
           </PriceContent>
         ) : (
           <PriceContent>
-            현재 {PostingState.data[0].user.accountname}님의 값어치는 따로 높일
+            현재 {PostingState.data[0].user.accountname}님의 웨일 포인트는 따로 높일
             필요가 없을 정도로 충분히 높습니다!<br/>대단해요!
           </PriceContent>
         )}
