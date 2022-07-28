@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import Button from '../../components/login/Button';
+import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Button from '../../components/login/Button';
 import Logo from '../../assets/Logo.png';
 
 const Wrapper = styled.main`
-    width: 100vw;
     background-color: #00BCD4;
     text-align: center;
     padding-top: 27vh;
@@ -14,22 +12,19 @@ const Wrapper = styled.main`
 
 const LogoImage = styled.img`
     width: 200px;
+    margin-right: 25px;
 `;
 
 const Container = styled.section`
-    margin-top: 110px;
-    padding: 50px 30px 100px;
-    background-color: white;
+    padding: 30px 30px 100px;
+    background-color: #FFFFFF;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     animation: loginbar 1s;
 
     @keyframes loginbar {
         from {
-            margin-top: 300px;
-        }
-        to {
-            margin-top: 110px;
+            margin-top: 400px;
         }
     }
 `;
