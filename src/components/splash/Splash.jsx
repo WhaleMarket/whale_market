@@ -16,7 +16,7 @@ const Logo = styled.img`
 `;
 
 const SplashBody = styled.div`
-  background: #257;
+  background: white;
   width: 100vw;
   height: 100vh;
 `;
@@ -57,8 +57,15 @@ function Splash() {
           <Wave
             style={{ zIndex: 10 }}
             options={{ height: 50, speed: 0.8, points: 5 }}
-            fill="#257"
-          />
+            fill="url(#gradient)"
+          >
+            <defs>
+              <linearGradient id="gradient" gradientTransform="rotate(90)">
+                <stop offset="20%" stopColor="#039be5" />
+                <stop offset="80%" stopColor="#fff" />
+              </linearGradient>
+            </defs>
+          </Wave>
         </WaveWrapper>
       </SplashBody>
     </>

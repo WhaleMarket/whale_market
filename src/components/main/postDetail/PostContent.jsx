@@ -25,7 +25,7 @@ const UserInfo = styled.div`
   display: flex;
   align-items: center;
   padding: 10px 4px 10px 16px;
-  border-bottom: 0.5px solid #BDBDBD;
+  border-bottom: 0.5px solid #bdbdbd;
 `;
 
 const UserProfile = styled.img`
@@ -66,18 +66,18 @@ const TextContent = styled.p`
 `;
 
 const CommentWrapper = styled.ul`
-  border-top: 0.5px solid #BDBDBD;
+  border-top: 0.5px solid #bdbdbd;
 `;
 
 const Nocomment = styled.li`
   padding: 50px;
   font-size: 13px;
-  color: #BDBDBD;
+  color: #bdbdbd;
   text-align: center;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 function PostContent({ id, index, src, Isimg, content, feed }) {
@@ -171,7 +171,7 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
           },
         };
         const Postingresponse = await axios.get(
-          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost`,
+          `${API_URL}/post/${PostingState.data[0].accountname}/userpost`,
           Postingconfig
         );
         setPostingState((PostingState) => {

@@ -71,7 +71,6 @@ const Navbar = ({ location }) => {
         }}
         fill="url(#gradient)"
         paused={false}
-        mask="url(#mask)"
         options={{
           height: 70,
           amplitude: 20,
