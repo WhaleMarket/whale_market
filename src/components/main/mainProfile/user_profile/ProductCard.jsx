@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
-import AuthContext from '../../../../context/AuthProvider';
-import axios from 'axios';
-import { API_URL } from '../../../../constants/defaultUrl';
-import Modal from '../../../modal/Modal';
-import AlertModal from '../../../modal/AlertModal';
-import { useHistory  } from 'react-router-dom';
-
+import React, { useState, useContext } from "react";
+import styled from "styled-components";
+import AuthContext from "../../../../context/AuthProvider";
+import axios from "axios";
+import { API_URL } from "../../../../constants/defaultUrl";
+import Modal from "../../../modal/Modal";
+import AlertModal from "../../../modal/AlertModal";
+import { useHistory } from "react-router-dom";
 
 const ProductWrapper = styled.li`
   display: flex;
@@ -22,6 +21,7 @@ const ProductImg = styled.img`
 `;
 
 const ProductName = styled.strong`
+  line-height: 18px;
   width: 140px;
   margin: 6px 0 4px;
   font-size: 14px;
@@ -41,7 +41,7 @@ const ProductPrice = styled.p`
 function ProductCard({ productResult }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
-  const [targetProduct, setTargetProduct] = useState('');
+  const [targetProduct, setTargetProduct] = useState("");
   const [InfoState] = useContext(AuthContext);
   const history = useHistory();
 
@@ -54,31 +54,14 @@ function ProductCard({ productResult }) {
     },
     {
       content: "수정",
-      onClick: () => {             
+      onClick: () => {
         const GetProduct = async (id) => {
-          history.push('/productedit/'+id);
+          history.push("/productedit/" + id);
         };
         GetProduct(targetProduct);
       },
-      },
+    },
   ];
-
-  const EditProduct = async (id) => {
-    try {
-      const editConfig = {
-        headers: {
-          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-          "Content-type": "application/json",
-        },
-      };
-      await axios.put(`${API_URL}/product/` + id, editConfig);
-      alert("🐳 상품이 수정되었습니다. 🐳");
-      window.location.href = "./" + InfoState.MyInformations[0].myAccountname;
-    }catch (error) {
-      console.error(error);
-      alert("error");
-    }
-  };
 
   const removeProduct = async (id) => {
     try {
@@ -131,7 +114,7 @@ function ProductCard({ productResult }) {
           content: "삭제",
           onClick: () => {
             removeProduct(targetProduct);
-          }
+          },
         }}
       />
     </>

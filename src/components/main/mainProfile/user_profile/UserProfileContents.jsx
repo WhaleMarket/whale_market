@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import messageIcon from "../../../../assets/icon-message-circle.png";
@@ -50,6 +50,7 @@ const UserIntro = styled.span`
   margin: 1rem 0 1.5rem;
   color: #767676;
   font-size: 0.75rem;
+  line-height: 16px;
 `;
 
 const Followers = styled(Link)`
@@ -91,7 +92,7 @@ const IconWrapper = styled.div`
   gap: 10px;
 `;
 
-const MessageButton = styled(Link)`
+const MessageButton = styled.button`
   width: 34px;
   height: 34px;
   border: 1px solid #dbdbdb;
@@ -159,6 +160,7 @@ function UserProfileCard() {
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
   const [loading, setLoading] = useState(false);
+  const [productResult, setProductResult] = useState([]);
 
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -168,7 +170,7 @@ function UserProfileCard() {
 
   const useHandleFollow = () => {
     async function fetchData() {
-        setLoading(true);
+      setLoading(true);
       try {
         const config = {
           headers: {
@@ -210,7 +212,7 @@ function UserProfileCard() {
 
   const useHandleUnfollow = () => {
     async function fetchData() {
-        setLoading(true);
+      setLoading(true);
       try {
         const config = {
           headers: {
@@ -249,10 +251,46 @@ function UserProfileCard() {
     fetchData();
   };
 
-  return (
-    loading ? <LoadingPage/> :
+  async function getProduct() {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      const response = await axios.get(
+        `${API_URL}/product/${PostingState.data[0].accountname}/?limit=100&skip=0`,
+        config
+      );
+      setProductResult(response.data.product);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    PostingState.data[0].accountname && getProduct();
+  }, [PostingState.data[0].accountname]);
+
+  return loading ? (
+    <LoadingPage />
+  ) : (
     <>
       <UserProfileContainer>
+        <p>
+          현재 {PostingState.data[0].user.accountname}님의 값어치는{" "}
+          <strong>
+            {productResult.length !== 0 &&
+              productResult
+                .map((value) => {
+                  return value.price;
+                })
+                .reduce((a, b) => a + b)
+                .toLocaleString("ko-KR")}
+          </strong>
+          원 상승 했습니다! 대단해요!
+        </p>
         <ImgDiv src={PostingState.data[0].user.image} />
         <UserName>{PostingState.data[0].user.username}</UserName>
         <UserId>{`@${PostingState.data[0].user.accountname}`}</UserId>
@@ -269,7 +307,7 @@ function UserProfileCard() {
           {window.location.pathname !==
           `/main/profile/${InfoState.MyInformations[0].myAccountname}` ? (
             <>
-              <MessageButton to="/Chatting" />
+              <MessageButton />
               <FollowButton
                 follow={PostingState.data[0].user.isfollow}
                 type="button"
