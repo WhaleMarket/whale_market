@@ -11,17 +11,17 @@ import axios from "axios";
 import { API_URL } from "../../constants/defaultUrl";
 
 const Head = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    z-index: 1;
-    width: 100%;
-    height: 54px;
-    padding: 13px 12px 13px 16px;
-    border-bottom: 0.5px solid #BDBDBD;
-    background-color: #FFFFFF;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 54px;
+  padding: 13px 12px 13px 16px;
+  border-bottom: 0.5px solid #bdbdbd;
+  background-color: #ffffff;
+  box-sizing: border-box;
 `;
 
 const Search = styled.button`
@@ -99,7 +99,7 @@ function ChatProfileHeader() {
       );
       let heartCount = 0;
       response.data.post.map((value) => {
-        heartCount += value.heartCount;
+        return (heartCount += value.heartCount);
       });
       setHeart(heartCount);
     } catch (error) {

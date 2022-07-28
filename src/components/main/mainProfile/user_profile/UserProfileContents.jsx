@@ -92,6 +92,7 @@ const MessageButton = styled.button`
   height: 34px;
   border: 1px solid #dbdbdb;
   border-radius: 30px;
+  background-color: white;
   background-image: url(${messageIcon});
   background-position: center center;
   background-size: 20px 20px;
@@ -122,13 +123,14 @@ const ProfileEditButton = styled(Link)`
   text-decoration: none;
   line-height: 18px;
   cursor: pointer;
+  pointer-events: ${(props) => (props.click ? "all" : "none")};
 `;
 
 const ProductUploadButton = styled(Link)`
   padding: 8px 23px;
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 30px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #767676;
   font-size: 14px;
   font-weight: 500;
@@ -149,6 +151,14 @@ const FollowButton = styled.button`
   font-weight: 500;
   line-height: 18px;
   cursor: pointer;
+`;
+
+const PriceContent = styled.p`
+  line-height: 20px;
+`;
+
+const PriceStrong = styled.strong`
+  font-size: 20px;
 `;
 
 function UserProfileCard() {
@@ -273,19 +283,25 @@ function UserProfileCard() {
   ) : (
     <>
       <UserProfileContainer>
-        <p>
-          현재 {PostingState.data[0].user.accountname}님의 값어치는{" "}
-          <strong>
-            {productResult.length !== 0 &&
-              productResult
+        {productResult.length !== 0 ? (
+          <PriceContent>
+            현재 {PostingState.data[0].user.accountname}님의 값어치는{" "}
+            <PriceStrong>
+              {productResult
                 .map((value) => {
                   return value.price;
                 })
                 .reduce((a, b) => a + b)
                 .toLocaleString("ko-KR")}
-          </strong>
-          원 상승 했습니다! 대단해요!
-        </p>
+            </PriceStrong>
+            원 상승 했습니다! 대단해요!
+          </PriceContent>
+        ) : (
+          <PriceContent>
+            현재 {PostingState.data[0].user.accountname}님의 값어치는 따로 높일
+            필요가 없을 정도로 충분히 높습니다! 대단해요!
+          </PriceContent>
+        )}
         <ImgDiv src={PostingState.data[0].user.image} />
         <UserName>{PostingState.data[0].user.username}</UserName>
         <UserId>{`@${PostingState.data[0].user.accountname}`}</UserId>
@@ -318,7 +334,10 @@ function UserProfileCard() {
             </>
           ) : (
             <>
-              <ProfileEditButton to="/profileedit">
+              <ProfileEditButton
+                click={PostingState.data[0].accountname ? true : false}
+                to="/profileedit"
+              >
                 프로필 수정
               </ProfileEditButton>
               <ProductUploadButton to="/productupload">
