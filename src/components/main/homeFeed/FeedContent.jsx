@@ -40,7 +40,7 @@ const ContentWrapper = styled.div`
 `;
 
 const ContentText = styled.p`
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
   font-size: 14px;
   font-weight: 400;
   line-height: 17.53px;
@@ -52,8 +52,8 @@ const ImgWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: max-content;
-  margin: 0 auto 16px auto;
-`;
+  margin-bottom: 16px;
+  `;
 
 const ContentImg = styled.img`
   overflow: hidden;
@@ -62,6 +62,10 @@ const ContentImg = styled.img`
   margin-bottom: 10px;
   border-radius: 10px;
   object-fit: cover;
+
+  &:first-child{
+    margin-top: 16px;
+  }
 
   @media screen and (max-width: 768px) {
     width: 338px;
