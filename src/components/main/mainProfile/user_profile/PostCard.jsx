@@ -119,6 +119,7 @@ function PostCard() {
   const [InfoState] = useContext(AuthContext);
   const [targetPost, setTargetPost] = useState("");
   const history = useHistory();
+  const accountname = useParams().accountname;
 
   const modalItemList =
     PostingState.data[0].accountname ===
@@ -244,7 +245,10 @@ function PostCard() {
           })}
         </PostContentList>
         <Modal
-          isOpenModal={isOpenModal}
+          isOpenModal={
+            accountname === InfoState.MyInformations[0].myAccountname &&
+            isOpenModal
+          }
           setIsOpenModal={setIsOpenModal}
           modalItemList={modalItemList}
         />
