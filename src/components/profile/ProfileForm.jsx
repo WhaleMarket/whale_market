@@ -6,6 +6,7 @@ import upload_icon from '../../assets/upload-file.png';
 import axios from 'axios';
 import { API_URL } from '../../constants/defaultUrl';
 import AuthContext from '../../context/AuthProvider';
+import LoadingPage from '../../pages/LoadingPage';
 
 const Form = styled.form`
     display: flex;
@@ -31,7 +32,7 @@ const ProfileImgWrapper = styled.div`
     border-radius: 9999px;
 `
 
-const ProfileImgLable = styled.label`
+const ProfileImgLabel = styled.label`
     width: 110px;
     margin: 0 auto;
 `
@@ -91,6 +92,7 @@ const SuccessMessage = styled.strong`
 
 function ProfileForm() {
     const [InfoState] = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
     const usernameRef = useRef();
     const accountnameRef = useRef();
 
@@ -225,6 +227,7 @@ function ProfileForm() {
         alert('🎉 웨일마켓에 오신 것을 환영합니다. 로그인 화면으로 이동합니다.');
         event.preventDefault();
         window.location.href = '/emaillogin';
+        setLoading(true);
         try {
             const reqData = {
                 user: { 
@@ -246,6 +249,7 @@ function ProfileForm() {
                 reqData,
                 config
             );
+            setLoading(false);
         } catch (error) {
             console.error(error);
         }
@@ -259,6 +263,7 @@ function ProfileForm() {
     };
 
     return (
+        loading ? <LoadingPage /> :
         <>
             {success ? (
                 window.location.href = '/emaillogin'
@@ -268,9 +273,9 @@ function ProfileForm() {
                         <legend className='a11yhidden'>프로필 사진 변경</legend>
 
                         <ProfileImgWrapper ref={previewImage}>
-                            <ProfileImgLable htmlFor='profileImg'>
+                            <ProfileImgLabel htmlFor='profileImg'>
                                 <Img src={upload_icon} alt='프로필 이미지 업로드'/>
-                            </ProfileImgLable>
+                            </ProfileImgLabel>
                         </ProfileImgWrapper>
                         <ProfileImgInput 
                             type='file' 
@@ -279,11 +284,8 @@ function ProfileForm() {
                             onChange={handleImageChange}
                         />
                     </Fieldset>
-
-
                     <Fieldset>
                         <legend className='a11yhidden'>개인정보 변경</legend>
-
                         <FormLabel htmlFor='username' style={{marginTop:'0'}}>사용자 이름</FormLabel>
                         <FormInput 
                             type='text' 
@@ -296,7 +298,6 @@ function ProfileForm() {
                             onBlur={handleOnBlurUsername}
                         />
                         {errMsgForUsername && <ErrorMessage>{errMsgForUsername}</ErrorMessage>}
-
                         <FormLabel htmlFor='accountname'>계정 ID</FormLabel>
                         <FormInput 
                             type='text' 
