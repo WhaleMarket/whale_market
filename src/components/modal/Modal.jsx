@@ -10,6 +10,7 @@ const ModalBg = styled.section`
   right: 0;
   z-index: 150;
   background-color: rgba(0, 0, 0, 0.2);
+  transition: all 0.5s;
   visibility: ${(props) =>
     props.isOpenModal === false ? "hidden" : "visible"};
   opacity: ${(props) => (props.isOpenModal === false ? "0" : "1")};
@@ -26,12 +27,12 @@ const ModalUl = styled.ul`
   width: 100%;
   padding: 36px 0 10px;
   border-radius: 10px 10px 0 0;
-  background-color: #ffffff;
+  background-color: white;
 
   &::before {
     position: absolute;
-    top: 16px;
-    left: 50%;
+    top: 7px;
+    left: 45%;
     transform: translateX(-50%);
     width: 50px;
     height: 4px;

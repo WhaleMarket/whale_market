@@ -3,23 +3,34 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import LogoSrc from "../../assets/Logo.png";
 import Wave from "react-wavify";
-import LoopEvent from "../../theme/splashEvent";
+import { WhaleEvent, WaveMoveEvent } from "../../theme/splashEvent";
 
 const Logo = styled.img`
   display: block;
-  z-index: -1;
+  z-index: 200;
   width: 200px;
-  /* margin: 27vh auto; */
   margin-top: 27vh;
+  margin-left: 40vw;
   position: relative;
-  transition: all ease 10s;
-
-  animation: ${LoopEvent} 6s infinite;
+  animation: ${WhaleEvent} 3s linear forwards;
 `;
 
 const SplashBody = styled.div`
+  background: #257;
   width: 100vw;
   height: 100vh;
+`;
+
+const WaveWrapper = styled.div`
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  height: 130px;
+  margin: 0px;
+  padding-top: 250px;
+  animation: ${WaveMoveEvent} 3s linear forwards;
 `;
 
 function Splash() {
@@ -27,7 +38,7 @@ function Splash() {
   const timeOut = () => {
     setTimeout(() => {
       history.push("/login");
-    }, 2000);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -38,22 +49,19 @@ function Splash() {
   }, []);
 
   return (
-    <SplashBody>
-      <Logo src={LogoSrc} />
-      <Wave
-        style={{
-          zIndex: 100,
-          // paddingTop: "10px",
-          marginTop: "-130px",
-          height: "800px",
-        }}
-        options={{
-          speed: 0.5,
-          height: 70,
-        }}
-        fill="#00BCD4"
-      />
-    </SplashBody>
+    <>
+      {/* <p>칭찬은 고래도 춤추게 한다</p> */}
+      <SplashBody>
+        <Logo src={LogoSrc} />
+        <WaveWrapper>
+          <Wave
+            style={{ zIndex: 10 }}
+            options={{ height: 50, speed: 0.8, points: 5 }}
+            fill="#257"
+          />
+        </WaveWrapper>
+      </SplashBody>
+    </>
   );
 }
 
