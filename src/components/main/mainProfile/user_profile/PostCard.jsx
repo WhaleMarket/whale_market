@@ -8,7 +8,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
-import { useHistory  } from 'react-router-dom';
+import { useHistory, useParams  } from 'react-router-dom';
 
 const PostWrapper = styled.div`
   display: flex;
@@ -118,6 +118,7 @@ function PostCard() {
   const [InfoState] = useContext(AuthContext);
   const [targetPost, setTargetPost] = useState('');
   const history = useHistory();
+  const accountname = useParams().accountname;
 
   const modalItemList = [
     {
@@ -214,7 +215,7 @@ function PostCard() {
           })}
         </PostContentList>
         <Modal
-          isOpenModal={isOpenModal}
+          isOpenModal={(accountname === InfoState.MyInformations[0].myAccountname) && isOpenModal}
           setIsOpenModal={setIsOpenModal}
           modalItemList={modalItemList}
         />
