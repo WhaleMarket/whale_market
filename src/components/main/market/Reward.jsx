@@ -8,27 +8,24 @@ import whale from "../../../assets/whale-small.png";
 const RewardCard = styled.li`
   border: 1px solid #dbdbdb;
   border-radius: 10px;
-  width: 25%;
-  padding: 24px 16px;
+  width: 230px;
+  padding: 16px;
   box-sizing: border-box;
-  @media screen and (max-width: 1200px) {
-    padding: 14px 10px;
-  }
-  @media screen and (max-width: 480px) {
-    width: 100%;
+
+  @media screen and (max-width: 768px) {
+    width: 190px;
   }
 `;
 
 const Img = styled.img`
-  width: 100%;
-  height: 155px;
+  width: 198px;
+  height: 158px;
   border-radius: 10px;
-  @media screen and (max-width: 1200px) {
-    height: 100px;
-  }
-  @media screen and (max-width: 480px) {
-    width: 100%;
-    height: 155px;
+  object-fit: fill;
+
+  @media screen and (max-width: 768px) {
+    width: 158px;
+    height: 126px;
   }
 `;
 
@@ -37,29 +34,21 @@ const TextWrapper = styled.div`
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 16px;
-  margin: 40px auto;
+  margin: 16px 10px;
   word-break: keep-all;
-  @media screen and (max-width: 1200px) {
+
+  @media screen and (max-width: 768px) {
     margin: 20px auto 18px;
     column-gap: 0;
     row-gap: 14px;
-  }
-  @media screen and (max-width: 480px) {
-    margin: 40px auto;
-    width: 90%;
-    gap: 20px;
+    width: 160px
   }
 `;
 
 const RewardTit = styled.p`
   font-size: 14px;
   color: #515151;
-  @media screen and (max-width: 1200px) {
-    font-size: 10px;
-  }
-  @media screen and (max-width: 480px) {
-    font-size: 14px;
-  }
+
   ::before {
     display: inline-block;
     left: 0;
@@ -72,18 +61,22 @@ const RewardTit = styled.p`
     background-repeat: no-repeat;
     content: "";
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+    line-height: 12px;
+  }
 `;
 
 const RewardCont = styled.strong`
   font-size: 14px;
+  line-height: 14px;
   font-weight: 600;
   color: #515151;
-  @media screen and (max-width: 1200px) {
-    font-size: 10px;
-  }
-  @media screen and (max-width: 480px) {
-    font-size: 14px;
-    line-height: 16px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+    line-height: 12px;
   }
 `;
 
@@ -100,16 +93,6 @@ const GetBtn = styled.button`
   text-align: center;
   box-sizing: border-box;
   cursor: pointer;
-  @media screen and (max-width: 1200px) {
-    width: 68px;
-    padding: 5px 0px;
-    font-size: 8px;
-  }
-  @media screen and (max-width: 480px) {
-    width: 84px;
-    padding: 8px 18px;
-    font-size: 12px;
-  }
 `;
 
 function Reward({ data }) {

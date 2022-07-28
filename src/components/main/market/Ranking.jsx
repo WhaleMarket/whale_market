@@ -6,29 +6,26 @@ import axios from "axios";
 import { API_URL } from "../../../constants/defaultUrl";
 
 const RankingSection = styled.section`
-  margin: 50px;
+  margin: 20px;
   padding-bottom: 100px;
   text-align: center;
   color: #515151;
-  @media screen and (max-width: 1200px) {
+
+  @media screen and (max-width: 768px) {
     margin-top: 40px;
   }
-  @media screen and (max-width: 480px) {
-    width: 100%;
-    padding-bottom: 90px;
-  }
+
 `;
 
 const RankingTit = styled.h1`
-  font-size: 36px;
+  font-size: 26px;
   font-weight: 600;
   color: #515151;
-  @media screen and (max-width: 1200px) {
-    font-size: 32px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
   }
-  @media screen and (max-width: 480px) {
-    margin: 14px auto;
-  }
+
   ::before {
     display: inline-block;
     left: 0;
@@ -40,20 +37,25 @@ const RankingTit = styled.h1`
     background-size: 48px 48px;
     background-repeat: no-repeat;
     content: "";
+
+    @media screen and (max-width: 768px) {
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    background-size: 30px 30px;
+    }
   }
 `;
 
 const UserWrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  width: 60%;
-  margin: 50px auto;
-  @media screen and (max-width: 1200px) {
+  width: 550px;
+  margin: 40px auto;
+
+  @media screen and (max-width: 768px) {
     margin: 30px auto;
-  }
-  @media screen and (max-width: 480px) {
-    width: 90%;
-    gap: 16px;
+    width: 380px;
   }
 `;
 
@@ -64,7 +66,8 @@ const FollowWrapper = styled.div`
 const UserList = styled.p`
   font-size: 16px;
   line-height: 28px;
-  @media screen and (max-width: 1200px) {
+
+  @media screen and (max-width: 768px) {
     font-size: 14px;
     line-height: 24px;
   }

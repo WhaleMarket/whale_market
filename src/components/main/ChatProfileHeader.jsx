@@ -43,16 +43,18 @@ const Outer = styled.div`
 `;
 
 const Inner = styled.ul`
-  position: relative;
   display: flex;
+  position: relative;
   width: 200%;
   &:nth-child(1) {
-    animation: ${MarqueeEvent} 5s linear infinite;
+    animation: ${MarqueeEvent} 6s linear infinite;
   }
 `;
 
 const Content = styled.li`
   width: 100%;
+  font-size: 14px;
+  color: #515151;
 `;
 
 function ChatProfileHeader() {
