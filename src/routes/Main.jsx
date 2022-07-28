@@ -1,6 +1,6 @@
 import Navbar from "../components/main/Navbar";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
-import Chatting from "../pages/main_page/Chatting";
+import Reward from "../pages/main_page/Reward";
 import MainProfile from "../pages/main_page/mainProfile/MyProfile";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
 import ProfileModification from "../pages/main_page/mainProfile/ProfileEdit";
@@ -33,7 +33,7 @@ function MainRouter() {
         <>
           <Navbar />
           <Route path="/home" exact render={Home} />
-          <Route path="/chatting" component={Chatting} />
+          <Route path="/reward" component={Reward} />
           <Route path="/profile/:accountname" component={MainProfile} />
           <Route path="/home/search" component={HomeSearch} />
         </>
