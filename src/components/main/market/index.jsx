@@ -4,8 +4,7 @@ import Ranking from "./Ranking";
 
 const RewardWrapper = styled.ul`
   display: flex;
-  width: 60vw;
-  padding-top: 100px; 
+  padding: 100px 16px 0 16px;
   margin: 0 auto;
   gap: 20px;
   box-sizing: border-box;
@@ -29,7 +28,7 @@ function Market({ List }) {
           return <Reward key={key} data={value} />;
         })}
       </RewardWrapper>
-      <Ranking/>
+      <Ranking />
     </>
   );
 }

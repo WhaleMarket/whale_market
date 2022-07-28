@@ -53,6 +53,10 @@ const FollowIntro = styled.p`
   font-size: 12px;
   line-height: 15px;
   color: #767676;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 15px;
 `;
 
 const FollowButton = styled.button`
@@ -165,27 +169,31 @@ function FollowUser() {
           }
           fetchData();
         };
-        return (
-            loading ? <LoadingPage /> :
-                <Wrapper key={key}>
-                <InfoWrapper>
-                  <StyledLink to={"/profile/" + value.accountname}>
-                    <UserImgDiv src={value.image} />
-                  </StyledLink>
-                  <FollowInfo>
-                    <FollowName>{value.username}</FollowName>
-                    <FollowIntro>{value.intro}</FollowIntro>
-                  </FollowInfo>
-                </InfoWrapper>
+        return loading ? (
+          <LoadingPage />
+        ) : (
+          <Wrapper key={key}>
+            <InfoWrapper>
+              <StyledLink to={"/profile/" + value.accountname}>
+                <UserImgDiv src={value.image} />
+              </StyledLink>
+              <FollowInfo>
+                <FollowName>{value.username}</FollowName>
+                <FollowIntro>{value.intro}</FollowIntro>
+              </FollowInfo>
+            </InfoWrapper>
 
-                <FollowButton
-                  type="button"
-                  follow={value.isfollow}
-                  onClick={value.isfollow ? useHandleUnfollow : useHandleFollow}
-                >
-                  {value.isfollow ? "팔로우 취소" : "팔로우"}
-                </FollowButton>
-              </Wrapper>
+            {value.accountname !==
+              InfoState.MyInformations[0].myAccountname && (
+              <FollowButton
+                type="button"
+                follow={value.isfollow}
+                onClick={value.isfollow ? useHandleUnfollow : useHandleFollow}
+              >
+                {value.isfollow ? "팔로우 취소" : "팔로우"}
+              </FollowButton>
+            )}
+          </Wrapper>
         );
       })}
     </>

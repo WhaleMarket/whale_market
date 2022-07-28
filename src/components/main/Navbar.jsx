@@ -9,7 +9,8 @@ import user_icon_fill from "../../assets/icon-user-fill.png";
 import user_icon from "../../assets/icon-user.png";
 import Wave from "react-wavify";
 import AuthContext from "../../context/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import NavbarClickEvent from "../../theme/nabvarClickEvent";
 
 const Bottomnav = styled.ul`
   display: flex;
@@ -30,6 +31,7 @@ const List = styled.li`
   font-size: 10px;
   font-weight: 600;
   text-align: center;
+  transition: 0.5s ease-in-out;
   & a {
     text-decoration: none;
     color: inherit;
@@ -41,10 +43,24 @@ const Logo = styled.img`
   width: 24px;
   padding: 12px 0 4px 0;
   margin: 0 auto;
+  transform-origin: bottom;
+  &.current {
+    animation: ${NavbarClickEvent} 0.5s ease-in-out forwards;
+  }
 `;
 
 const Navbar = ({ location }) => {
   const [InfoState] = useContext(AuthContext);
+  const [homecurrent, setHomecurrent] = useState([false, false, false]);
+  useEffect(() => {
+    if (location.pathname.substr(0, 5) === "/home") {
+      setHomecurrent([true, false, false]);
+    } else if (location.pathname === "/chatting") {
+      setHomecurrent([false, true, false]);
+    } else {
+      setHomecurrent([false, false, true]);
+    }
+  }, [location]);
   return (
     <>
       <Wave
@@ -77,7 +93,7 @@ const Navbar = ({ location }) => {
         >
           <Link to="/home">
             <Logo
-              className="Home"
+              className={`${homecurrent[0] ? "Home current" : "Home"}`}
               src={
                 location.pathname.substr(0, 5) === "/home"
                   ? home_icon_fill
@@ -91,11 +107,9 @@ const Navbar = ({ location }) => {
         <List className="chatting" current={location.pathname === "/chatting"}>
           <Link to="/chatting">
             <Logo
-              className="Home"
+              className={`${homecurrent[1] ? "Home current" : "Home"}`}
               src={
-                location.pathname === "/chatting"
-                  ? award_icon_fill
-                  : award_icon
+                location.pathname === "/chatting" ? award_icon_fill : award_icon
               }
               alt="home icon"
             />
@@ -110,17 +124,13 @@ const Navbar = ({ location }) => {
         </List>
         <List
           className="profile"
-          current={
-            location.pathname ===
-            `/profile/${InfoState.MyInformations[0].myAccountname}`
-          }
+          current={location.pathname.substr(0, 8) === "/profile"}
         >
           <Link to={`/profile/${InfoState.MyInformations[0].myAccountname}`}>
             <Logo
-              className="Home"
+              className={`${homecurrent[2] ? "Home current" : "Home"}`}
               src={
-                location.pathname ===
-                `/profile/${InfoState.MyInformations[0].myAccountname}`
+                location.pathname.substr(0, 8) === "/profile"
                   ? user_icon_fill
                   : user_icon
               }

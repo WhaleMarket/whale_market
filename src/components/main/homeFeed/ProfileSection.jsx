@@ -22,7 +22,7 @@ const ProfileImg = styled.img`
   width: 42px;
   height: 42px;
   margin-right: 12px;
-  border: 0.5px solid #DBDBDB;
+  border: 0.5px solid #dbdbdb;
   border-radius: 50%;
   background: url(${defaultImg});
 `;
@@ -73,7 +73,7 @@ function ProfileSection({ username, accountname, src }) {
           <ProfileImg src={src || defaultImg} alt="프로필 이미지" />
           <UserInfoWrapper>
             <UserName>{username}</UserName>
-            <UserId>{accountname}</UserId>
+            <UserId>@{accountname}</UserId>
           </UserInfoWrapper>
         </ProfileDiv>
         <ModalBtn

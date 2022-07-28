@@ -53,6 +53,10 @@ const FollowIntro = styled.p`
   font-size: 12px;
   line-height: 15px;
   color: #767676;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 15px;
 `;
 
 const FollowButton = styled.button`
@@ -190,8 +194,9 @@ function FollowingUser() {
           }
           fetchData();
         };
-        return (
-            loading ? <LoadingPage /> :
+        return loading ? (
+          <LoadingPage />
+        ) : (
           <Wrapper key={key}>
             <InfoWrapper>
               <StyledLink to={"/profile/" + value.accountname}>
@@ -203,20 +208,23 @@ function FollowingUser() {
               </FollowInfo>
             </InfoWrapper>
 
-            <FollowButton
-              type="button"
-              follow={value.isfollow}
-              onClick={value.isfollow ? useHandleUnfollow : useHandleFollow}
-            >
-              {PostingState.data[0].accountname ===
-              InfoState.MyInformations[0].myAccountname
-                ? value.isfollow
-                  ? "언 팔로우"
-                  : "팔로우"
-                : value.isfollow
-                ? "팔로우 취소"
-                : "팔로우"}
-            </FollowButton>
+            {value.accountname !==
+              InfoState.MyInformations[0].myAccountname && (
+              <FollowButton
+                type="button"
+                follow={value.isfollow}
+                onClick={value.isfollow ? useHandleUnfollow : useHandleFollow}
+              >
+                {PostingState.data[0].accountname ===
+                InfoState.MyInformations[0].myAccountname
+                  ? value.isfollow
+                    ? "언 팔로우"
+                    : "팔로우"
+                  : value.isfollow
+                  ? "팔로우 취소"
+                  : "팔로우"}
+              </FollowButton>
+            )}
           </Wrapper>
         );
       })}

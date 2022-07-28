@@ -40,7 +40,7 @@ const ProductList = styled.ul`
   }
 `;
 
-function ProductSection({ accountname }) {
+function ProductSection() {
   const [InfoState] = useContext(AuthContext);
   const [productResult, setProductResult] = useState([]);
   const [PostingState] = useContext(PostingContext);
@@ -71,10 +71,11 @@ function ProductSection({ accountname }) {
   }, [PostingState.data[0].accountname]);
 
   if (productResult.length > 0) {
-    return (
-        loading ? <LoadingPage/> :
+    return loading ? (
+      <LoadingPage />
+    ) : (
       <ProductContainer>
-        <ProductTitle>판매 중인 상품</ProductTitle>
+        <ProductTitle>About {PostingState.data[0].accountname}</ProductTitle>
         <ProductList>
           <ProductCard id="product1" productResult={productResult} />
         </ProductList>

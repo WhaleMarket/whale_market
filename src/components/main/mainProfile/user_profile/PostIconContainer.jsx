@@ -8,6 +8,7 @@ import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostModal from "../../postDetail/PostModal";
 import PostingContext from "../../../../context/PostingProvider";
+import HeartEvent from "../../../../theme/heartClickEvent";
 
 const PostIconWrapper = styled.div`
   display: flex;
@@ -23,6 +24,10 @@ const LikeBtn = styled.button`
   background-image: ${(props) =>
     props.Liked === true ? `url(${likeBtn})` : `url(${likeBtnOutline})`};
   background-size: 20px 20px;
+  transition: 0.5s ease-in-out;
+  &.like {
+    animation: ${HeartEvent} 0.5s ease-in-out;
+  }
   &:hover {
     cursor: pointer;
   }
@@ -139,6 +144,7 @@ function PostIconContainer({
       <PostIconWrapper>
         <LikeBtn
           Liked={liked}
+          className={`${liked ? "like" : ""}`}
           onClick={liked ? useHandleUnlike : useHandleLike}
         ></LikeBtn>
         <Count>{like}</Count>
