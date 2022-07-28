@@ -55,7 +55,7 @@ const Navbar = ({ location }) => {
   useEffect(() => {
     if (location.pathname.substr(0, 5) === "/home") {
       setHomecurrent([true, false, false]);
-    } else if (location.pathname === "/chatting") {
+    } else if (location.pathname === "/reward") {
       setHomecurrent([false, true, false]);
     } else {
       setHomecurrent([false, false, true]);
@@ -103,7 +103,7 @@ const Navbar = ({ location }) => {
             홈
           </Link>
         </List>
-        <List className="chatting" current={location.pathname === "/chatting"}>
+        <List className="reward" current={location.pathname === "/reward"}>
           <Link to="/reward">
             <Logo
               className={`${homecurrent[1] ? "Home current" : "Home"}`}
