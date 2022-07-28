@@ -18,6 +18,7 @@ const UserProfileContainer = styled.div`
   padding: 30px 55px 26px;
   margin: 48px auto 0 auto;
   box-sizing: border-box;
+  white-space: pre-wrap;
 `;
 
 const ImgDiv = styled.div`
