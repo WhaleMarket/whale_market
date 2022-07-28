@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import messageIcon from "../../../../assets/icon-message-circle.png";
@@ -7,6 +7,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import PostingContext from "../../../../context/PostingProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
+import { CountUp } from "../../../../util/countup";
 
 const UserProfileContainer = styled.div`
   display: flex;
@@ -46,6 +47,7 @@ const UserId = styled.span`
 `;
 
 const UserIntro = styled.span`
+  line-height: 16px;
   margin: 1rem 0 1.5rem;
   color: #767676;
   font-size: 0.75rem;
@@ -157,6 +159,8 @@ const FollowButton = styled.button`
 function UserProfileCard() {
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
+  const [productResult, setProductResult] = useState([]);
+  const domRef = useRef();
 
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -243,9 +247,45 @@ function UserProfileCard() {
     fetchData();
   };
 
+  async function getProduct() {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      const response = await axios.get(
+        `${API_URL}/product/${PostingState.data[0].accountname}/?limit=100&skip=0`,
+        config
+      );
+      setProductResult(response.data.product);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    PostingState.data[0].accountname && getProduct();
+  }, [PostingState.data[0].accountname]);
+
+  let allprice = 0;
+  useEffect(() => {
+    productResult.map((value) => {
+      return (allprice += value.price);
+    });
+    CountUp(allprice / 100000000, domRef);
+  }, []);
+
   return (
     <>
       <UserProfileContainer>
+        <p>
+          현재 {PostingState.data[0].user.accountname}님의 값어치는 대략{" "}
+          <strong ref={domRef}>{allprice / 100000000}</strong>억{" "}
+          <strong ref={domRef}>{(allprice % 100000000) / 10000}</strong>만원
+          상승 했습니다! 대단해요!
+        </p>
         <ImgDiv src={PostingState.data[0].user.image} />
         <UserName>{PostingState.data[0].user.username}</UserName>
         <UserId>{`@${PostingState.data[0].user.accountname}`}</UserId>

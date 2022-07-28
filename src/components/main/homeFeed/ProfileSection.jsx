@@ -73,7 +73,7 @@ function ProfileSection({ username, accountname, src }) {
           <ProfileImg src={src || defaultImg} alt="프로필 이미지" />
           <UserInfoWrapper>
             <UserName>{username}</UserName>
-            <UserId>{accountname}</UserId>
+            <UserId>{`@${accountname}`}</UserId>
           </UserInfoWrapper>
         </ProfileDiv>
         <ModalBtn

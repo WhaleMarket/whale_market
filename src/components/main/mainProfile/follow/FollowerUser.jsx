@@ -52,6 +52,10 @@ const FollowIntro = styled.p`
   font-size: 12px;
   line-height: 15px;
   color: #767676;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 15px;
 `;
 
 const FollowButton = styled.button`

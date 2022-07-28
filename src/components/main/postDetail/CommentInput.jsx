@@ -28,9 +28,6 @@ const Heart = styled.button`
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px 20px;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const Input = styled.input`
@@ -130,7 +127,7 @@ function CommentInput({ index, Liked, id, setComments }) {
           };
           return { data: PostingState.data };
         });
-        console.log("good")
+        console.log("good");
       }
     } catch (error) {
       console.error(error);
@@ -155,7 +152,7 @@ function CommentInput({ index, Liked, id, setComments }) {
 
   return (
     <CommentForm method="POST" onSubmit={handleSubmit}>
-      <Heart Liked={Liked} />
+      <Heart disabled={true} Liked={Liked} />
       <label htmlFor="text"></label>
       <Input
         id="text"

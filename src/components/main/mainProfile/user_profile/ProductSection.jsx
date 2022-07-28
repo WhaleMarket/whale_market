@@ -56,6 +56,7 @@ function ProductSection({ accountname }) {
         `${API_URL}/product/${PostingState.data[0].accountname}/?limit=100&skip=0`,
         config
       );
+
       setProductResult(response.data.product);
     } catch (error) {
       console.error(error);
@@ -69,7 +70,7 @@ function ProductSection({ accountname }) {
   if (productResult.length > 0) {
     return (
       <ProductContainer>
-        <ProductTitle>판매 중인 상품</ProductTitle>
+        <ProductTitle>내 값어치를 올려주는 것들</ProductTitle>
         <ProductList>
           <ProductCard id="product1" productResult={productResult} />
         </ProductList>
