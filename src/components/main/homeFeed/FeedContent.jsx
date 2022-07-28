@@ -53,6 +53,7 @@ const PassLink = styled(Link)`
 
 const ContentWrapper = styled.div`
   word-break: break-word;
+  white-space: pre-wrap;
 `;
 
 const ContentText = styled.p`

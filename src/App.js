@@ -16,7 +16,7 @@ const Globalstyle = createGlobalStyle`
 
     html, body, #root {
         height: 100%;
-        /* font-family: 'GangwonEdu_OTFBoldA'; */
+        font-family: 'GangwonEdu_OTFBoldA';
         font-family: 'TmoneyRoundWindRegular';
         overflow: auto;
         white-space: nowrap;
