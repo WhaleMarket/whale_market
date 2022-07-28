@@ -83,6 +83,12 @@ const ErrorMessage = styled.p`
     font-size: 0.750rem;
 `
 
+const SuccessMessage = styled.strong`
+    margin-top: 0.375rem;
+    color: green;
+    font-size: 0.750rem;
+`;
+
 function ProfileForm() {
     const [InfoState] = useContext(AuthContext);
     const usernameRef = useRef();
@@ -95,6 +101,7 @@ function ProfileForm() {
 
     const [errMsgForUsername, setErrMsgForUsername] = useState('');
     const [errMsgForAccountname, setErrMsgForAccountname] = useState('');
+    const [successMsgForAccountname, setSuccessMsgForAccountname] = useState('');
 
     const [isValidUsername, setIsValidUsername] = useState(false);
     const [isValidAccountname, setIsValidAccountname] = useState(false);
@@ -200,7 +207,7 @@ function ProfileForm() {
             } else if (!accountnameRegex.test(accountname)) {
                 setErrMsgForAccountname('*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.');
             } else if (response?.data?.message === '사용 가능한 계정ID 입니다.') {
-                setErrMsgForAccountname('*' + response.data.message);
+                setSuccessMsgForAccountname('*' + response.data.message);
                 setIsValidAccountname(true);
             }
         } catch (error) {
@@ -301,8 +308,11 @@ function ProfileForm() {
                             onKeyUp={isPassedProfile}
                             onBlur={handleOnBlur}
                         />
-                        {errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>}
-                        
+                        {errMsgForAccountname ? (
+                            errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>
+                        ) : (
+                            successMsgForAccountname && <SuccessMessage>{successMsgForAccountname}</SuccessMessage>
+                        )}
                         <FormLabel htmlFor='intro'>소개</FormLabel>
                         <FormInput 
                             type='text' 
