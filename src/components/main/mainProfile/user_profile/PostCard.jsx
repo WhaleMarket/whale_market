@@ -250,6 +250,7 @@ function PostCard() {
         <Modal
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           isOpenModal={
             accountname === InfoState.MyInformations[0].myAccountname &&
             isOpenModal
@@ -260,6 +261,9 @@ function PostCard() {
 =======
           isOpenModal={isOpenModal}
 >>>>>>> 38bc17d (🩹 PostCard revert 처리)
+=======
+          isOpenModal={isOpenModal}
+>>>>>>> 0c4c8f74e31139bf1b6bcebe1f2c13de8ecabd74
           setIsOpenModal={setIsOpenModal}
           modalItemList={modalItemList}
         />
