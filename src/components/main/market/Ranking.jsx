@@ -123,7 +123,7 @@ function Ranking() {
           },
         };
         const followingResponse = await axios.get(
-          `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/following/?limit=100&skip=0`,
+          `${API_URL}/user`,
           followingConfig
         );
         let data = [];
