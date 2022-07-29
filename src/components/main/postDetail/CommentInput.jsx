@@ -1,11 +1,11 @@
 import React, { useState, useRef, useContext } from "react";
+import axios from "axios";
+import AuthContext from "../../../context/AuthProvider";
+import PostingContext from "../../../context/PostingProvider";
+import { API_URL } from "../../../constants/defaultUrl";
 import styled from "styled-components";
 import praise_icon from "../../../assets/icon-praise.png";
 import praise_icon_fill from "../../../assets/icon-praise-fill.png";
-import axios from "axios";
-import AuthContext from "../../../context/AuthProvider";
-import { API_URL } from "../../../constants/defaultUrl";
-import PostingContext from "../../../context/PostingProvider";
 
 const CommentForm = styled.form`
   display: flex;
@@ -130,7 +130,6 @@ function CommentInput({ index, Liked, id, setComments }) {
           };
           return { data: PostingState.data };
         });
-        console.log("good")
       }
     } catch (error) {
       console.error(error);

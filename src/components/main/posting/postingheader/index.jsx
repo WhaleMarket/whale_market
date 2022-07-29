@@ -1,8 +1,8 @@
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import BackButton from "./Back_btn";
 import UploadButton from "./Upload_btn";
 import EditButton from "./Edit_btn";
-import { useParams } from "react-router-dom";
 
 const Head = styled.header`
   display: flex;

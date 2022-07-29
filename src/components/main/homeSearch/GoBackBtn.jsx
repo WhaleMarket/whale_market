@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import BackBtnIcon from '../../../assets/icon-arrow-left.png';
 
 const BackBtn = styled.button`

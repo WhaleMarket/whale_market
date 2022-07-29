@@ -1,9 +1,9 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import search_icon from "../../assets/icon-search.png";
-import { Link } from "react-router-dom";
 import whale from "../../assets/whale-small.png";
-import axios from "axios";
-import { useState } from "react";
 
 const Head = styled.header`
   display: flex;
@@ -63,13 +63,10 @@ function Header() {
       await axios.get(
       `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}`
       ).then((response) => {
-        console.log(response)
       setWeather(response.data.weather[0].main);
       })
   };
   TakeWeather();
-
-  console.log(weather);
 
   return (
     <Head>

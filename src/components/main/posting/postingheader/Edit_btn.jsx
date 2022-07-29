@@ -1,11 +1,11 @@
-import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import AuthContext from "../../../../context/AuthProvider";
 import UploadContext from "../../../../context/UploadProvider";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import PostingModificationContext from "../../../../context/PostingModificationProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
 import styled from "styled-components";
 import success_whale from '../../../../assets/success-whale.png';
 import disabled_whale from '../../../../assets/disabled-whale.png';

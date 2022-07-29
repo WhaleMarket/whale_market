@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import EditButton from "./Edit_btn";
-import BackButton from "./Back_btn";
-import SaveButton from "./Save_btn";
+import EditButton from "../productUploadHeader/Edit_btn";
+import BackButton from "../productUploadHeader/Back_btn";
+import SaveButton from "../productUploadHeader/Save_btn";
 
 const Head = styled.header`
   display: flex;

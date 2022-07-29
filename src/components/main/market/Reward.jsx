@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import axios from "axios";
-import { API_URL } from "../../../constants/defaultUrl";
 import { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import AuthContext from "../../../context/AuthProvider";
+import { API_URL } from "../../../constants/defaultUrl";
+import styled from "styled-components";
 import whale from "../../../assets/whale-small.png";
 import get_whale from '../../../assets/get-whale.png';
 import get_disabled_whale from '../../../assets/get-disabled-whale.png';

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import FollowingUser from "./FollowingUser";
-import FollowUser from "./FollowerUser";
+import FollowingUser from "../follow/FollowingUser";
+import FollowUser from "../follow/FollowerUser";
 
 const FollowWrapper = styled.ul`
   display: flex;

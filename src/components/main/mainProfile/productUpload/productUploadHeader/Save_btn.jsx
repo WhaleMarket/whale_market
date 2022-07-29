@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import SaveProductContext from "../../../../../context/SaveProductProvider";
 import axios from "axios";
-import { API_URL } from "../../../../../constants/defaultUrl";
+import styled from "styled-components";
 import AuthContext from "../../../../../context/AuthProvider";
+import SaveProductContext from "../../../../../context/SaveProductProvider";
+import { API_URL } from "../../../../../constants/defaultUrl";
 import upload_whale from '../../../../../assets/upload-whale.png';
 import upload_disabled_whale from '../../../../../assets/upload-disabled-whale.png';
 

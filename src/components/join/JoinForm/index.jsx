@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import Button from '../../emaillogin/button/Button';
-import AuthContext from '../../../context/AuthProvider';
 import axios from 'axios';
+import AuthContext from '../../../context/AuthProvider';
 import { API_URL } from '../../../constants/defaultUrl';
+import Button from '../../emaillogin/button/Button';
 import {
     Wrapper,
     Title,

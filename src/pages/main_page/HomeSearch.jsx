@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from '../../components/main/homeSearch/SearchBar';
-import Navbar from '../../components/main/Navbar';
-import SearchList from '../../components/main/homeSearch/SearchList';
 import axios from 'axios';
 import { API_URL } from '../../constants/defaultUrl';
+import SearchBar from '../../components/main/homeSearch/SearchBar';
+import SearchList from '../../components/main/homeSearch/SearchList';
+import Navbar from '../../components/main/Navbar';
 
 function HomeSearch(){
     const [searchResult, setSearchResult] = useState([]);

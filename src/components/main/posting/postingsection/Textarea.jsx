@@ -1,13 +1,13 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import UploadPostingContext from "../../../../context/UploadImageListProvider";
-import UploadContext from "../../../../context/UploadProvider";
-import ImgWrapper from "./ImgArticle";
-import AuthContext from '../../../../context/AuthProvider';
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
+import AuthContext from '../../../../context/AuthProvider';
+import UploadContext from "../../../../context/UploadProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import PostingModificationContext from "../../../../context/PostingModificationProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
+import styled from "styled-components";
+import ImgWrapper from "./ImgArticle";
 
 const EnterWrapper = styled.div``;
 

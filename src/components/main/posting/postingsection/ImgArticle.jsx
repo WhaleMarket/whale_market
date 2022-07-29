@@ -1,13 +1,13 @@
-import styled from "styled-components";
-import PostingImg from "./PostingImg";
-import UploadPostingContext from "../../../../context/UploadImageListProvider";
-import UploadContext from "../../../../context/UploadProvider";
-import AuthContext from '../../../../context/AuthProvider';
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
+import AuthContext from '../../../../context/AuthProvider';
+import UploadContext from "../../../../context/UploadProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import PostingModificationContext from "../../../../context/PostingModificationProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
+import styled from "styled-components";
+import PostingImg from "./PostingImg";
 import LoadingPage from "../../../../pages/LoadingPage";
 
 const Wrapper = styled.article`

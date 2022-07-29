@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import CommentInput from "./CommentInput";
-import styled from "styled-components";
-import Comment from "./Comment";
-import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
-import { API_URL } from "../../../constants/defaultUrl";
-import AlertModal from "../../modal/AlertModal";
-import Modal from "../../modal/Modal";
+import AuthContext from "../../../context/AuthProvider";
 import PostingContext from "../../../context/PostingProvider";
+import { API_URL } from "../../../constants/defaultUrl";
+import styled from "styled-components";
+import Comment from "../postDetail/Comment";
+import CommentInput from "../postDetail/CommentInput";
+import Modal from "../../modal/Modal";
+import AlertModal from "../../modal/AlertModal";
 
 const LayOut = styled.div`
   display: flex;

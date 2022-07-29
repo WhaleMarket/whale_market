@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import styled from "styled-components";
-import UploadContext from "../../../../context/UploadProvider";
 import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
-import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import AuthContext from "../../../../context/AuthProvider";
+import UploadContext from "../../../../context/UploadProvider";
+import UploadPostingContext from "../../../../context/UploadImageListProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
+import styled from "styled-components";
 import upload_whale from '../../../../assets/upload-whale.png';
 import upload_disabled_whale from '../../../../assets/upload-disabled-whale.png';
 
