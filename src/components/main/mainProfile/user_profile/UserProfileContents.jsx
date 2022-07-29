@@ -20,6 +20,25 @@ const UserProfileContainer = styled.div`
   margin: 48px auto 0 auto;
   box-sizing: border-box;
   white-space: pre-wrap;
+
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    padding: 30px 4% 26px;
+  }
+`;
+
+
+const PriceContent = styled.p`
+  text-align: center;
+  color: #515151;
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+const PriceStrong = styled.strong`
+  font-size: 19px;
+  font-weight: 600;
+  color: #00bcd4;
 `;
 
 const ImgDiv = styled.div`
@@ -48,6 +67,8 @@ const UserIntro = styled.span`
   margin: 16px 0 24px;
   color: #767676;
   font-size: 12px;
+  line-height: 18px;
+  text-align: center;
 `;
 
 const Followers = styled(Link)`
@@ -159,18 +180,6 @@ const FollowButton = styled.button`
   cursor: pointer;
 `;
 
-const PriceContent = styled.p`
-  text-align: center;
-  color: #515151;
-  font-size: 16px;
-  line-height: 20px;
-`;
-
-const PriceStrong = styled.strong`
-  font-size: 19px;
-  font-weight: 600;
-  color: #00bcd4;
-`;
 
 function UserProfileCard() {
   const [InfoState] = useContext(AuthContext);

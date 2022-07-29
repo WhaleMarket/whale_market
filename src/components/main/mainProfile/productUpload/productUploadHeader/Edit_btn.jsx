@@ -6,18 +6,24 @@ import { API_URL } from "../../../../../constants/defaultUrl";
 import AuthContext from "../../../../../context/AuthProvider";
 import ProductModificationContext from "../../../../../context/ProductModification";
 import { useParams } from "react-router-dom";
+import success_whale from '../../../../../assets/success-whale.png';
+import disabled_whale from '../../../../../assets/disabled-whale.png';
+
 
 const Edit = styled.button`
-  width: 90px;
-  height: 32px;
+  width: 100px;
+  height: 52px;
+  padding-left: 16px;
   border: none;
-  border-radius: 32px;
-  background-color: ${(props) => (props.state ? "#00bcd4" : "#B2EBF2")};
-  color: white;
-  font-size: 14px;
+  background-color: transparent;
+  background-position: 0px 0px;
+  background-image: ${(props) => (props.state ? `url(${success_whale})` : `url(${disabled_whale})`)};
+  background-size: 100px 52px;
+  background-repeat: no-repeat;
+  transition: 0.5s ease-in-out;
+  vertical-align: top;
   &:hover {
     cursor: ${(props) => (props.state ? "pointer" : "auto")};
-    outline: ${(props) => (props.state ? "1px solid #03a9f4" : "none")};
   }
 `;
 
@@ -115,9 +121,7 @@ function EditButton() {
 
   return (
     <>
-      <Edit onClick={onSubmit} type="submit" state={save} disabled={!save}>
-        수정
-      </Edit>
+      <Edit onClick={onSubmit} type="submit" state={save} disabled={!save}/>
     </>
   );
 }

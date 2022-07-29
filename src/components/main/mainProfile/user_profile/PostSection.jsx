@@ -6,12 +6,12 @@ import listIconOff from "../../../../assets/icon-post-list-off.png";
 import albumIconOn from "../../../../assets/icon-post-album-on.png";
 import albumIconOff from "../../../../assets/icon-post-album-off.png";
 import PostCard from "./PostCard";
-import postImg from "../../../../assets/postImg.png";
 import AuthContext from "../../../../context/AuthProvider";
 import { API_URL } from "../../../../constants/defaultUrl";
 import axios from "axios";
 import PostingContext from "../../../../context/PostingProvider";
 import LoadingPage from "../../../../pages/LoadingPage";
+import whale from '../../../../assets/Logo.png';
 
 const ViewTypeNav = styled.nav`
   display: flex;
@@ -56,23 +56,22 @@ const PostContainer = styled.section`
 
 const AlbumContainer = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+  grid-auto-rows: 1fr 1fr 1fr 1fr;
   gap: 8px;
-  width: 390px;
+  width: 600px;
   padding-bottom: 70px;
   margin: 16px auto;
 `;
 
-const AlbumCard = styled.div`
-  text-align: center;
-  cursor: pointer;
-`;
+const AlbumReward = styled.div`
+`
 
 const AlbumImg = styled.img`
-  width: 114px;
-  height: 114px;
-  object-fit: cover;
+    grid-area: 1/2/5/3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `;
 
 function PostSection() {
@@ -137,11 +136,8 @@ function PostSection() {
           </PostContainer>
         ) : (
           <AlbumContainer>
-            <AlbumCard>
-              <Link to="/">
-                <AlbumImg src={postImg} />
-              </Link>
-            </AlbumCard>
+            <AlbumReward/>
+            <AlbumImg src={whale} />
           </AlbumContainer>
         )}
       </>

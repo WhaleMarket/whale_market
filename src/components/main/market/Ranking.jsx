@@ -88,7 +88,8 @@ const FollowWrapper = styled.div`
 `;
 
 const HeartNumber = styled.strong`
-    font-size: 20px;
+    font-family: 'TmoneyRoundWindExtraBold';
+    font-size: 18px;
     color: #00BCD4;
 `
 

@@ -4,6 +4,8 @@ import { API_URL } from "../../../constants/defaultUrl";
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "../../../context/AuthProvider";
 import whale from "../../../assets/whale-small.png";
+import get_whale from '../../../assets/get-whale.png';
+import get_disabled_whale from '../../../assets/get-disabled-whale.png';
 
 const RewardCard = styled.li`
   border: 1px solid #dbdbdb;
@@ -107,17 +109,21 @@ const RewardCont = styled.strong`
 
 const GetBtn = styled.button`
   display: block;
-  width: 84px;
+  width: 98px;
+  height: 48px;
   margin: 0 auto;
-  padding: 8px 18px;
-  border-style: none;
-  border-radius: 50px;
-  background-color: ${(props) => (props.disabled ? "grey" : "#00BCD4")};
-  color: #fff;
-  font-size: 12px;
-  text-align: center;
-  box-sizing: border-box;
-  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  background-position: 0px 0px;
+  background-image: ${(props) => (props.disabled ? `url(${get_disabled_whale})` : `url(${get_whale})`)};
+  background-size: 98px 48px;
+  background-repeat: no-repeat;
+  transition: 0.5s ease-in-out;
+
+  &:hover {
+    cursor: ${(props) => (props.disabled ? "auto" : "pointer")};
+    /* outline: ${(props) => (props.disabled ? "1px solid #03a9f4" : "none")}; */
+  }
 
   @media screen and (max-width: 390px) {
     width: 90px;
@@ -201,9 +207,7 @@ function Reward({ data }) {
             ? true
             : false
         }
-      >
-        획득하기
-      </GetBtn>
+      />
     </RewardCard>
   );
 }
