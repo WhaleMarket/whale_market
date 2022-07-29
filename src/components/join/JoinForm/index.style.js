@@ -56,7 +56,7 @@ export const Input = styled.input`
 `;
 
 export const ErrorMessage = styled.strong`
-    display: inline-block;
+    display: block;
     color: #eb5757;
     font-weight: 500;
     font-size: 12px;
@@ -64,7 +64,7 @@ export const ErrorMessage = styled.strong`
 `;
 
 export const SuccessMessage = styled.strong`
-    display: inline-block;
+    display: block;
     color: green;
     font-weight: 500;
     font-size: 12px;
