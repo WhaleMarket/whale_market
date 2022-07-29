@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import axios from "axios";
+import AuthContext from "../../../../context/AuthProvider";
+import PostingContext from "../../../../context/PostingProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
-import AuthContext from "../../../../context/AuthProvider";
-import { useState, useContext, useEffect } from "react";
-import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
-import PostingContext from "../../../../context/PostingProvider";
 import LoadingPage from "../../../../pages/LoadingPage";
 
 const ProductContainer = styled.section`

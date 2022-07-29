@@ -1,10 +1,10 @@
 import React from "react";
-import PostingHeader from "../../../components/main/posting/postingheader";
-import PostingSection from "../../../components/main/posting/postingsection";
-import ImageUploadButton from "../../../components/main/posting/imageuploadbutton";
-import { UploadPostingProvider } from "../../../context/UploadImageListProvider";
 import { UploadProvider } from "../../../context/UploadProvider";
+import { UploadPostingProvider } from "../../../context/UploadImageListProvider";
 import { PostingModificationProvider } from "../../../context/PostingModificationProvider";
+import PostingSection from "../../../components/main/posting/postingsection";
+import PostingHeader from "../../../components/main/posting/postingheader";
+import ImageUploadButton from "../../../components/main/posting/imageuploadbutton";
 
 function PostingEdit() {
     return (

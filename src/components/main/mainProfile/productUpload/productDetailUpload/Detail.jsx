@@ -1,10 +1,10 @@
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import SaveProductContext from "../../../../../context/SaveProductProvider";
 import DetailInput from "./DetailInput";
 import DetailLabel from "./DetailLabel";
 import ErrorMessage from "./ErrorMessage";
 import ProductModificationContext from "../../../../../context/ProductModification";
-import { useParams } from "react-router-dom";
 
 function Detail() {
   const [saveStates] = useContext(SaveProductContext);

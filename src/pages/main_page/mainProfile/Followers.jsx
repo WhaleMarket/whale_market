@@ -1,11 +1,11 @@
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../../context/AuthProvider";
+import PostingContext from "../../../context/PostingProvider";
+import { API_URL } from "../../../constants/defaultUrl";
 import FollowHeader from "../../../components/main/mainProfile/follow/FollowHeader";
 import FollowSection from "../../../components/main/mainProfile/follow/FollowSection";
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../../context/AuthProvider";
-import { useParams } from "react-router-dom";
-import PostingContext from "../../../context/PostingProvider";
-import axios from "axios";
-import { API_URL } from "../../../constants/defaultUrl";
 import LoadingPage from "../../LoadingPage";
 
 function Followers() {

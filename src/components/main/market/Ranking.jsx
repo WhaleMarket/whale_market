@@ -1,8 +1,6 @@
-import styled from "styled-components";
-import crown from "../../../assets/crown.png";
 import { useContext, useState, useEffect } from "react";
-import AuthContext from "../../../context/AuthProvider";
 import axios from "axios";
+import AuthContext from "../../../context/AuthProvider";
 import { API_URL } from "../../../constants/defaultUrl";
 import "../../../fonts/font.css";
 

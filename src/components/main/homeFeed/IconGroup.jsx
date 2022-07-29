@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
+import axios from "axios";
+import AuthContext from "../../../context/AuthProvider";
+import { API_URL } from "../../../constants/defaultUrl";
 import styled from "styled-components";
 import praise_icon from "../../../assets/icon-praise.png";
 import praise_icon_fill from "../../../assets/icon-praise-fill.png";
 import comment_icon from "../../../assets/icon-comment.png";
-import AuthContext from "../../../context/AuthProvider";
-import axios from "axios";
-import { API_URL } from "../../../constants/defaultUrl";
 import PostModal from "../postDetail/PostModal";
 import HeartEvent from "../../../theme/heartClickEvent";
 

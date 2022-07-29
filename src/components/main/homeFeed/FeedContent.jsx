@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import AuthContext from "../../../context/AuthProvider";
 import ProfileSection from "./ProfileSection";
 import IconGroup from "./IconGroup";
-import AuthContext from "../../../context/AuthProvider";
 
 const LayOut = styled.ul`
   display: flex;

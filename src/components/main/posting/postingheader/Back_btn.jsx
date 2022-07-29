@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 import back from "../../../../assets/icon-arrow-left.png";
 
 const Back = styled.button`

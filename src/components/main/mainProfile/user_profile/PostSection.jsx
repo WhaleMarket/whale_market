@@ -1,15 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../../../context/AuthProvider";
+import PostingContext from "../../../../context/PostingProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
 import styled from "styled-components";
 import listIconOn from "../../../../assets/icon-post-list-on.png";
 import listIconOff from "../../../../assets/icon-post-list-off.png";
 import albumIconOn from "../../../../assets/icon-post-album-on.png";
 import albumIconOff from "../../../../assets/icon-post-album-off.png";
-import PostCard from "./PostCard";
-import AuthContext from "../../../../context/AuthProvider";
-import { API_URL } from "../../../../constants/defaultUrl";
-import axios from "axios";
-import PostingContext from "../../../../context/PostingProvider";
+import PostCard from "../user_profile/PostCard";
 import LoadingPage from "../../../../pages/LoadingPage";
 import whale from '../../../../assets/Logo.png';
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import axios from 'axios';
+import AuthContext from '../../context/AuthProvider';
+import { API_URL } from '../../constants/defaultUrl';
 import styled from 'styled-components';
 import StartButton from './StartButton';
 import profile_icon from '../../assets/basic-profile-img.png';
 import upload_icon from '../../assets/upload-file.png';
-import axios from 'axios';
-import { API_URL } from '../../constants/defaultUrl';
-import AuthContext from '../../context/AuthProvider';
 import LoadingPage from '../../pages/LoadingPage';
 
 const Form = styled.form`

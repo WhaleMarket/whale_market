@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../../../context/AuthProvider";
+import PostingContext from "../../../../context/PostingProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
 import styled from "styled-components";
 import messageIcon from "../../../../assets/icon-message-circle.png";
 import shareIcon from "../../../../assets/icon-share.png";
-import AuthContext from "../../../../context/AuthProvider";
-import PostingContext from "../../../../context/PostingProvider";
-import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
 import LoadingPage from "../../../../pages/LoadingPage";
 import QuoteModal from "../../../modal/QuoteModal";
 

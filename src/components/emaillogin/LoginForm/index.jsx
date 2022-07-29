@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "../../../context/AuthProvider";
 import axios from 'axios';
+import AuthContext from "../../../context/AuthProvider";
 import { API_URL } from '../../../constants/defaultUrl';
 import LoadingPage from '../../../pages/LoadingPage';
 import Button from '../../emaillogin/button/Button';

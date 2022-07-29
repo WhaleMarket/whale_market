@@ -1,8 +1,8 @@
-import RewardProfileHeader from "../../components/main/RewardProfileHeader";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../constants/defaultUrl";
 import AuthContext from "../../context/AuthProvider";
+import { API_URL } from "../../constants/defaultUrl";
+import RewardProfileHeader from "../../components/main/RewardProfileHeader";
 import Market from "../../components/main/market";
 import LoadingPage from "../LoadingPage";
 
