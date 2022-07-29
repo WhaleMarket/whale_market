@@ -9,7 +9,7 @@ import MarqueeEvent from "../../theme/marquee";
 import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../constants/defaultUrl";
-import whale from "../../assets/whale-small.png";
+import whale_left from "../../assets/whale-small-left.png";
 
 const Head = styled.header`
   display: flex;
@@ -23,6 +23,10 @@ const Head = styled.header`
   border-bottom: 0.5px solid #bdbdbd;
   background-color: #ffffff;
   box-sizing: border-box;
+
+  @media screen and (max-width: 390px) {
+    padding: 13px 5px 13px 5px;
+  }
 `;
 
 const Search = styled.button`
@@ -37,7 +41,16 @@ const Search = styled.button`
   }
 `;
 
-const Marquee = styled.div``;
+const Marquee = styled.div`
+  
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 390px) {
+    width: 85%;
+  }
+`;
 
 const Outer = styled.div`
   overflow: hidden;
@@ -47,6 +60,7 @@ const Inner = styled.ul`
   display: flex;
   position: relative;
   width: 200%;
+  
   &:nth-child(1) {
     animation: ${MarqueeEvent} 6s linear infinite;
   }
@@ -64,7 +78,7 @@ const Content = styled.li`
     width: 24px;
     height: 14px;
     margin-right: 5px;
-    background-image: url(${whale});
+    background-image: url(${whale_left});
     background-size: 24px 14px;
     background-repeat: no-repeat;
     content: "";
@@ -76,8 +90,8 @@ const Content = styled.li`
     vertical-align: middle;
     width: 24px;
     height: 14px;
-    margin-right: 5px;
-    background-image: url(${whale});
+    margin-left: 5px;
+    background-image: url(${whale_left});
     background-size: 24px 14px;
     background-repeat: no-repeat;
     content: "";

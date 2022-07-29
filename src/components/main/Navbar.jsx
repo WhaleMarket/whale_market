@@ -81,7 +81,7 @@ const Navbar = ({ location }) => {
       >
         <defs>
           <linearGradient id="gradient" gradientTransform="rotate(90)">
-            <stop offset="10%" stopColor="#039be5" />
+            <stop offset="10%" stopColor="#80deea" />
             <stop offset="90%" stopColor="#fff" />
           </linearGradient>
         </defs>
