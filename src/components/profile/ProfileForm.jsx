@@ -12,13 +12,13 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     margin-top: 30px;
-`
+`;
 
 const Fieldset = styled.fieldset`
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
-`
+`;
 
 const ProfileImgWrapper = styled.div`
     width: 110px;
@@ -28,14 +28,14 @@ const ProfileImgWrapper = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative; 
+    position: relative;
     border-radius: 9999px;
-`
+`;
 
 const ProfileImgLabel = styled.label`
     width: 110px;
     margin: 0 auto;
-`
+`;
 
 const Img = styled.img`
     position: absolute;
@@ -43,7 +43,7 @@ const Img = styled.img`
     right: 0;
     bottom: 0;
     cursor: pointer;
-`
+`;
 
 const ProfileImgInput = styled.input`
     overflow: hidden;
@@ -52,42 +52,42 @@ const ProfileImgInput = styled.input`
     height: 0;
     line-height: 0;
     text-indent: -9999px;
-`
+`;
 const FormLabel = styled.label`
     margin: 16px 0 10px 0;
     color: #767676;
     font-size: 12px;
-`
+`;
 
 const FormInput = styled.input`
     width: 322px;
     border: none;
-    border-bottom: 1px solid #DBDBDB;
+    border-bottom: 1px solid #dbdbdb;
     color: #000000;
     font-size: 14px;
     &:focus {
         outline: none;
-        border-bottom: 1px solid #00BCD4;
+        border-bottom: 1px solid #00bcd4;
     }
     &::placeholder {
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 14px;
-        color: #DBDBDB
+        color: #dbdbdb;
     }
-`
+`;
 
 const ErrorMessage = styled.p`
     margin-top: 6px;
-    color: #EB5757;
+    color: #eb5757;
     font-size: 12px;
-`
+`;
 
 const SuccessMessage = styled.strong`
     margin-top: 0.375rem;
     color: green;
-    font-size: 0.750rem;
+    font-size: 0.75rem;
 `;
 
 function ProfileForm() {
@@ -103,7 +103,8 @@ function ProfileForm() {
 
     const [errMsgForUsername, setErrMsgForUsername] = useState('');
     const [errMsgForAccountname, setErrMsgForAccountname] = useState('');
-    const [successMsgForAccountname, setSuccessMsgForAccountname] = useState('');
+    const [successMsgForAccountname, setSuccessMsgForAccountname] =
+        useState('');
 
     const [isValidUsername, setIsValidUsername] = useState(false);
     const [isValidAccountname, setIsValidAccountname] = useState(false);
@@ -125,22 +126,22 @@ function ProfileForm() {
     }, [usernameRef, accountnameRef]);
 
     // 프로필 이미지
-    const [image, setImage] = useState('https://mandarin.api.weniv.co.kr/1658318303337.png');
+    const [image, setImage] = useState(`${profile_icon}`);
     const previewImage = useRef();
 
     // 이미지 filename 응답 받기
-    function handleImageChange (event) {
+    function handleImageChange(event) {
         const loadImage = event.target.files;
         const formData = new FormData();
         formData.append('image', loadImage[0]);
         onLoadImage(formData, loadImage);
     }
 
-    async function onLoadImage (formData, loadImage) {
+    async function onLoadImage(formData, loadImage) {
         try {
             const config = {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    'Content-Type': 'multipart/form-data',
                 },
             };
             const response = await axios.post(
@@ -152,21 +153,22 @@ function ProfileForm() {
                 setImage(`${API_URL}/` + response?.data?.filename);
                 preview(loadImage);
             } else {
-                alert('.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.');
+                alert(
+                    '.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.'
+                );
             }
         } catch (error) {
             console.error(error);
             alert('잘못된 접근입니다.');
         }
-    };
+    }
 
     function preview(loadImage) {
         const reader = new FileReader();
-        reader.onload = () => (
-            previewImage.current.style.backgroundImage = `url(${reader.result})`
-        );
+        reader.onload = () =>
+            (previewImage.current.style.backgroundImage = `url(${reader.result})`);
         reader.readAsDataURL(loadImage[0]);
-    };
+    }
 
     // username 검증
     const handleOnBlurUsername = async (event) => {
@@ -176,7 +178,7 @@ function ProfileForm() {
             if (!(username.length > 1 && username.length < 11)) {
                 setErrMsgForUsername('*2글자 이상 10글자 미만이어야 합니다.');
                 setIsDisabled(true);
-            } 
+            }
         } catch (error) {
             console.error(error);
         }
@@ -189,11 +191,11 @@ function ProfileForm() {
 
         try {
             const reqData = {
-                user: { accountname: accountname }
+                user: { accountname: accountname },
             };
             const config = {
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
             };
             const response = await axios.post(
@@ -207,8 +209,12 @@ function ProfileForm() {
             } else if (!accountname) {
                 setErrMsgForAccountname('*계정ID를 입력해주세요.');
             } else if (!accountnameRegex.test(accountname)) {
-                setErrMsgForAccountname('*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.');
-            } else if (response?.data?.message === '사용 가능한 계정ID 입니다.') {
+                setErrMsgForAccountname(
+                    '*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.'
+                );
+            } else if (
+                response?.data?.message === '사용 가능한 계정ID 입니다.'
+            ) {
                 setSuccessMsgForAccountname('*' + response.data.message);
                 setIsValidAccountname(true);
             }
@@ -220,35 +226,33 @@ function ProfileForm() {
     // 소개
     function handleChangeIntro(event) {
         setIntro(event.target.value);
-    };
+    }
 
     // 회원가입 정보 제출
     const handleSubmit = async (event) => {
-        alert('🎉 웨일마켓에 오신 것을 환영합니다. 로그인 화면으로 이동합니다.');
+        alert(
+            '🎉 웨일마켓에 오신 것을 환영합니다. 로그인 화면으로 이동합니다.'
+        );
         event.preventDefault();
         window.location.href = '/emaillogin';
         setLoading(true);
         try {
             const reqData = {
-                user: { 
+                user: {
                     username: username,
                     email: InfoState.MyInformations[1].email,
                     password: InfoState.MyInformations[1].password,
                     accountname: accountname,
                     intro: intro,
-                    image: image
-                }
+                    image: image,
+                },
             };
             const config = {
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
             };
-            await axios.post(
-                `${API_URL}/user`,
-                reqData,
-                config
-            );
+            await axios.post(`${API_URL}/user`, reqData, config);
             setLoading(false);
         } catch (error) {
             console.error(error);
@@ -259,77 +263,98 @@ function ProfileForm() {
     const [isDisabled, setIsDisabled] = useState(true);
     const accountnameRegex = /^[-._a-zA-Z0-9]+$/;
     const isPassedProfile = () => {
-        return accountnameRegex.test(accountname) && isValidUsername ? setIsDisabled(false) : setIsDisabled(true);
+        return accountnameRegex.test(accountname) && isValidUsername
+            ? setIsDisabled(false)
+            : setIsDisabled(true);
     };
 
-    return (
-        loading ? <LoadingPage /> :
+    return loading ? (
+        <LoadingPage />
+    ) : (
         <>
             {success ? (
-                window.location.href = '/emaillogin'
+                (window.location.href = '/emaillogin')
             ) : (
                 <Form onSubmit={handleSubmit}>
                     <Fieldset>
-                        <legend className='a11yhidden'>프로필 사진 변경</legend>
+                        <legend className="a11yhidden">프로필 사진 변경</legend>
 
                         <ProfileImgWrapper ref={previewImage}>
-                            <ProfileImgLabel htmlFor='profileImg'>
-                                <Img src={upload_icon} alt='프로필 이미지 업로드'/>
+                            <ProfileImgLabel htmlFor="profileImg">
+                                <Img
+                                    src={upload_icon}
+                                    alt="프로필 이미지 업로드"
+                                />
                             </ProfileImgLabel>
                         </ProfileImgWrapper>
-                        <ProfileImgInput 
-                            type='file' 
-                            accept='image/*' 
-                            id='profileImg'
+                        <ProfileImgInput
+                            type="file"
+                            accept="image/*"
+                            id="profileImg"
                             onChange={handleImageChange}
                         />
                     </Fieldset>
                     <Fieldset>
-                        <legend className='a11yhidden'>개인정보 변경</legend>
-                        <FormLabel htmlFor='username' style={{marginTop:'0'}}>사용자 이름</FormLabel>
-                        <FormInput 
-                            type='text' 
-                            id='username' 
-                            placeholder='2~10자 이내여야 합니다.'  
+                        <legend className="a11yhidden">개인정보 변경</legend>
+                        <FormLabel
+                            htmlFor="username"
+                            style={{ marginTop: '0' }}
+                        >
+                            사용자 이름
+                        </FormLabel>
+                        <FormInput
+                            type="text"
+                            id="username"
+                            placeholder="2~10자 이내여야 합니다."
                             required
                             ref={usernameRef}
-                            onChange={(event) => setUsername(event.target.value)}
+                            onChange={(event) =>
+                                setUsername(event.target.value)
+                            }
                             onKeyUp={isPassedProfile}
                             onBlur={handleOnBlurUsername}
                         />
-                        {errMsgForUsername && <ErrorMessage>{errMsgForUsername}</ErrorMessage>}
-                        <FormLabel htmlFor='accountname'>계정 ID</FormLabel>
-                        <FormInput 
-                            type='text' 
-                            id='accountname' 
-                            placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.' 
+                        {errMsgForUsername && (
+                            <ErrorMessage>{errMsgForUsername}</ErrorMessage>
+                        )}
+                        <FormLabel htmlFor="accountname">계정 ID</FormLabel>
+                        <FormInput
+                            type="text"
+                            id="accountname"
+                            placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
                             required
                             ref={accountnameRef}
-                            onChange={(event) => setAccountname(event.target.value)}
+                            onChange={(event) =>
+                                setAccountname(event.target.value)
+                            }
                             onKeyUp={isPassedProfile}
                             onBlur={handleOnBlur}
                         />
-                        {errMsgForAccountname ? (
-                            errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>
-                        ) : (
-                            successMsgForAccountname && <SuccessMessage>{successMsgForAccountname}</SuccessMessage>
-                        )}
-                        <FormLabel htmlFor='intro'>소개</FormLabel>
-                        <FormInput 
-                            type='text' 
-                            id='intro' 
-                            placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
+                        {errMsgForAccountname
+                            ? errMsgForAccountname && (
+                                  <ErrorMessage>
+                                      {errMsgForAccountname}
+                                  </ErrorMessage>
+                              )
+                            : successMsgForAccountname && (
+                                  <SuccessMessage>
+                                      {successMsgForAccountname}
+                                  </SuccessMessage>
+                              )}
+                        <FormLabel htmlFor="intro">소개</FormLabel>
+                        <FormInput
+                            type="text"
+                            id="intro"
+                            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
                             onChange={handleChangeIntro}
-                            maxLength='150'
+                            maxLength="150"
                         />
                     </Fieldset>
-                    <StartButton 
-                        disabled={isDisabled}
-                    />
+                    <StartButton disabled={isDisabled} />
                 </Form>
             )}
         </>
     );
-};
+}
 
 export default ProfileForm;
