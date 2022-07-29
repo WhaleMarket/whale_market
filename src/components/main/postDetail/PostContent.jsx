@@ -13,11 +13,9 @@ const LayOut = styled.div`
   display: flex;
   flex-direction: column;
   width: 330px;
-  /* width: ${(props) => (props.img === undefined ? "380px" : "330px")}; */
   @media screen and (max-width: 768px) {
     width: 380px;
-    height: ${(props) => (props.img === undefined ? "540px" : "280px")};
-    /* 이미지가 언디파인드면 540px인데.. */
+    height: ${(props) => (props.img === "" ? "540px" : "280px")};
   }
 `;
 
