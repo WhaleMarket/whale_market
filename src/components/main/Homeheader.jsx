@@ -49,7 +49,7 @@ const Title = styled.h1`
 `;
 
 const Today = styled.strong`
-  font-size: 16px;
+  font-size: 14px;
   margin-left: 16px;
 `
 
