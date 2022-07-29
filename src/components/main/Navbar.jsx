@@ -68,12 +68,13 @@ const Navbar = ({ location }) => {
           position: "fixed",
           bottom: "0",
           background: "linear-gradient(transparent 95%, #ffffff 5%)",
+          height: "80px",
         }}
         fill="url(#gradient)"
         paused={false}
         options={{
-          height: 70,
-          amplitude: 20,
+          height: 20,
+          amplitude: 10,
           speed: 0.3,
           points: 4,
         }}
