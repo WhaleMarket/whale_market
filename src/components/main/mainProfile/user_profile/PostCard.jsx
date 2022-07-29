@@ -119,6 +119,7 @@ function PostCard() {
   const [InfoState] = useContext(AuthContext);
   const [targetPost, setTargetPost] = useState("");
   const history = useHistory();
+  const accountname = useParams().accountname;
 
   const modalItemList =
     PostingState.data[0].accountname ===
