@@ -4,6 +4,13 @@ import axios from "axios";
 import styled from "styled-components";
 import search_icon from "../../assets/icon-search.png";
 import whale from "../../assets/whale-small.png";
+import clear from '../../assets/sun.png';
+import snow from '../../assets/snow.png';
+import thunderstorm from '../../assets/thunder.png';
+import rain from '../../assets/rain.png';
+import mist from '../../assets/fog.png';
+import clouds from '../../assets/cloud.png';
+
 
 const Head = styled.header`
   display: flex;
@@ -53,9 +60,33 @@ const Today = styled.strong`
   margin-left: 16px;
 `
 
+const TodayWeather = styled.img`
+  height: 16px;
+  width: auto;
+  margin-left: 5px;
+  vertical-align: middle;
+`
+
 function Header() {
   const date = new Date();
   const [weather, setWeather] = useState('');
+  let weatherIcon = clear; 
+  switch(weather.toLowerCase){
+    case "clear": weatherIcon = clear;
+    break;
+    case "clouds": weatherIcon = clouds;
+    break;
+    case "rain": weatherIcon = rain;
+    break;
+    case "mist": weatherIcon = mist;
+    break;
+    case "snow": weatherIcon = snow;
+    break;
+    case "thunderstorm": weatherIcon = thunderstorm;
+    break;
+    default: weatherIcon = clear;
+    break;
+  }
 
   const TakeWeather = async() =>{
       const API_KEY = 'd4389cad7412a6a110847e67b352fffb';
@@ -73,8 +104,9 @@ function Header() {
       <Title>
         웨일마켓 피드
         <Today>
-          {date.getFullYear()}년 {date.getMonth()+1}월 {date.getDate()}일 {date.toLocaleString("ko-KR", {weekday: "long"})} {weather}
+          {date.getFullYear()}년 {date.getMonth()+1}월 {date.getDate()}일 {date.toLocaleString("ko-KR", {weekday: "long"})} 
         </Today>
+        <TodayWeather src={weatherIcon} alt="today weather"/>
       </Title>
       <Link to="/home/search">
         <Search />

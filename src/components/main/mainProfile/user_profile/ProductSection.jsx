@@ -12,8 +12,13 @@ const ProductContainer = styled.section`
   padding: 20px 0;
   margin: 0 auto;
   box-sizing: border-box;
+
   @media screen and (max-width: 768px) {
     width: 400px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 80%;
   }
 `;
 

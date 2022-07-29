@@ -14,7 +14,6 @@ const UserProfileContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  position: relative;
   width: 420px;
   padding: 30px 55px 26px;
   margin: 48px auto 0 auto;
@@ -39,7 +38,16 @@ const PriceStrong = styled.strong`
   font-size: 19px;
   font-weight: 600;
   color: #00bcd4;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
+
+const ProfileWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`
 
 const ImgDiv = styled.div`
   width: 110px;
@@ -49,7 +57,6 @@ const ImgDiv = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
   border-radius: 50%;
 `;
 
@@ -72,9 +79,6 @@ const UserIntro = styled.span`
 `;
 
 const Followers = styled(Link)`
-  position: absolute;
-  left: 15px;
-  top: 160px;
   text-align: center;
   text-decoration: none;
   @media screen and (max-width: 768px) {
@@ -95,9 +99,6 @@ const FollowTxt = styled.span`
 `;
 
 const Followings = styled(Link)`
-  position: absolute;
-  right: 15px;
-  top: 160px;
   text-align: center;
   text-decoration-line: none;
   @media screen and (max-width: 768px) {
@@ -344,18 +345,20 @@ function UserProfileCard() {
             화이팅!
           </PriceContent>
         )}
-        <ImgDiv src={PostingState.data[0].user.image} />
-        <UserName>{PostingState.data[0].user.username}</UserName>
-        <UserId>{`@${PostingState.data[0].user.accountname}`}</UserId>
-        <UserIntro>{PostingState.data[0].user.intro}</UserIntro>
+        <ProfileWrapper>
         <Followers to={"/followers/" + PostingState.data[0].user.accountname}>
           <FollowCount>{PostingState.data[0].user.followerCount}</FollowCount>
           <FollowTxt>followers</FollowTxt>
         </Followers>
+        <ImgDiv src={PostingState.data[0].user.image} />
         <Followings to={"/followings/" + PostingState.data[0].user.accountname}>
           <FollowCount>{PostingState.data[0].user.followingCount}</FollowCount>
           <FollowTxt>followings</FollowTxt>
         </Followings>
+        </ProfileWrapper>
+        <UserName>{PostingState.data[0].user.username}</UserName>
+        <UserId>{`@${PostingState.data[0].user.accountname}`}</UserId>
+        <UserIntro>{PostingState.data[0].user.intro}</UserIntro>
         <IconWrapper>
           {window.location.pathname !==
           `/main/profile/${InfoState.MyInformations[0].myAccountname}` ? (

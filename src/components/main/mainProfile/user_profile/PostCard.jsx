@@ -20,6 +20,10 @@ const PostWrapper = styled.div`
   @media screen and (max-width: 768px) {
     width: 400px;
   }
+
+  @media screen and (max-width: 390px) {
+    width: 90%;
+  }
 `;
 
 const PostInfo = styled.div`
@@ -60,6 +64,13 @@ const PostInfoId = styled.p`
 const PostContentList = styled.ul`
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 390px) {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 4%;
+    box-sizing: border-box;
+  }
 `;
 
 const PostContent = styled.li`
@@ -75,12 +86,19 @@ const PostContent = styled.li`
     width: 400px;
     padding: 26px 30px 25px;
   }
+
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px 5% 25px;
+  }
 `;
 
 const PostTxt = styled.p`
   margin-bottom: 16px;
   font-size: 14px;
   line-height: 18px;
+
   @media screen and (max-width: 768px) {
     margin-bottom: 16px;
   }
@@ -101,6 +119,11 @@ const PostImg = styled.img`
   @media screen and (max-width: 768px) {
     width: 338px;
     height: 270px;
+  }
+
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    height: 230px;
   }
 `;
 

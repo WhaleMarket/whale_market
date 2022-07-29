@@ -61,7 +61,7 @@ function Splash() {
           >
             <defs>
               <linearGradient id="gradient" gradientTransform="rotate(90)">
-                <stop offset="20%" stopColor="#039be5" />
+                <stop offset="20%" stopColor="#80deea" />
                 <stop offset="80%" stopColor="#fff" />
               </linearGradient>
             </defs>
