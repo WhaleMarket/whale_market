@@ -307,6 +307,7 @@ function ProfileEditForm() {
                     placeholder="자신과 판매할 상품에 대해 소개해 주세요!" 
                     onChange={(event) => setIntro(event.target.value)}
                     defaultValue={InfoState.MyInformations[0].myIntro}
+                    maxLength='150'
                 />
             </Fieldset>
             <ProfileEditHeader type="submit" disabled={isDisabled}/>
