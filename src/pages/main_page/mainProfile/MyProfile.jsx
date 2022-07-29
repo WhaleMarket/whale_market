@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../../context/AuthProvider";
@@ -12,6 +12,7 @@ import PostSection from "../../../components/main/mainProfile/user_profile/PostS
 function MainProfile() {
   const [InfoState] = useContext(AuthContext);
   const [, setPostingState] = useContext(PostingContext);
+  const [RewardList, setRewardList] = useState([]);
 
   const params = useParams();
   const accountname = params.accountname;
@@ -46,12 +47,33 @@ function MainProfile() {
     getUser();
   }, [accountname, InfoState.MyInformations, setPostingState]);
 
+  useEffect(() => {
+    async function getReward() {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+            "Content-type": "application/json",
+          },
+        };
+        const response = await axios.get(
+          `${API_URL}/post/whalegm/userpost`,
+          config
+        );
+        setRewardList(response.data.post);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getReward();
+  }, [InfoState.MyInformations]);
+
   return (
     <>
       <RewardProfileHeader />
       <UserProfileSection />
       <ProductSection />
-      <PostSection />
+      <PostSection List={RewardList} />
     </>
   );
 }

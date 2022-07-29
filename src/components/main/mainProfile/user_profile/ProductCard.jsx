@@ -114,9 +114,7 @@ function ProductCard({ productResult }) {
           >
             <ProductImg src={product.itemImage} />
             <ProductName>{product.itemName}</ProductName>
-            <ProductPrice>{`${product.price.toLocaleString(
-              "ko-KR"
-            )}원`}</ProductPrice>
+            <ProductPrice>{`${product.price.toLocaleString("ko-KR")}원`}</ProductPrice>
           </ProductWrapper>
         );
       })}

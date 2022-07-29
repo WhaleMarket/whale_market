@@ -11,6 +11,8 @@ import albumIconOff from "../../../../assets/icon-post-album-off.png";
 import PostCard from "../user_profile/PostCard";
 import LoadingPage from "../../../../pages/LoadingPage";
 import whale from '../../../../assets/Logo.png';
+import { WhaleLaughEvent } from "../../../../theme/whaleEvent";
+import AlbumReward from "./AlbumReward";
 
 const ViewTypeNav = styled.nav`
   display: flex;
@@ -55,29 +57,42 @@ const PostContainer = styled.section`
 
 const AlbumContainer = styled.section`
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-auto-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 1fr 2fr 1fr;
   gap: 8px;
   width: 600px;
+  height: 600px;
   padding-bottom: 70px;
   margin: 16px auto;
+  place-items: center;
 `;
-
-const AlbumReward = styled.div`
-`
 
 const AlbumImg = styled.img`
-    grid-area: 1/2/5/3;
-    width: 100%;
-    height: 100%;
+    grid-area: 3/1/4/5;
+    width: ${(props) => `${5 + props.Eaten}%`};
     object-fit: cover;
+    &.eat{
+      animation: ${WhaleLaughEvent} 1s ease-in-out;
+    }
 `;
 
-function PostSection() {
+const Whaleget = styled.p`
+    grid-area: 1/1/2/5;
+    padding-bottom: 16px;
+`
+
+const Highlight = styled.strong`
+  font-size: 20px;
+  color: #00BCD4;
+`
+
+function PostSection({List}) {
   const [viewType, setviewType] = useState(true);
   const [InfoState] = useContext(AuthContext);
   const [PostingState, setPostingState] = useContext(PostingContext);
   const [loading, setLoading] = useState(false);
+  const [eat, setEat] = useState(false);
+  const [eaten, setEaten] = useState([0]);
 
   async function getPost() {
     setLoading(true);
@@ -109,6 +124,36 @@ function PostSection() {
     PostingState.data[0].user.accountname && getPost();
   }, [PostingState.data[0].user.accountname]);
 
+  const confirmList = List.slice(0,4);
+  const deleteList = List.slice(4);
+
+  async function acquiredFeed() {
+    try {
+      let getFeed = []
+      confirmList.map(async (value) => {
+        const feedres = await axios.get(`${API_URL}/post/${value.id}/comments`, {
+            headers: {
+              Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+              "Content-type": "application/json",
+            },
+          });
+          let feed = 0;
+          feed += feedres.data.comments.filter((value)=>{
+            return value.author.accountname === InfoState.MyInformations[0].myAccountname
+          }).length;
+          getFeed = [...getFeed, feed];
+          setEaten(getFeed);
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    acquiredFeed();
+  }, [viewType]);
+
+
   if (PostingState.data[0].postdata.length > 0) {
     return (
         loading ? <LoadingPage /> :
@@ -135,8 +180,11 @@ function PostSection() {
           </PostContainer>
         ) : (
           <AlbumContainer>
-            <AlbumReward/>
-            <AlbumImg src={whale} />
+            <Whaleget>고래에게 <Highlight>먹이</Highlight>를 주세요! 고래가 <Highlight>행복</Highlight>해 하는 모습을 볼 수 있어요!</Whaleget>
+            {deleteList.map((value,key)=>{
+              return <AlbumReward key={key} post={value} changePost={confirmList[key]} setEat={setEat} acquiredFeed={acquiredFeed}/>
+            })}
+            <AlbumImg Eaten={eaten?.reduce((a,b)=> a+b)*5} className={`${eat ? "eat" : ""}`} src={whale} onAnimationEnd={()=>{setEat(false)}}/>
           </AlbumContainer>
         )}
       </>

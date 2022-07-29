@@ -22,7 +22,7 @@ function Reward() {
           },
         };
         const response = await axios.get(
-          `${API_URL}/post/whalegm/userpost`,
+          `${API_URL}/post/whalegm/userpost/?limit=4&skip=4`,
           config
         );
         setRewardList(response.data.post);
