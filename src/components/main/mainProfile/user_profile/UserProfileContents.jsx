@@ -8,8 +8,7 @@ import PostingContext from "../../../../context/PostingProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import LoadingPage from "../../../../pages/LoadingPage";
-import AlertModal from "../../../modal/AlertModal";
-import Modal from "../../../modal/Modal";
+import QuoteModal from "../../../modal/QuoteModal";
 
 const UserProfileContainer = styled.div`
   display: flex;
@@ -100,6 +99,10 @@ const MessageButton = styled.button`
   background-position: center center;
   background-size: 20px 20px;
   background-repeat: no-repeat;
+
+  &:hover {
+        cursor: pointer;
+    }
 `;
 
 const ShareButton = styled.button`
@@ -174,6 +177,7 @@ function UserProfileCard() {
   const [PostingState, setPostingState] = useContext(PostingContext);
   const [loading, setLoading] = useState(false);
   const [productResult, setProductResult] = useState([]);
+  const [quoteModal, setQuoteModal] = useState(false);
 
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -330,7 +334,11 @@ function UserProfileCard() {
           {window.location.pathname !==
           `/main/profile/${InfoState.MyInformations[0].myAccountname}` ? (
             <>
-              <MessageButton />
+              <MessageButton 
+                onClick={
+                  ()=>{setQuoteModal(!quoteModal)}
+                }
+              />
               <FollowButton
                 follow={PostingState.data[0].user.isfollow}
                 type="button"
@@ -359,6 +367,12 @@ function UserProfileCard() {
           )}
         </IconWrapper>
       </UserProfileContainer>
+      <QuoteModal
+          quoteModal={quoteModal}
+          setQuoteModal={setQuoteModal}
+          msgcontent={"한마디드립니다요"}
+          content={"어쩌구저쩌구명언이라네요진짜로정말로얼마나길어질지모르겠어요옹오오오이정도길이의명언도나오려나요오오오오오오오오오오오kdafaldksfjldffladfldfwf오오오"}
+        />
     </>
   );
 }
