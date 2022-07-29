@@ -2,6 +2,8 @@ import styled from "styled-components";
 import search_icon from "../../assets/icon-search.png";
 import { Link } from "react-router-dom";
 import whale from "../../assets/whale-small.png";
+import axios from "axios";
+import { useState } from "react";
 
 const Head = styled.header`
   display: flex;
@@ -46,10 +48,37 @@ const Title = styled.h1`
   }
 `;
 
+const Today = styled.strong`
+  font-size: 16px;
+  margin-left: 16px;
+`
+
 function Header() {
+  const date = new Date();
+  const [weather, setWeather] = useState('');
+
+  const TakeWeather = async() =>{
+      const API_KEY = 'd4389cad7412a6a110847e67b352fffb';
+      const CITY_NAME = 'SEOUL';
+      await axios.get(
+      `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}`
+      ).then((response) => {
+        console.log(response)
+      setWeather(response.data.weather[0].main);
+      })
+  };
+  TakeWeather();
+
+  console.log(weather);
+
   return (
     <Head>
-      <Title>웨일마켓 피드</Title>
+      <Title>
+        웨일마켓 피드
+        <Today>
+          {date.getFullYear()}년 {date.getMonth()+1}월 {date.getDate()}일 {date.toLocaleString("ko-KR", {weekday: "long"})} {weather}
+        </Today>
+      </Title>
       <Link to="/home/search">
         <Search />
       </Link>
