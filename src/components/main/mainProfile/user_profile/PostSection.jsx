@@ -6,8 +6,8 @@ import { API_URL } from "../../../../constants/defaultUrl";
 import styled from "styled-components";
 import listIconOn from "../../../../assets/icon-post-list-on.png";
 import listIconOff from "../../../../assets/icon-post-list-off.png";
-import albumIconOn from "../../../../assets/icon-post-album-on.png";
-import albumIconOff from "../../../../assets/icon-post-album-off.png";
+import whale_small_on from "../../../../assets/whale-small-on.png";
+import whale_small_off from "../../../../assets/whale-small-off.png";
 import PostCard from "../user_profile/PostCard";
 import LoadingPage from "../../../../pages/LoadingPage";
 import whale from '../../../../assets/Logo.png';
@@ -42,8 +42,8 @@ const AlbumIconBtn = styled.button`
 `;
 
 const AlbumIcon = styled.img`
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 22px;
 `;
 
 const PostContainer = styled.section`
@@ -170,7 +170,7 @@ function PostSection({List}) {
               setviewType(false);
             }}
           >
-            <AlbumIcon src={viewType ? albumIconOff : albumIconOn} />
+            <AlbumIcon src={viewType ? whale_small_off : whale_small_on} />
           </AlbumIconBtn>
         </ViewTypeNav>
         {viewType ? (

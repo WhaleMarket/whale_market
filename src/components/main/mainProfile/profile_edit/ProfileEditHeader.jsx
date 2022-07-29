@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import AuthContext from "../../../../context/AuthProvider";
 import styled from 'styled-components';
 import back from '../../../../assets/icon-arrow-left.png';
-import save from '../../../../assets/Ms-button.png';
-import disabledSave from '../../../../assets/Ms--Disabled-button.png';
+import upload_whale from '../../../../assets/upload-whale.png';
+import upload_disabled_whale from '../../../../assets/upload-disabled-whale.png';
 
 
 const Head = styled.header`
@@ -34,14 +34,15 @@ const BackBtn = styled(Link)`
     }
 `
 const SaveBtn = styled.button`
-    width: 90px;
-    height: 32px;
+  width: 100px;
+  height: 52px;
     border: none;
     background-color: inherit;
-    background-image: url(${save});
-    background-size: 90px 32px;
+    background-image: url(${upload_whale});
+    background-size: 100px 52px;
+    transition: 0.5s ease-in-out;
     :disabled {
-        background-image: url(${disabledSave});
+        background-image: url(${upload_disabled_whale});
     }
     &:hover{
         cursor: pointer;
