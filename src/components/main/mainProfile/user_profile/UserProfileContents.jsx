@@ -8,13 +8,15 @@ import PostingContext from "../../../../context/PostingProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import LoadingPage from "../../../../pages/LoadingPage";
+import AlertModal from "../../../modal/AlertModal";
+import Modal from "../../../modal/Modal";
 
 const UserProfileContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   position: relative;
-  width: 400px;
+  width: 420px;
   padding: 30px 55px 26px;
   margin: 48px auto 0 auto;
   box-sizing: border-box;
@@ -91,7 +93,7 @@ const IconWrapper = styled.div`
 const MessageButton = styled.button`
   width: 34px;
   height: 34px;
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 30px;
   background-color: white;
   background-image: url(${messageIcon});
@@ -103,7 +105,7 @@ const MessageButton = styled.button`
 const ShareButton = styled.button`
   width: 34px;
   height: 34px;
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 30px;
   background-color: inherit;
   background-image: url(${shareIcon});
@@ -115,9 +117,9 @@ const ShareButton = styled.button`
 
 const ProfileEditButton = styled(Link)`
   padding: 8px 26px;
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 30px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #767676;
   font-size: 14px;
   font-weight: 500;
@@ -129,9 +131,9 @@ const ProfileEditButton = styled(Link)`
 
 const ProductUploadButton = styled(Link)`
   padding: 8px 23px;
-  border: 1px solid #DBDBDB;
+  border: 1px solid #dbdbdb;
   border-radius: 30px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #767676;
   font-size: 14px;
   font-weight: 500;
@@ -300,12 +302,16 @@ function UserProfileCard() {
                 .reduce((a, b) => a + b)
                 .toLocaleString("ko-KR")}
             </PriceStrong>
-            원 적립됐습니다!<br/>대단해요!
+            원 적립됐습니다!
+            <br />
+            대단해요!
           </PriceContent>
         ) : (
           <PriceContent>
-            현재 {PostingState.data[0].user.accountname}님의 웨일 포인트는 따로 높일
-            필요가 없을 정도로 충분히 높습니다!<br/>대단해요!
+            현재 {PostingState.data[0].user.accountname}님의 웨일 포인트는 따로
+            높일 필요가 없을 정도로 충분히 높습니다!
+            <br />
+            대단해요!
           </PriceContent>
         )}
         <ImgDiv src={PostingState.data[0].user.image} />
