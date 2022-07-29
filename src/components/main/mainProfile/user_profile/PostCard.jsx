@@ -123,7 +123,6 @@ function PostCard() {
   const [InfoState] = useContext(AuthContext);
   const [targetPost, setTargetPost] = useState("");
   const history = useHistory();
-  const accountname = useParams().accountname;
 
   const modalItemList =
     PostingState.data[0].accountname ===
@@ -250,6 +249,7 @@ function PostCard() {
         </PostContentList>
         <Modal
 <<<<<<< HEAD
+<<<<<<< HEAD
           isOpenModal={
             accountname === InfoState.MyInformations[0].myAccountname &&
             isOpenModal
@@ -257,6 +257,9 @@ function PostCard() {
 =======
           isOpenModal={(accountname === InfoState.MyInformations[0].myAccountname) && isOpenModal}
 >>>>>>> d738990 (🩹 다른 사용자의 모달버튼 제한)
+=======
+          isOpenModal={isOpenModal}
+>>>>>>> 38bc17d (🩹 PostCard revert 처리)
           setIsOpenModal={setIsOpenModal}
           modalItemList={modalItemList}
         />
