@@ -63,7 +63,7 @@ const SendBtn = styled.button`
 function CommentInput({ index, Liked, id, setComments }) {
   // 댓글 작성 api 확인
   const [InfoState, setInfoState] = useContext(AuthContext);
-  const [, setPostingState] = useContext(PostingContext);
+  const [PostingState, setPostingState] = useContext(PostingContext);
   const [comment, setComment] = useState("");
   const commentinput = useRef();
 
@@ -120,7 +120,7 @@ function CommentInput({ index, Liked, id, setComments }) {
           },
         };
         const Postingresponse = await axios.get(
-          `${API_URL}/post/${InfoState.MyInformations[0].myAccountname}/userpost/?limit=100&skip=0`,
+          `${API_URL}/post/${PostingState.data[0].accountname}/userpost/?limit=100&skip=0`,
           Postingconfig
         );
         setPostingState((PostingState) => {

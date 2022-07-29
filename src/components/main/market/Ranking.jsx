@@ -64,9 +64,9 @@ const RankingTit = styled.h1`
 
 const UserWrapper = styled.div`
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
-    width: 600px;
+    width: 800px;
     margin: 20px auto;
 
     @media screen and (max-width: 768px) {
@@ -87,9 +87,17 @@ const FollowWrapper = styled.div`
     text-align: initial;
 `;
 
+const HeartNumber = styled.strong`
+    font-size: 20px;
+    color: #00BCD4;
+`
+
 const UserList = styled.p`
     font-size: 16px;
     line-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 
     @media screen and (max-width: 768px) {
       font-size: 14px;
@@ -162,13 +170,13 @@ function Ranking() {
     const result = [];
     for (
       let i = 0;
-      i < (followingPosting.length > 10 ? 10 : followingPosting.length);
+      i < (followingPosting.length > 5 ? 5 : followingPosting.length);
       i++
     ) {
       result.push(
         <UserList key={i}>
           {i + 1}. {followingPosting[i][0]} @{followingPosting[i][1]}{" "}
-          {followingPosting[i][2]}개
+          <HeartNumber>{followingPosting[i][2]}개</HeartNumber>
         </UserList>
       );
     }
@@ -178,14 +186,14 @@ function Ranking() {
   const rendering2 = () => {
     const result = [];
     for (
-      let i = 10;
-      i < (followingPosting.length > 20 ? 20 : followingPosting.length);
+      let i = 5;
+      i < (followingPosting.length > 10 ? 10 : followingPosting.length);
       i++
     ) {
       result.push(
         <UserList key={i}>
           {i + 1}. {followingPosting[i][0]} @{followingPosting[i][1]}{" "}
-          {followingPosting[i][2]}개
+          <HeartNumber>{followingPosting[i][2]}개</HeartNumber>
         </UserList>
       );
     }
