@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import AuthContext from "../../../../context/AuthProvider";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import axios from "axios";
+import styled from "styled-components";
+import AuthContext from "../../../../context/AuthProvider";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
 import LoadingPage from "../../../../pages/LoadingPage";

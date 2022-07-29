@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
+import axios from "axios";
+import AuthContext from "../../../../context/AuthProvider";
+import PostingContext from "../../../../context/PostingProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
 import styled from "styled-components";
 import praise_icon_fill from "../../../../assets/icon-praise-fill.png";
 import praise_icon from "../../../../assets/icon-praise.png";
 import comment_icon from "../../../../assets/icon-comment.png";
-import AuthContext from "../../../../context/AuthProvider";
-import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
-import PostModal from "../../postDetail/PostModal";
-import PostingContext from "../../../../context/PostingProvider";
 import HeartEvent from "../../../../theme/heartClickEvent";
+import PostModal from "../../postDetail/PostModal";
 
 const PostIconWrapper = styled.div`
   display: flex;

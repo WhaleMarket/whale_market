@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import SaveProductContext from "../../../../../context/SaveProductProvider";
-import axios from "axios";
-import { API_URL } from "../../../../../constants/defaultUrl";
-import AuthContext from "../../../../../context/AuthProvider";
-import ProductModificationContext from "../../../../../context/ProductModification";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import styled from "styled-components";
+import AuthContext from "../../../../../context/AuthProvider";
+import SaveProductContext from "../../../../../context/SaveProductProvider";
+import ProductModificationContext from "../../../../../context/ProductModification";
+import { API_URL } from "../../../../../constants/defaultUrl";
 import success_whale from '../../../../../assets/success-whale.png';
 import disabled_whale from '../../../../../assets/disabled-whale.png';
 
@@ -83,7 +83,6 @@ function EditButton() {
             );
       
             if (response) {
-              console.log(response)
               alert("🐳 성공적으로 수정 되었습니다! 🐳");
               window.location.href =
                 "/main/profile/" + InfoState.MyInformations[0].myAccountname;

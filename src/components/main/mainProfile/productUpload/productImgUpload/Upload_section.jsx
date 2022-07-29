@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import UploadBtn from "./Upload_btn";
 import { useState, useContext } from "react";
 import ProductModificationContext from "../../../../../context/ProductModification";
+import styled from "styled-components";
+import UploadBtn from "../productImgUpload/Upload_btn";
 
 const Blank = styled.div`
   position: relative;

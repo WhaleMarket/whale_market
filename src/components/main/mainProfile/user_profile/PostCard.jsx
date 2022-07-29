@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../../../context/AuthProvider";
+import PostingContext from "../../../../context/PostingProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
+import styled from "styled-components";
 import ModalBtn from "../../../modal/ModalBtn";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
-import styled from "styled-components";
-import PostIconContainer from "./PostIconContainer";
-import AuthContext from "../../../../context/AuthProvider";
-import axios from "axios";
-import { API_URL } from "../../../../constants/defaultUrl";
-import PostingContext from "../../../../context/PostingProvider";
-import { useHistory } from "react-router-dom";
+import PostIconContainer from "../user_profile/PostIconContainer";
 
 const PostWrapper = styled.div`
   display: flex;

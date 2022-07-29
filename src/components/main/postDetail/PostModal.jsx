@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import ModalPortal from "../../../Portal";
-import PostContent from "./PostContent";
 import AuthContext from "../../../context/AuthProvider";
+import PostContent from "../postDetail/PostContent";
 import prev from "../../../assets/prev-icon.png";
 import next from "../../../assets/next-icon.png";
 

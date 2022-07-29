@@ -1,9 +1,9 @@
-import whale from "../../assets/Logo.png";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import Feed from "../main/homeFeed/FeedContent";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
+import styled from "styled-components";
+import whale from "../../assets/Logo.png";
+import Feed from "../main/homeFeed/FeedContent";
 
 const Section = styled.section`
   display: flex;

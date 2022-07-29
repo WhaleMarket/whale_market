@@ -20,9 +20,6 @@ export const Form = styled.form`
     width: 322px;
 `;
 
-export const Fieldset = styled.fieldset`
-`;
-
 export const Legend = styled.legend`
     display: none;
 `;
@@ -34,40 +31,40 @@ export const Label = styled.label`
     font-size: 12px;
     line-height: 15px;
     color: #767676;
-    margin-top: ${(props) => props.className === 'password' ? '16px' : null};
+    margin-top: ${(props) => (props.className === 'password' ? '16px' : null)};
 `;
 
 export const Input = styled.input`
     outline: none;
     display: block;
-    border : none;
-    border-bottom: 1px solid #DBDBDB;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
     width: 100%;
     height: 32px;
     padding: 0;
     margin-bottom: 6px;
     &:focus {
-        border-bottom: 1px solid #00BCD4;
+        border-bottom: 1px solid #00bcd4;
     }
     &::placeholder {
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 14px;
-        color: #DBDBDB
+        color: #dbdbdb;
     }
 `;
 
 export const ErrorMessage = styled.strong`
-    display: inline-block;
-    color: #EB5757;
+    display: block;
+    color: #eb5757;
     font-weight: 500;
     font-size: 12px;
     line-height: 1;
 `;
 
 export const SuccessMessage = styled.strong`
-    display: inline-block;
+    display: block;
     color: green;
     font-weight: 500;
     font-size: 12px;

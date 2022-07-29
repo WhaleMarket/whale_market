@@ -1,14 +1,14 @@
 import { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../context/AuthProvider";
+import { API_URL } from "../../constants/defaultUrl";
 import styled from "styled-components";
 import back from "../../assets/icon-arrow-left.png";
 import ModalBtn from "../modal/ModalBtn";
 import Modal from "../modal/Modal";
 import AlertModal from "../modal/AlertModal";
 import MarqueeEvent from "../../theme/marquee";
-import AuthContext from "../../context/AuthProvider";
-import axios from "axios";
-import { API_URL } from "../../constants/defaultUrl";
 import whale_left from "../../assets/whale-small-left.png";
 
 const Head = styled.header`

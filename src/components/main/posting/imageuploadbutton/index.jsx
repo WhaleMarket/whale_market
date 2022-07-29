@@ -1,10 +1,10 @@
-import styled from "styled-components";
 import { useContext, useRef } from "react";
-import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
-import ImageUpload from "../../../../assets/upload-file.png";
+import { useParams } from "react-router-dom";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import PostingModificationContext from "../../../../context/PostingModificationProvider";
-import { useParams } from "react-router-dom";
+import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
+import styled from "styled-components";
+import ImageUpload from "../../../../assets/upload-file.png";
 
 const ImgUploadBtn = styled.img`
   position: fixed;

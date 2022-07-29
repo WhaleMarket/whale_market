@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
+import axios from 'axios';
+import AuthContext from "../../../../context/AuthProvider";
+import { API_URL } from '../../../../constants/defaultUrl';
 import styled from 'styled-components';
 import ProfileEditHeader from './ProfileEditHeader'
 import upload_icon from '../../../../assets/upload-file.png';
-import axios from 'axios';
-import { API_URL } from '../../../../constants/defaultUrl';
-import AuthContext from "../../../../context/AuthProvider";
 
 
 const Form = styled.form`
@@ -130,7 +130,6 @@ function ProfileEditForm() {
         const formData = new FormData();
         formData.append('image', loadImage[0]);
         onLoadImage(formData, loadImage);
-        console.log(loadImage);
     }
 
     async function onLoadImage (formData, loadImage) {
@@ -145,7 +144,6 @@ function ProfileEditForm() {
                 formData,
                 config
             );
-            console.log(response);
             if (response?.data?.filename) {
                 setImage(`${API_URL}/` + response?.data?.filename);
                 preview(loadImage);
@@ -307,6 +305,7 @@ function ProfileEditForm() {
                     placeholder="자신과 판매할 상품에 대해 소개해 주세요!" 
                     onChange={(event) => setIntro(event.target.value)}
                     defaultValue={InfoState.MyInformations[0].myIntro}
+                    maxLength='150'
                 />
             </Fieldset>
             <ProfileEditHeader type="submit" disabled={isDisabled}/>

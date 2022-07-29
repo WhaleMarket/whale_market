@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import UserProfileCard from "./UserProfileContents";
+import UserProfileCard from "../user_profile/UserProfileContents";
 
 const ProfileContainer = styled.section`
   display: flex;

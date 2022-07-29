@@ -1,13 +1,13 @@
-import Img_logo from "../../../../../assets/image_logo.png";
-import styled from "styled-components";
 import { useContext, useEffect, useRef } from "react";
-import SaveProductContext from "../../../../../context/SaveProductProvider";
-import { IMG_EXTENSION } from "../../../../../constants/defaultUrl";
-import axios from "axios";
 import { useParams } from "react-router-dom";
-import ProductModificationContext from "../../../../../context/ProductModification";
-import { API_URL } from "../../../../../constants/defaultUrl";
+import axios from "axios";
+import styled from "styled-components";
 import AuthContext from "../../../../../context/AuthProvider";
+import SaveProductContext from "../../../../../context/SaveProductProvider";
+import ProductModificationContext from "../../../../../context/ProductModification";
+import { IMG_EXTENSION } from "../../../../../constants/defaultUrl";
+import { API_URL } from "../../../../../constants/defaultUrl";
+import Img_logo from "../../../../../assets/image_logo.png";
 
 
 const Uploadbtn = styled.button`

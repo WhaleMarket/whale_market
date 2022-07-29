@@ -1,13 +1,13 @@
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "../../../context/AuthProvider";
+import PostingContext from "../../../context/PostingProvider";
+import { API_URL } from "../../../constants/defaultUrl";
 import RewardProfileHeader from "../../../components/main/RewardProfileHeader";
 import UserProfileSection from "../../../components/main/mainProfile/user_profile/UserProfileSection";
 import ProductSection from "../../../components/main/mainProfile/user_profile/ProductSection";
 import PostSection from "../../../components/main/mainProfile/user_profile/PostSection";
-import { API_URL } from "../../../constants/defaultUrl";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../../context/AuthProvider";
-import PostingContext from "../../../context/PostingProvider";
 
 function MainProfile() {
   const [InfoState] = useContext(AuthContext);
