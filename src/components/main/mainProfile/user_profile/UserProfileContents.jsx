@@ -178,6 +178,20 @@ function UserProfileCard() {
   const [loading, setLoading] = useState(false);
   const [productResult, setProductResult] = useState([]);
   const [quoteModal, setQuoteModal] = useState(false);
+  const quoteList = [
+    "칭찬은 고래도 춤추게 한다.",
+    "오늘도 수고했어, 토닥토닥!",
+    "좋은 칭찬 한 마디면 두 달을 견뎌 낼 수 있다.\n넌 오늘도 최고였어!",
+    "넌 사랑받을 줄 아는 사람이야.",
+    "백 마디 말보다 한 마디의 말로도 충분하다.\n고마워.",
+    "온 우주가 널 도울거야!",
+    "당신이 서 있는 오늘과 걸어온 모든 하루를 응원해요!",
+    "가장 중요한 것은 눈에 보이지 않는 법이야.",
+    "오랫동안 꿈을 그리는 사람은 마침내 그 꿈을 닮아간다.",
+    "사람은 행복하기로 마음먹은 만큼 행복해요!"
+  ]
+
+  const randomnumber = Math.random();
 
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -297,7 +311,9 @@ function UserProfileCard() {
       <UserProfileContainer>
         {productResult.length !== 0 ? (
           <PriceContent>
-            현재 {PostingState.data[0].user.accountname}님의 웨일 포인트는{" "}
+            {PostingState.data[0].user.accountname}님의 웨일 포인트는
+            <br />
+            {" "}
             <PriceStrong>
               {productResult
                 .map((value) => {
@@ -312,10 +328,11 @@ function UserProfileCard() {
           </PriceContent>
         ) : (
           <PriceContent>
-            현재 {PostingState.data[0].user.accountname}님의 웨일 포인트는 따로
-            높일 필요가 없을 정도로 충분히 높습니다!
+            {PostingState.data[0].user.accountname}님의 상품을 등록해
             <br />
-            대단해요!
+            웨일 포인트를 쌓아보세요!
+            <br />
+            화이팅!
           </PriceContent>
         )}
         <ImgDiv src={PostingState.data[0].user.image} />
@@ -370,8 +387,8 @@ function UserProfileCard() {
       <QuoteModal
           quoteModal={quoteModal}
           setQuoteModal={setQuoteModal}
-          msgcontent={"한마디드립니다요"}
-          content={"어쩌구저쩌구명언이라네요진짜로정말로얼마나길어질지모르겠어요옹오오오이정도길이의명언도나오려나요오오오오오오오오오오오kdafaldksfjldffladfldfwf오오오"}
+          msgcontent={`${PostingState.data[0].user.username}님이 ${InfoState.MyInformations[0].myUsername}에게 해주고 싶은 말은?`}
+          content={quoteList[Math.ceil(randomnumber*10)-1]}
         />
     </>
   );

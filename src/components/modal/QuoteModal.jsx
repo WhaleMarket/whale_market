@@ -20,7 +20,7 @@ const ModalContent = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 340px;
+    width: 370px;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     background-color: #ffffff;
