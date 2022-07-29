@@ -6,6 +6,7 @@ import AuthContext from "../../../context/AuthProvider";
 import whale from "../../../assets/whale-small.png";
 import get_whale from '../../../assets/get-whale.png';
 import get_disabled_whale from '../../../assets/get-disabled-whale.png';
+import { whaleClickEvent } from "../../../theme/whaleEvent";
 
 const RewardCard = styled.li`
   border: 1px solid #dbdbdb;
@@ -122,7 +123,10 @@ const GetBtn = styled.button`
 
   &:hover {
     cursor: ${(props) => (props.disabled ? "auto" : "pointer")};
-    /* outline: ${(props) => (props.disabled ? "1px solid #03a9f4" : "none")}; */
+  }
+
+  &:active{
+    animation: ${whaleClickEvent} 1s ease-in-out;
   }
 
   @media screen and (max-width: 390px) {
