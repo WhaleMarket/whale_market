@@ -8,9 +8,9 @@ const Reward = styled.button`
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  border: 1px solid black;
-  background-color: white;
-  box-shadow: 0px 3px 3px grey;
+  border: 1px solid #D9D9D9;
+  background-color: #fff;
+  box-shadow: 0px 3px 3px #D9D9D9;
   transition: 0.3s;
   background-image: url(${props => props.src});
   background-size: 80px auto;

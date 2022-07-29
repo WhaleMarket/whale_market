@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../../context/AuthProvider";
@@ -8,6 +9,10 @@ import RewardProfileHeader from "../../../components/main/RewardProfileHeader";
 import UserProfileSection from "../../../components/main/mainProfile/user_profile/UserProfileSection";
 import ProductSection from "../../../components/main/mainProfile/user_profile/ProductSection";
 import PostSection from "../../../components/main/mainProfile/user_profile/PostSection";
+
+const ProfileWrapper = styled.section`
+  margin-bottom: 50px;
+`
 
 function MainProfile() {
   const [InfoState] = useContext(AuthContext);
@@ -71,10 +76,12 @@ function MainProfile() {
   return (
     <>
       <RewardProfileHeader />
-      <UserProfileSection />
-      <ProductSection />
-      <PostSection List={RewardList} />
-    </>
+      <ProfileWrapper>
+        <UserProfileSection />
+        <ProductSection />
+        <PostSection List={RewardList} />
+      </ProfileWrapper>
+  </>
   );
 }
 

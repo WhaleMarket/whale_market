@@ -21,7 +21,6 @@ const Save = styled.button`
   vertical-align: top;
   &:hover {
     cursor: ${(props) => (props.state ? "pointer" : "auto")};
-    outline: ${(props) => (props.state ? "1px solid #03a9f4" : "none")};
   }
 `;
 

@@ -1,15 +1,15 @@
-import { useContext, useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
 import styled from "styled-components";
-import home_icon from "../../assets/icon-home.png";
 import home_icon_fill from "../../assets/icon-home-fill.png";
-import award_icon from "../../assets/icon-award.png";
+import home_icon from "../../assets/icon-home.png";
 import award_icon_fill from "../../assets/icon-award-fill.png";
+import award_icon from "../../assets/icon-award.png";
 import posting_icon from "../../assets/icon-edit.png";
-import user_icon from "../../assets/icon-user.png";
 import user_icon_fill from "../../assets/icon-user-fill.png";
+import user_icon from "../../assets/icon-user.png";
 import Wave from "react-wavify";
+import AuthContext from "../../context/AuthProvider";
+import { useContext, useState, useEffect } from "react";
 import NavbarClickEvent from "../../theme/nabvarClickEvent";
 
 const Bottomnav = styled.ul`
@@ -27,7 +27,7 @@ const Bottomnav = styled.ul`
 const List = styled.li`
   width: 64px;
   padding-bottom: 6px;
-  color: ${(props) => (props.current ? "#607D8B" : "#767676")};
+  color: ${(props) => (props.current ? "#0097A7" : "#767676")};
   font-size: 10px;
   font-weight: 600;
   text-align: center;

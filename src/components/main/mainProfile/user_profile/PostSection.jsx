@@ -1,25 +1,25 @@
-import React, { useContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import AuthContext from '../../../../context/AuthProvider';
-import PostingContext from '../../../../context/PostingProvider';
-import { API_URL } from '../../../../constants/defaultUrl';
-import styled from 'styled-components';
-import listIconOn from '../../../../assets/icon-post-list-on.png';
-import listIconOff from '../../../../assets/icon-post-list-off.png';
-import albumIconOn from '../../../../assets/icon-post-album-on.png';
-import albumIconOff from '../../../../assets/icon-post-album-off.png';
-import PostCard from '../user_profile/PostCard';
-import LoadingPage from '../../../../pages/LoadingPage';
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import AuthContext from "../../../../context/AuthProvider";
+import PostingContext from "../../../../context/PostingProvider";
+import { API_URL } from "../../../../constants/defaultUrl";
+import styled from "styled-components";
+import listIconOn from "../../../../assets/icon-post-list-on.png";
+import listIconOff from "../../../../assets/icon-post-list-off.png";
+import whale_small_on from "../../../../assets/whale-small-on.png";
+import whale_small_off from "../../../../assets/whale-small-off.png";
+import PostCard from "../user_profile/PostCard";
+import LoadingPage from "../../../../pages/LoadingPage";
 import whale from '../../../../assets/Logo.png';
 import { WhaleLaughEvent } from '../../../../theme/whaleEvent';
 import AlbumReward from './AlbumReward';
 
 const ViewTypeNav = styled.nav`
-    display: flex;
-    justify-content: flex-end;
-    height: 60px;
-    padding-right: 20px;
-    border-top: 0.5px solid #dbdbdb;
+  display: flex;
+  justify-content: flex-end;
+  height: 60px;
+  padding-right: 20px;
+  border-top: 0.5px solid #dbdbdb;
 `;
 
 const ListIconBtn = styled.button`
@@ -42,8 +42,8 @@ const AlbumIconBtn = styled.button`
 `;
 
 const AlbumIcon = styled.img`
-    width: 26px;
-    height: 26px;
+  width: 28px;
+  height: 22px;
 `;
 
 const PostContainer = styled.section`
@@ -153,38 +153,37 @@ function PostSection({ List }) {
             console.error(error);
         }
     }
+  }
 
-    useEffect(() => {
-        acquiredFeed();
-    }, [viewType]);
+  useEffect(() => {
+    acquiredFeed();
+  }, [viewType]);
 
-    if (PostingState.data[0].postdata.length > 0) {
-        return loading ? (
-            <LoadingPage />
-        ) : (
-            <>
-                <ViewTypeNav>
-                    <ListIconBtn
-                        onClick={() => {
-                            setviewType(true);
-                        }}
-                    >
-                        <ListIcon src={viewType ? listIconOn : listIconOff} />
-                    </ListIconBtn>
-                    <AlbumIconBtn
-                        onClick={() => {
-                            setviewType(false);
-                        }}
-                    >
-                        <AlbumIcon
-                            src={viewType ? albumIconOff : albumIconOn}
-                        />
-                    </AlbumIconBtn>
-                </ViewTypeNav>
-                {viewType ? (
-                    <PostContainer>
-                        <PostCard />
-                    </PostContainer>
+
+  if (PostingState.data[0].postdata.length > 0) {
+    return (
+        loading ? <LoadingPage /> :
+      <>
+        <ViewTypeNav>
+          <ListIconBtn
+            onClick={() => {
+              setviewType(true);
+            }}
+          >
+            <ListIcon src={viewType ? listIconOn : listIconOff} />
+          </ListIconBtn>
+          <AlbumIconBtn
+            onClick={() => {
+              setviewType(false);
+            }}
+          >
+            <AlbumIcon src={viewType ? whale_small_off : whale_small_on} />
+          </AlbumIconBtn>
+        </ViewTypeNav>
+        {viewType ? (
+          <PostContainer>
+            <PostCard />
+          </PostContainer>
                 ) : (
                     <AlbumContainer>
                         <Whaleget>

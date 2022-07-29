@@ -13,6 +13,8 @@ import PostModal from "../../postDetail/PostModal";
 const PostIconWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
+  
 `;
 
 const LikeBtn = styled.button`

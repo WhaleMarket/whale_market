@@ -31,6 +31,7 @@ const Img = styled.img`
     height: 158px;
     border-radius: 10px;
     object-fit: fill;
+    background-color: #e7eeeed2;
 
   @media screen and (max-width: 768px) {
     width: 158px;
