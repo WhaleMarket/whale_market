@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
-import AuthContext from "../../../../context/AuthProvider";
+import AuthContext from '../../../../context/AuthProvider';
 import { API_URL } from '../../../../constants/defaultUrl';
 import styled from 'styled-components';
-import ProfileEditHeader from './ProfileEditHeader'
+import ProfileEditHeader from './ProfileEditHeader';
 import upload_icon from '../../../../assets/upload-file.png';
-
 
 const Form = styled.form`
     display: flex;
@@ -16,7 +15,7 @@ const Form = styled.form`
 const Fieldset = styled.fieldset`
     display: flex;
     flex-direction: column;
-    margin-top: 30PX;
+    margin-top: 30px;
 `;
 
 const Legend = styled.legend`
@@ -28,14 +27,14 @@ const Legend = styled.legend`
 `;
 
 const ProfileImgWrapper = styled.div`
-    position:relative; 
+    position: relative;
     width: 110px;
     height: 110px;
     background-image: url(${(props) => props.src});
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin:0 auto;
+    margin: 0 auto;
     border-radius: 50%;
 `;
 
@@ -71,21 +70,21 @@ const FormLabel = styled.label`
 const FormInput = styled.input`
     width: 322px;
     border: none;
-    border-bottom: 1px solid #DBDBDB;
+    border-bottom: 1px solid #dbdbdb;
     color: #000000;
     font-size: 14px;
     &:focus {
         outline: none;
-        border-bottom: 1px solid #00BCD4;
+        border-bottom: 1px solid #00bcd4;
     }
     &::placeholder {
-        color: #DBDBDB;
+        color: #dbdbdb;
     }
 `;
 
 const ErrorMessage = styled.p`
     margin-top: 6px;
-    color: #EB5757;
+    color: #eb5757;
     font-size: 12px;
 `;
 
@@ -95,9 +94,13 @@ function ProfileEditForm() {
     const usernameRef = useRef();
     const accountnameRef = useRef();
     const previewImage = useRef();
-    
-    const [username, setUsername] = useState(InfoState.MyInformations[0].myUsername);
-    const [accountname, setAccountname] = useState(InfoState.MyInformations[0].myAccountname);
+
+    const [username, setUsername] = useState(
+        InfoState.MyInformations[0].myUsername
+    );
+    const [accountname, setAccountname] = useState(
+        InfoState.MyInformations[0].myAccountname
+    );
     const [intro, setIntro] = useState(InfoState.MyInformations[0].myIntro);
     const [image, setImage] = useState(InfoState.MyInformations[0].myImage);
     const [errMsgForUsername, setErrMsgForUsername] = useState('');
@@ -112,31 +115,37 @@ function ProfileEditForm() {
     useEffect(() => {
         if (image !== InfoState.MyInformations[0].myImage) {
             setIsDisabled(false);
-        } else if (username !== InfoState.MyInformations[0].myUsername 
-            || accountname !== InfoState.MyInformations[0].myAccountname 
-            || intro !== InfoState.MyInformations[0].myIntro) {
-            (isValidUsername && isValidAccountname) ? setIsDisabled(true) : setIsDisabled(false)
-        } else if (image === InfoState.MyInformations[0].myImage
-            && username === InfoState.MyInformations[0].myUsername 
-            && accountname === InfoState.MyInformations[0].myAccountname 
-            && intro === InfoState.MyInformations[0].myIntro) {
-            setIsDisabled(true)
+        } else if (
+            username !== InfoState.MyInformations[0].myUsername ||
+            accountname !== InfoState.MyInformations[0].myAccountname ||
+            intro !== InfoState.MyInformations[0].myIntro
+        ) {
+            isValidUsername && isValidAccountname
+                ? setIsDisabled(true)
+                : setIsDisabled(false);
+        } else if (
+            image === InfoState.MyInformations[0].myImage &&
+            username === InfoState.MyInformations[0].myUsername &&
+            accountname === InfoState.MyInformations[0].myAccountname &&
+            intro === InfoState.MyInformations[0].myIntro
+        ) {
+            setIsDisabled(true);
         }
     }, [username, accountname, intro, image]);
 
     // 이미지 filename 응답 받기
-    function handleImageChange (event) {
+    function handleImageChange(event) {
         const loadImage = event.target.files;
         const formData = new FormData();
         formData.append('image', loadImage[0]);
         onLoadImage(formData, loadImage);
     }
 
-    async function onLoadImage (formData, loadImage) {
+    async function onLoadImage(formData, loadImage) {
         try {
             const config = {
                 headers: {
-                    "Content-Type": "multipart/form-data",
+                    'Content-Type': 'multipart/form-data',
                 },
             };
             const response = await axios.post(
@@ -148,39 +157,41 @@ function ProfileEditForm() {
                 setImage(`${API_URL}/` + response?.data?.filename);
                 preview(loadImage);
             } else {
-                alert('.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.');
+                alert(
+                    '.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic 파일만 업로드 가능합니다.'
+                );
             }
         } catch (error) {
             console.error(error);
             alert('잘못된 접근입니다.');
         }
-    };
+    }
 
     // preview 이미지 설정
     function preview(loadImage) {
         const reader = new FileReader();
-        reader.onload = () => (
-            previewImage.current.style.backgroundImage = `url(${reader.result})`
-        );
+        reader.onload = () =>
+            (previewImage.current.style.backgroundImage = `url(${reader.result})`);
         reader.readAsDataURL(loadImage[0]);
-    };
+    }
 
     // 사용자 이름 유효성 검사
     const handleOnBlurUsername = async (event) => {
         event.preventDefault();
         setErrMsgForUsername('');
-        if(username !== InfoState.MyInformations[0].myUsername) {
+        if (username !== InfoState.MyInformations[0].myUsername) {
             try {
                 if (!(username.length > 1 && username.length < 11)) {
-                    setErrMsgForUsername('*2글자 이상 10글자 미만이어야 합니다.');
+                    setErrMsgForUsername(
+                        '*2글자 이상 10글자 미만이어야 합니다.'
+                    );
                     setIsDisabled(true);
                 }
                 setIsValidUsername(true);
-            } catch(error) {
+            } catch (error) {
                 console.error(error);
             }
         }
-        
     };
 
     // 사용자 ID 유효성 검사
@@ -190,11 +201,11 @@ function ProfileEditForm() {
         if (accountname !== InfoState.MyInformations[0].myAccountname) {
             try {
                 const reqData = {
-                    user: { accountname: accountname }
+                    user: { accountname: accountname },
                 };
                 const config = {
                     headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
                     },
                 };
                 const response = await axios.post(
@@ -202,21 +213,25 @@ function ProfileEditForm() {
                     reqData,
                     config
                 );
-    
-                if (response?.data?.message === "이미 가입된 계정ID 입니다.") {
+
+                if (response?.data?.message === '이미 가입된 계정ID 입니다.') {
                     setErrMsgForAccountname('*' + response.data.message);
                     setIsDisabled(true);
                 } else if (!accountname) {
                     setErrMsgForAccountname('*계정ID를 입력해주세요.');
                     setIsDisabled(true);
                 } else if (!accountnameRegex.test(accountname)) {
-                    setErrMsgForAccountname('*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.');
+                    setErrMsgForAccountname(
+                        '*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.'
+                    );
                     setIsDisabled(true);
-                } else if (response?.data?.message === '사용 가능한 계정ID 입니다.') {
+                } else if (
+                    response?.data?.message === '사용 가능한 계정ID 입니다.'
+                ) {
                     setErrMsgForAccountname('*' + response.data.message);
                     setIsValidAccountname(true);
                     setIsDisabled(false);
-                }           
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -234,83 +249,86 @@ function ProfileEditForm() {
                     username: username,
                     accountname: accountname,
                     intro: intro,
-                    image: image
-                }
+                    image: image,
+                },
             };
             const config = {
                 headers: {
-                    "Authorization" : `Bearer ${InfoState.MyInformations[0].token}`,
-                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                    'Content-Type': 'application/json',
                 },
             };
-            await axios.put(
-                `${API_URL}/user`,
-                reqData,
-                config
-            );
-        } catch(error) {
+            await axios.put(`${API_URL}/user`, reqData, config);
+        } catch (error) {
             console.error(error);
-            }
-        };
+        }
+    };
 
     return (
         <Form onSubmit={handleSubmit}>
             <Fieldset>
-            <Legend>프로필 사진 변경</Legend>
-                <ProfileImgWrapper ref={previewImage} style={{ backgroundImage: `url(${image})` }}>
+                <Legend>프로필 사진 변경</Legend>
+                <ProfileImgWrapper
+                    ref={previewImage}
+                    style={{ backgroundImage: `url(${image})` }}
+                >
                     <ProfileImgLabel htmlFor="profileImg">
-                        <Img src={upload_icon} alt="프로필 이미지 업로드"/>
+                        <Img src={upload_icon} alt="프로필 이미지 업로드" />
                     </ProfileImgLabel>
                 </ProfileImgWrapper>
-                <ProfileImgInput 
-                    type="file" 
-                    accept="image/*" 
+                <ProfileImgInput
+                    type="file"
+                    accept="image/*"
                     id="profileImg"
-                    onChange={handleImageChange} 
+                    onChange={handleImageChange}
                 />
             </Fieldset>
 
             <Fieldset>
                 <Legend>개인정보 변경</Legend>
                 <FormLabel htmlFor="username">사용자 이름</FormLabel>
-                <FormInput 
-                    type="text" 
-                    id="username" 
-                    placeholder="2~10자 이내여야 합니다." 
-                    required 
-                    ref={usernameRef} 
+                <FormInput
+                    type="text"
+                    id="username"
+                    placeholder="2~10자 이내여야 합니다."
+                    required
+                    ref={usernameRef}
                     onChange={(event) => setUsername(event.target.value)}
-                    onBlur={handleOnBlurUsername} 
+                    onBlur={handleOnBlurUsername}
                     defaultValue={InfoState.MyInformations[0].myUsername}
                 />
-                {errMsgForUsername && <ErrorMessage>*2~10자 이내여야 합니다.</ErrorMessage>}
+                {errMsgForUsername && (
+                    <ErrorMessage>*2~10자 이내여야 합니다.</ErrorMessage>
+                )}
 
                 <FormLabel htmlFor="accountname">계정 ID</FormLabel>
-                <FormInput 
-                    type="text" 
-                    id="accountname" 
-                    placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다." 
-                    required 
-                    ref={accountnameRef} 
+                <FormInput
+                    type="text"
+                    id="accountname"
+                    placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+                    required
+                    ref={accountnameRef}
                     onChange={(event) => setAccountname(event.target.value)}
-                    onBlur={handleOnBlur} 
+                    onBlur={handleOnBlur}
                     defaultValue={InfoState.MyInformations[0].myAccountname}
                 />
-                {errMsgForAccountname && <ErrorMessage>{errMsgForAccountname}</ErrorMessage>}
+                {errMsgForAccountname && (
+                    <ErrorMessage>{errMsgForAccountname}</ErrorMessage>
+                )}
 
                 <FormLabel htmlFor="intro">소개</FormLabel>
-                <FormInput 
-                    type="text" 
-                    id="intro" 
-                    placeholder="자신과 판매할 상품에 대해 소개해 주세요!" 
+                <FormInput
+                    type="text"
+                    id="intro"
+                    placeholder="자신을 소개해 주세요!"
                     onChange={(event) => setIntro(event.target.value)}
                     defaultValue={InfoState.MyInformations[0].myIntro}
-                    maxLength='150'
+                    maxLength="150"
                 />
             </Fieldset>
-            <ProfileEditHeader type="submit" disabled={isDisabled}/>
+            <ProfileEditHeader type="submit" disabled={isDisabled} />
         </Form>
     );
-};
+}
 
 export default ProfileEditForm;
