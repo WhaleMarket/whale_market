@@ -49,6 +49,7 @@ const FollowName = styled.strong`
 
 const FollowIntro = styled.p`
   margin-top: 6px;
+  width: 200px;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;

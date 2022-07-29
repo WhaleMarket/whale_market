@@ -51,6 +51,7 @@ const FollowIntro = styled.p`
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
+  width: 200px;
   line-height: 15px;
   color: #767676;
   text-overflow: ellipsis;
