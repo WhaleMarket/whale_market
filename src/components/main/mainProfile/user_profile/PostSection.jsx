@@ -153,7 +153,6 @@ function PostSection({ List }) {
             console.error(error);
         }
     }
-  }
 
   useEffect(() => {
     acquiredFeed();
