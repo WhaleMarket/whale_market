@@ -245,7 +245,10 @@ function PostCard() {
           })}
         </PostContentList>
         <Modal
-          isOpenModal={isOpenModal}
+          isOpenModal={
+            accountname === InfoState.MyInformations[0].myAccountname &&
+            isOpenModal
+          }
           setIsOpenModal={setIsOpenModal}
           modalItemList={modalItemList}
         />
