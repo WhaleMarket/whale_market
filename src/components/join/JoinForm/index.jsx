@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import Button from '../../emaillogin/button/Button';
-import AuthContext from "../../../context/AuthProvider";
+import AuthContext from '../../../context/AuthProvider';
 import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
-import { Wrapper, Title, Form, Fieldset, Legend, Label, Input, ErrorMessage, SuccessMessage } from './index.style';
+import {
+    Wrapper,
+    Title,
+    Form,
+    Legend,
+    Label,
+    Input,
+    ErrorMessage,
+    SuccessMessage,
+} from './index.style';
 
 export function JoinForm({ setNextPage }) {
     const [, setInfoState] = useContext(AuthContext);
@@ -24,7 +33,7 @@ export function JoinForm({ setNextPage }) {
 
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [isValidPassword, setIsValidPassword] = useState(false);
-    
+
     useEffect(() => {
         emailRef.current.focus();
     }, []);
@@ -49,9 +58,9 @@ export function JoinForm({ setNextPage }) {
                     InfoState.MyInformations[1] = {
                         ...InfoState.MyInformations[1],
                         email: email,
-                        password: password
+                        password: password,
                     };
-                    return { MyInformations: InfoState.MyInformations }
+                    return { MyInformations: InfoState.MyInformations };
                 });
                 // setAuth({ email, password });
                 setNextPage(false);
@@ -66,13 +75,13 @@ export function JoinForm({ setNextPage }) {
         setNotMatchError('');
         try {
             const reqData = {
-                user: { 
-                    email: email
-                }
+                user: {
+                    email: email,
+                },
             };
             const config = {
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
             };
             const response = await axios.post(
@@ -80,16 +89,18 @@ export function JoinForm({ setNextPage }) {
                 reqData,
                 config
             );
-            if (response?.data?.message === "이미 가입된 이메일 주소 입니다.") {
+            if (response?.data?.message === '이미 가입된 이메일 주소 입니다.') {
                 setNotMatchError('*' + response.data.message);
             } else if (!email) {
                 setNotMatchError('*이메일을 입력해주세요.');
-            } else if (response?.data?.message === "사용 가능한 이메일 입니다.") {
+            } else if (
+                response?.data?.message === '사용 가능한 이메일 입니다.'
+            ) {
                 setPossibleEmailMessage('*' + response.data.message);
                 setIsValidEmail(true);
-            } 
+            }
         } catch (error) {
-            if (error.response.data.message === "잘못된 이메일 형식입니다.") {
+            if (error.response.data.message === '잘못된 이메일 형식입니다.') {
                 setNotMatchError('*' + error.response.data.message);
             }
         }
@@ -126,65 +137,96 @@ export function JoinForm({ setNextPage }) {
     const [isDisabled, setIsDisabled] = useState(true);
     const emailRegex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     const isPassedJoin = () => {
-        return emailRegex.test(email) && password.length > 5 && password === passwordRecheck ? setIsDisabled(false) : setIsDisabled(true);
+        return emailRegex.test(email) &&
+            password.length > 5 &&
+            password === passwordRecheck
+            ? setIsDisabled(false)
+            : setIsDisabled(true);
     };
-    
+
     return (
         <>
             <Wrapper>
                 <Title>이메일로 회원가입</Title>
                 <Form onSubmit={handleNextButton}>
-                    <Fieldset>
+                    <fieldset>
                         <Legend>회원가입</Legend>
-                        <Label htmlFor='email'>이메일</Label>
+                        <Label htmlFor="email">이메일</Label>
                         <Input
-                            type='email'
-                            id='email'
+                            type="email"
+                            id="email"
                             ref={emailRef}
-                            autoComplete='off'
+                            autoComplete="off"
                             onChange={(event) => setEmail(event.target.value)}
                             required
                             onKeyUp={isPassedJoin}
                             onBlur={handleOnBlurForEmail}
-                            placeholder='이메일 주소를 입력해 주세요.'
+                            placeholder="이메일 주소를 입력해 주세요."
                         />
-                        {notMatchError && <ErrorMessage>{notMatchError}</ErrorMessage>}
-                        {possibleEmailMessage && <SuccessMessage>{possibleEmailMessage}</SuccessMessage>}
+                        {notMatchError && (
+                            <ErrorMessage>{notMatchError}</ErrorMessage>
+                        )}
+                        {possibleEmailMessage && (
+                            <SuccessMessage>
+                                {possibleEmailMessage}
+                            </SuccessMessage>
+                        )}
 
-                        <Label htmlFor='password' id='labelPassword' className='password'>비밀번호</Label>
+                        <Label
+                            htmlFor="password"
+                            id="labelPassword"
+                            className="password"
+                        >
+                            비밀번호
+                        </Label>
                         <Input
-                            type='password'
-                            id='password'
+                            type="password"
+                            id="password"
                             ref={passwordRef}
-                            onChange={(event) => setPassword(event.target.value)}
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
                             required
                             onKeyUp={isPassedJoin}
                             onBlur={handleOnBlurForPassword}
-                            placeholder='비밀번호를 설정해 주세요.'
+                            placeholder="비밀번호를 설정해 주세요."
                         />
-                        {passwordMessage && <ErrorMessage>{passwordMessage}</ErrorMessage>}
+                        {passwordMessage && (
+                            <ErrorMessage>{passwordMessage}</ErrorMessage>
+                        )}
 
-                        <Label htmlFor='passwordRecheck' id='labelPasswordRecheck' className='password'>비밀번호 재확인</Label>
+                        <Label
+                            htmlFor="passwordRecheck"
+                            id="labelPasswordRecheck"
+                            className="password"
+                        >
+                            비밀번호 재확인
+                        </Label>
                         <Input
-                            type='password'
-                            id='passwordRecheck'
+                            type="password"
+                            id="passwordRecheck"
                             ref={passwordRecheckRef}
-                            onChange={(event) => setPasswordRecheck(event.target.value)}
+                            onChange={(event) =>
+                                setPasswordRecheck(event.target.value)
+                            }
                             required
                             onKeyUp={isPassedJoin}
                             onBlur={handleOnBlurForPasswordRecheck}
-                            placeholder='비밀번호를 다시 입력해 주세요.'
+                            placeholder="비밀번호를 다시 입력해 주세요."
                         />
-                        {passwordMatch && <SuccessMessage>{passwordMatch}</SuccessMessage>}
-                        {passwordNotMatch && <ErrorMessage>{passwordNotMatch}</ErrorMessage>}
+                        {passwordMatch && (
+                            <SuccessMessage>{passwordMatch}</SuccessMessage>
+                        )}
+                        {passwordNotMatch && (
+                            <ErrorMessage>{passwordNotMatch}</ErrorMessage>
+                        )}
 
-                        
-                        <Button 
-                            type='submit' 
-                            text='다음'
+                        <Button
+                            type="submit"
+                            text="다음"
                             disabled={isDisabled}
                         />
-                    </Fieldset>
+                    </fieldset>
                 </Form>
             </Wrapper>
         </>
