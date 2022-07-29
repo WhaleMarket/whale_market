@@ -8,11 +8,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
-<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
-=======
-import { useHistory, useParams  } from 'react-router-dom';
->>>>>>> d738990 (🩹 다른 사용자의 모달버튼 제한)
 
 const PostWrapper = styled.div`
   display: flex;
@@ -123,6 +119,7 @@ function PostCard() {
   const [InfoState] = useContext(AuthContext);
   const [targetPost, setTargetPost] = useState("");
   const history = useHistory();
+  const accountname = useParams().accountname;
 
   const modalItemList =
     PostingState.data[0].accountname ===
@@ -248,22 +245,10 @@ function PostCard() {
           })}
         </PostContentList>
         <Modal
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
           isOpenModal={
             accountname === InfoState.MyInformations[0].myAccountname &&
             isOpenModal
           }
-=======
-          isOpenModal={(accountname === InfoState.MyInformations[0].myAccountname) && isOpenModal}
->>>>>>> d738990 (🩹 다른 사용자의 모달버튼 제한)
-=======
-          isOpenModal={isOpenModal}
->>>>>>> 38bc17d (🩹 PostCard revert 처리)
-=======
-          isOpenModal={isOpenModal}
->>>>>>> 0c4c8f74e31139bf1b6bcebe1f2c13de8ecabd74
           setIsOpenModal={setIsOpenModal}
           modalItemList={modalItemList}
         />
