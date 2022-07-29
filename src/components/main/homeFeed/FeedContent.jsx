@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ProfileSection from "./ProfileSection";
 import IconGroup from "./IconGroup";
@@ -45,10 +44,6 @@ const FeedWrapper = styled.li`
     margin-top: 30px;
     padding: 10px 5% 25px;
   }
-`;
-
-const PassLink = styled(Link)`
-  text-decoration: none;
 `;
 
 const ContentWrapper = styled.div`
@@ -119,13 +114,11 @@ function FeedContent() {
 
       result.push(
         <FeedWrapper key={i}>
-          <PassLink to={`/profile/${InfoState.MyInformations[5].accountname[i]}`}>
             <ProfileSection
                 src={InfoState.MyInformations[4].image[index]}
                 username={InfoState.MyInformations[5].username[i]}
                 accountname={InfoState.MyInformations[5].accountname[i]}
             />
-          </PassLink>
           <ContentWrapper>
             <ContentText>{InfoState.MyInformations[5].content[i]}</ContentText>
             <ImgWrapper>
