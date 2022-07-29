@@ -8,7 +8,7 @@ import AuthContext from "../../../../context/AuthProvider";
 import axios from "axios";
 import { API_URL } from "../../../../constants/defaultUrl";
 import PostingContext from "../../../../context/PostingProvider";
-import { useHistory  } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 const PostWrapper = styled.div`
   display: flex;
@@ -64,7 +64,7 @@ const PostContentList = styled.ul`
 
 const PostContent = styled.li`
   padding: 36px 50px 32px;
-  border: solid #DBDBDB 1px;
+  border: solid #dbdbdb 1px;
   border-radius: 10px;
   margin-bottom: 30px;
   word-break: break-word;
@@ -117,26 +117,37 @@ function PostCard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [InfoState] = useContext(AuthContext);
-  const [targetPost, setTargetPost] = useState('');
+  const [targetPost, setTargetPost] = useState("");
   const history = useHistory();
 
-  const modalItemList = [
-    {
-      content: "삭제",
-      onClick: () => {
-        setAlertModal(true);
-      },
-    },
-    {
-      content: "수정",
-      onClick: () => {
-        const GetPost = async (id) => {
-          history.push('/postingedit/'+id);
-        };
-        GetPost(targetPost);
-      },
-    },
-  ];
+  const modalItemList =
+    PostingState.data[0].accountname ===
+    InfoState.MyInformations[0].myAccountname
+      ? [
+          {
+            content: "삭제",
+            onClick: () => {
+              setAlertModal(true);
+            },
+          },
+          {
+            content: "수정",
+            onClick: () => {
+              const GetPost = async (id) => {
+                history.push("/postingedit/" + id);
+              };
+              GetPost(targetPost);
+            },
+          },
+        ]
+      : [
+          {
+            content: "신고",
+            onClick: () => {
+              setAlertModal(true);
+            },
+          },
+        ];
 
   const removePost = async (id) => {
     try {
@@ -154,7 +165,25 @@ function PostCard() {
       alert("error");
     }
   };
-  
+
+  const reportPost = async (id) => {
+    try {
+      const reportConfig = {
+        headers: {
+          Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+          "Content-type": "application/json",
+        },
+      };
+      await axios.post(`${API_URL}/post/${id}/report`, {}, reportConfig);
+      if (prompt("신고 사유를 적어주세요.") !== "") {
+        alert("신고 되었습니다.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("error");
+    }
+  };
+
   return (
     <>
       <PostWrapper>
@@ -223,13 +252,28 @@ function PostCard() {
           alertModal={alertModal}
           setAlertModal={setAlertModal}
           setIsOpenModal={setIsOpenModal}
-          content={"게시글을 삭제할까요?"}
-          deleteBtn={{
-            content: "삭제",
-            onClick: () => {
-              removePost(targetPost);
-            },
-          }}
+          content={
+            PostingState.data[0].accountname ===
+            InfoState.MyInformations[0].myAccountname
+              ? "게시글을 삭제할까요?"
+              : "게시글을 신고할까요?"
+          }
+          deleteBtn={
+            PostingState.data[0].accountname ===
+            InfoState.MyInformations[0].myAccountname
+              ? {
+                  content: "삭제",
+                  onClick: () => {
+                    removePost(targetPost);
+                  },
+                }
+              : {
+                  content: "신고",
+                  onClick: () => {
+                    reportPost(targetPost);
+                  },
+                }
+          }
         />
       </PostWrapper>
     </>

@@ -6,6 +6,7 @@ import { API_URL } from "../../../../constants/defaultUrl";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
 import { useHistory } from "react-router-dom";
+import PostingContext from "../../../../context/PostingProvider";
 
 const ProductWrapper = styled.li`
   display: flex;
@@ -39,29 +40,48 @@ const ProductPrice = styled.p`
 `;
 
 function ProductCard({ productResult }) {
+  const [PostingState] = useContext(PostingContext);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [targetProduct, setTargetProduct] = useState("");
+  const [targetProductName, setTargetProductName] = useState("");
   const [InfoState] = useContext(AuthContext);
   const history = useHistory();
 
-  const modalItemList = [
-    {
-      content: "삭제",
-      onClick: () => {
-        setAlertModal(true);
-      },
-    },
-    {
-      content: "수정",
-      onClick: () => {
-        const GetProduct = async (id) => {
-          history.push("/productedit/" + id);
-        };
-        GetProduct(targetProduct);
-      },
-    },
-  ];
+  const modalItemList =
+    PostingState.data[0].accountname ===
+    InfoState.MyInformations[0].myAccountname
+      ? [
+          {
+            content: targetProductName,
+            onClick: () => {
+              return;
+            },
+          },
+          {
+            content: "삭제",
+            onClick: () => {
+              setAlertModal(true);
+            },
+          },
+          {
+            content: "수정",
+            onClick: () => {
+              const GetProduct = async (id) => {
+                history.push("/productedit/" + id);
+              };
+              GetProduct(targetProduct);
+            },
+          },
+        ]
+      : [
+          {
+            content: targetProductName,
+            onClick: () => {
+              return;
+            },
+          },
+        ];
 
   const removeProduct = async (id) => {
     try {
@@ -89,6 +109,7 @@ function ProductCard({ productResult }) {
             onClick={() => {
               setIsOpenModal(!isOpenModal);
               setTargetProduct(product.id);
+              setTargetProductName(product.itemName);
             }}
           >
             <ProductImg src={product.itemImage} />
