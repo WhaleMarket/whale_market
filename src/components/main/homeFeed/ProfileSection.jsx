@@ -4,6 +4,7 @@ import defaultImg from "../../../assets/basic-profile-img.png";
 import ModalBtn from "../../modal/ModalBtn";
 import Modal from "../../modal/Modal";
 import AlertModal from "../../modal/AlertModal";
+import { Link } from "react-router-dom";
 
 const ProfileContainer = styled.section`
   display: flex;
@@ -68,34 +69,37 @@ function ProfileSection({ username, accountname, src }) {
 
   return (
     <>
-      <ProfileContainer>
-        <ProfileDiv>
-          <ProfileImg src={src || defaultImg} alt="프로필 이미지" />
-          <UserInfoWrapper>
-            <UserName>{username}</UserName>
-            <UserId>@{accountname}</UserId>
-          </UserInfoWrapper>
-        </ProfileDiv>
-        <ModalBtn
-          className="small"
-          onClick={() => setIsOpenModal(!isOpenModal)}
-        />
-      </ProfileContainer>
+        <ProfileContainer>
+            <ProfileDiv>
+                <Link to={`/profile/${accountname}`}>
+                    <ProfileImg src={src || defaultImg} alt="프로필 이미지" />
+                </Link>
+                <UserInfoWrapper>
+                    <UserName>{username}</UserName>
+                    <UserId>@{accountname}</UserId>
+                </UserInfoWrapper>
+                
+            </ProfileDiv>
+            <ModalBtn
+            className="small"
+            onClick={() => setIsOpenModal(!isOpenModal)}
+            />
+        </ProfileContainer>
 
-      <Modal
-        isOpenModal={isOpenModal}
-        setIsOpenModal={setIsOpenModal}
-        modalItemList={modalItemList}
-      />
-      <AlertModal
-        alertModal={alertModal}
-        setAlertModal={setAlertModal}
-        setIsOpenModal={setIsOpenModal}
-        content={"게시글을 신고하시겠어요?"}
-        deleteBtn={deleteBtn}
-      />
-    </>
-  );
+        <Modal
+            isOpenModal={isOpenModal}
+            setIsOpenModal={setIsOpenModal}
+            modalItemList={modalItemList}
+        />
+        <AlertModal
+            alertModal={alertModal}
+            setAlertModal={setAlertModal}
+            setIsOpenModal={setIsOpenModal}
+            content={"게시글을 신고하시겠어요?"}
+            deleteBtn={deleteBtn}
+        />
+        </>
+    );
 }
 
 export default ProfileSection;

@@ -320,6 +320,7 @@ function ProfileForm() {
                             id='intro' 
                             placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
                             onChange={handleChangeIntro}
+                            maxLength='150'
                         />
                     </Fieldset>
                     <StartButton 

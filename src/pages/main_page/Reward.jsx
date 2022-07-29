@@ -4,13 +4,16 @@ import axios from "axios";
 import { API_URL } from "../../constants/defaultUrl";
 import AuthContext from "../../context/AuthProvider";
 import Market from "../../components/main/market";
+import LoadingPage from "../LoadingPage";
 
 function Reward() {
   const [InfoState] = useContext(AuthContext);
   const [RewardList, setRewardList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getReward() {
+      setLoading(true);
       try {
         const config = {
           headers: {
@@ -23,13 +26,16 @@ function Reward() {
           config
         );
         setRewardList(response.data.post);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
     }
     getReward();
   }, [InfoState.MyInformations]);
-  return (
+  return loading ? (
+    <LoadingPage />
+  ) : (
     <>
       <RewardProfileHeader />
       <Market List={RewardList} />
