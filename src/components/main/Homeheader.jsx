@@ -23,6 +23,10 @@ const Head = styled.header`
   border-bottom: 0.5px solid #BDBDBD;
   background-color: #FFFFFF;
   box-sizing: border-box;
+
+  @media screen and (max-width: 390px) {
+    padding: 13px 2% 13px;
+    }
 `;
 
 const Search = styled.button`
@@ -58,6 +62,11 @@ const Title = styled.h1`
 const Today = styled.strong`
   font-size: 14px;
   margin-left: 16px;
+
+  @media screen and (max-width: 390px) {
+    margin-left: 5px;
+    font-size: 12px;
+    }
 `
 
 const TodayWeather = styled.img`
