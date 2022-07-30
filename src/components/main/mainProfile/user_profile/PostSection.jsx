@@ -109,11 +109,10 @@ const AlbumImg = styled.img`
 const Whaleget = styled.p`
     grid-area: 1/1/2/5;
     padding-bottom: 16px;
-    word-wrap: break-word;
-    word-break: break-all;
+    text-align: center;
+    line-height: 25px;
 
     @media screen and (max-width: 430px) {
-      /* margin-left: 20px; */
       font-size: 14px;
   }
 
@@ -249,7 +248,7 @@ function PostSection({ List }) {
                             </Whaleget>
                         ) : (
                             <Whaleget>
-                                고래에게 <Highlight>먹이</Highlight>를 주세요!
+                                고래에게 <Highlight>먹이</Highlight>를 주세요!<br/>
                                 고래가 <Highlight>행복</Highlight>해 하는 모습을
                                 볼 수 있어요!
                             </Whaleget>

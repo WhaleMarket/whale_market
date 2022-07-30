@@ -8,6 +8,7 @@ import { API_URL } from '../../../constants/defaultUrl';
 
 const Guide = styled.p`
     padding-top: 90px;
+    line-height: 25px;
     text-align: center;
     white-space: pre-wrap;
     word-wrap: break-word;
@@ -78,7 +79,7 @@ function Market({ List }) {
 
     return (
         <>
-        <Guide><Strong>칭찬</Strong>의 개수에 따라 새우부터 차례대로 고래의 <Strong>먹이</Strong>를 획득하실 수 있습니다.</Guide>
+        <Guide><Strong>칭찬</Strong>의 개수에 따라 새우부터 차례대로 <br/>고래의 <Strong>먹이</Strong>를 획득하실 수 있습니다.</Guide>
             <RewardWrapper>
                 {List?.map((value, key) => {
                     return (
