@@ -77,7 +77,6 @@ function SaveButton() {
       );
 
       if (response) {
-        alert("🐳 성공적으로 업로드 되었습니다! 🐳");
         window.location.href =
           "./profile/" + InfoState.MyInformations[0].myAccountname;
       }

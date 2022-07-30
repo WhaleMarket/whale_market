@@ -185,7 +185,6 @@ function PostCard() {
         },
       };
       await axios.delete(`${API_URL}/post/` + id, deleteConfig);
-      alert("🐳 게시글이 삭제되었습니다. 🐳");
       window.location.href = "./" + InfoState.MyInformations[0].myAccountname;
     } catch (error) {
       console.error(error);

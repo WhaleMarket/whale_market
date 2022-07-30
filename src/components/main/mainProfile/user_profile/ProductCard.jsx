@@ -93,7 +93,6 @@ function ProductCard({ productResult }) {
                 },
             };
             await axios.delete(`${API_URL}/product/` + id, deleteConfig);
-            alert('🐳 상품이 삭제되었습니다. 🐳');
             window.location.href =
                 './' + InfoState.MyInformations[0].myAccountname;
         } catch (error) {
