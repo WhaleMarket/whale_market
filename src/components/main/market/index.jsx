@@ -6,17 +6,27 @@ import AuthContext from '../../../context/AuthProvider';
 import axios from 'axios';
 import { API_URL } from '../../../constants/defaultUrl';
 
+const Guide = styled.p`
+    padding-top: 90px;
+    text-align: center;
+`
+
+const Strong = styled.strong`
+    font-size: 18px;
+    font-weight: 900;
+    color: #00BCD4;
+`
+
 const RewardWrapper = styled.ul`
     display: flex;
     justify-content: space-between;
     width: 1000px;
-    padding-top: 90px;
+    padding-top: 40px;
     margin: 0 auto;
     box-sizing: border-box;
 
     @media screen and (max-width: 768px) {
         width: 230px;
-        padding-top: 80px;
         margin: 0 26px;
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -65,6 +75,7 @@ function Market({ List }) {
 
     return (
         <>
+        <Guide><Strong>칭찬</Strong>의 개수에 따라 새우부터 차례대로 고래의 <Strong>먹이</Strong>를 획득하실 수 있습니다.</Guide>
             <RewardWrapper>
                 {List?.map((value, key) => {
                     return (

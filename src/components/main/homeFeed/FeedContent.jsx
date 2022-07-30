@@ -22,7 +22,7 @@ const LayOut = styled.ul`
     @media screen and (max-width: 390px) {
         width: 330px;
         margin: 0 auto;
-        padding: 53px 4% 68px;
+        padding: 53px 10px 68px;
     }
 `;
 
@@ -44,7 +44,7 @@ const FeedWrapper = styled.li`
     @media screen and (max-width: 390px) {
         width: 100%;
         margin-top: 30px;
-        padding: 10px 5% 25px;
+        padding: 4px 5% 25px;
     }
 `;
 
