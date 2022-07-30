@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
-import styled from "styled-components";
-import UploadBtn from "./Upload_btn";
-import ProfileModificationContext from "../../../../../context/ProfileModification";
+import { useState, useContext } from 'react';
+import styled from 'styled-components';
+import UploadBtn from './Upload_btn';
+import AuthContext from '../../../../../context/AuthProvider';
 
 const Blank = styled.div`
     position: relative;
@@ -16,15 +16,15 @@ const Blank = styled.div`
 `;
 
 function UploadSection() {
-  const [ProfileModificationState] = useContext(ProfileModificationContext);
-  const [url, setUrl] = useState("");
-  return (
-    <>
-      <Blank url={url === "" ? ProfileModificationState.profile[3].value : url}>
-        <UploadBtn setUrl={setUrl} />
-      </Blank>
-    </>
-  );
+    const [InfoState] = useContext(AuthContext);
+    const [url, setUrl] = useState('');
+    return (
+        <>
+            <Blank url={url === '' ? InfoState.MyInformations[0].myImage : url}>
+                <UploadBtn setUrl={setUrl} />
+            </Blank>
+        </>
+    );
 }
 
 export default UploadSection;

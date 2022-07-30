@@ -133,7 +133,7 @@ const GetBtn = styled.button`
     }
 `;
 
-function Reward({ data }) {
+function Reward({ data, heart, index }) {
     const [InfoState] = useContext(AuthContext);
     const [Acquired, setAcquired] = useState([]);
     async function getReward() {
@@ -153,12 +153,15 @@ function Reward({ data }) {
                     },
                 }
             );
-            const res = await axios.get(`${API_URL}/post/${data.id}/comments`, {
-                headers: {
-                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                    'Content-type': 'application/json',
-                },
-            });
+            const res = await axios.get(
+                `${API_URL}/post/${data.id}/comments/?limit=1000&skip=0`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                        'Content-type': 'application/json',
+                    },
+                }
+            );
             setAcquired(res.data.comments);
         } catch (error) {
             console.error(error);
@@ -169,7 +172,7 @@ function Reward({ data }) {
         async function acquiredReward() {
             try {
                 const res = await axios.get(
-                    `${API_URL}/post/${data.id}/comments`,
+                    `${API_URL}/post/${data.id}/comments/?limit=1000&skip=0`,
                     {
                         headers: {
                             Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
@@ -184,6 +187,13 @@ function Reward({ data }) {
         }
         acquiredReward();
     }, [InfoState.MyInformations]);
+
+    const leftHeart =
+        heart > (3 - index) * 5
+            ? heart - (3 - index) * 5 > 5
+                ? 5
+                : heart - (3 - index) * 5
+            : 0;
 
     return (
         <RewardCard>
@@ -207,7 +217,7 @@ function Reward({ data }) {
             <GetBtn
                 onClick={getReward}
                 disabled={
-                    data.content.split(',')[1] -
+                    leftHeart -
                         Acquired.map(
                             (value) => value.author.accountname
                         ).filter((value) => {
