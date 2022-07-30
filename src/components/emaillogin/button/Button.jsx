@@ -6,10 +6,10 @@ const StyledButton = styled.button`
     width: 100%;
     border-style: none;
     border-radius: 44px;
-    background-color: ${(props) => props.disabled ? '#B2EBF2' : '#00BCD4'};
+    background-color: ${(props) => (props.disabled ? '#B2EBF2' : '#00BCD4')};
     padding: 12px 86px;
     margin-top: 30px;
-    cursor: ${(props) => props.disabled ? "default" : "pointer"};
+    cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 
     font-style: normal;
     font-weight: 500;
@@ -28,9 +28,7 @@ const StyledButton = styled.button`
 `;
 
 function Button(props) {
-    return (
-        <StyledButton disabled={props.disabled}>{props.text}</StyledButton>
-    );
+    return <StyledButton disabled={props.disabled}>{props.text}</StyledButton>;
 }
 
 export default Button;

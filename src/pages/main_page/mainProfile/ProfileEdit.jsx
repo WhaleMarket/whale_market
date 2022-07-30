@@ -6,7 +6,7 @@ function ProfileEdit() {
         <ProfileModificationProvider>
             <ProfileEditSection />
         </ProfileModificationProvider>
-    )
+    );
 }
 
 export default ProfileEdit;

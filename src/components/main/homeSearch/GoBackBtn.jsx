@@ -10,17 +10,15 @@ const BackBtn = styled.button`
     background-color: inherit;
     background-image: url(${BackBtnIcon});
     background-size: 22px 22px;
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
-`
+`;
 
-function GoBackBtn () {
+function GoBackBtn() {
     const history = useHistory();
 
-    return (
-        <BackBtn onClick={()=>history.goBack()} />
-    );
+    return <BackBtn onClick={() => history.goBack()} />;
 }
 
 export default GoBackBtn;

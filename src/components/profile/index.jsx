@@ -9,7 +9,7 @@ const Section = styled.section`
     align-items: center;
     padding: 30px 34px 314px;
     box-sizing: border-box;
-`
+`;
 
 function ProfileSection() {
     return (

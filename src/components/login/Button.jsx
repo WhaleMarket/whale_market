@@ -7,11 +7,11 @@ import LogoFacebook from '../../assets/facebook-logo.png';
 const StyledButton = styled.button`
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid ${(props) => (
-        props.account === 'kakao' && '#F2C94C') 
-        || (props.account === 'google' && '#767676;') 
-        || (props.account === 'facebook' && '#2D9CDB;')
-    };
+    border: 1px solid
+        ${(props) =>
+            (props.account === 'kakao' && '#F2C94C') ||
+            (props.account === 'google' && '#767676;') ||
+            (props.account === 'facebook' && '#2D9CDB;')};
     border-radius: 44px;
     background-color: white;
     padding: 12px 86px;
@@ -24,7 +24,10 @@ const StyledButton = styled.button`
     position: relative;
     cursor: pointer;
 
-    background-image: url(${(props) => (props.account === 'kakao' && `${LogoKakao}`) || (props.account === 'google' && `${LogoGoogle}`) || (props.account === 'facebook' && `${LogoFacebook}`)});
+    background-image: url(${(props) =>
+        (props.account === 'kakao' && `${LogoKakao}`) ||
+        (props.account === 'google' && `${LogoGoogle}`) ||
+        (props.account === 'facebook' && `${LogoFacebook}`)});
     background-repeat: no-repeat;
     background-size: 24px 24px;
     background-position: 14px 10px;
@@ -32,19 +35,17 @@ const StyledButton = styled.button`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
     @media (max-width: 768px) {
-        padding: 12px 50px
+        padding: 12px 50px;
     }
-    
+
     @media (max-width: 540px) {
     }
 `;
 
 function Button(props) {
-    return (
-        <StyledButton account={props.account}>{props.text}</StyledButton>
-    );
+    return <StyledButton account={props.account}>{props.text}</StyledButton>;
 }
 
 export default Button;
