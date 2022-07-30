@@ -17,12 +17,12 @@ const UserProfileContainer = styled.div`
     flex-direction: column;
     width: 420px;
     padding: 30px 55px 26px;
-    margin: 48px auto 0 auto;
+    margin: 54px auto 0 auto;
     box-sizing: border-box;
     white-space: pre-wrap;
 
     @media screen and (max-width: 390px) {
-        width: 100%;
+        width: 340px;
         padding: 30px 4% 26px;
     }
 `;
@@ -30,8 +30,9 @@ const UserProfileContainer = styled.div`
 const PriceContent = styled.p`
     text-align: center;
     color: #515151;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 24px;
+    margin-bottom: 20px;
 `;
 
 const PriceStrong = styled.strong`
@@ -46,13 +47,13 @@ const ProfileWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 260px;
 `;
 
 const ImgDiv = styled.div`
     width: 110px;
     height: 110px;
-    margin: 20px auto 0;
+    margin: 0 auto;
     background-image: url(${(props) => props.src});
     background-position: center;
     background-repeat: no-repeat;
@@ -62,7 +63,7 @@ const ImgDiv = styled.div`
 
 const UserName = styled.h1`
     font-weight: 700;
-    margin: 16px 0 6px 0;
+    margin: 20px 0 6px 0;
 `;
 
 const UserId = styled.span`
@@ -71,7 +72,7 @@ const UserId = styled.span`
 `;
 
 const UserIntro = styled.span`
-    margin: 16px 0 24px;
+    margin: 16px 0;
     color: #767676;
     font-size: 12px;
     line-height: 18px;
@@ -81,9 +82,6 @@ const UserIntro = styled.span`
 const Followers = styled(Link)`
     text-align: center;
     text-decoration: none;
-    @media screen and (max-width: 768px) {
-        left: 65px;
-    }
 `;
 
 const FollowCount = styled.span`
@@ -101,9 +99,6 @@ const FollowTxt = styled.span`
 const Followings = styled(Link)`
     text-align: center;
     text-decoration-line: none;
-    @media screen and (max-width: 768px) {
-        right: 65px;
-    }
 `;
 
 const IconWrapper = styled.div`

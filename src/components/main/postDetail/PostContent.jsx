@@ -14,7 +14,7 @@ const LayOut = styled.div`
     flex-direction: column;
     width: 330px;
     @media screen and (max-width: 768px) {
-        width: 380px;
+        width: 340px;
         height: ${(props) =>
             props.img !== '' && props.img !== undefined ? '280px' : '540px'};
     }

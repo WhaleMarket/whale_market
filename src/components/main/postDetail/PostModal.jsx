@@ -36,7 +36,7 @@ const ModalWrapper = styled.section`
 
     @media screen and (max-width: 768px) {
         flex-direction: column;
-        width: 380px;
+        width: 340px;
         height: 540px;
     }
 `;
@@ -50,7 +50,7 @@ const ContentImg = styled.img`
     object-fit: contain;
 
     @media screen and (max-width: 768px) {
-        width: 380px;
+        width: 340px;
         height: 304px;
         border-radius: 10px 10px 0 0;
     }
