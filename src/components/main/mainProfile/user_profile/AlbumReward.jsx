@@ -87,7 +87,7 @@ function AlbumReward({ post, setEat, changePost, acquiredFeed}){
                 return value.author.accountname === InfoState.MyInformations[0].myAccountname
             }).length - feed.filter((value) => {
                 return value.author.accountname === InfoState.MyInformations[0].myAccountname
-            }).length === 0 ? true : false
+            }).length <= 0 ? true : false
         } src={post.image} onClick={()=>{setEat(true); getFeed(); acquiredFeed();}}>{Acquired.filter((value)=>{
             return value.author.accountname === InfoState.MyInformations[0].myAccountname
         }).length - feed.filter((value) => {
