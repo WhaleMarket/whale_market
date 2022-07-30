@@ -10,7 +10,7 @@
 <br>
 
 <div align="center">
-<img src="https://cdn.discordapp.com/attachments/985721620377247808/1002950495297622097/Frame_85.png?width=1782&height=1002" alt="프로젝트 메인 이미지" width="900">
+<img src="https://media.discordapp.net/attachments/985721620377247808/1002962209464401961/Frame_75.png?width=1782&height=1002" alt="프로젝트 메인 이미지" width="900">
 </div>
 <br>
 <br>
@@ -19,7 +19,7 @@
 
 <details>
 <summary>👀 프로젝트 설명서</summary>
-<img src="https://cdn.discordapp.com/attachments/985721620377247808/1002955416327704617/Frame_92.png" alt="프로젝트 설명서" width="1000">
+<img src="https://cdn.discordapp.com/attachments/985721620377247808/1002991514894487732/Frame_92.png" alt="프로젝트 설명서" width="900">
 </details>
 
 </div>
@@ -42,8 +42,10 @@
 
 <br>
 
-<!-- <h2>📌 플로우 차트</h2>
---- 피그잼 이미지 들어가는 곳 --- -->
+<h2>📌 플로우 차트</h2>
+<div align="center">
+    <img src="https://media.discordapp.net/attachments/985721620377247808/1002963132777500712/unknown.png?width=1488&height=1002" alt="플로우 차트" width=900>
+</div>
 
 <br>
 <br>
@@ -61,8 +63,10 @@
 <br>
 
 <h2>⚙️ 개발 환경 및 배포 URL</h2>
+
 #### [개발기간]
-- 2022-06-26 ~ 2022-07-31
+
+-   2022-06-26 ~ 2022-07-31
 
 </br>
 
@@ -115,7 +119,7 @@
     - 💙 칭찬하기
 
     - 🏆 리워드
-        - 랭킹, 리워드 획득, 웨일 키우기
+        - 랭킹, 칭찬 개수에 따른 리워드 획득, 웨일 키우기
 
 ### [UI Interaction]
 
@@ -259,40 +263,6 @@
 <br>
   
 </div>
-
-<!-- <h2>💥 트러블 슈팅 </h2>
-
-</div>
-
-### ✅ ``
-
-```
--
--
--
-```
-
-<br>
-
-### ✅ ``
-
-```
--
--
--
-```
-
-<br>
-
-### ✅ ``
-
-```
--
--
--
-```
-
-<br> -->
 
 <h2>🚀 실행방법</h2>
 
