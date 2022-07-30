@@ -23,7 +23,7 @@ const PostWrapper = styled.div`
   }
 
   @media screen and (max-width: 390px) {
-    width: 90%;
+    width: 330px;
   }
 `;
 
@@ -31,6 +31,9 @@ const PostInfo = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 16px;
+  @media screen and (max-width: 390px) {  
+    padding-top: 10px;
+}
 `;
 
 const UserImgDiv = styled.div`
@@ -67,9 +70,9 @@ const PostContentList = styled.ul`
   flex-direction: column;
 
   @media screen and (max-width: 390px) {
-    width: 80%;
+    width: 330px;
     margin: 0 auto;
-    padding: 0 4%;
+    padding: 0 10px;
     box-sizing: border-box;
   }
 `;

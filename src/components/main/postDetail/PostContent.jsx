@@ -15,7 +15,7 @@ const LayOut = styled.div`
     width: 330px;
     @media screen and (max-width: 768px) {
         width: 380px;
-        height: ${(props) => (props.img === '' ? '540px' : '280px')};
+        height: ${(props) => (props.img !== '' && props.img !== undefined ? '280px' : '540px')};
     }
 `;
 
@@ -60,7 +60,7 @@ const TextContent = styled.p`
     letter-spacing: 0em;
     text-align: left;
     padding: 16px;
-    word-break: break-word;
+    word-break: break-all;
     white-space: pre-wrap;
 `;
 

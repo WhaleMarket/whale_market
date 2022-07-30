@@ -49,6 +49,7 @@ const CommentContent = styled.p`
   margin-left: 48px;
   font-size: 14px;
   font-weight: 400;
+  word-break: break-all;
   white-space: pre-wrap;
 
   @media screen and (max-width: 768px) {
