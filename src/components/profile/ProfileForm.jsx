@@ -54,7 +54,7 @@ const ProfileImgInput = styled.input`
     text-indent: -9999px;
 `;
 const FormLabel = styled.label`
-    margin: 16px 0 10px 0;
+    margin: ${props => props.htmlFor === "username" ? "0 0 10px 0" : "16px 0 10px 0"};
     color: #767676;
     font-size: 12px;
 `;
@@ -298,7 +298,6 @@ function ProfileForm() {
                         <legend className="a11yhidden">개인정보 변경</legend>
                         <FormLabel
                             htmlFor="username"
-                            style={{ marginTop: '0' }}
                         >
                             사용자 이름
                         </FormLabel>

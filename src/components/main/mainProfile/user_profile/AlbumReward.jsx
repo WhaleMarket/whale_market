@@ -25,6 +25,18 @@ const Reward = styled.button`
     margin-top: ${props => props.disabled ? "0" : "5px"};
     box-shadow: ${props => props.disabled ? "0px 3px 3px grey" : "none"};
   }
+
+  @media screen and (max-width: 430px) {
+    width: 80px;
+    height: 80px;
+    background-size: 60px auto;
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 70px;
+    height: 70px;
+    background-size: 60px auto;
+  }
 `
 
 function AlbumReward({ post, setEat, changePost, acquiredFeed}){
@@ -82,7 +94,7 @@ function AlbumReward({ post, setEat, changePost, acquiredFeed}){
       }
 
     return(
-        <Reward disabled={
+<Reward disabled={
             Acquired.filter((value)=>{
                 return value.author.accountname === InfoState.MyInformations[0].myAccountname
             }).length - feed.filter((value) => {
@@ -92,7 +104,11 @@ function AlbumReward({ post, setEat, changePost, acquiredFeed}){
             return value.author.accountname === InfoState.MyInformations[0].myAccountname
         }).length - feed.filter((value) => {
             return value.author.accountname === InfoState.MyInformations[0].myAccountname
-        }).length}</Reward>
+        }).length < 0 ? 0 : Acquired.filter((value)=>{
+          return value.author.accountname === InfoState.MyInformations[0].myAccountname
+      }).length - feed.filter((value) => {
+          return value.author.accountname === InfoState.MyInformations[0].myAccountname
+      }).length}</Reward>
     )
 }
 

@@ -19,7 +19,7 @@ const RankingSection = styled.section`
 
   @media screen and (max-width: 390px) {
     width: 330px;
-    margin: 0;
+    margin: 0 auto;
     padding: 0 4% 100px;
   }
 `;
@@ -34,7 +34,8 @@ const RankingTit = styled.h1`
   }
 
   @media screen and (max-width: 390px) {
-    font-size: 22px;
+    /* font-size: 22px; */
+    margin: 0 auto;
   }
 
   ::before {
@@ -79,12 +80,22 @@ const UserWrapper = styled.div`
     flex-direction: column;
     gap: 0;
     width: 100%;
-    margin: 40px 5%;
+    margin: 40px auto;
   }
 `;
 
 const FollowWrapper = styled.div`
   text-align: initial;
+
+  @media screen and (max-width: 390px) {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+  @media screen and (max-width: 390px) {
+      width: 90%;
+      margin: 0 auto;
+    }
 `;
 
 const HeartNumber = styled.strong`

@@ -93,7 +93,7 @@ const PostContent = styled.li`
 
   @media screen and (max-width: 390px) {
     width: 100%;
-    margin-top: 30px;
+    margin: 30px 0 0 0;
     padding: 10px 5% 25px;
   }
 `;

@@ -30,7 +30,8 @@ const Globalstyle = createGlobalStyle`
         background-color: rgba(225, 245, 254, 0.7);
         }
     }
-    input::placeholder, textarea::placeholder, button {
+
+    textarea, textarea::placeholder, input, input::placeholder, button {
         font-family: 'TmoneyRoundWindRegular';
     }
         .a11yhidden {

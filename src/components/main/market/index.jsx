@@ -9,6 +9,9 @@ import { API_URL } from '../../../constants/defaultUrl';
 const Guide = styled.p`
     padding-top: 90px;
     text-align: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
 `
 
 const Strong = styled.strong`
@@ -26,10 +29,10 @@ const RewardWrapper = styled.ul`
     box-sizing: border-box;
 
     @media screen and (max-width: 768px) {
-        width: 230px;
-        margin: 0 26px;
+        width: 600px;
+        margin: 0 auto;
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         gap: 16px;
     }

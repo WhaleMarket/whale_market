@@ -126,7 +126,7 @@ const GetBtn = styled.button`
     }
 
     @media screen and (max-width: 390px) {
-        width: 90px;
+        width: 100px;
         padding: 10px 18px;
         font-size: 14px;
         line-height: 14px;
