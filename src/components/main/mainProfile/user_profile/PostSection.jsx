@@ -24,9 +24,8 @@ const ViewTypeNav = styled.nav`
     border-top: 0.5px solid #dbdbdb;
 
     @media screen and (max-width: 390px) {
-    padding-right: 10px;
-
-  }
+        padding-right: 10px;
+    }
 `;
 
 const ListIconBtn = styled.button`
@@ -51,11 +50,11 @@ const AlbumIconBtn = styled.button`
 const AlbumIcon = styled.img`
     width: 28px;
     height: 22px;
-    
+
     @media screen and (max-width: 390px) {
-      width: 30px;
-      height: 22px;
-  }
+        width: 30px;
+        height: 22px;
+    }
 `;
 
 const PostContainer = styled.section`
@@ -79,22 +78,22 @@ const AlbumContainer = styled.section`
     white-space: pre-wrap;
 
     @media screen and (max-width: 590px) {
-      width: 100%;
-      margin: 16px 0;
-  }
+        width: 100%;
+        margin: 16px 0;
+    }
 
-  @media screen and (max-width: 430px) {
-      width: 90%;
-      margin: 16px 5%;
-  }
+    @media screen and (max-width: 430px) {
+        width: 90%;
+        margin: 16px 5%;
+    }
 
     @media screen and (max-width: 390px) {
-      margin: 16px 3%;
-  }
+        margin: 16px 3%;
+    }
 
-  @media screen and (max-width: 360px) {
-      margin: 16px 3%;
-  }
+    @media screen and (max-width: 360px) {
+        margin: 16px 3%;
+    }
 `;
 
 const AlbumImg = styled.img`
@@ -113,12 +112,12 @@ const Whaleget = styled.p`
     line-height: 25px;
 
     @media screen and (max-width: 430px) {
-      font-size: 14px;
-  }
+        font-size: 14px;
+    }
 
     @media screen and (max-width: 390px) {
-      font-size: 12px;
-  }
+        font-size: 12px;
+    }
 `;
 
 const Highlight = styled.strong`
@@ -126,12 +125,12 @@ const Highlight = styled.strong`
     color: #00bcd4;
 
     @media screen and (max-width: 430px) {
-      font-size: 14px;
-  }
-    
+        font-size: 14px;
+    }
+
     @media screen and (max-width: 390px) {
-      font-size: 16px;
-  }
+        font-size: 16px;
+    }
 `;
 
 function PostSection({ List }) {
@@ -248,7 +247,8 @@ function PostSection({ List }) {
                             </Whaleget>
                         ) : (
                             <Whaleget>
-                                고래에게 <Highlight>먹이</Highlight>를 주세요!<br/>
+                                고래에게 <Highlight>먹이</Highlight>를 주세요!
+                                <br />
                                 고래가 <Highlight>행복</Highlight>해 하는 모습을
                                 볼 수 있어요!
                             </Whaleget>

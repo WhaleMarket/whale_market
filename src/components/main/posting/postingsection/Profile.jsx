@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import AuthContext from "../../../../context/AuthProvider";
-import styled from "styled-components";
+import { useContext } from 'react';
+import AuthContext from '../../../../context/AuthProvider';
+import styled from 'styled-components';
 
 const Image = styled.img`
     width: 42px;
@@ -14,7 +14,10 @@ function Profile() {
 
     return (
         <>
-            <Image src={InfoState.MyInformations[0].myImage} alt="profile image" />
+            <Image
+                src={InfoState.MyInformations[0].myImage}
+                alt="profile image"
+            />
         </>
     );
 }

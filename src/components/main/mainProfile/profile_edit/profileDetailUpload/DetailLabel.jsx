@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Label = styled.label`
     margin: 16px 0 10px 0;
@@ -7,11 +7,11 @@ const Label = styled.label`
 `;
 
 function DetailLabel({ id, title }) {
-  return (
-    <>
-      <Label htmlFor={id}>{title}</Label>
-    </>
-  );
+    return (
+        <>
+            <Label htmlFor={id}>{title}</Label>
+        </>
+    );
 }
 
 export default DetailLabel;

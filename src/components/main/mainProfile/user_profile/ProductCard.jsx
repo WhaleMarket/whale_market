@@ -113,7 +113,13 @@ function ProductCard({ productResult }) {
                             setTargetProductName(product.itemName);
                         }}
                     >
-                        <ProductImg src={product.itemImage.includes(API_URL) ? product.itemImage : error_image} />
+                        <ProductImg
+                            src={
+                                product.itemImage.includes(API_URL)
+                                    ? product.itemImage
+                                    : error_image
+                            }
+                        />
                         <ProductName>{product.itemName}</ProductName>
                         <ProductPrice>{`${
                             isNaN(product.price)

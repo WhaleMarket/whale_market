@@ -211,7 +211,18 @@ function Reward({ data, heart, index }) {
                                 value ===
                                 InfoState.MyInformations[0].myAccountname
                             );
-                        }).length}
+                        }).length <
+                    0
+                        ? 0
+                        : data.content.split(',')[1] -
+                          Acquired.map(
+                              (value) => value.author.accountname
+                          ).filter((value) => {
+                              return (
+                                  value ===
+                                  InfoState.MyInformations[0].myAccountname
+                              );
+                          }).length}
                 </RewardCont>
             </TextWrapper>
             <GetBtn
@@ -225,7 +236,7 @@ function Reward({ data, heart, index }) {
                                 value ===
                                 InfoState.MyInformations[0].myAccountname
                             );
-                        }).length ===
+                        }).length <=
                     0
                         ? true
                         : false

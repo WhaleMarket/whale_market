@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import UploadSection from "./Upload_section";
+import styled from 'styled-components';
+import UploadSection from './Upload_section';
 
 const Fieldset = styled.fieldset`
     display: flex;
@@ -8,11 +8,11 @@ const Fieldset = styled.fieldset`
 `;
 
 function ProfileImgUploadSection() {
-  return (
-    <Fieldset>
-      <UploadSection />
-    </Fieldset>
-  );
+    return (
+        <Fieldset>
+            <UploadSection />
+        </Fieldset>
+    );
 }
 
 export default ProfileImgUploadSection;

@@ -13,13 +13,13 @@ const Guide = styled.p`
     white-space: pre-wrap;
     word-wrap: break-word;
     word-break: break-all;
-`
+`;
 
 const Strong = styled.strong`
     font-size: 18px;
     font-weight: 900;
-    color: #00BCD4;
-`
+    color: #00bcd4;
+`;
 
 const RewardWrapper = styled.ul`
     display: flex;
@@ -79,7 +79,10 @@ function Market({ List }) {
 
     return (
         <>
-        <Guide><Strong>칭찬</Strong>의 개수에 따라 새우부터 차례대로 <br/>고래의 <Strong>먹이</Strong>를 획득하실 수 있습니다.</Guide>
+            <Guide>
+                <Strong>칭찬</Strong>의 개수에 따라 새우부터 차례대로 <br />
+                고래의 <Strong>먹이</Strong>를 획득하실 수 있습니다.
+            </Guide>
             <RewardWrapper>
                 {List?.map((value, key) => {
                     return (

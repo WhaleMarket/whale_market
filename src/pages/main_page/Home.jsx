@@ -1,8 +1,8 @@
-import Header from "../../components/main/Homeheader";
-import HomeSection from "../../components/main/HomeSection";
+import Header from '../../components/main/Homeheader';
+import HomeSection from '../../components/main/HomeSection';
 
-function Home(){
-    return(
+function Home() {
+    return (
         <>
             <Header />
             <HomeSection />
@@ -10,4 +10,4 @@ function Home(){
     );
 }
 
-export default Home
+export default Home;

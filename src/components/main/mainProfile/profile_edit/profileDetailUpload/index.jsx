@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Detail from "./Detail";
+import styled from 'styled-components';
+import Detail from './Detail';
 
 const Fieldset = styled.fieldset`
     display: flex;
@@ -8,13 +8,13 @@ const Fieldset = styled.fieldset`
 `;
 
 function ProfileDetail() {
-  return (
-    <>
-      <Fieldset>
-        <Detail />
-      </Fieldset>
-    </>
-  );
+    return (
+        <>
+            <Fieldset>
+                <Detail />
+            </Fieldset>
+        </>
+    );
 }
 
 export default ProfileDetail;

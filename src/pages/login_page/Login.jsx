@@ -5,7 +5,7 @@ import Button from '../../components/login/Button';
 import Logo from '../../assets/Logo.png';
 
 const Wrapper = styled.main`
-    background-color: #00BCD4;
+    background-color: #00bcd4;
     text-align: center;
     padding-top: 27vh;
 `;
@@ -17,7 +17,7 @@ const LogoImage = styled.img`
 
 const Container = styled.section`
     padding: 30px 30px 100px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     animation: loginbar 1s;
@@ -56,7 +56,7 @@ const StyledLink = styled(Link)`
     text-decoration: none;
 
     &:last-child::before {
-        content: "|";
+        content: '|';
         display: block;
         position: absolute;
         top: 0;
@@ -64,29 +64,34 @@ const StyledLink = styled(Link)`
     }
 `;
 
-function Login(){
+function Login() {
     const history = useHistory();
     useEffect(() => {
-        if (window.localStorage.getItem('token') !== 'undefined' && window.localStorage.getItem('token')) {
+        if (
+            window.localStorage.getItem('token') !== 'undefined' &&
+            window.localStorage.getItem('token')
+        ) {
             history.push('/main/home');
         }
     }, [history]);
-    
-    
-    return(
+
+    return (
         <Wrapper>
-        <LogoImage src={Logo} alt='로고' />
-        <Container>
-            <ButtonList>
-                <Button account='kakao' text='카카오톡 계정으로 로그인' />
-                <Button account='google' text='구글 계정으로 로그인' />
-                <Button account='facebook' text='페이스북 계정으로 로그인' />
-            </ButtonList>
-            <LinkList>
-                <StyledLink to='/emaillogin'>이메일로 로그인</StyledLink>
-                <StyledLink to='/join'>회원가입</StyledLink>
-            </LinkList>
-        </Container>
+            <LogoImage src={Logo} alt="로고" />
+            <Container>
+                <ButtonList>
+                    <Button account="kakao" text="카카오톡 계정으로 로그인" />
+                    <Button account="google" text="구글 계정으로 로그인" />
+                    <Button
+                        account="facebook"
+                        text="페이스북 계정으로 로그인"
+                    />
+                </ButtonList>
+                <LinkList>
+                    <StyledLink to="/emaillogin">이메일로 로그인</StyledLink>
+                    <StyledLink to="/join">회원가입</StyledLink>
+                </LinkList>
+            </Container>
         </Wrapper>
     );
 }

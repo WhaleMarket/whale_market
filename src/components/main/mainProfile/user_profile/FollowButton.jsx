@@ -5,25 +5,25 @@ const FollowBtn = styled.button`
     padding: 8px 41px;
     border-style: none;
     border-radius: 30px;
-    background-color: #00BCD4;
-    color: #FFFFFF;
+    background-color: #00bcd4;
+    color: #ffffff;
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
     cursor: pointer;
-`
+`;
 
 const UnFollowBtn = styled.button`
     padding: 7px 33px;
-    border: 1px solid #DBDBDB;
+    border: 1px solid #dbdbdb;
     border-radius: 30px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     color: #767676;
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
     cursor: pointer;
-`
+`;
 
 function FollowButton() {
     const [isFollowed, setisFollowed] = useState(0);
@@ -35,15 +35,19 @@ function FollowButton() {
         setisFollowed(false);
     };
 
-    return(
+    return (
         <>
-        {isFollowed ? (
-            <FollowBtn type="submit" onClick={handleUnFollowBtn}>팔로우</FollowBtn>
-        ) : (
-            <UnFollowBtn type="submit" onClick={handleFollowBtn}>언팔로우</UnFollowBtn>
-        )}
+            {isFollowed ? (
+                <FollowBtn type="submit" onClick={handleUnFollowBtn}>
+                    팔로우
+                </FollowBtn>
+            ) : (
+                <UnFollowBtn type="submit" onClick={handleFollowBtn}>
+                    언팔로우
+                </UnFollowBtn>
+            )}
         </>
-    )
+    );
 }
 
 export default FollowButton;
