@@ -9,15 +9,8 @@ function HomeSearch(){
     const [searchResult, setSearchResult] = useState([]);
     const [keyword, setKeyword] = useState('');
 
-    function handleKeyword(event) {
-        setKeyword(event.target.value);
-        if (event.target.value === '') {
-            setSearchResult([]);
-        }
-    }
-
     useEffect(() => {
-        if (keyword) {
+        if (keyword !== '') {
             const search = async () => {
                     const token = window.localStorage.getItem('token');
                     const config = {
@@ -38,8 +31,8 @@ function HomeSearch(){
 
     return(
         <>
-            <SearchBar value={keyword} handleKeyword={handleKeyword} />
-            <SearchList keyword={keyword} searchResult={searchResult} />
+            <SearchBar setKeyword={setKeyword}/>
+            {keyword !== '' && <SearchList keyword={keyword} searchResult={searchResult} />}
             <Navbar />
         </>
     );

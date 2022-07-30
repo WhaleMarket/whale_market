@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import Reward from "../pages/main_page/Reward";
 import MainProfile from "../pages/main_page/mainProfile/MyProfile";
 import ProductUpload from "../pages/main_page/mainProfile/ProductUpload";
-import ProfileModification from "../pages/main_page/mainProfile/ProfileEdit";
 import Home from "../pages/main_page/Home";
 import Posting from "../pages/main_page/Posting";
 import HomeSearch from "../pages/main_page/HomeSearch";
@@ -14,6 +13,7 @@ import UserProfile from "../pages/main_page/mainProfile/UserProfile";
 import PostingEdit from "../pages/main_page/mainProfile/PostingEdit";
 import ProductEdit from "../pages/main_page/mainProfile/ProductEdit";
 import Login from "../pages/login_page/Login";
+import ProfileEdit from "../pages/main_page/mainProfile/ProfileEdit";
 
 function MainRouter() {
     useAccountInfo();
@@ -22,7 +22,7 @@ function MainRouter() {
     <>
       <Switch>
         <Route path="/posting" component={Posting} />
-        <Route path="/profileedit" component={ProfileModification} />
+        <Route path="/profileedit" component={ProfileEdit} />
         <Route path="/followers/:accountname" component={Followers} />
         <Route path="/followings/:accountname" component={Followings} />
         <Route path="/productupload" component={ProductUpload} />

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import basicProfileImage from "../../../assets/basic-profile-img.png";
+import { API_URL } from "../../../constants/defaultUrl";
 
 const SearchUl = styled.ul`
   padding: 68px 16px 0 16px;
@@ -25,6 +26,7 @@ const UserProfileImage = styled.div`
   background-position: center;
   background-size: cover;
   border-radius: 50%;
+  background-image: url(${(props) => (props.src)});
 `;
 
 const TextBox = styled.div`
@@ -74,55 +76,49 @@ const StyledKeywordInAccountname = styled.p`
 `;
 
 function SearchList({ keyword, searchResult }) {
-  const imageRegex = new RegExp(
-    /(^https:\/\/mandarin.api.weniv.co.kr\/)[1-9]+\.[a-zA-Z]+$/g
-  );
-
   return (
     <SearchUl>
       {searchResult.map((user) => {
-        return (
-          <List key={user._id}>
-            <FlexedLink to={`/profile/${user.accountname}`}>
-              {imageRegex.test(user.image) ? (
-                <UserProfileImage
-                  style={{ backgroundImage: `url(${user.image})` }}
-                />
-              ) : (
-                <UserProfileImage
-                  style={{ backgroundImage: `url(${basicProfileImage})` }}
-                />
-              )}
-              <TextBox>
-                {user.username.includes(keyword) ? (
-                  <UsernameBox>
-                    <UserName>{user.username.split(keyword)[0]}</UserName>
-                    <StyledKeywordInUsername>{keyword}</StyledKeywordInUsername>
-                    <UserName>{user.username.split(keyword)[1]}</UserName>
-                  </UsernameBox>
-                ) : (
-                  <UserName>{user.username}</UserName>
-                )}
-
-                {user.accountname.includes(keyword) ? (
-                  <AccountNameBox>
-                    <AccountName>
-                      @{user.accountname.split(keyword)[0]}
-                    </AccountName>
-                    <StyledKeywordInAccountname>
-                      {keyword}
-                    </StyledKeywordInAccountname>
-                    <AccountName>
-                      {user.accountname.split(keyword)[1]}
-                    </AccountName>
-                  </AccountNameBox>
-                ) : (
-                  <AccountName>@{user.accountname}</AccountName>
-                )}
-              </TextBox>
-            </FlexedLink>
-          </List>
-        );
+        if(user.accountname.includes(keyword) || user.username.includes(keyword)){
+          return (
+            <List key={user._id}>
+              <FlexedLink to={`/profile/${user.accountname}`}>
+              <UserProfileImage
+                    src={user.image.includes(API_URL) ? user.image : basicProfileImage}
+              />
+                <TextBox>
+                  {user.username.includes(keyword) ? (
+                    <UsernameBox>
+                      <UserName>{user.username.split(keyword)[0]}</UserName>
+                      <StyledKeywordInUsername>{keyword}</StyledKeywordInUsername>
+                      <UserName>{user.username.replace(user.username.split(keyword)[0]+keyword, '')}</UserName>
+                    </UsernameBox>
+                  ) : (
+                    <UserName>{user.username}</UserName>
+                  )}
+  
+                  {user.accountname.includes(keyword) ? (
+                    <AccountNameBox>
+                      <AccountName>
+                        @{user.accountname.split(keyword)[0]}
+                      </AccountName>
+                      <StyledKeywordInAccountname>
+                        {keyword}
+                      </StyledKeywordInAccountname>
+                      <AccountName>
+                        {user.accountname.replace(user.accountname.split(keyword)[0] + keyword, '')}
+                      </AccountName>
+                    </AccountNameBox>
+                  ) : (
+                    <AccountName>@{user.accountname}</AccountName>
+                  )}
+                </TextBox>
+              </FlexedLink>
+            </List>
+          );
+        } else {
+          return;
+        }
       })}
     </SearchUl>
   );

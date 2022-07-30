@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import GoBackBtn from './GoBackBtn';
 
@@ -33,7 +33,14 @@ const SearchInput = styled.input`
     }
 `;
 
-function SearchBar({ value, handleKeyword }) {
+function SearchBar({ setKeyword }) {
+    const input_ref = useRef();
+
+    const inputState = () => {
+        if(input_ref){
+            setKeyword(input_ref.current.value)
+        }
+    }
     return (
         <SearchHeader>
             <GoBackBtn />
@@ -43,10 +50,10 @@ function SearchBar({ value, handleKeyword }) {
                 <SearchInput 
                     type='text' 
                     placeholder='계정 검색' 
-                    name='searchInput' 
-                    id='searchInput' 
-                    value={value}
-                    onChange={handleKeyword}
+                    name='searchInput'
+                    id='searchInput'
+                    ref={input_ref}
+                    onInput={inputState}
                     autoFocus
                 />
             </SearchForm>

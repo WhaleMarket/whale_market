@@ -3,14 +3,7 @@ import axios from 'axios';
 import AuthContext from '../../../../context/AuthProvider';
 import { API_URL } from '../../../../constants/defaultUrl';
 import styled from 'styled-components';
-import ProfileEditHeader from './ProfileEditHeader';
 import upload_icon from '../../../../assets/upload-file.png';
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    margin: 78px 34px;
-`;
 
 const Fieldset = styled.fieldset`
     display: flex;
@@ -154,7 +147,7 @@ function ProfileEditForm() {
                 config
             );
             if (response?.data?.filename) {
-                setImage(`${API_URL}/` + response?.data?.filename);
+                setImage(`${API_URL}/` + response.data.filename);
                 preview(loadImage);
             } else {
                 alert(
@@ -170,9 +163,9 @@ function ProfileEditForm() {
     // preview 이미지 설정
     function preview(loadImage) {
         const reader = new FileReader();
+        reader.readAsDataURL(loadImage[0]);
         reader.onload = () =>
             (previewImage.current.style.backgroundImage = `url(${reader.result})`);
-        reader.readAsDataURL(loadImage[0]);
     }
 
     // 사용자 이름 유효성 검사
@@ -239,10 +232,7 @@ function ProfileEditForm() {
     };
 
     // 프로필 정보 제출
-    const handleSubmit = async (event) => {
-        alert('🐳 프로필이 수정되었습니다. 🐳');
-        event.preventDefault();
-        window.location.href = `/main/profile/${accountname}`;
+    const handleSubmit = async () => {
         try {
             const reqData = {
                 user: {
@@ -258,32 +248,17 @@ function ProfileEditForm() {
                     'Content-Type': 'application/json',
                 },
             };
-            await axios.put(`${API_URL}/user`, reqData, config);
+            const res = await axios.put(`${API_URL}/user`, reqData, config);
+            console.log(res);
+            alert('🐳 프로필이 수정되었습니다. 🐳');
+            window.location.href = `/main/profile/${accountname}`;
         } catch (error) {
             console.error(error);
         }
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Fieldset>
-                <Legend>프로필 사진 변경</Legend>
-                <ProfileImgWrapper
-                    ref={previewImage}
-                    style={{ backgroundImage: `url(${image})` }}
-                >
-                    <ProfileImgLabel htmlFor="profileImg">
-                        <Img src={upload_icon} alt="프로필 이미지 업로드" />
-                    </ProfileImgLabel>
-                </ProfileImgWrapper>
-                <ProfileImgInput
-                    type="file"
-                    accept="image/*"
-                    id="profileImg"
-                    onChange={handleImageChange}
-                />
-            </Fieldset>
-
+        <>
             <Fieldset>
                 <Legend>개인정보 변경</Legend>
                 <FormLabel htmlFor="username">사용자 이름</FormLabel>
@@ -326,8 +301,7 @@ function ProfileEditForm() {
                     maxLength="150"
                 />
             </Fieldset>
-            <ProfileEditHeader type="submit" disabled={isDisabled} />
-        </Form>
+        </>
     );
 }
 

@@ -28,8 +28,8 @@ const Edit = styled.button`
 `;
 
 function EditButton() {
-  const [uploadState] = useContext(UploadContext);
   const [uploadPostingState] = useContext(UploadPostingContext);
+  const [uploadState] = useContext(UploadContext);
   const [InfoState] = useContext(AuthContext);
   const [PostingModificationState] = useContext(PostingModificationContext)
   const params = useParams();

@@ -1,5 +1,4 @@
 import { useContext, useRef } from "react";
-import { useParams } from "react-router-dom";
 import UploadPostingContext from "../../../../context/UploadImageListProvider";
 import PostingModificationContext from "../../../../context/PostingModificationProvider";
 import { IMG_EXTENSION } from "../../../../constants/defaultUrl";
@@ -19,7 +18,6 @@ const UploadInput = styled.input`
 `;
 
 function ImageUploadButton() {
-  const postId = useParams().postId;  
   const [uploadPostingState, setUploadPostingState] =
     useContext(UploadPostingContext);
   const [PostingModificationState] = useContext(PostingModificationContext);
