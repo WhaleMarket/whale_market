@@ -132,6 +132,7 @@ function FeedContent() {
                         }
                         username={InfoState.MyInformations[5].username[i]}
                         accountname={InfoState.MyInformations[5].accountname[i]}
+                        postId={InfoState.MyInformations[5].id[i]}
                     />
                     <ContentWrapper>
                         <ContentText>
