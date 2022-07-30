@@ -113,8 +113,8 @@ function PostModal({
                   }}
                 />
               )}
-              <ContentImg src={image.split(",")[imgIndex]} />
-              {imgIndex !== image.split(",").length - 1 && (
+              <ContentImg src={image?.split(",")[imgIndex]} />
+              {imgIndex !== image?.split(",").length - 1 && (
                 <MoveBtn
                   type="button"
                   direction="next"
@@ -168,11 +168,11 @@ function PostModal({
             )}
             <ContentImg
               src={
-                InfoState.MyInformations[5].image[index].split(",")[imgIndex]
+                InfoState.MyInformations[5].image[index]?.split(",")[imgIndex]
               }
             />
             {imgIndex !==
-              InfoState.MyInformations[5].image[index].split(",").length -
+              InfoState.MyInformations[5].image[index]?.split(",").length -
                 1 && (
               <MoveBtn
                 type="button"

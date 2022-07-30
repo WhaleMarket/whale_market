@@ -47,7 +47,7 @@ function HomeSection() {
     ) : (
       <Section>
         <Logo src={whale} alt="whale" />
-        <Title>팔로우 한 유저들의 게시물이 없습니다.</Title>
+        <Title>팔로우 한 유저의 게시물이 없습니다.</Title>
         <Link to="/home/search">
           <Search type="button">검색하기</Search>
         </Link>

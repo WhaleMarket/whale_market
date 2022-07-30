@@ -250,13 +250,28 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
                                 alertModal={alertModal}
                                 setAlertModal={setAlertModal}
                                 setIsOpenModal={setIsOpenModal}
-                                content={'댓글을 삭제할까요?'}
-                                deleteBtn={{
-                                    content: '삭제',
-                                    onClick: () => {
-                                        removePost(targetcomment);
-                                    },
-                                }}
+                                content={
+                                    targetUser ===
+                                    InfoState.MyInformations[0].myAccountname
+                                        ? '댓글을 삭제할까요?'
+                                        : '댓글을 신고할까요?'
+                                }
+                                deleteBtn={
+                                    targetUser ===
+                                    InfoState.MyInformations[0].myAccountname
+                                        ? {
+                                              content: '삭제',
+                                              onClick: () => {
+                                                  removePost(targetcomment);
+                                              },
+                                          }
+                                        : {
+                                              content: '신고',
+                                              onClick: () => {
+                                                  reportPost(targetcomment);
+                                              },
+                                          }
+                                }
                             />
                         </CommentWrapper>
                     </Wrapper>

@@ -4,6 +4,7 @@ import PostingModificationContext from "../../../../context/PostingModificationP
 import { API_URL } from "../../../../constants/defaultUrl";
 import styled from "styled-components";
 import Cancle from "../../../../assets/cancle_Btn_icon.png";
+import UploadContext from "../../../../context/UploadProvider";
 
 const Btn = styled.button`
   background-image: url(${Cancle});
@@ -18,17 +19,9 @@ const Btn = styled.button`
 function CancleBtn({ src, index }) {
   const [, setUploadPostingState] = useContext(UploadPostingContext);
   const [, setPostingModificationState] = useContext(PostingModificationContext);
+  const [, setUploadState] = useContext(UploadContext);
 
   const deleteImg = () => {
-    src.includes(`${API_URL}`) ? 
-        setPostingModificationState((PostingModificationState) => {
-            PostingModificationState.post[0] = {
-                ...PostingModificationState.post[0],
-                image: PostingModificationState.post[0].image.replace(src, '')
-            };
-            return { post: PostingModificationState.post }
-        })
-    :
     setUploadPostingState((uploadPostingState) => {
       uploadPostingState.required[1] = {
         ...uploadPostingState.required[1],
@@ -43,9 +36,20 @@ function CancleBtn({ src, index }) {
     });
   };
 
+  const EditImage = () => {
+    setPostingModificationState((PostingModificationState) => {
+      PostingModificationState.post[0] = {
+          ...PostingModificationState.post[0],
+          image: PostingModificationState.post[0].image.replace(src, '')
+      };
+      return { post: PostingModificationState.post }
+    })
+    setUploadState(true);
+  }
+
   return (
     <>
-      <Btn onClick={deleteImg} />
+      <Btn onClick={src.includes(`${API_URL}`) ? EditImage : deleteImg} />
     </>
   );
 }

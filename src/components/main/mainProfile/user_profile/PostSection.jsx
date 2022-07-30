@@ -13,6 +13,8 @@ import LoadingPage from "../../../../pages/LoadingPage";
 import whale from '../../../../assets/Logo.png';
 import { WhaleLaughEvent } from '../../../../theme/whaleEvent';
 import AlbumReward from './AlbumReward';
+import whale_smile from '../../../../assets/whale_smile.png'
+import whale_smile_eyes from '../../../../assets/whale_smile_eyes.png'
 
 const ViewTypeNav = styled.nav`
   display: flex;
@@ -171,13 +173,13 @@ function PostSection({ List }) {
           >
             <ListIcon src={viewType ? listIconOn : listIconOff} />
           </ListIconBtn>
-          <AlbumIconBtn
+          {PostingState.data[0].accountname === InfoState.MyInformations[0].myAccountname && <AlbumIconBtn
             onClick={() => {
               setviewType(false);
             }}
           >
             <AlbumIcon src={viewType ? whale_small_off : whale_small_on} />
-          </AlbumIconBtn>
+          </AlbumIconBtn>}
         </ViewTypeNav>
         {viewType ? (
           <PostContainer>
@@ -204,7 +206,7 @@ function PostSection({ List }) {
                         <AlbumImg
                             Eaten={eaten?.reduce((a, b) => a + b) * 5}
                             className={`${eat ? 'eat' : ''}`}
-                            src={whale}
+                            src={eaten?.reduce((a, b) => a + b) === 20 ? whale_smile_eyes : (eat ? whale_smile: whale) }
                             onAnimationEnd={() => {
                                 setEat(false);
                             }}

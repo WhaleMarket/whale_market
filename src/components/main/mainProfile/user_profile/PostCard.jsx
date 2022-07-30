@@ -9,6 +9,7 @@ import ModalBtn from "../../../modal/ModalBtn";
 import Modal from "../../../modal/Modal";
 import AlertModal from "../../../modal/AlertModal";
 import PostIconContainer from "../user_profile/PostIconContainer";
+import error_image from "../../../../assets/error-img.png"
 
 const PostWrapper = styled.div`
   display: flex;
@@ -238,8 +239,8 @@ function PostCard() {
                 <PostTxt>{post.content}</PostTxt>
                 <PostImgWrapper>
                   {post.image !== "" &&
-                    post.image.split(",").map((value, key) => {
-                      return <PostImg key={key} src={value} />;
+                    post.image?.split(",").map((value, key) => {
+                      return <PostImg key={key} src={value.includes(API_URL) ? value : error_image} />;
                     })}
                 </PostImgWrapper>
                 <PostIconContainer

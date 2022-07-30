@@ -35,7 +35,7 @@ function UploadBtn({ setUrl }) {
   const [, setSaveStates] = useContext(SaveProductContext);
   const Upload_input = useRef();
   const postId = useParams().postId;
-  const [ProductModificationState, setProductModificationState] = useContext(ProductModificationContext);
+  const [, setProductModificationState] = useContext(ProductModificationContext);
   const [InfoState] = useContext(AuthContext)
 
   useEffect(() => {

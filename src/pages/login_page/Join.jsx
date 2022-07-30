@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { JoinForm } from '../../components/join/JoinForm';
+import { JoinForm } from '../../components/JoinForm';
 import Profile from './Profile';
 
 const Join = (props) => {

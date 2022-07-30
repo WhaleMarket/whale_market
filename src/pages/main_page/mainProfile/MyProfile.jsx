@@ -71,7 +71,7 @@ function MainProfile() {
       }
     }
     getReward();
-  }, [InfoState.MyInformations]);
+  }, [accountname, InfoState.MyInformations]);
 
   return (
     <>

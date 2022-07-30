@@ -261,7 +261,7 @@ function ProfileForm() {
 
     // 버튼 활성상태 관리
     const [isDisabled, setIsDisabled] = useState(true);
-    const accountnameRegex = /^[-._a-zA-Z0-9]+$/;
+    const accountnameRegex = /^[a-zA-Z0-9_.]{4,}$/;
     const isPassedProfile = () => {
         return accountnameRegex.test(accountname) && isValidUsername
             ? setIsDisabled(false)

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Modal from '../../../modal/Modal';
 import AlertModal from '../../../modal/AlertModal';
 import PostingContext from '../../../../context/PostingProvider';
+import error_image from '../../../../assets/error-img.png';
 
 const ProductWrapper = styled.li`
     display: flex;
@@ -113,7 +114,7 @@ function ProductCard({ productResult }) {
                             setTargetProductName(product.itemName);
                         }}
                     >
-                        <ProductImg src={product.itemImage} />
+                        <ProductImg src={product.itemImage.includes(API_URL) ? product.itemImage : error_image} />
                         <ProductName>{product.itemName}</ProductName>
                         <ProductPrice>{`${
                             isNaN(product.price)
