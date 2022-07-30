@@ -83,7 +83,6 @@ function EditButton() {
             );
       
             if (response) {
-              alert("🐳 성공적으로 수정 되었습니다! 🐳");
               window.location.href =
                 "/main/profile/" + InfoState.MyInformations[0].myAccountname;
             }
@@ -108,7 +107,6 @@ function EditButton() {
               postBodyData,
               headerData
             );
-              alert("🐳 성공적으로 수정 되었습니다! 🐳");
               window.location.href =
                 "/main/profile/" + InfoState.MyInformations[0].myAccountname;
         }

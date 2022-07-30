@@ -70,7 +70,6 @@ function EditButton() {
         headerData
       );
       if (response) {
-        alert("🚀 성공적으로 수정되었습니다!");
         window.location.href = "/main/profile/" + InfoState.MyInformations[0].myAccountname;
       }
     } catch (error) {

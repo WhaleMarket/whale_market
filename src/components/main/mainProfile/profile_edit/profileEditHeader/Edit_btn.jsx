@@ -97,7 +97,6 @@ function EditButton() {
                     profileEditData,
                     headerData
                 );
-                alert('🐳 성공적으로 수정 되었습니다! 🐳');
                 window.location.href =
                     '/main/profile/' + res.data.user.accountname;
             } else {
@@ -131,7 +130,6 @@ function EditButton() {
                     profileEditData,
                     headerData
                 );
-                alert('🐳 성공적으로 수정 되었습니다! 🐳');
                 window.location.href =
                     '/main/profile/' + res.data.user.accountname;
             }
