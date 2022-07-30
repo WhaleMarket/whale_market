@@ -1,4 +1,4 @@
-import { keyframes } from "styled-components";
+import { keyframes } from 'styled-components';
 
 const WhaleLaughEvent = keyframes`
     0% {
@@ -36,16 +36,4 @@ const WhaleLaughEvent = keyframes`
     }
 `;
 
-const whaleClickEvent = keyframes`
-    0% {
-        transform: scale(1.0);
-    }
-    50% {
-        transform: scale(1.5);
-    }
-    100% {
-        transform: scale(1.0);
-    }
-`
-
-export { WhaleLaughEvent, whaleClickEvent };
+export { WhaleLaughEvent };

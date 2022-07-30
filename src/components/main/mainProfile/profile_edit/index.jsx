@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 
 function ProfileEditSection() {
     const [InfoState] = useContext(AuthContext);
-    const [ProfileModificationState, setProfileModificationState] = useContext(
+    const [, setProfileModificationState] = useContext(
         ProfileModificationContext
     );
 
@@ -56,7 +56,6 @@ function ProfileEditSection() {
         });
     }, []);
 
-    console.log(ProfileModificationState);
     return (
         <ProfileEditContainer>
             <Wrapper>
