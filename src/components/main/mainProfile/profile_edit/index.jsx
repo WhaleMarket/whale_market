@@ -4,13 +4,13 @@ import AuthContext from '../../../../context/AuthProvider';
 import ProfileModificationContext from '../../../../context/ProfileModification';
 import ProfileImgUploadSection from './profileImgUpload';
 import ProfileEditHeader from './profileEditHeader';
-import ProfileDetail from './profileDetailUpload'
+import ProfileDetail from './profileDetailUpload';
 
 const ProfileEditContainer = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-`
+`;
 
 const Wrapper = styled.div`
     display: flex;
@@ -20,40 +20,43 @@ const Wrapper = styled.div`
 
 function ProfileEditSection() {
     const [InfoState] = useContext(AuthContext);
-    const [ProfileModificationState, setProfileModificationState] = useContext(ProfileModificationContext);
+    const [ProfileModificationState, setProfileModificationState] = useContext(
+        ProfileModificationContext
+    );
 
-    useEffect(()=>{
+    useEffect(() => {
         setProfileModificationState((ProfileModificationState) => {
             ProfileModificationState.profile = [
                 {
-                    label: "username",
+                    label: 'username',
                     error: false,
                     editPossible: false,
                     value: InfoState.MyInformations[0].myUsername,
-                  },
-                  {
-                    label: "accountname",
+                },
+                {
+                    label: 'accountname',
                     error: false,
                     editPossible: false,
                     value: InfoState.MyInformations[0].myAccountname,
-                  },
-                  {
-                    label: "intro",
+                },
+                {
+                    label: 'intro',
                     error: false,
                     editPossible: false,
                     value: InfoState.MyInformations[0].myIntro,
-                  },
-                  {
-                    label: "image",
+                },
+                {
+                    label: 'image',
                     error: false,
                     editPossible: false,
                     value: InfoState.MyInformations[0].myImage,
-                  }
-            ]
-            return { profile : ProfileModificationState.profile };
-        })
-    }, [InfoState.MyInformations])
+                },
+            ];
+            return { profile: ProfileModificationState.profile };
+        });
+    }, []);
 
+    console.log(ProfileModificationState);
     return (
         <ProfileEditContainer>
             <Wrapper>
@@ -62,7 +65,7 @@ function ProfileEditSection() {
             </Wrapper>
             <ProfileEditHeader />
         </ProfileEditContainer>
-    )
+    );
 }
 
 export default ProfileEditSection;

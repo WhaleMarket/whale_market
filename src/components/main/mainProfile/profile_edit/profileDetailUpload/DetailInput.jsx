@@ -2,7 +2,8 @@ import { useRef, useContext } from 'react';
 import styled from 'styled-components';
 import ProfileModificationContext from '../../../../../context/ProfileModification';
 import axios from 'axios';
-import { API_URL } from "../../../../../constants/defaultUrl";
+import { API_URL } from '../../../../../constants/defaultUrl';
+import AuthContext from '../../../../../context/AuthProvider';
 
 const Input = styled.input`
     width: 322px;
@@ -26,9 +27,12 @@ function DetailInput({
     index,
     errorName,
     defaultValue,
-    setErrMsgForAccountname
+    setErrMsgForAccountname,
 }) {
-    const [, setProfileModificationState] = useContext(ProfileModificationContext);
+    const [, setProfileModificationState] = useContext(
+        ProfileModificationContext
+    );
+    const [InfoState] = useContext(AuthContext);
     const accountnameRegex = /^[-._a-zA-Z0-9]+$/;
     const input_ref = useRef();
 
@@ -42,7 +46,7 @@ function DetailInput({
                 return { profile: ProfileModificationsState.profile };
             });
         }
-        if(id !== "intro"){
+        if (id !== 'intro') {
             if (input_ref.current.value !== '') {
                 setProfileModificationState((ProfileModificationsState) => {
                     ProfileModificationsState.profile[parseInt(index)] = {
@@ -72,7 +76,7 @@ function DetailInput({
     };
 
     const errorState = async () => {
-        if(id !== "accountname"){
+        if (id !== 'accountname') {
             if (errorName) {
                 setProfileModificationState((ProfileModificationState) => {
                     ProfileModificationState.profile[parseInt(index)] = {
@@ -91,7 +95,11 @@ function DetailInput({
                 });
             }
         } else {
-            if (input_ref.current.value !== '') {
+            if (
+                input_ref.current.value !== '' &&
+                input_ref.current.value !==
+                    InfoState.MyInformations[0].myAccountname
+            ) {
                 try {
                     const reqData = {
                         user: { accountname: input_ref.current.value },
@@ -106,39 +114,67 @@ function DetailInput({
                         reqData,
                         config
                     );
-    
-                    if (response?.data?.message === '이미 가입된 계정ID 입니다.') {
+
+                    if (
+                        response?.data?.message === '이미 가입된 계정ID 입니다.'
+                    ) {
                         setErrMsgForAccountname('*' + response.data.message);
-                        setProfileModificationState((ProfileModificationState) => {
-                            ProfileModificationState.profile[parseInt(index)] = {
-                                ...ProfileModificationState.profile[parseInt(index)],
-                                error: true,
-                            };
-                            return { profile: ProfileModificationState.profile };
-                        });
-                    } else if (!accountnameRegex.test(input_ref.current.value)) {
+                        setProfileModificationState(
+                            (ProfileModificationState) => {
+                                ProfileModificationState.profile[
+                                    parseInt(index)
+                                ] = {
+                                    ...ProfileModificationState.profile[
+                                        parseInt(index)
+                                    ],
+                                    error: true,
+                                };
+                                return {
+                                    profile: ProfileModificationState.profile,
+                                };
+                            }
+                        );
+                    } else if (
+                        !accountnameRegex.test(input_ref.current.value)
+                    ) {
                         setErrMsgForAccountname(
                             '*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.'
                         );
-                        setProfileModificationState((ProfileModificationState) => {
-                            ProfileModificationState.profile[parseInt(index)] = {
-                                ...ProfileModificationState.profile[parseInt(index)],
-                                error: true,
-                            };
-                            return { profile: ProfileModificationState.profile };
-                        });
+                        setProfileModificationState(
+                            (ProfileModificationState) => {
+                                ProfileModificationState.profile[
+                                    parseInt(index)
+                                ] = {
+                                    ...ProfileModificationState.profile[
+                                        parseInt(index)
+                                    ],
+                                    error: true,
+                                };
+                                return {
+                                    profile: ProfileModificationState.profile,
+                                };
+                            }
+                        );
                     } else if (
                         response?.data?.message === '사용 가능한 계정ID 입니다.'
                     ) {
                         setErrMsgForAccountname('*' + response.data.message);
-                        setProfileModificationState((ProfileModificationState) => {
-                            ProfileModificationState.profile[parseInt(index)] = {
-                                ...ProfileModificationState.profile[parseInt(index)],
-                                error: true,
-                                editPossible: true
-                            };
-                            return { profile: ProfileModificationState.profile };
-                        });
+                        setProfileModificationState(
+                            (ProfileModificationState) => {
+                                ProfileModificationState.profile[
+                                    parseInt(index)
+                                ] = {
+                                    ...ProfileModificationState.profile[
+                                        parseInt(index)
+                                    ],
+                                    error: false,
+                                    editPossible: true,
+                                };
+                                return {
+                                    profile: ProfileModificationState.profile,
+                                };
+                            }
+                        );
                     }
                 } catch (error) {
                     console.error(error);
@@ -157,7 +193,7 @@ function DetailInput({
                 placeholder={placeholder}
                 onBlur={errorState}
                 defaultValue={defaultValue}
-                maxLength={id==="intro" ? "150" : ""}
+                maxLength={id === 'intro' ? '150' : ''}
             />
         </>
     );

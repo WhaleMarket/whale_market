@@ -11,8 +11,8 @@ function Detail() {
     const [errMsgForAccountname, setErrMsgForAccountname] = useState('');
 
     const nameState =
-    ProfileModificationState.profile[0].value.split('').length < 2 ||
-    ProfileModificationState.profile[0].value.split('').length > 10;
+        ProfileModificationState.profile[0].value.split('').length < 2 ||
+        ProfileModificationState.profile[0].value.split('').length > 10;
 
     return (
         <>
@@ -24,7 +24,7 @@ function Detail() {
                 id="username"
                 type="text"
                 placeholder="2~10자 이내여야 합니다."
-                defaultValue={InfoState.MyInformations[0].myAccountname}
+                defaultValue={InfoState.MyInformations[0].myUsername}
             />
             {ProfileModificationState.profile[0].error && (
                 <ErrorMessage message="*2~10자 이내여야 합니다." />
@@ -38,7 +38,8 @@ function Detail() {
                 defaultValue={InfoState.MyInformations[0].myAccountname}
                 setErrMsgForAccountname={setErrMsgForAccountname}
             />
-            {ProfileModificationState.profile[1].error && (
+            {(ProfileModificationState.profile[1].error ||
+                errMsgForAccountname === '*사용 가능한 계정ID 입니다.') && (
                 <ErrorMessage message={errMsgForAccountname} />
             )}
             <DetailLabel id="intro" title="소개" />
