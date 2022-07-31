@@ -9,8 +9,7 @@ const Logo = styled.img`
     display: block;
     z-index: 200;
     width: 200px;
-    margin-top: 27vh;
-    margin-left: 40vw;
+    margin: 27vh auto 0;
     position: relative;
     animation: ${WhaleEvent} 3s linear forwards;
 `;
