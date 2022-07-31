@@ -122,9 +122,9 @@ function ProductCard({ productResult }) {
                         />
                         <ProductName>{product.itemName}</ProductName>
                         <ProductPrice>{`${
-                            isNaN(product.price)
-                                ? product.price
-                                : product.price.toLocaleString('ko-KR')
+                            !isNaN(product.price) && (product.price !== null)
+                                ? product.price.toLocaleString('ko-KR')
+                                : product.price
                         }원`}</ProductPrice>
                     </ProductWrapper>
                 );

@@ -11,9 +11,10 @@ function Detail() {
     const [ProductModificationState] = useContext(ProductModificationContext);
     const postId = useParams().postId;
 
-    const nameState =
+    const nameState = ProductModificationState.product[0].itemName === '' ? 
         saveStates.required[1].value.split('').length < 2 ||
-        saveStates.required[1].value.split('').length > 15;
+        saveStates.required[1].value.split('').length > 15 : ((saveStates.required[1].value === '') ? false : saveStates.required[1].value.split('').length < 2 ||
+        saveStates.required[1].value.split('').length > 15);
 
     const numberpattern = /^[0-9]*$/;
     const priceState =
@@ -22,7 +23,7 @@ function Detail() {
 
     const urlpattern =
         /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    const urlState = !urlpattern.test(saveStates.required[3].value);
+    const urlState = ProductModificationState.product[0].itemName === '' ? !urlpattern.test(saveStates.required[3].value) : ((saveStates.required[3].value === '') ? false : !urlpattern.test(saveStates.required[3].value));
 
     return (
         <>
@@ -50,11 +51,11 @@ function Detail() {
                 placeholder="0보다 큰 숫자만 입력 가능합니다."
                 defaultValue={
                     postId &&
-                    (isNaN(ProductModificationState.product[0].price)
-                        ? ProductModificationState.product[0].price
-                        : ProductModificationState.product[0].price.toLocaleString(
+                    (!isNaN(ProductModificationState.product[0].price) && (ProductModificationState.product[0].price !== null)
+                        ? ProductModificationState.product[0].price.toLocaleString(
                               'ko-KR'
-                          ))
+                          )
+                        : ProductModificationState.product[0].price)
                 }
             />
             {saveStates.required[2].error && (
