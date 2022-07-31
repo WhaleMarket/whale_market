@@ -64,7 +64,7 @@ const CommentCount = styled.span`
     line-height: 20px;
 `;
 
-function IconGroup({ like, comment, liked, id, index, src }) {
+function IconGroup({ like, comment, liked, id, index, src, user }) {
     const [InfoState, setInfoState] = useContext(AuthContext);
     const [postModal, setPostModal] = useState(false);
 
@@ -178,6 +178,7 @@ function IconGroup({ like, comment, liked, id, index, src }) {
                 id={id}
                 postModal={postModal}
                 setPostModal={setPostModal}
+                user={user}
             />
         </>
     );

@@ -161,6 +161,7 @@ function FeedContent() {
                                 InfoState.MyInformations[3].commentCount[i]
                             }
                             liked={InfoState.MyInformations[3].hearted[i]}
+                            user={InfoState.MyInformations[3].accountname}
                         />
                         <CreatedDate>
                             {hoursGap < 24
