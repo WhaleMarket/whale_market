@@ -76,38 +76,46 @@ const TodayWeather = styled.img`
 `;
 
 const ArrowBox = styled.p`
-  display: none;
-  position: absolute;
-  width: 150px;
-  padding: 8px;
-  left: 0;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  background: #444444ba;
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  line-height: 20px;
-  left: 18.7%;
-  top: 86%;
-  &.on{
-    display: block;
-  }
-  &::after{
+    display: none;
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    margin-left: -10px;
-    border: solid transparent;
-    border-color: rgba(51, 51, 51, 0);
-    border-bottom-color: #444444ba;
-    border-width: 10px;
-    pointer-events: none;
-    content: ' ';
-  }
+    top: 52px;
+    left: 255px;
+    width: 150px;
+    padding: 8px;
+    border-radius: 8px;
+    background: #444444ba;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+    color: #fff;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    
+    &.on{
+        display: block;
+    }
+    &::after{
+        position: absolute;
+        left: 50%;
+        bottom: 100%;
+        width: 0;
+        height: 0;
+        margin-left: -10px;
+        border: solid transparent;
+        border-color: rgba(51, 51, 51, 0);
+        border-bottom-color: #444444ba;
+        border-width: 10px;
+        pointer-events: none;
+        content: ' ';
+    }
+
+    @media screen and (max-width: 390px) {
+        left: 190px;
+
+        &::after{
+        left: 65%;
+        }
+    }
 `
 
 function Header() {
