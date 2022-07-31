@@ -10,7 +10,7 @@
 <br>
 
 <div align="center">
-<img src="https://media.discordapp.net/attachments/985721620377247808/1002962209464401961/Frame_75.png?width=1782&height=1002" alt="프로젝트 메인 이미지" width="900">
+<img src="https://user-images.githubusercontent.com/95061372/182035958-e5417789-dfc6-4798-86d2-a2f05d761889.png" alt="프로젝트 메인 이미지" width="900">
 </div>
 
 <br>
@@ -59,14 +59,14 @@
 
 <br>
 
-<!-- <div align="center">
+<div align="center">
 
 <details>
 <summary>👀 웨일마켓 둘러보기</summary>
-<img src="" alt="프로젝트 설명서" width="900">
+<img src="https://user-images.githubusercontent.com/95061372/182036316-84c25145-3900-402c-82dc-1301b143b4f9.png" alt="프로젝트 설명서" width="900">
 </details>
 
-</div> -->
+</div>
 
 <br>
 
@@ -90,7 +90,7 @@
 -   게시물 작성 페이지 화면 및 기능 구현
 -   상품 업로드 화면 및 기능 구현
 -   라우터 설계 및 useContext를 사용한 데이터 바인딩
--   에니메이션 기능 구현
+-   애니메이션 기능 구현
 -   고래에게 먹이주기 기능 구현
 -   칭찬하기 기능 구현
 -   코드 리팩토링
