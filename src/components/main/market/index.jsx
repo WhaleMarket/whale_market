@@ -30,8 +30,7 @@ const RewardWrapper = styled.ul`
     box-sizing: border-box;
 
     @media screen and (max-width: 768px) {
-        width: 600px;
-        margin: 0 auto;
+        width: 400px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
@@ -41,9 +40,9 @@ const RewardWrapper = styled.ul`
     @media screen and (max-width: 390px) {
         display: flex;
         flex-direction: column;
-        width: 330px;
-        margin: 0 auto;
-        padding: 53px 4% 68px;
+        width: 280px;
+        padding-left: 15px;
+        padding: 0 0 50px;
     }
 `;
 

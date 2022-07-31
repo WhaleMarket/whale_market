@@ -10,10 +10,14 @@ const Btn = styled.button`
     background-image: url(${Cancle});
     background-repeat: no-repeat;
     background-color: transparent;
-    margin: 15px 0 0 -20px;
+    margin: 15px 0 0 -30px;
     border: none;
     height: 20px;
     width: 20px;
+
+    @media screen and (max-width: 390px) {
+        margin: -40px 15px 20px;
+    }
 `;
 
 function CancleBtn({ src, index }) {

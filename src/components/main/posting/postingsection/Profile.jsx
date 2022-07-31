@@ -3,6 +3,7 @@ import AuthContext from '../../../../context/AuthProvider';
 import styled from 'styled-components';
 
 const Image = styled.img`
+    margin-left: 16px;
     width: 42px;
     height: 42px;
     border-radius: 50%;

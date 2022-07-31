@@ -9,15 +9,21 @@ import { API_URL } from '../../../../constants/defaultUrl';
 import styled from 'styled-components';
 import ImgWrapper from './ImgArticle';
 
-const EnterWrapper = styled.div``;
+const EnterWrapper = styled.div`
+    margin-left: 16px;
+    width: 90%;
 
+    @media screen and (max-width: 390px) {
+        width: 280px;
+    }
+`
 const TextArea = styled.textarea`
-    margin: 10px 0 0 13px;
+    margin-top: 10px;
     border: none;
-    font-size: 14px;
     resize: none;
+    width: 85%;
     height: ${(props) => props.height};
-    width: 1100px;
+    font-size: 14px;
     line-height: 20px;
     white-space: pre-wrap;
     word-wrap: break-word;

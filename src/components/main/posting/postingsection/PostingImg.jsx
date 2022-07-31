@@ -3,10 +3,14 @@ import CancleBtn from './CancleBtn';
 
 const PostImage = styled.img`
     display: block;
-    margin: 10px 0 0 15px;
+    margin: 10px 10px 0 15px;
     width: 200px;
     height: auto;
     border-radius: 10px;
+    
+    @media screen and (max-width: 390px) {
+        margin: 10px 0;
+    }
 `;
 
 function PostingImg({ src, alt }) {

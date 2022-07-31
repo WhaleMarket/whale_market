@@ -34,7 +34,6 @@ const RankingTit = styled.h1`
     }
 
     @media screen and (max-width: 390px) {
-        /* font-size: 22px; */
         margin: 0 auto;
     }
 
@@ -71,15 +70,14 @@ const UserWrapper = styled.div`
     margin: 20px auto;
 
     @media screen and (max-width: 768px) {
-        margin: 30px auto;
-        width: 380px;
+        width: 400px;
     }
 
-    @media screen and (max-width: 560px) {
+    @media screen and (max-width: 390px) {
         display: flex;
         flex-direction: column;
         gap: 0;
-        width: 100%;
+        width: 310px;
         margin: 40px auto;
     }
 `;
@@ -113,12 +111,7 @@ const UserList = styled.p`
 
     @media screen and (max-width: 768px) {
         font-size: 14px;
-        line-height: 24px;
-    }
-
-    @media screen and (max-width: 390px) {
-        font-size: 16px;
-        line-height: 40px;
+        line-height: 28px;
     }
 `;
 

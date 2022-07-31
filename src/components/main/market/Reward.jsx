@@ -19,9 +19,9 @@ const RewardCard = styled.li`
     }
 
     @media screen and (max-width: 390px) {
-        width: 100%;
+        width: 280px;
         margin-top: 30px;
-        padding: 10px 5% 25px;
+        padding: 10px;
     }
 `;
 
@@ -38,8 +38,8 @@ const Img = styled.img`
     }
 
     @media screen and (max-width: 390px) {
-        width: 100%;
-        height: 230px;
+        width: 258px;
+        height: 200px;
     }
 `;
 
@@ -59,7 +59,7 @@ const TextWrapper = styled.div`
     }
 
     @media screen and (max-width: 390px) {
-        margin: 30px auto;
+        margin: 30px auto 20px;
     }
 `;
 
