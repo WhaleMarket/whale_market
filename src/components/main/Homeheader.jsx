@@ -40,7 +40,7 @@ const Search = styled.button`
     }
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
     font-size: 18px;
     font-weight: 500;
 

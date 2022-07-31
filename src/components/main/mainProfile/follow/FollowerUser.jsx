@@ -14,7 +14,6 @@ const Wrapper = styled.li`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 0.5px solid #bdbdbd;
     padding: 10px 0;
 `;
 
@@ -37,6 +36,10 @@ const UserImgDiv = styled.div`
 
 const FollowInfo = styled.div`
     margin-left: 10px;
+    
+    @media screen and (max-width: 390px) {
+        width: 200px;
+    }
 `;
 
 const FollowName = styled.strong`
@@ -59,6 +62,10 @@ const FollowIntro = styled.p`
     overflow: hidden;
     white-space: nowrap;
     height: 15px;
+
+    @media screen and (max-width: 390px) {
+        width: 120px;
+    }
 `;
 
 const FollowButton = styled.button`
@@ -74,12 +81,20 @@ const FollowButton = styled.button`
     &:hover {
         cursor: pointer;
     }
+
+    @media screen and (max-width: 390px) {
+        width: 100px;
+    }
 `;
 
 const InfoWrapper = styled.div`
     display: flex;
     align-items: center;
     margin-left: 16px;
+
+    @media screen and (max-width: 390px) {
+        width: 150px;
+    }
 `;
 
 function FollowUser() {
