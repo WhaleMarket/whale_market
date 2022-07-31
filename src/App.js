@@ -47,6 +47,7 @@ const Globalstyle = createGlobalStyle`
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
+    color: #515151;
     }
 `;
 

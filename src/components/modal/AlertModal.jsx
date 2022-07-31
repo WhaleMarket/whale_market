@@ -52,6 +52,7 @@ const CancelBtn = styled.button`
     padding: 14px 0;
     border: none;
     background-color: #ffffff;
+    color: #515151;
     &:hover {
         cursor: pointer;
     }
