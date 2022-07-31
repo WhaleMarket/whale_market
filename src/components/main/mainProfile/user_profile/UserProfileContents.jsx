@@ -383,15 +383,7 @@ function UserProfileCard() {
                         등록해
                         <br />
                         웨일 포인트 <Question onMouseOver={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} src={questionMark} alt="question mark" /> 는
-                        <br />{' '}
-                        <PriceStrong>
-                            {productResult
-                                .map((value) => {
-                                    return value.price;
-                                })
-                                .reduce((a, b) => a + b)
-                                .toLocaleString('ko-KR')}
-                        </PriceStrong> 를 쌓아보세요!
+                        <br />{' '}를 쌓아보세요!
                         <br />
                         화이팅!
                         <ArrowBox className={`${hover ? 'on' : ''}`}>웨일포인트가 뭔가요?<br/><br/>웨일포인트란 자신과 관련된 물건들의 총 가격을 말합니다!<br/>상품 등록을 통해{InfoState.MyInformations[0].myAccountname} 님과 관련된 물품을 등록하고<br/>웨일포인트를 높여보세요!</ArrowBox>
