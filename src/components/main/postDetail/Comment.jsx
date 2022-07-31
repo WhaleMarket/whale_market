@@ -5,13 +5,14 @@ const CommentLi = styled.li`
     flex-direction: column;
     padding: 6px 16px;
     list-style: none;
+    box-sizing: border-box;
 
     &:first-child {
         padding-top: 16px;
     }
 
     @media screen and (max-width: 768px) {
-        width: 380px;
+        width: 340px;
     }
 `;
 
@@ -20,9 +21,6 @@ const ProfileWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    @media screen and (max-width: 768px) {
-        padding-right: 30px;
-    }
 `;
 
 const ProfileImg = styled.img`
@@ -45,16 +43,12 @@ const UserName = styled.span`
 `;
 
 const CommentContent = styled.p`
-    width: 200px;
+    width: 250px;
     margin-left: 48px;
     font-size: 14px;
     font-weight: 400;
     word-break: break-all;
     white-space: pre-wrap;
-
-    @media screen and (max-width: 768px) {
-        width: 300px;
-    }
 `;
 
 const InfoWrapper = styled.div`
