@@ -10,6 +10,7 @@ import shareIcon from '../../../../assets/icon-share.png';
 import LoadingPage from '../../../../pages/LoadingPage';
 import QuoteModal from '../../../modal/QuoteModal';
 import basic_profile_image from '../../../../assets/basic-profile-img.png';
+import questionMark from '../../../../assets/question-mark.png'
 
 const UserProfileContainer = styled.div`
     display: flex;
@@ -27,7 +28,7 @@ const UserProfileContainer = styled.div`
     }
 `;
 
-const PriceContent = styled.p`
+const PriceContent = styled.article`
     text-align: center;
     color: #515151;
     font-size: 15px;
@@ -180,12 +181,53 @@ const FollowButton = styled.button`
     cursor: pointer;
 `;
 
+const Question = styled.img`
+    width: 12px;
+    height: auto;
+`
+
+const ArrowBox = styled.p`
+  display: none;
+  position: absolute;
+  width: 400px;
+  padding: 8px;
+  left: 0;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background: #444444ba;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  left: 39.2%;
+  top: 18%;
+  &.on{
+    display: block;
+  }
+  &::after{
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -10px;
+    border: solid transparent;
+    border-color: rgba(51, 51, 51, 0);
+    border-bottom-color: #444444ba;
+    border-width: 10px;
+    pointer-events: none;
+    content: ' ';
+  }
+`
+
 function UserProfileCard() {
     const [InfoState] = useContext(AuthContext);
     const [PostingState, setPostingState] = useContext(PostingContext);
     const [loading, setLoading] = useState(false);
     const [productResult, setProductResult] = useState([]);
     const [quoteModal, setQuoteModal] = useState(false);
+    const [hover, setHover] = useState(false);
     const quoteList = [
         '칭찬은 고래도 춤추게 한다.',
         '오늘도 수고했어, 토닥토닥!',
@@ -320,7 +362,7 @@ function UserProfileCard() {
                 {productResult.length !== 0 ? (
                     <PriceContent>
                         {PostingState.data[0].user.accountname}님의 웨일
-                        포인트는
+                        포인트 <Question onMouseOver={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} src={questionMark} alt="question mark" /> 는
                         <br />{' '}
                         <PriceStrong>
                             {productResult
@@ -333,15 +375,26 @@ function UserProfileCard() {
                         원 적립됐습니다!
                         <br />
                         대단해요!
+                        <ArrowBox className={`${hover ? 'on' : ''}`}>웨일포인트가 뭔가요?<br/><br/>웨일포인트란 자신과 관련된 물건들의 총 가격을 말합니다!<br/>상품 등록을 통해{InfoState.MyInformations[0].myAccountname} 님과 관련된 물품을 등록하고<br/>웨일포인트를 높여보세요!</ArrowBox>
                     </PriceContent>
                 ) : (
                     <PriceContent>
                         {PostingState.data[0].user.accountname}님의 상품을
                         등록해
                         <br />
-                        웨일 포인트를 쌓아보세요!
+                        웨일 포인트 <Question onMouseOver={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} src={questionMark} alt="question mark" /> 는
+                        <br />{' '}
+                        <PriceStrong>
+                            {productResult
+                                .map((value) => {
+                                    return value.price;
+                                })
+                                .reduce((a, b) => a + b)
+                                .toLocaleString('ko-KR')}
+                        </PriceStrong> 를 쌓아보세요!
                         <br />
                         화이팅!
+                        <ArrowBox className={`${hover ? 'on' : ''}`}>웨일포인트가 뭔가요?<br/><br/>웨일포인트란 자신과 관련된 물건들의 총 가격을 말합니다!<br/>상품 등록을 통해{InfoState.MyInformations[0].myAccountname} 님과 관련된 물품을 등록하고<br/>웨일포인트를 높여보세요!</ArrowBox>
                     </PriceContent>
                 )}
                 <ProfileWrapper>

@@ -75,49 +75,86 @@ const TodayWeather = styled.img`
     vertical-align: middle;
 `;
 
+const ArrowBox = styled.p`
+  display: none;
+  position: absolute;
+  width: 150px;
+  padding: 8px;
+  left: 0;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background: #444444ba;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  left: 18.7%;
+  top: 86%;
+  &.on{
+    display: block;
+  }
+  &::after{
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -10px;
+    border: solid transparent;
+    border-color: rgba(51, 51, 51, 0);
+    border-bottom-color: #444444ba;
+    border-width: 10px;
+    pointer-events: none;
+    content: ' ';
+  }
+`
+
 function Header() {
     const date = new Date();
     const [weather, setWeather] = useState('');
-    let weatherIcon = clear;
-    switch (weather.toLowerCase) {
-        case 'clear':
-            weatherIcon = clear;
-            break;
-        case 'clouds':
-            weatherIcon = clouds;
-            break;
-        case 'rain':
-            weatherIcon = rain;
-            break;
-        case 'mist':
-            weatherIcon = mist;
-            break;
-        case 'snow':
-            weatherIcon = snow;
-            break;
-        case 'thunderstorm':
-            weatherIcon = thunderstorm;
-            break;
-        default:
-            weatherIcon = clear;
-            break;
-    }
-
+    const [hover, setHover] = useState(false);
+    // const [weatherIcon, setWeatherIcon] = useState('')
+    
     const TakeWeather = async () => {
         const API_KEY = 'd4389cad7412a6a110847e67b352fffb';
         const CITY_NAME = 'SEOUL';
         await axios
-            .get(
-                `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}`
+        .get(
+            `http://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}`
             )
             .then((response) => {
                 setWeather(response.data.weather[0].main);
             });
-    };
-    TakeWeather();
+        };
+        TakeWeather();
 
-    return (
-        <Head>
+        // switch (weather.toLowerCase()) {
+        //     case 'clear':
+        //         setWeatherIcon(clear);
+        //         break;
+        //     case 'clouds':
+        //         setWeatherIcon(clouds);
+        //         break;
+        //     case 'rain':
+        //         setWeatherIcon(rain);
+        //         break;
+        //     case 'mist':
+        //         setWeatherIcon(mist);
+        //         break;
+        //     case 'snow':
+        //         setWeatherIcon(snow);
+        //         break;
+        //     case 'thunderstorm':
+        //         setWeatherIcon(thunderstorm);
+        //         break;
+        //     default:
+        //         setWeatherIcon(clear);
+        //         break;
+        // }
+        
+        return (
+            <Head>
             <Title>
                 웨일마켓 피드
                 <Today>
@@ -125,7 +162,8 @@ function Header() {
                     {date.getDate()}일{' '}
                     {date.toLocaleString('ko-KR', { weekday: 'long' })}
                 </Today>
-                <TodayWeather src={weatherIcon} alt="today weather" />
+                <TodayWeather onMouseOver={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} src={weather.toLowerCase() === 'clear' ? clear : (weather.toLowerCase() === 'rain' ? rain : (weather.toLowerCase() === 'clouds' ? clouds : (weather.toLowerCase() === 'mist' ? mist : (weather.toLowerCase() === 'snow' ? snow : thunderstorm))))} alt="today weather" />
+                <ArrowBox className={`${hover ? 'on' : ''}`}>서울 날씨 기준입니다.</ArrowBox>
             </Title>
             <Link to="/home/search">
                 <Search />
