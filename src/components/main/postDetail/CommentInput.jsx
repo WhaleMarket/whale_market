@@ -47,6 +47,9 @@ const Input = styled.input`
         font-weight: 400;
         line-height: 18px;
     }
+    &:disabled{
+        background-color: white;
+    }
 `;
 
 const SendBtn = styled.button`
@@ -61,7 +64,7 @@ const SendBtn = styled.button`
     cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
 `;
 
-function CommentInput({ index, Liked, id, setComments }) {
+function CommentInput({ index, Liked, id, setComments, user }) {
     // 댓글 작성 api 확인
     const [InfoState, setInfoState] = useContext(AuthContext);
     const [PostingState, setPostingState] = useContext(PostingContext);
@@ -160,10 +163,11 @@ function CommentInput({ index, Liked, id, setComments }) {
             <Input
                 id="text"
                 type="text"
-                placeholder="댓글 입력하기..."
+                placeholder={user==='whalegm' ? "댓글을 입력하실 수 없습니다." : "댓글 입력하기..."}
                 ref={commentinput}
                 onChange={(event) => setComment(event.target.value)}
                 onKeyUp={isPassedComment}
+                disabled={user==='whalegm' ? true : false}
             />
             <SendBtn type="submit" disabled={isDisabled}>
                 게시

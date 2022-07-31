@@ -80,7 +80,7 @@ const Nocomment = styled.li`
     user-select: none;
 `;
 
-function PostContent({ id, index, src, Isimg, content, feed }) {
+function PostContent({ id, index, src, Isimg, content, feed, user }) {
     const [PostingState, setPostingState] = useContext(PostingContext);
     const [InfoState, setInfoState] = useContext(AuthContext);
     const [comments, setComments] = useState([]);
@@ -284,6 +284,7 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
                         id={id}
                         Liked={PostingState.data[0].postdata[index].hearted}
                         setComments={setComments}
+                        user={user}
                     />
                 </LayOut>
             ) : (
@@ -360,6 +361,7 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
                         id={id}
                         Liked={InfoState.MyInformations[3].hearted[index]}
                         setComments={setComments}
+                        user={user}
                     />
                 </LayOut>
             )}

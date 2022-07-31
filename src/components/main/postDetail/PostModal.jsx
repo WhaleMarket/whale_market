@@ -90,6 +90,7 @@ function PostModal({
     image,
     content,
     feed,
+    user
 }) {
     const [InfoState] = useContext(AuthContext);
     const [imgIndex, setImgIndex] = useState(0);
@@ -130,6 +131,7 @@ function PostModal({
                                 index={index}
                                 content={content}
                                 feed={feed}
+                                user={user}
                             />
                         </ModalWrapper>
                     ) : (
@@ -147,6 +149,7 @@ function PostModal({
                                 index={index}
                                 content={content}
                                 feed={feed}
+                                user={user}
                             />
                         </ModalWrapper>
                     )
@@ -192,6 +195,7 @@ function PostModal({
                             index={index}
                             content={content}
                             feed={feed}
+                            user={user}
                         />
                     </ModalWrapper>
                 ) : (
@@ -209,6 +213,7 @@ function PostModal({
                             index={index}
                             content={content}
                             feed={feed}
+                            user={user}
                         />
                     </ModalWrapper>
                 )}

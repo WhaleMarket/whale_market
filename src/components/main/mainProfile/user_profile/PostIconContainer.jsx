@@ -142,6 +142,7 @@ function PostIconContainer({
     function openPostModal() {
         setPostModal(true);
     }
+
     return (
         <>
             <PostIconWrapper>
@@ -167,6 +168,7 @@ function PostIconContainer({
                 setPostModal={setPostModal}
                 content={content}
                 feed={false}
+                user={PostingState.data[0].accountname}
             />
         </>
     );
