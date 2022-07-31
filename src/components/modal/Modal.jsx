@@ -32,7 +32,7 @@ const ModalUl = styled.ul`
     &::before {
         position: absolute;
         top: 7px;
-        left: 45%;
+        left: 50%;
         transform: translateX(-50%);
         width: 50px;
         height: 4px;
@@ -49,6 +49,7 @@ const ModalItem = styled.button`
     background-color: inherit;
     font-size: 14px;
     font-weight: 400;
+    color: #515151;
     line-height: 17.53px;
     text-align: left;
 
