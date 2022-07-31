@@ -15,14 +15,14 @@
 <br>
 <br>
 
-<div align="center">
+<!-- <div align="center">
 
 <details>
 <summary>👀 프로젝트 설명서</summary>
-<img src="https://cdn.discordapp.com/attachments/985721620377247808/1002991514894487732/Frame_92.png" alt="프로젝트 설명서" width="900">
+<img src="https://user-images.githubusercontent.com/95061372/182008485-e7f4900f-34d8-4d05-b2ee-fc46c0c3f080.png" alt="프로젝트 설명서" width="900">
 </details>
 
-</div>
+</div> -->
 
 <br>
 
