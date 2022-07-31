@@ -48,6 +48,10 @@ const ProfileWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 260px;
+    
+    @media screen and (max-width: 390px) {
+        width: 80%;
+    }
 `;
 
 const ImgDiv = styled.div`
