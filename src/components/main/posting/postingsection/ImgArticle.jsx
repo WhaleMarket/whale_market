@@ -14,6 +14,10 @@ const Wrapper = styled.article`
     display: flex;
     justify-content: left;
     align-items: flex-start;
+
+    @media screen and (max-width: 390px) {
+        flex-direction: column;
+    }
 `;
 
 function ImgWrapper({ text }) {

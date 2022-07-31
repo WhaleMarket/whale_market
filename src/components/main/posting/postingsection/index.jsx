@@ -3,7 +3,7 @@ import Profile from './Profile';
 import PostingArea from './Textarea';
 
 const PostingWrapper = styled.section`
-    padding: 70px 16px;
+    margin: 70px 0;
     display: flex;
     justify-content: left;
     align-items: flex-start;
