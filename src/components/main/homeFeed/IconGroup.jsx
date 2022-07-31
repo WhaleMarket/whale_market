@@ -91,8 +91,8 @@ function IconGroup({ like, comment, liked, id, index, src }) {
                 );
 
                 setInfoState((InfoState) => {
-                    InfoState.MyInformations[5] = {
-                        ...InfoState.MyInformations[5],
+                    InfoState.MyInformations[3] = {
+                        ...InfoState.MyInformations[3],
                         hearted: Feedresponse.data.posts.map((item) => {
                             return item.hearted;
                         }),
@@ -132,8 +132,8 @@ function IconGroup({ like, comment, liked, id, index, src }) {
                 );
 
                 setInfoState((InfoState) => {
-                    InfoState.MyInformations[5] = {
-                        ...InfoState.MyInformations[5],
+                    InfoState.MyInformations[3] = {
+                        ...InfoState.MyInformations[3],
                         hearted: Feedresponse.data.posts.map((item) => {
                             return item.hearted;
                         }),

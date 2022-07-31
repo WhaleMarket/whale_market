@@ -83,11 +83,11 @@ function EditButton() {
                         accountname:
                             ProfileModificationState.profile[1].value !== ''
                                 ? ProfileModificationState.profile[1].value
-                                : InfoState.MyInformations[1].myAccountname,
+                                : InfoState.MyInformations[0].myAccountname,
                         intro:
                             ProfileModificationState.profile[2].value !== ''
                                 ? ProfileModificationState.profile[2].value
-                                : InfoState.MyInformations[2].myIntro,
+                                : InfoState.MyInformations[0].myIntro,
                         image: `${API_URL}/${imgResponse.data.filename}`,
                     },
                 };
@@ -117,11 +117,11 @@ function EditButton() {
                         accountname:
                             ProfileModificationState.profile[1].value !== ''
                                 ? ProfileModificationState.profile[1].value
-                                : InfoState.MyInformations[1].myAccountname,
+                                : InfoState.MyInformations[0].myAccountname,
                         intro:
                             ProfileModificationState.profile[2].value !== ''
                                 ? ProfileModificationState.profile[2].value
-                                : InfoState.MyInformations[2].myIntro,
+                                : InfoState.MyInformations[0].myIntro,
                         image: ProfileModificationState.profile[3].value,
                     },
                 };

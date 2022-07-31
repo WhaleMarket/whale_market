@@ -49,7 +49,7 @@ function AlbumReward({ post, setEat, changePost, acquiredFeed }) {
         async function acquiredReward() {
             try {
                 const res = await axios.get(
-                    `${API_URL}/post/${post.id}/comments`,
+                    `${API_URL}/post/${post.id}/comments/?limit=1000&skip=0`,
                     {
                         headers: {
                             Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
@@ -59,7 +59,7 @@ function AlbumReward({ post, setEat, changePost, acquiredFeed }) {
                 );
                 setAcquired(res.data.comments);
                 const feedres = await axios.get(
-                    `${API_URL}/post/${changePost.id}/comments`,
+                    `${API_URL}/post/${changePost.id}/comments/?limit=1000&skip=0`,
                     {
                         headers: {
                             Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
@@ -93,7 +93,7 @@ function AlbumReward({ post, setEat, changePost, acquiredFeed }) {
                 }
             );
             const res = await axios.get(
-                `${API_URL}/post/${changePost.id}/comments`,
+                `${API_URL}/post/${changePost.id}/comments/?limit=1000&skip=0`,
                 {
                     headers: {
                         Authorization: `Bearer ${InfoState.MyInformations[0].token}`,

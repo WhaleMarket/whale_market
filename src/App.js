@@ -42,6 +42,12 @@ const Globalstyle = createGlobalStyle`
         margin: -1px;
         overflow: hidden;
     }
+
+    button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    }
 `;
 
 function App() {

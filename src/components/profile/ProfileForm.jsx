@@ -86,9 +86,9 @@ const ErrorMessage = styled.p`
 `;
 
 const SuccessMessage = styled.strong`
-    margin-top: 0.375rem;
+    margin-top: 6px;
     color: green;
-    font-size: 0.75rem;
+    font-size: 12px;
 `;
 
 function ProfileForm() {

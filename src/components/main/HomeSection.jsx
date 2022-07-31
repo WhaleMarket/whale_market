@@ -43,12 +43,12 @@ const Search = styled.button`
 
 function HomeSection() {
     const [InfoState, setInfoState] = useContext(AuthContext);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         async function getFeedData() {
             try {
-                setLoading(true)
+                setLoading(true);
                 //피드 정보
                 const feedConfig = {
                     headers: {
@@ -62,59 +62,61 @@ function HomeSection() {
                 );
                 feedResponse.data.posts.map((value) => {
                     return setInfoState((InfoState) => {
-                        InfoState.MyInformations[5] = {
-                            ...InfoState.MyInformations[5],
-                            id: [...InfoState.MyInformations[5].id, value.id],
+                        InfoState.MyInformations[3] = {
+                            ...InfoState.MyInformations[3],
+                            id: [...InfoState.MyInformations[3].id, value.id],
                             username: [
-                                ...InfoState.MyInformations[5].username,
+                                ...InfoState.MyInformations[3].username,
                                 value.author.username,
                             ],
                             accountname: [
-                                ...InfoState.MyInformations[5].accountname,
+                                ...InfoState.MyInformations[3].accountname,
                                 value.author.accountname,
                             ],
                             content: [
-                                ...InfoState.MyInformations[5].content,
+                                ...InfoState.MyInformations[3].content,
                                 value.content,
                             ],
                             image: [
-                                ...InfoState.MyInformations[5].image,
+                                ...InfoState.MyInformations[3].image,
                                 value.image,
                             ],
                             heartCount: [
-                                ...InfoState.MyInformations[5].heartCount,
+                                ...InfoState.MyInformations[3].heartCount,
                                 value.heartCount,
                             ],
                             commentCount: [
-                                ...InfoState.MyInformations[5].commentCount,
+                                ...InfoState.MyInformations[3].commentCount,
                                 value.commentCount,
                             ],
                             hearted: [
-                                ...InfoState.MyInformations[5].hearted,
+                                ...InfoState.MyInformations[3].hearted,
                                 value.hearted,
                             ],
                             updatedAt: [
-                                ...InfoState.MyInformations[5].updatedAt,
+                                ...InfoState.MyInformations[3].updatedAt,
                                 value.updatedAt,
                             ],
                             createdAt: [
-                                ...InfoState.MyInformations[5].createdAt,
+                                ...InfoState.MyInformations[3].createdAt,
                                 value.createdAt,
                             ],
                         };
                         return { MyInformations: InfoState.MyInformations };
                     });
                 });
-                setLoading(false)
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
         }
-        getFeedData()
-    }, [InfoState.MyInformations, setInfoState])
+        getFeedData();
+    }, [InfoState.MyInformations, setInfoState]);
 
-    return loading ? <LoadingPage /> : (parseInt(InfoState.MyInformations[0].myFollowingCount) > 0 ? (
-        InfoState.MyInformations[5].accountname.length > 0 ? (
+    return loading ? (
+        <LoadingPage />
+    ) : parseInt(InfoState.MyInformations[0].myFollowingCount) > 0 ? (
+        InfoState.MyInformations[3].accountname.length > 0 ? (
             <Feed />
         ) : (
             <Section>
@@ -133,7 +135,7 @@ function HomeSection() {
                 <Search type="button">검색하기</Search>
             </Link>
         </Section>
-    ))
+    );
 }
 
 export default HomeSection;

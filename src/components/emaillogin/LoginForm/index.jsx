@@ -2,17 +2,80 @@ import { useRef, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from '../../../context/AuthProvider';
 import { API_URL } from '../../../constants/defaultUrl';
+import { Link } from 'react-router-dom';
 import LoadingPage from '../../../pages/LoadingPage';
 import Button from '../../emaillogin/button/Button';
-import {
-    Wrapper,
-    Title,
-    Form,
-    Label,
-    Input,
-    ErrorMessage,
-    StyledLink,
-} from './index.style';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+`;
+
+const Title = styled.h2`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 40px;
+`;
+
+const Form = styled.form`
+    width: 322px;
+`;
+
+const Label = styled.label`
+    display: block;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #767676;
+    margin-top: ${(props) => (props.id === 'labelPassword' ? '16px' : null)};
+`;
+
+const Input = styled.input`
+    outline: none;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+    width: 100%;
+    height: 32px;
+    padding: 0;
+    margin-bottom: 6px;
+    &:focus {
+        border-bottom: 1px solid #00bcd4;
+    }
+    &::placeholder {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: #dbdbdb;
+    }
+`;
+
+const ErrorMessage = styled.strong`
+    display: inline-block;
+    color: #eb5757;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1;
+`;
+
+const StyledLink = styled(Link)`
+    position: relative;
+    flex-direction: row;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #767676;
+    text-decoration: none;
+    margin-top: 20px;
+`;
 
 export function LoginForm() {
     const [, setInfoState] = useContext(AuthContext);
@@ -60,7 +123,6 @@ export function LoginForm() {
                 };
                 return { MyInformations: InfoState.MyInformations };
             });
-            // setAuth({ email, password, token });
 
             // 로컬스토리지 저장
             localStorage.setItem('token', response?.data?.user?.token);

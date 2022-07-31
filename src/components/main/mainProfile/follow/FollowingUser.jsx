@@ -76,9 +76,9 @@ const FollowButton = styled.button`
     font-size: 12px;
     vertical-align: baseline;
     margin-right: 16px;
-    border: ${(props) => (props.follow ? 'solid 1px grey' : 'none')};
-    background-color: ${(props) => (props.follow ? 'white' : '#00bcd4')};
-    color: ${(props) => (props.follow ? 'black' : 'white')};
+    border: ${(props) => (props.follow ? 'solid 1px #dbdbdb' : 'none')};
+    background-color: ${(props) => (props.follow ? '#ffffff' : '#00bcd4')};
+    color: ${(props) => (props.follow ? '#515151' : '#ffffff')};
     &:hover {
         cursor: pointer;
     }

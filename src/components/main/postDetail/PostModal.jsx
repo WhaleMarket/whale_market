@@ -150,7 +150,7 @@ function PostModal({
                             />
                         </ModalWrapper>
                     )
-                ) : InfoState.MyInformations[5].image[index] !== '' ? (
+                ) : InfoState.MyInformations[3].image[index] !== '' ? (
                     <ModalWrapper
                         postModal={postModal}
                         onClick={(event) => {
@@ -168,13 +168,13 @@ function PostModal({
                         )}
                         <ContentImg
                             src={
-                                InfoState.MyInformations[5].image[index]?.split(
+                                InfoState.MyInformations[3].image[index]?.split(
                                     ','
                                 )[imgIndex]
                             }
                         />
                         {imgIndex !==
-                            InfoState.MyInformations[5].image[index]?.split(',')
+                            InfoState.MyInformations[3].image[index]?.split(',')
                                 .length -
                                 1 && (
                             <MoveBtn

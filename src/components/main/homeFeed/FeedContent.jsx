@@ -105,14 +105,14 @@ function FeedContent() {
         const result = [];
         for (
             let i = 0;
-            i < InfoState.MyInformations[5].accountname.length;
+            i < InfoState.MyInformations[3].accountname.length;
             i++
         ) {
-            const index = InfoState.MyInformations[4].accountname.indexOf(
-                InfoState.MyInformations[5].accountname[i]
+            const index = InfoState.MyInformations[2].accountname.indexOf(
+                InfoState.MyInformations[3].accountname[i]
             );
 
-            const createAt = InfoState.MyInformations[5].createdAt[i];
+            const createAt = InfoState.MyInformations[3].createdAt[i];
             const timeGap = parseInt(Date.now() - new Date(createAt));
             const hoursGap = Math.floor(timeGap / 3600000);
             const minsGap = Math.floor(timeGap / 60000);
@@ -122,25 +122,25 @@ function FeedContent() {
                 <FeedWrapper key={i}>
                     <ProfileSection
                         src={
-                            InfoState.MyInformations[4].image[index] !==
+                            InfoState.MyInformations[2].image[index] !==
                                 `${API_URL}/undefined` &&
-                            InfoState.MyInformations[4].image[index]?.includes(
+                            InfoState.MyInformations[2].image[index]?.includes(
                                 API_URL
                             )
-                                ? InfoState.MyInformations[4].image[index]
+                                ? InfoState.MyInformations[2].image[index]
                                 : basic_profile_image
                         }
-                        username={InfoState.MyInformations[5].username[i]}
-                        accountname={InfoState.MyInformations[5].accountname[i]}
-                        postId={InfoState.MyInformations[5].id[i]}
+                        username={InfoState.MyInformations[3].username[i]}
+                        accountname={InfoState.MyInformations[3].accountname[i]}
+                        postId={InfoState.MyInformations[3].id[i]}
                     />
                     <ContentWrapper>
                         <ContentText>
-                            {InfoState.MyInformations[5].content[i]}
+                            {InfoState.MyInformations[3].content[i]}
                         </ContentText>
                         <ImgWrapper>
-                            {InfoState.MyInformations[5].image[i] &&
-                                InfoState.MyInformations[5].image[i]
+                            {InfoState.MyInformations[3].image[i] &&
+                                InfoState.MyInformations[3].image[i]
                                     .split(',')
                                     .map((value, key) => {
                                         return (
@@ -153,14 +153,14 @@ function FeedContent() {
                                     })}
                         </ImgWrapper>
                         <IconGroup
-                            src={InfoState.MyInformations[4].image[index]}
+                            src={InfoState.MyInformations[2].image[index]}
                             index={i}
-                            id={InfoState.MyInformations[5].id[i]}
-                            like={InfoState.MyInformations[5].heartCount[i]}
+                            id={InfoState.MyInformations[3].id[i]}
+                            like={InfoState.MyInformations[3].heartCount[i]}
                             comment={
-                                InfoState.MyInformations[5].commentCount[i]
+                                InfoState.MyInformations[3].commentCount[i]
                             }
-                            liked={InfoState.MyInformations[5].hearted[i]}
+                            liked={InfoState.MyInformations[3].hearted[i]}
                         />
                         <CreatedDate>
                             {hoursGap < 24

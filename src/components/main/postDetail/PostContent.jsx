@@ -155,8 +155,8 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
                     feedConfig
                 );
                 setInfoState((InfoState) => {
-                    InfoState.MyInformations[5] = {
-                        ...InfoState.MyInformations[5],
+                    InfoState.MyInformations[3] = {
+                        ...InfoState.MyInformations[3],
                         commentCount: feedResponse.data.posts.map((value) => {
                             return value.commentCount;
                         }),
@@ -189,24 +189,26 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
     };
 
     const reportPost = async (commentid) => {
-        try {
-            const reportConfig = {
-                headers: {
-                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                    'Content-type': 'application/json',
-                },
-            };
-            await axios.post(
-                `${API_URL}/post/${id}/comments/${commentid}/report`,
-                {},
-                reportConfig
-            );
-            if (prompt('신고 사유를 적어주세요.') !== '') {
-                alert('신고 되었습니다.');
+        if (prompt('신고 사유를 적어주세요.') !== null) {
+            try {
+                const reportConfig = {
+                    headers: {
+                        Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                        'Content-type': 'application/json',
+                    },
+                };
+                await axios.post(
+                    `${API_URL}/post/${id}/comments/${commentid}/report`,
+                    {},
+                    reportConfig
+                );
+            } catch (error) {
+                console.error(error);
+                alert('error');
             }
-        } catch (error) {
-            console.error(error);
-            alert('error');
+            alert('신고 되었습니다.');
+        } else {
+            return;
         }
     };
 
@@ -289,13 +291,13 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
                     <UserInfo>
                         <UserProfile src={src} />
                         <UserAccount>
-                            {InfoState.MyInformations[5].username[index]}
+                            {InfoState.MyInformations[3].username[index]}
                         </UserAccount>
                     </UserInfo>
                     <Wrapper>
-                        {InfoState.MyInformations[5].content[index] !== '' && (
+                        {InfoState.MyInformations[3].content[index] !== '' && (
                             <TextContent>
-                                {InfoState.MyInformations[5].content[index]}
+                                {InfoState.MyInformations[3].content[index]}
                             </TextContent>
                         )}
                         <CommentWrapper>
@@ -356,7 +358,7 @@ function PostContent({ id, index, src, Isimg, content, feed }) {
                     <CommentInput
                         index="5"
                         id={id}
-                        Liked={InfoState.MyInformations[5].hearted[index]}
+                        Liked={InfoState.MyInformations[3].hearted[index]}
                         setComments={setComments}
                     />
                 </LayOut>
