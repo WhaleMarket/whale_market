@@ -8,7 +8,7 @@ import { API_URL } from '../../../constants/defaultUrl';
 import questionMark from '../../../assets/question-mark.png'
 
 const Guide = styled.article`
-    position: relative;
+    /* position: relative; */
     padding-top: 90px;
     line-height: 25px;
     text-align: center;
@@ -54,38 +54,48 @@ const Question = styled.img`
 `
 
 const ArrowBox = styled.p`
-  display: none;
-  position: absolute;
-  width: 400px;
-  padding: 8px;
-  left: 0;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  background: #444444ba;
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  line-height: 20px;
-  left: 31.5%;
-  margin-top: 5px;
-  &.on{
-    display: block;
-  }
-  &::after{
+    display: none;
     position: absolute;
-    bottom: 100%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    margin-left: -10px;
-    border: solid transparent;
-    border-color: rgba(51, 51, 51, 0);
-    border-bottom-color: #444444ba;
-    border-width: 10px;
-    pointer-events: none;
-    content: ' ';
-  }
+    width: 220px;
+    padding: 10px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 10px;
+    background: #444444ba;
+    color: #FFFFFF;
+    font-size: 13px;
+    text-align: center;
+    line-height: 18px;
+    left: 37%;
+    /* margin: 5px auto 0; */
+
+    &.on{
+        display: block;
+        top: 155px;
+    }
+
+    &::after{
+        position: absolute;
+        left: 50%;
+        bottom: 100%;
+        width: 0;
+        height: 0;
+        margin-left: -10px;
+        border: solid transparent;
+        border-color: rgba(51, 51, 51, 0);
+        border-bottom-color: #444444ba;
+        border-width: 10px;
+        pointer-events: none;
+        content: ' ';
+    }
+
+    @media screen and (max-width: 768px) {
+        left: 25%;
+    }
+
+    @media screen and (max-width: 390px) {
+        left: 5%;
+    }
 `
 
 function Market({ List }) {
@@ -124,7 +134,7 @@ function Market({ List }) {
             <Guide>
                 <Strong>칭찬</Strong>의 개수에 따라 새우부터 차례대로 <br />
                 고래의 <Strong>먹이</Strong> <Question onMouseOver={()=>{setHover(true)}} onMouseLeave={()=>{setHover(false)}} src={questionMark} alt="question mark" /> 를 획득하실 수 있습니다.
-                <ArrowBox className={`${hover ? 'on' : ''}`}>먹이는 어디에 쓰는 건가요?<br/><br/>먹이는 프로필 페이지 게시물 피드의 우측 상단에 있는<br/>고래 아이콘을 누르면 보이는 고래에게 먹이로 줄 수 있습니다!<br/>고래에게 먹이를 주고 행복해 하는 모습을 관찰하세요!</ArrowBox>
+                <ArrowBox className={`${hover ? 'on' : ''}`}>프로필 페이지 게시물 우측 상단의<br/>고래 아이콘을 눌러보세요!</ArrowBox>
             </Guide>
             <RewardWrapper>
                 {List?.map((value, key) => {

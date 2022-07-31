@@ -70,10 +70,6 @@ const UserWrapper = styled.div`
     margin: 20px auto;
 
     @media screen and (max-width: 768px) {
-        width: 400px;
-    }
-
-    @media screen and (max-width: 390px) {
         display: flex;
         flex-direction: column;
         gap: 0;
@@ -83,17 +79,6 @@ const UserWrapper = styled.div`
 `;
 
 const FollowWrapper = styled.div`
-    text-align: initial;
-
-    @media screen and (max-width: 390px) {
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    @media screen and (max-width: 390px) {
-        width: 90%;
-        margin: 0 auto;
-    }
 `;
 
 const HeartNumber = styled.strong`
