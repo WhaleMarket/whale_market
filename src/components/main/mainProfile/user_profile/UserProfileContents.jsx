@@ -327,6 +327,13 @@ function UserProfileCard() {
                             {productResult
                                 .map((value) => {
                                     return value.price;
+                                }).filter((value) => {
+                                    return value !== null && !isNaN(value)
+                                }).length === 0 ? 0 : productResult
+                                .map((value) => {
+                                    return value.price;
+                                }).filter((value) => {
+                                    return value !== null && !isNaN(value)
                                 })
                                 .reduce((a, b) => a + b)
                                 .toLocaleString('ko-KR')}

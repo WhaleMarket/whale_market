@@ -60,6 +60,8 @@ function ImageUploadButton() {
             };
         });
     };
+
+    console.log(uploadPostingState.required[1])
     return (
         <>
             <UploadInput
