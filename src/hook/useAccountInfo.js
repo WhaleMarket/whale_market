@@ -67,14 +67,14 @@ export default function useAccountInfo() {
                 );
                 FollowingResponse.data.map((value) => {
                     return setInfoState((InfoState) => {
-                        InfoState.MyInformations[4] = {
-                            ...InfoState.MyInformations[4],
+                        InfoState.MyInformations[2] = {
+                            ...InfoState.MyInformations[2],
                             accountname: [
-                                ...InfoState.MyInformations[4].accountname,
+                                ...InfoState.MyInformations[2].accountname,
                                 value.accountname,
                             ],
                             image: [
-                                ...InfoState.MyInformations[4].image,
+                                ...InfoState.MyInformations[2].image,
                                 value.image,
                             ],
                         };

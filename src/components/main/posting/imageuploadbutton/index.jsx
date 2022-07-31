@@ -26,7 +26,7 @@ function ImageUploadButton() {
         const Blob = event.target.files[0];
         if (
             Blob === undefined ||
-            !IMG_EXTENSION.includes(Blob.name.split('.')[1])
+            !IMG_EXTENSION.includes(Blob.name.split('.')[1].toLowerCase())
         ) {
             event.target.value = '';
             return alert('올바른 형식의 파일을 넣어주세요.');

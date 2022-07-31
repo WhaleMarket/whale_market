@@ -28,6 +28,10 @@ const Heart = styled.button`
     background-repeat: no-repeat;
     background-position: center;
     background-size: 26px 19px;
+
+    @media screen and (max-width: 390px) {
+        margin-top: 1px;
+    }
 `;
 
 const Input = styled.input`
@@ -101,8 +105,8 @@ function CommentInput({ index, Liked, id, setComments }) {
                     feedConfig
                 );
                 setInfoState((InfoState) => {
-                    InfoState.MyInformations[5] = {
-                        ...InfoState.MyInformations[5],
+                    InfoState.MyInformations[3] = {
+                        ...InfoState.MyInformations[3],
                         commentCount: feedResponse.data.posts.map((value) => {
                             return value.commentCount;
                         }),

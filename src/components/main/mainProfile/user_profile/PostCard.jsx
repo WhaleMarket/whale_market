@@ -194,20 +194,26 @@ function PostCard() {
     };
 
     const reportPost = async (id) => {
-        try {
-            const reportConfig = {
-                headers: {
-                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                    'Content-type': 'application/json',
-                },
-            };
-            await axios.post(`${API_URL}/post/${id}/report`, {}, reportConfig);
-            if (prompt('신고 사유를 적어주세요.') !== '') {
-                alert('신고 되었습니다.');
+        if (prompt('신고 사유를 적어주세요.') !== null) {
+            try {
+                const reportConfig = {
+                    headers: {
+                        Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                        'Content-type': 'application/json',
+                    },
+                };
+                await axios.post(
+                    `${API_URL}/post/${id}/report`,
+                    {},
+                    reportConfig
+                );
+            } catch (error) {
+                console.error(error);
+                alert('error');
             }
-        } catch (error) {
-            console.error(error);
-            alert('error');
+            alert('신고 되었습니다.');
+        } else {
+            return;
         }
     };
 
