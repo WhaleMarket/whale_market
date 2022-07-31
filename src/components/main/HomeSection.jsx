@@ -1,9 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthProvider';
 import styled from 'styled-components';
 import whale from '../../assets/Logo.png';
 import Feed from '../main/homeFeed/FeedContent';
+import axios from 'axios';
+import { API_URL } from '../../constants/defaultUrl';
+import LoadingPage from '../../pages/LoadingPage';
 
 const Section = styled.section`
     display: flex;
@@ -39,9 +42,78 @@ const Search = styled.button`
 `;
 
 function HomeSection() {
-    const [InfoState] = useContext(AuthContext);
+    const [InfoState, setInfoState] = useContext(AuthContext);
+    const [loading, setLoading] = useState(false)
 
-    return parseInt(InfoState.MyInformations[0].myFollowingCount) > 0 ? (
+    useEffect(()=>{
+        async function getFeedData() {
+            try {
+                setLoading(true)
+                //피드 정보
+                const feedConfig = {
+                    headers: {
+                        Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                        'Content-type': 'application/json',
+                    },
+                };
+                const feedResponse = await axios.get(
+                    `${API_URL}/post/feed/?limit=100&skip=0`,
+                    feedConfig
+                );
+                feedResponse.data.posts.map((value) => {
+                    return setInfoState((InfoState) => {
+                        InfoState.MyInformations[5] = {
+                            ...InfoState.MyInformations[5],
+                            id: [...InfoState.MyInformations[5].id, value.id],
+                            username: [
+                                ...InfoState.MyInformations[5].username,
+                                value.author.username,
+                            ],
+                            accountname: [
+                                ...InfoState.MyInformations[5].accountname,
+                                value.author.accountname,
+                            ],
+                            content: [
+                                ...InfoState.MyInformations[5].content,
+                                value.content,
+                            ],
+                            image: [
+                                ...InfoState.MyInformations[5].image,
+                                value.image,
+                            ],
+                            heartCount: [
+                                ...InfoState.MyInformations[5].heartCount,
+                                value.heartCount,
+                            ],
+                            commentCount: [
+                                ...InfoState.MyInformations[5].commentCount,
+                                value.commentCount,
+                            ],
+                            hearted: [
+                                ...InfoState.MyInformations[5].hearted,
+                                value.hearted,
+                            ],
+                            updatedAt: [
+                                ...InfoState.MyInformations[5].updatedAt,
+                                value.updatedAt,
+                            ],
+                            createdAt: [
+                                ...InfoState.MyInformations[5].createdAt,
+                                value.createdAt,
+                            ],
+                        };
+                        return { MyInformations: InfoState.MyInformations };
+                    });
+                });
+                setLoading(false)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getFeedData()
+    }, [InfoState.MyInformations, setInfoState])
+
+    return loading ? <LoadingPage /> : (parseInt(InfoState.MyInformations[0].myFollowingCount) > 0 ? (
         InfoState.MyInformations[5].accountname.length > 0 ? (
             <Feed />
         ) : (
@@ -61,7 +133,7 @@ function HomeSection() {
                 <Search type="button">검색하기</Search>
             </Link>
         </Section>
-    );
+    ))
 }
 
 export default HomeSection;

@@ -81,63 +81,6 @@ export default function useAccountInfo() {
                         return { MyInformations: InfoState.MyInformations };
                     });
                 });
-
-                //피드 정보
-                const feedConfig = {
-                    headers: {
-                        Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
-                        'Content-type': 'application/json',
-                    },
-                };
-                const feedResponse = await axios.get(
-                    `${API_URL}/post/feed/?limit=100&skip=0`,
-                    feedConfig
-                );
-                feedResponse.data.posts.map((value) => {
-                    return setInfoState((InfoState) => {
-                        InfoState.MyInformations[5] = {
-                            ...InfoState.MyInformations[5],
-                            id: [...InfoState.MyInformations[5].id, value.id],
-                            username: [
-                                ...InfoState.MyInformations[5].username,
-                                value.author.username,
-                            ],
-                            accountname: [
-                                ...InfoState.MyInformations[5].accountname,
-                                value.author.accountname,
-                            ],
-                            content: [
-                                ...InfoState.MyInformations[5].content,
-                                value.content,
-                            ],
-                            image: [
-                                ...InfoState.MyInformations[5].image,
-                                value.image,
-                            ],
-                            heartCount: [
-                                ...InfoState.MyInformations[5].heartCount,
-                                value.heartCount,
-                            ],
-                            commentCount: [
-                                ...InfoState.MyInformations[5].commentCount,
-                                value.commentCount,
-                            ],
-                            hearted: [
-                                ...InfoState.MyInformations[5].hearted,
-                                value.hearted,
-                            ],
-                            updatedAt: [
-                                ...InfoState.MyInformations[5].updatedAt,
-                                value.updatedAt,
-                            ],
-                            createdAt: [
-                                ...InfoState.MyInformations[5].createdAt,
-                                value.createdAt,
-                            ],
-                        };
-                        return { MyInformations: InfoState.MyInformations };
-                    });
-                });
             } catch (error) {
                 console.error(error);
             }
