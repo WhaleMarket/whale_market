@@ -7,6 +7,7 @@ import Feed from '../main/homeFeed/FeedContent';
 import axios from 'axios';
 import { API_URL } from '../../constants/defaultUrl';
 import LoadingPage from '../../pages/LoadingPage';
+import PostingContext from '../../context/PostingProvider';
 
 const Section = styled.section`
     display: flex;
@@ -111,7 +112,7 @@ function HomeSection() {
             }
         }
         getFeedData();
-    }, [InfoState.MyInformations, setInfoState]);
+    }, [InfoState.MyInformations]);
 
     return loading ? (
         <LoadingPage />

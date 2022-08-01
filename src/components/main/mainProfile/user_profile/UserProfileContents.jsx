@@ -342,7 +342,7 @@ function UserProfileCard() {
                     </PriceContent>
                 ) : (
                     <PriceContent>
-                        {PostingState.data[0].user.accountname}님의 상품을
+                        {PostingState.data[0].user.accountname}님의 물품을
                         등록해
                         <br />
                         웨일 포인트를 쌓아보세요!
@@ -421,7 +421,7 @@ function UserProfileCard() {
                                 프로필 수정
                             </ProfileEditButton>
                             <ProductUploadButton to="/productupload">
-                                상품 등록
+                                물품 등록
                             </ProductUploadButton>
                         </>
                     )}

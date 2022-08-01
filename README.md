@@ -33,11 +33,15 @@
 
 <h2>⚙️ 개발 환경</h2>
 
-#### [개발기간]
+#### [개발 기간]
 
 -   2022-06-26 ~ 2022-07-31
 
 #### [개발 환경]
+
+-   vscode
+
+#### [회의 내용]
 
 -   EarthMarket WorkPlace: [웨일마켓 워크플레이스](https://sleepy-wound-aba.notion.site/5addb773ab7d4527a66b7e3f875ca7cd)
 -   Coding Convention: ⚙️ [함께 정한 코딩 컨벤션](https://sleepy-wound-aba.notion.site/7960e2020ac246cd9a349b145f514bca)
@@ -62,8 +66,8 @@
 <div align="center">
 
 <details>
-<summary>👀 웨일마켓 둘러보기</summary>
-<img src="https://user-images.githubusercontent.com/95061372/182036316-84c25145-3900-402c-82dc-1301b143b4f9.png" alt="프로젝트 설명서" width="900">
+<summary>👀 <strong>웨일마켓 둘러보기</strong></summary>
+<img src="https://user-images.githubusercontent.com/95061372/182055152-2a3704ac-bf71-4af6-8dd2-73607bb9576e.png" alt="프로젝트 설명서" width="900">
 </details>
 
 </div>
@@ -88,7 +92,7 @@
 -   웨일마켓 프로젝트 아이디어 기획
 -   프로젝트 팀 테크 리드
 -   게시물 작성 페이지 화면 및 기능 구현
--   상품 업로드 화면 및 기능 구현
+-   물품 업로드 화면 및 기능 구현
 -   라우터 설계 및 useContext를 사용한 데이터 바인딩
 -   애니메이션 기능 구현
 -   고래에게 먹이주기 기능 구현
@@ -114,7 +118,7 @@
 -   Splash 화면 및 기능 구현
 -   계정 검색, 404 화면 구현
 -   피드 UI 제작 및 피드 데이터 연결
--   게시물, 상품 삭제하기 기능 구현
+-   게시글, 물품 삭제하기 기능 구현
 -   기본 모달, alert 모달, 인용구 모달 구현 및 연결
 -   반응형 웹 구현
 
@@ -145,11 +149,11 @@
         - 유효성 검사
         - 토큰 검증
 
-    - 🎁 상품
-        - 상품 목록 / 등록 / 수정 / 삭제
+    - 🎁 물품
+        - 물품 목록 / 등록 / 수정 / 삭제
         - 이미지 파일 업로드 / 수정 / 미리보기
         - 유효성 검사
-            - 이미지, 상품명, 가격, 판매링크
+            - 이미지, 물품명, 가격, 등록링크
 
     - 📱 게시물
         - 게시물 목록 / 등록 / 수정 / 삭제 / 신고
@@ -240,11 +244,11 @@
 
 </div>
 
-### 4) 판매상품
+### 4) 등록물품
 
 <div align='center'>
 
-| 1. 🔗[상품 등록](https://github.com/WhaleMarket/whale_market/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83) | 2. 🔗[상품 수정, 삭제](https://user-images.githubusercontent.com/102460056/182042462-f2542de5-1d21-4feb-8109-75c916cb8a32.gif) |
+| 1. 🔗[물품 등록](https://github.com/WhaleMarket/whale_market/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85#-%EB%A1%9C%EA%B7%B8%EC%95%84%EC%9B%83) | 2. 🔗[물품 수정, 삭제](https://user-images.githubusercontent.com/102460056/182042462-f2542de5-1d21-4feb-8109-75c916cb8a32.gif) |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
 |                                <img src="https://user-images.githubusercontent.com/102460056/182038870-9c1ff90b-6e68-4966-930a-e7b4c5794a82.gif" width="300"/>                                |     <img src="https://user-images.githubusercontent.com/102460056/182042872-71683749-9e8e-4351-8674-1dc7a386e918.gif" width="300"/>      |
 

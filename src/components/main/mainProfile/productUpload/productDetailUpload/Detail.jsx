@@ -28,7 +28,7 @@ function Detail() {
     return (
         <>
             <legend className="a11yhidden">Product</legend>
-            <DetailLabel id="name" title="상품명" />
+            <DetailLabel id="name" title="물품명" />
             <DetailInput
                 errorName={nameState}
                 index="0"
@@ -61,7 +61,7 @@ function Detail() {
             {saveStates.required[2].error && (
                 <ErrorMessage message="0보다 큰 숫자만 입력해주세요." />
             )}
-            <DetailLabel id="link" title="판매 링크" />
+            <DetailLabel id="link" title="등록 링크" />
             <DetailInput
                 errorName={urlState}
                 index="2"

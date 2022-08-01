@@ -98,7 +98,7 @@ const InfoWrapper = styled.div`
 `;
 
 function FollowUser() {
-    const [InfoState] = useContext(AuthContext);
+    const [InfoState, setInfoState] = useContext(AuthContext);
     const [PostingState, setPostingState] = useContext(PostingContext);
     const [loading, setLoading] = useState(false);
 
@@ -137,6 +137,116 @@ function FollowUser() {
                                     followeruser: Followerresponse.data,
                                 };
                                 return { data: PostingState.data };
+                            });
+
+                            setInfoState((InfoState) => {
+                                InfoState.MyInformations[2] = {
+                                    ...InfoState.MyInformations[2],
+                                    accountname: [],
+                                    image: [],
+                                };
+                                return { MyInformations: InfoState.MyInformations };
+                            });
+
+                            setInfoState((InfoState) => {
+                                InfoState.MyInformations[3] = {
+                                    ...InfoState.MyInformations[3],
+                                    id: [],
+                                    username: [],
+                                    accountname: [],
+                                    content: [],
+                                    image: [],
+                                    heartCount: [],
+                                    commentCount: [],
+                                    hearted: [],
+                                    updatedAt: [],
+                                    createdAt: [],
+                                };
+                                return { MyInformations: InfoState.MyInformations };
+                            });
+
+                            // 팔로잉 정보
+                            const FollowingConfig = {
+                                headers: {
+                                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                                    'Content-type': 'application/json',
+                                },
+                            };
+                            const FollowingResponse = await axios.get(
+                                `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/following?limit=100&skip=0`,
+                                FollowingConfig
+                            );
+                            FollowingResponse.data.map((value) => {
+                                return setInfoState((InfoState) => {
+                                    InfoState.MyInformations[2] = {
+                                        ...InfoState.MyInformations[2],
+                                        accountname: [
+                                            ...InfoState.MyInformations[2].accountname,
+                                            value.accountname,
+                                        ],
+                                        image: [
+                                            ...InfoState.MyInformations[2].image,
+                                            value.image,
+                                        ],
+                                    };
+                                    return { MyInformations: InfoState.MyInformations };
+                                });
+                            });
+
+                            const feedConfig = {
+                                headers: {
+                                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                                    'Content-type': 'application/json',
+                                },
+                            };
+                            const feedResponse = await axios.get(
+                                `${API_URL}/post/feed/?limit=100&skip=0`,
+                                feedConfig
+                            );
+                            feedResponse.data.posts.map((value) => {
+                                return setInfoState((InfoState) => {
+                                    InfoState.MyInformations[3] = {
+                                        ...InfoState.MyInformations[3],
+                                        id: [...InfoState.MyInformations[3].id, value.id],
+                                        username: [
+                                            ...InfoState.MyInformations[3].username,
+                                            value.author.username,
+                                        ],
+                                        accountname: [
+                                            ...InfoState.MyInformations[3].accountname,
+                                            value.author.accountname,
+                                        ],
+                                        content: [
+                                            ...InfoState.MyInformations[3].content,
+                                            value.content,
+                                        ],
+                                        image: [
+                                            ...InfoState.MyInformations[3].image,
+                                            value.image,
+                                        ],
+                                        heartCount: [
+                                            ...InfoState.MyInformations[3].heartCount,
+                                            value.heartCount,
+                                        ],
+                                        commentCount: [
+                                            ...InfoState.MyInformations[3].commentCount,
+                                            value.commentCount,
+                                        ],
+                                        hearted: [
+                                            ...InfoState.MyInformations[3].hearted,
+                                            value.hearted,
+                                        ],
+                                        updatedAt: [
+                                            ...InfoState.MyInformations[3].updatedAt,
+                                            value.updatedAt,
+                                        ],
+                                        createdAt: [
+                                            ...InfoState.MyInformations[3].createdAt,
+                                            value.createdAt,
+                                        ],
+                                    };
+                                    return { MyInformations: InfoState.MyInformations };
+                                });
                             });
                             setLoading(false);
                         } catch (error) {
@@ -179,6 +289,116 @@ function FollowUser() {
                                 };
                                 return { data: PostingState.data };
                             });
+
+                            setInfoState((InfoState) => {
+                                InfoState.MyInformations[2] = {
+                                    ...InfoState.MyInformations[2],
+                                    accountname: [],
+                                    image: [],
+                                };
+                                return { MyInformations: InfoState.MyInformations };
+                            });
+
+                            setInfoState((InfoState) => {
+                                InfoState.MyInformations[3] = {
+                                    ...InfoState.MyInformations[3],
+                                    id: [],
+                                    username: [],
+                                    accountname: [],
+                                    content: [],
+                                    image: [],
+                                    heartCount: [],
+                                    commentCount: [],
+                                    hearted: [],
+                                    updatedAt: [],
+                                    createdAt: [],
+                                };
+                                return { MyInformations: InfoState.MyInformations };
+                            });
+
+                            // 팔로잉 정보
+                            const FollowingConfig = {
+                                headers: {
+                                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                                    'Content-type': 'application/json',
+                                },
+                            };
+                            const FollowingResponse = await axios.get(
+                                `${API_URL}/profile/${InfoState.MyInformations[0].myAccountname}/following?limit=100&skip=0`,
+                                FollowingConfig
+                            );
+                            FollowingResponse.data.map((value) => {
+                                return setInfoState((InfoState) => {
+                                    InfoState.MyInformations[2] = {
+                                        ...InfoState.MyInformations[2],
+                                        accountname: [
+                                            ...InfoState.MyInformations[2].accountname,
+                                            value.accountname,
+                                        ],
+                                        image: [
+                                            ...InfoState.MyInformations[2].image,
+                                            value.image,
+                                        ],
+                                    };
+                                    return { MyInformations: InfoState.MyInformations };
+                                });
+                            });
+
+                            const feedConfig = {
+                                headers: {
+                                    Authorization: `Bearer ${InfoState.MyInformations[0].token}`,
+                                    'Content-type': 'application/json',
+                                },
+                            };
+                            const feedResponse = await axios.get(
+                                `${API_URL}/post/feed/?limit=100&skip=0`,
+                                feedConfig
+                            );
+                            feedResponse.data.posts.map((value) => {
+                                return setInfoState((InfoState) => {
+                                    InfoState.MyInformations[3] = {
+                                        ...InfoState.MyInformations[3],
+                                        id: [...InfoState.MyInformations[3].id, value.id],
+                                        username: [
+                                            ...InfoState.MyInformations[3].username,
+                                            value.author.username,
+                                        ],
+                                        accountname: [
+                                            ...InfoState.MyInformations[3].accountname,
+                                            value.author.accountname,
+                                        ],
+                                        content: [
+                                            ...InfoState.MyInformations[3].content,
+                                            value.content,
+                                        ],
+                                        image: [
+                                            ...InfoState.MyInformations[3].image,
+                                            value.image,
+                                        ],
+                                        heartCount: [
+                                            ...InfoState.MyInformations[3].heartCount,
+                                            value.heartCount,
+                                        ],
+                                        commentCount: [
+                                            ...InfoState.MyInformations[3].commentCount,
+                                            value.commentCount,
+                                        ],
+                                        hearted: [
+                                            ...InfoState.MyInformations[3].hearted,
+                                            value.hearted,
+                                        ],
+                                        updatedAt: [
+                                            ...InfoState.MyInformations[3].updatedAt,
+                                            value.updatedAt,
+                                        ],
+                                        createdAt: [
+                                            ...InfoState.MyInformations[3].createdAt,
+                                            value.createdAt,
+                                        ],
+                                    };
+                                    return { MyInformations: InfoState.MyInformations };
+                                });
+                            });
                             setLoading(false);
                         } catch (error) {
                             console.error(error);
@@ -187,7 +407,7 @@ function FollowUser() {
                     fetchData();
                 };
                 return loading ? (
-                    <LoadingPage />
+                    <LoadingPage key={key} />
                 ) : (
                     <Wrapper key={key}>
                         <InfoWrapper>
