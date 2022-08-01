@@ -139,7 +139,7 @@ function ProductCard({ productResult }) {
                 alertModal={alertModal}
                 setAlertModal={setAlertModal}
                 setIsOpenModal={setIsOpenModal}
-                content={'상품을 삭제할까요?'}
+                content={'물품을 삭제할까요?'}
                 deleteBtn={{
                     content: '삭제',
                     onClick: () => {

@@ -341,7 +341,7 @@ function ProfileForm() {
                         <FormInput
                             type="text"
                             id="intro"
-                            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+                            placeholder="자신과 등록할 물품에 대해 소개해 주세요!"
                             onChange={handleChangeIntro}
                             maxLength="150"
                         />
