@@ -84,11 +84,11 @@ function ImgWrapper({ text }) {
                           .filter((index) => {
                               return index !== '';
                           })
-                          .map((index, key) => {
+                          .map((value, key) => {
                               return (
                                   <PostingImg
                                       key={key}
-                                      src={index}
+                                      src={value}
                                       alt={`${key} Image`}
                                   />
                               );
