@@ -64,11 +64,9 @@
 <br>
 
 <div align="center">
-
-<details>
-<summary>👀 <strong>웨일마켓 둘러보기</strong></summary>
+👀 <strong>웨일마켓 둘러보기</strong>
 <img src="https://user-images.githubusercontent.com/95061372/182055152-2a3704ac-bf71-4af6-8dd2-73607bb9576e.png" alt="프로젝트 설명서" width="900">
-</details>
+
 
 </div>
 
