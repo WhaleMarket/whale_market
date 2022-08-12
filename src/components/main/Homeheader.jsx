@@ -22,6 +22,7 @@ const Head = styled.header`
     border-bottom: 0.5px solid #bdbdbd;
     background-color: #ffffff;
     box-sizing: border-box;
+    z-index: 20;
 
     @media screen and (max-width: 390px) {
         padding: 13px 2% 13px;
@@ -122,8 +123,7 @@ function Header() {
     const date = new Date();
     const [weather, setWeather] = useState('');
     const [hover, setHover] = useState(false);
-    // const [weatherIcon, setWeatherIcon] = useState('')
-    
+ 
     const TakeWeather = async () => {
         const API_KEY = 'd4389cad7412a6a110847e67b352fffb';
         const CITY_NAME = 'SEOUL';
@@ -137,30 +137,6 @@ function Header() {
         };
         TakeWeather();
 
-        // switch (weather.toLowerCase()) {
-        //     case 'clear':
-        //         setWeatherIcon(clear);
-        //         break;
-        //     case 'clouds':
-        //         setWeatherIcon(clouds);
-        //         break;
-        //     case 'rain':
-        //         setWeatherIcon(rain);
-        //         break;
-        //     case 'mist':
-        //         setWeatherIcon(mist);
-        //         break;
-        //     case 'snow':
-        //         setWeatherIcon(snow);
-        //         break;
-        //     case 'thunderstorm':
-        //         setWeatherIcon(thunderstorm);
-        //         break;
-        //     default:
-        //         setWeatherIcon(clear);
-        //         break;
-        // }
-        
         return (
             <Head>
             <Title>
