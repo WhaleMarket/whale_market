@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../../../../context/AuthProvider';
@@ -10,6 +10,7 @@ import Modal from '../../../modal/Modal';
 import AlertModal from '../../../modal/AlertModal';
 import PostIconContainer from '../user_profile/PostIconContainer';
 import error_image from '../../../../assets/error-img.png';
+import { useInView } from "react-intersection-observer"
 
 const PostWrapper = styled.div`
     display: flex;
@@ -139,13 +140,20 @@ const PostDate = styled.p`
     }
 `;
 
-function PostCard() {
+function PostCard({setSkip, skip}) {
     const [PostingState] = useContext(PostingContext);
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [alertModal, setAlertModal] = useState(false);
     const [InfoState] = useContext(AuthContext);
     const [targetPost, setTargetPost] = useState('');
     const history = useHistory();
+    const [ref, inView] = useInView();
+
+    useEffect(()=>{
+        if(inView && PostingState.data[0].postdata.length%10 === 0){
+            setSkip(skip + 10);
+        }
+    },[inView])
 
     const modalItemList =
         PostingState.data[0].accountname ===
@@ -228,7 +236,7 @@ function PostCard() {
                         let minsGap = Math.floor(timeGap / 60000);
                         let secsGap = Math.floor(timeGap / 1000);
                         return (
-                            <PostContent key={index}>
+                            <PostContent key={index} ref={ref}>
                                 <PostInfo>
                                     <div>
                                         <UserImgDiv

@@ -140,9 +140,12 @@ function PostSection({ List }) {
     const [loading, setLoading] = useState(false);
     const [eat, setEat] = useState(false);
     const [eaten, setEaten] = useState([0]);
+    const [skip, setSkip] = useState(PostingState.data[0].postdata.length > 10 ? Math.floor(PostingState.data[0].postdata.length/10)*10 - 10 : 0);
 
     async function getPost() {
-        setLoading(true);
+        if(skip === 0){
+            setLoading(true);
+        }
         try {
             const config = {
                 headers: {
@@ -151,7 +154,7 @@ function PostSection({ List }) {
                 },
             };
             const response = await axios.get(
-                `${API_URL}/post/${PostingState.data[0].user.accountname}/userpost/?limit=100&skip=0`,
+                `${API_URL}/post/${PostingState.data[0].user.accountname}/userpost/?limit=${skip+10}&skip=0`,
                 config
             );
             setPostingState((PostingState) => {
@@ -161,15 +164,17 @@ function PostSection({ List }) {
                 };
                 return { data: PostingState.data };
             });
-            setLoading(false);
+            if(skip === 0){
+                setLoading(false);
+            }
         } catch (error) {
             console.error(error);
         }
     }
 
     useEffect(() => {
-        PostingState.data[0].user.accountname && getPost();
-    }, [PostingState.data[0].user.accountname]);
+        (PostingState.data[0].user.accountname || (PostingState.data[0].postdata.length - skip !== 10 && PostingState.data[0].postdata.length%10 === 0)) && (PostingState.data[0].user.accountname && getPost());
+    }, [PostingState.data[0].user.accountname, skip]);
 
     const confirmList = List.slice(0, 4);
     const deleteList = List.slice(4);
@@ -236,7 +241,7 @@ function PostSection({ List }) {
                 </ViewTypeNav>
                 {viewType ? (
                     <PostContainer>
-                        <PostCard />
+                        <PostCard skip={skip} setSkip={setSkip}/>
                     </PostContainer>
                 ) : (
                     <AlbumContainer>

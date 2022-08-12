@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthProvider';
 import styled from 'styled-components';
 import whale from '../../assets/Logo.png';
-import Feed from '../main/homeFeed/FeedContent';
+import FeedContent from '../main/homeFeed/FeedContent';
 import axios from 'axios';
 import { API_URL } from '../../constants/defaultUrl';
 import LoadingPage from '../../pages/LoadingPage';
-import PostingContext from '../../context/PostingProvider';
 
 const Section = styled.section`
     display: flex;
@@ -45,11 +44,14 @@ const Search = styled.button`
 function HomeSection() {
     const [InfoState, setInfoState] = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
+    const [skip, setSkip] = useState(InfoState.MyInformations[3].accountname.length > 10 ? Math.floor(InfoState.MyInformations[3].accountname.length/10)*10 - 10 : 0);
 
     useEffect(() => {
         async function getFeedData() {
             try {
-                setLoading(true);
+                if(skip === 0){
+                    setLoading(true);
+                }
                 //피드 정보
                 const feedConfig = {
                     headers: {
@@ -58,7 +60,7 @@ function HomeSection() {
                     },
                 };
                 const feedResponse = await axios.get(
-                    `${API_URL}/post/feed/?limit=100&skip=0`,
+                    `${API_URL}/post/feed/?limit=10&skip=${skip}`,
                     feedConfig
                 );
                 feedResponse.data.posts.map((value) => {
@@ -106,19 +108,21 @@ function HomeSection() {
                         return { MyInformations: InfoState.MyInformations };
                     });
                 });
-                setLoading(false);
+                if(skip === 0){
+                    setLoading(false);
+                }
             } catch (error) {
                 console.error(error);
             }
         }
-        getFeedData();
-    }, [InfoState.MyInformations]);
+        (InfoState.MyInformations[3].accountname.length - skip !== 10 && InfoState.MyInformations[3].accountname.length%10 === 0) && getFeedData();
+    }, [InfoState.MyInformations, skip]);
 
     return loading ? (
         <LoadingPage />
     ) : parseInt(InfoState.MyInformations[0].myFollowingCount) > 0 ? (
         InfoState.MyInformations[3].accountname.length > 0 ? (
-            <Feed />
+            <FeedContent setSkip={setSkip} skip={skip} length={InfoState.MyInformations[3].accountname.length}/>
         ) : (
             <Section>
                 <Logo src={whale} alt="whale" />

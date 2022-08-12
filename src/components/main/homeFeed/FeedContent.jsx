@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../context/AuthProvider';
 import ProfileSection from './ProfileSection';
 import IconGroup from './IconGroup';
 import { API_URL } from '../../../constants/defaultUrl';
 import basic_profile_image from '../../../assets/basic-profile-img.png';
+import { useInView } from "react-intersection-observer"
 
 const LayOut = styled.ul`
     display: flex;
@@ -98,8 +99,14 @@ const CreatedDate = styled.p`
     line-height: 12px;
 `;
 
-function FeedContent() {
+function FeedContent({setSkip, skip, length}) {
     const [InfoState] = useContext(AuthContext);
+    const [ref, inView] = useInView();
+    useEffect(()=>{
+        if(inView && length%10 === 0){
+            setSkip(skip + 10);
+        }
+    },[inView])
 
     const rendering = () => {
         const result = [];
@@ -119,7 +126,7 @@ function FeedContent() {
             const secsGap = Math.floor(timeGap / 1000);
 
             result.push(
-                <FeedWrapper key={i}>
+                <FeedWrapper key={i} ref={ref}>
                     <ProfileSection
                         src={
                             InfoState.MyInformations[2].image[index] !==
