@@ -16,7 +16,7 @@ const Head = styled.header`
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    z-index: 1;
+    z-index: 20;
     width: 100%;
     height: 54px;
     padding: 13px 12px 13px 16px;
