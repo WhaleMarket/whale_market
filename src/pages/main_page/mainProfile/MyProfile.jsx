@@ -9,6 +9,7 @@ import RewardProfileHeader from '../../../components/main/RewardProfileHeader';
 import UserProfileSection from '../../../components/main/mainProfile/user_profile/UserProfileSection';
 import ProductSection from '../../../components/main/mainProfile/user_profile/ProductSection';
 import PostSection from '../../../components/main/mainProfile/user_profile/PostSection';
+import TopButton from '../../../components/main/TopButton';
 
 const ProfileWrapper = styled.section`
     margin-bottom: 50px;
@@ -75,6 +76,7 @@ function MainProfile() {
 
     return (
         <>
+            <TopButton />
             <RewardProfileHeader />
             <ProfileWrapper>
                 <UserProfileSection />
