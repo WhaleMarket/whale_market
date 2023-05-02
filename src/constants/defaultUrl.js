@@ -1,4 +1,4 @@
-const API_URL = 'https://mandarin.api.weniv.co.kr';
+const API_URL = 'https://api.mandarin.weniv.co.kr';
 const IMG_EXTENSION = [
     'png',
     'gif',
